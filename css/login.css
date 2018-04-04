@@ -1,9 +1,14 @@
+.am-login-bg-op{
+    border-bottom: 1px solid rgba(177,177,177,0.26);
+    height: 61px;
+
+}
 .am-form{
     background-color: rgba(245,249,254,0.95);
 }
 .am-login-bg{
     background-image: url("../images/loginbg.png");
-    background-size: 100%;
+    background-size: auto;
     background-repeat: no-repeat;
 }
 .am-login-content{
@@ -15,15 +20,13 @@
     border: 1px solid rgba(0, 0, 0, .2);
     border-radius: .3rem;
 }
+fieldset{margin: 0px}
 .am-login-title{
     text-align: center !important;
-    font-size: 3.4rem;
+    font-size: 3.2rem;
     color: #414141;
-    padding-top: 2.33rem;
+    padding-top: 1.0rem;
     padding-bottom: .5rem;
-}
-.am-input-group{
-    padding: 2.25rem 1.25rem 1rem 1.25rem;
 }
 .am-input-group-label{
     border: none;
@@ -51,8 +54,24 @@
 .text-left{
     color: #858585;
 }
-.am-g-space{
-    padding:0.5rem 0 2.5rem .3rem;
+.am-btn-primary{
+    color: #f0f0f0;
+    font-size: 18px;
+    background-color: #034f86;
+    border-color: #034f86;
+    height: 50px;
 }
-
+.am-g-space1{
+    padding:2.25rem 1.25rem 1rem 1.25rem;;
+}
+.am-g-space2{
+    margin-bottom: 33px;
+    margin-top: 34px;
+}
+.am-g-space3{
+    padding: 2.25rem 1.25rem 0rem 1.25rem;
+}
+.am-input-group-label{
+    color: #a3a3a3;
+}
 

@@ -1,0 +1,106 @@
+.am-register-bg{
+    background-color: #D3D8DF;
+}
+.am-container{
+    padding-top: 3rem;
+}
+.am-register-content{
+    min-width: 30rem;
+    min-height: 30rem;
+    background-color: #DCE3E6;
+    box-shadow: 5px 5px 30px rgba(48, 95, 129, 0.15);
+    border: 1px solid rgba(0, 0, 0, .2);
+    border-radius: .3rem;
+}
+.am-register-title{
+    font-size: 3.2rem;
+    text-align: center;
+    padding-top: 1.14rem;
+    padding-bottom: 3rem;
+}
+.am-register-text{
+    font-size: 1.6rem;
+    color: #424242;
+    font-weight: normal;
+    height: 37px;
+    line-height: 37px;
+}
+.am-register-required{
+    color: red;
+}
+
+.am-form-horizontal .am-form-label{
+    padding: 0px;
+}
+.am-register-middle1{
+    height: 37px;
+    line-height: 37px;
+}
+.am-register-middle2{
+    height: 18px;
+    line-height: 18px;
+}
+.am-register-span{
+    font-size: 1.3rem;
+    color: #747474;
+}
+[class*="am-u-"] + [class*="am-u-"]:last-child {
+    float: left;
+}
+.am-register-space-5{
+    margin-top: 5rem;
+}
+.am-register-space-2{
+    margin-top: 2.5rem;
+}
+
+/*select的颜色修改*/
+.am-btn-primary {
+    color: #424242;
+    background-color: #ffffff;
+    border-color: #ffffff;
+}
+.am-btn-primary:hover,
+.am-btn-primary:focus,
+.am-btn-primary:active,
+.am-btn-primary.am-active,
+.am-dropdown.am-active .am-btn-primary.am-dropdown-toggle {
+    color: #424242;
+    border-color: #ffffff;
+}
+.am-btn-primary:hover,
+.am-btn-primary:focus {
+    background-color: #ffffff;
+}
+.am-btn-primary:active,
+.am-btn-primary.am-active,
+.am-dropdown.am-active .am-btn-primary.am-dropdown-toggle {
+    background-color: #ffffff;
+}
+
+/*验证*/
+#vld-tooltip {
+    position: absolute;
+    z-index: 1000;
+    padding: 2px 5px;
+    background: red;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.15s;
+    box-shadow: 0 0 5px rgba(0,0,0,.15);
+    border-radius: .3rem;
+    display: none;
+}
+
+#vld-tooltip:before {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    width: 0;
+    height: 0;
+    margin-left: -8px;
+    content: "";
+    border-width: 0 8px 8px;
+    border-color: transparent transparent red;
+    border-style: none inset solid;
+}

@@ -9,12 +9,116 @@
     <link rel="stylesheet" href="../css/register.css">
     <title>创建账户</title>
 </head>
-<body>
+<body class="am-register-bg">
+<div class="am-u-sm-12">
+    <div class="am-container">
+        <div class="am-register-content" id="app">
+            <form class="am-form am-form-horizontal" id="form-with-tooltip">
+                <fieldset>
+                <div class="am-register-title"><span>创建账户</span></div>
+                <div class="am-form-group am-vertical-align">
+                    <label for="doc-ipt-1" class="am-u-sm-2 am-form-label am-register-text" >
+                        电子邮箱地址<span class="am-register-required">*</span>
+                    </label>
+                    <div class="am-u-sm-5">
+                        <input type="email" id="doc-ipt-1" required>
+                    </div>
+                    <div class="am-u-sm-5 am-register-middle1"><span class="am-register-span">您的电子邮箱地址即为您的用户名</span></div>
+                </div>
+                <div class="am-form-group">
+                    <label for="doc-ipt-2" class="am-u-sm-2 am-form-label am-register-text">
+                        密码<span class="am-register-required">*</span>
+                    </label>
+                    <div class="am-u-sm-5">
+                        <input type="password" id="doc-ipt-2" pattern="^(?!^\\d+$)(?!^[a-zA-Z]+$)(?!^[_#@]+$).{8,}$" required>
+                    </div>
+                    <div class="am-u-sm-5 am-register-middle2">
+                        <span class="am-register-span">密码必须同时包含字母、数字、特殊字符，并且至少包含8个字符</span>
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <label for="doc-ipt-3" class="am-u-sm-2 am-form-label am-register-text">请重新输入密码<span class="am-register-required">*</span></label>
+                    <div class="am-u-sm-5">
+                        <input type="password" id="doc-ipt-3"  data-equal-to="#doc-ipt-2" required>
+                    </div>
+                </div>
+                <div class="am-form-group am-register-space-5">
+                    <label class="am-u-sm-2 am-form-label am-register-text">国家/地区<span class="am-register-required">*</span></label>
+                    <div class="am-u-sm-5">
+                        <select data-am-selected = "{btnWidth: '100%', btnSize: 'sm', btnStyle: 'primary'}">
+                            <option value="a">Apple</option>
+                            <option value="b">Banana</option>
+                            <option value="o">Orange</option>
+                            <option value="m">Mango</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <label class="am-u-sm-2 am-form-label am-register-text">姓名<span class="am-register-required">*</span></label>
+                    <div class="am-u-sm-5">
+                        <input type="text" placeholder="姓氏" pattern="^[\u4e00-\u9fa5]{0,}$" required data-foolish-msg="必须是中文">
+                    </div>
+                    <div class="am-u-sm-5">
+                        <input type="text" placeholder="名字" pattern="^[\u4e00-\u9fa5]{0,}$" required data-foolish-msg="必须是中文">
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <label class="am-u-sm-2 am-form-label am-register-text">英文名字<span class="am-register-required">*</span></label>
+                    <div class="am-u-sm-5">
+                        <input type="text" placeholder="英文姓氏" pattern="^[A-Za-z]+$" required data-foolish-msg="必须是英文字母">
+                    </div>
+                    <div class="am-u-sm-5">
+                        <input type="text" placeholder="英文名字" pattern="^[A-Za-z]+$" required data-foolish-msg="必须是英文字母">
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <label for="doc-ipt-7" class="am-u-sm-2 am-form-label am-register-text">联系电话<span class="am-register-required">*</span></label>
+                    <div class="am-u-sm-5">
+                        <input type="password" id="doc-ipt-7" pattern="^((1[3,5,8][0-9])|(14[5,7])|(17[0,6,7,8])|(19[7]))\d{8}$" required data-foolish-msg="以“1”开头的11位数字，不要加“086”前缀">
+                    </div>
+                </div>
+
+                <div class="am-form-group am-register-space-5">
+                    <label for="doc-ipt-8" class="am-u-sm-2 am-form-label am-register-text">公司名称<span class="am-register-required">*</span></label>
+                    <div class="am-u-sm-5">
+                        <input type="password" id="doc-ipt-8" required data-foolish-msg="请填写公司名称">
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <label class="am-u-sm-2 am-form-label am-register-text">部门<span class="am-register-required">*</span></label>
+                    <div class="am-u-sm-5">
+                        <select data-am-selected = "{btnWidth: '100%', btnSize: 'sm',btnStyle: 'primary'}">
+                            <option v-for="department in departments"  :value="department.value">
+                                {{department.text}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <label class="am-u-sm-2 am-form-label am-register-text">职位<span class="am-register-required">*</span></label>
+                    <div class="am-u-sm-5">
+                        <select data-am-selected = "{btnWidth: '100%', btnSize: 'sm',btnStyle: 'primary'}">
+                            <option v-for="job in jobs" :value="job.value">
+                                {{ job.text }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="am-form-group">
+                    <label class="am-u-sm-2 am-form-label am-register-text">&emsp;</label>
+                    <div class="am-u-sm-1 am-register-space-2"><button class="am-btn am-btn-secondary am-radius" type="submit">创建</button></div>
+                </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
 
 
-
-<script src="js/jquery/jquery-3.3.1.min.js"></script>
+<script src="../js/jquery/jquery-3.3.1.min.js"></script>
 <!-- 开发版本 -->
 <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.js"></script>
+<script src="../js/vue/vue.js"></script>
+<script src="../js/register.js"></script>
 </body>
 </html>
