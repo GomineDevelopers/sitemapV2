@@ -1,0 +1,64 @@
+body{
+    background-color: #f8f8f8;
+}
+.am-selected {
+    width: auto;
+}
+.searchList-input-group button:last-child{
+    color: white;
+    background-color: #408ff8;
+
+
+}
+.searchList-input-group button:last-child:hover{
+    color: white;
+    background-color: #103b72;
+
+
+}
+.searchList-input-group{
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+.searchList-searchbox{
+    padding-top: 3rem;
+    padding-bottom: 2rem;
+}
+.searchList-select-angle{
+    background-color: #51ad54;
+    color: white;
+    width: 25px;
+    height: 25px;
+}
+.am-selected-btn{
+    height: 38px;
+}
+.am-selected-status {
+    margin-right: 3px;
+}
+/* 面板自定义样式 */
+.am-panel{
+    border: none;
+    background-color: #f8f8f8;
+}
+.am-panel-default > .am-panel-hd {
+    font-size: 15px;
+    color: #444;
+    background-color: #f8f8f8;
+    border-bottom: none;
+}
+.am-panel-bd{
+    background-color: #f2f2f2;
+}
+
+.am-panel-hd span{
+    color: green;
+}
+.am-panel-hd-inner{
+    background-color: #f8f8f8;
+}
+/* 面板自定义样式 */
+/* 筛选 */
+
+
+/* 筛选  */
