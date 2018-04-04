@@ -3,6 +3,8 @@
 }
 .am-login-bg{
     background-image: url("../images/loginbg.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
 .am-login-content{
     min-width: 30rem;
