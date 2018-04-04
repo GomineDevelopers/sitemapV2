@@ -1,0 +1,16 @@
+.index-content-bg{
+    padding-top: 11rem;
+    background-image: url("../images/bg_photo.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    min-height: 70rem;
+}
+.content-devider{
+    margin-top: 15rem;
+    margin-bottom: 4rem;
+    border-color: #898176;
+}
+.index-see-more a{
+    color: #ffffff;
+
+}
