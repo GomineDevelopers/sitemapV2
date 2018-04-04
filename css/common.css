@@ -1,0 +1,46 @@
+/* 全局头部导航 */
+/* logo样式风格 */
+.am-text-ir {
+    display: block;
+    margin-right: 10px;
+    height: 50px;
+    width: 125px;
+    background-color: black;
+    background: url("../images/sitemap_logo.png") no-repeat left center;
+    -webkit-background-size: 125px 24px;
+    background-size: 125px 24px;
+  }
+/* 全局头部导航 */
+
+
+/* 全局底部导航 */
+.footer_main{
+    color: white;
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+    background-color: black;
+}
+.footer_main{
+    color: white;
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+    background-color: black;
+}
+
+.footer-logo{
+    padding-left: 1.5rem;
+}
+.footer_right-input input{
+    background-color: black;
+    color: #7d7d7d;
+}
+.footer_right-input button{
+    background-color: #3b4d5c;
+    
+}
+.footer_right-input span{
+    color: white;
+    
+}
+
+/* 全局底部导航 */
