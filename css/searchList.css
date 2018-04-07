@@ -39,7 +39,8 @@ body{
 /* 面板自定义样式 */
 .am-panel{
     border: none;
-    background-color: #f8f8f8;
+    /* background-color: #f8f8f8; */
+    box-shadow:none;
 }
 .am-panel-default > .am-panel-hd {
     font-size: 15px;
@@ -59,6 +60,50 @@ body{
 }
 /* 面板自定义样式 */
 /* 筛选 */
-
-
+.filter {
+    /* padding-top: 15px; */
+    /* padding-bottom: 15px; */
+    background: #f9fbfe;
+}
+.container {
+    /* max-width: 1200px; */
+    margin: 0 auto;
+}
+.filter .box {
+    padding:10px;
+    /* border: 1px solid #dcdcdc; */
+    background-color: #f2f2f2;
+}
+.filter .title-h {
+    font-size: 15px;
+    color: #6A6A6A;
+    border-bottom: 1px solid #dcdcdc;
+    padding-bottom: 10px;
+}
+.filter dl {
+    position: relative;
+    margin-bottom: 10px;
+}
+.filter dl dt {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 15px;
+    color: #6c6c6c
+    /* font-weight: 700; */
+}
+.filter dl dd {
+    padding-left: 80px;
+}
+/* .filter dl dd a.on {
+    font-weight: 700;
+    color: #477fd2;
+} */
+.filter dl dd a {
+    margin-right: 20px;
+    margin-bottom: 10px;
+    display: inline-block;
+    font-size: 14px;
+    color: #6c6c6c
+}
 /* 筛选  */
