@@ -41,6 +41,7 @@ body{
     border: none;
     /* background-color: #f8f8f8; */
     box-shadow:none;
+    min-width: 800px
 }
 .am-panel-default > .am-panel-hd {
     font-size: 15px;
@@ -48,8 +49,10 @@ body{
     background-color: #f8f8f8;
     border-bottom: none;
 }
+
 .am-panel-bd{
     background-color: #f2f2f2;
+    padding: 0.25rem;
 }
 
 .am-panel-hd span{
@@ -77,8 +80,11 @@ body{
 .filter .title-h {
     font-size: 15px;
     color: #6A6A6A;
-    border-bottom: 1px solid #dcdcdc;
+    border-bottom: 1px dashed#dcdcdc;
     padding-bottom: 10px;
+}
+. title-h dl> dt{
+   
 }
 .filter dl {
     position: relative;
@@ -94,6 +100,21 @@ body{
 }
 .filter dl dd {
     padding-left: 80px;
+}
+.filter dl dd.content-body {
+   height: 30px;
+   width: 92%;
+   float: left;
+   overflow: hidden;
+}
+dt + dd {
+    margin-top: 0rem;
+}
+.filter dl dd.show-more {
+    cursor: pointer;
+   padding-left: 0px;
+    text-align: right;
+    float: right;
 }
 /* .filter dl dd a.on {
     font-weight: 700;
