@@ -83,8 +83,9 @@ body{
     border-bottom: 1px dashed#dcdcdc;
     padding-bottom: 10px;
 }
-. title-h dl> dt{
-   
+.show-content-body{
+    overflow: visible !important ;
+    height: auto !important;
 }
 .filter dl {
     position: relative;
