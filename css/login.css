@@ -33,12 +33,12 @@ fieldset{margin: 0px}
     background-color: rgba(245,249,254,0.95);
     border-bottom: 1px solid #ccc;
 }
-.am-form input[type="text"]{
+.am-form input[type="email"],.am-form input[type="password"]{
     border: none;
     border-bottom: 1px solid #ccc;
     background-color: rgba(245,249,254,0.95);
 }
-.am-form input[type="text"]:focus{
+.am-form input[type="email"]:focus,.am-form input[type="password"]:focus{
     border-color:#ccc;
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -74,4 +74,26 @@ fieldset{margin: 0px}
 .am-input-group-label{
     color: #a3a3a3;
 }
+/*边框阴影*/
+.am-form-error .am-form-field, .am-field-error {
+    border-bottom-color: #dd514c !important;
+     -webkit-box-shadow: none;
+     box-shadow: none;
+}
+.am-form-error .am-form-field, .am-field-error:active {
+    border-bottom-color: #dd514c !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.am-form-success .am-form-field, .am-field-valid {
+    border-color: #5eb95e !important;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.am-form-success .am-form-field, .am-field-valid:active {
+    border-color:#f4f9fe;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
 

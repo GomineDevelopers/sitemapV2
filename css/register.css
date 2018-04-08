@@ -1,8 +1,9 @@
 .am-register-bg{
-    background-color: #D3D8DF;
+    background-color: #425c72;
 }
 .am-container{
     padding-top: 3rem;
+    padding-bottom: 3rem;
 }
 .am-register-content{
     min-width: 30rem;
@@ -76,6 +77,10 @@
 .am-btn-primary.am-active,
 .am-dropdown.am-active .am-btn-primary.am-dropdown-toggle {
     background-color: #ffffff;
+}
+.am-register-header{
+    background-color: #dce3e6;
+    height: 61px;
 }
 
 /*验证*/
