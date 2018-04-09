@@ -129,3 +129,20 @@ dt + dd {
     color: #6c6c6c
 }
 /* 筛选  */
+/* 筛选结果样式 */
+.selected-items{
+    border: 1px solid #408ff8;
+   padding: 2px;
+}
+.selected-items:hover{
+    border: 1px solid red;
+    cursor: pointer;
+}
+.selected-items i{
+    padding-left: 5px;
+    padding-right: 2px
+   }
+.selected-items i:hover{
+ color: red;
+ padding-left: 5px;
+}
