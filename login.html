@@ -10,31 +10,31 @@
     <title>登录页面</title>
 </head>
 <body class="am-login-bg">
-        <div class="am-container-fluid am-login-bg-op">
+    <div class="am-container-fluid am-login-bg-op">
         <div class="am-u-sm-8  am-u-sm-centered">
             <h1 class="am-topbar-brand">
                 <img src="images/sitemap_logo.png" alt="">
             </h1>
         </div>
-        </div>
-    <div class="am-u-sm-12">
-        <div class="am-container">
-            <div class="am-u-sm-5 am-u-sm-centered">
-                <div class="am-login-content" id="app">
-                    <form class="am-form" data-am-validator>
-                        <fieldset>
-                            <div class="am-login-title"><span>登陆</span></div>
+    </div>
+    <div class="am-g">
+        <div class="am-u-sm-12">
+            <div class="am-container">
+                <div class="am-u-sm-5 am-u-sm-centered">
+                    <div class="am-login-content" id="app">
+                        <form class="am-form">
+                            <fieldset>
+                                <div class="am-login-title"><span>登陆</span></div>
 
-                            <div class="am-input-group am-g-space1">
-                                <span class="am-input-group-label"><i class="am-icon-user am-icon-fw am-icon-sm"></i></span>
-                                <input type="email" class="am-form-field" placeholder="请输入用户名" ref="userName" required>
-                            </div>
+                                <div class="am-input-group am-g-space1">
+                                    <span class="am-input-group-label"><i class="am-icon-user am-icon-fw am-icon-sm"></i></span>
+                                    <input type="text" class="am-form-field" placeholder="请输入用户名" ref="userName">
+                                </div>
 
-                            <div class="am-input-group am-g-space3">
-                                <span class="am-input-group-label"><i class="am-icon-lock am-icon-fw am-icon-sm"></i></span>
-                                <input type="password" class="am-form-field" placeholder="请输入密码" ref="password" pattern="^(?!^\\d+$)(?!^[a-zA-Z]+$)(?!^[_#@]+$).{8,}$" required>
-                            </div>
-                            <div class="am-g">
+                                <div class="am-input-group am-g-space3">
+                                    <span class="am-input-group-label"><i class="am-icon-lock am-icon-fw am-icon-sm"></i></span>
+                                    <input type="text" class="am-form-field" placeholder="请输入密码" ref="password">
+                                </div>
                                 <div class="am-u-sm-6">
                                     <label class="am-checkbox text-left">
                                         <input type="checkbox" value="" data-am-ucheck>记住账号密码
@@ -43,12 +43,12 @@
                                 <div class="am-u-sm-6 text-right">
                                     <span>忘记密码？</span>
                                 </div>
-                            </div>
-                            <div class="am-u-sm-12 am-g-space2">
-                                <button type="submit" class="am-btn am-btn-primary am-btn-block" @click="login()">登陆</button>
-                            </div>
-                        </fieldset>
-                    </form>
+                                <div class="am-u-sm-12 am-g-space2">
+                                    <button class="am-btn am-btn-primary am-btn-block " @click="login()" >登陆</button>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
