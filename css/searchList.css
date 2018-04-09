@@ -82,6 +82,7 @@ body{
     color: #6A6A6A;
     border-bottom: 1px dashed#dcdcdc;
     padding-bottom: 10px;
+    height: 35px;
 }
 .show-content-body{
     overflow: visible !important ;
@@ -133,6 +134,7 @@ dt + dd {
 .selected-items{
     border: 1px solid #408ff8;
    padding: 2px;
+   margin-left: 5px;
 }
 .selected-items:hover{
     border: 1px solid red;
