@@ -23,17 +23,21 @@ $(function () {
             $(".selected-box").append(formatted_strings).children().addClass("selected-items");
             $(".selected-box").children().children(':last-child').addClass("am-icon-close");
             $(this).parent().parent(".am-cf").css("display", "none");
-            var target_css=$(this).parent().parent(".am-cf");
-
+            var target_css=$(this);
+            var target_row= target_css.parent().parent(".am-cf")
+            console.log(target_css.html());
             click_items = $('.selected-items');
             click_items.each(function (i) {
                 $(this).click(function () {
-                    var selected_item_text = $(this).text();
+                    var inbox_item=$(this);
+                    var selected_item_text = inbox_item.text();
                     console.log(selected_item_text);
-                    var target_value=$('.sx_child').text();
-                    console.log(target_value);
-                    target_css.css("display", "block");
-                    $(this).remove();
+                    if(target_css.text()==selected_item_text){
+                        target_row.css("display", "block");
+                        
+                    }
+                    inbox_item.remove();
+                    
 
                 });
 
