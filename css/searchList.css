@@ -69,10 +69,7 @@ body{
     /* padding-bottom: 15px; */
     background: #f9fbfe;
 }
-.container {
-    /* max-width: 1200px; */
-    margin: 0 auto;
-}
+
 .filter .box {
     padding:10px;
     /* border: 1px solid #dcdcdc; */
