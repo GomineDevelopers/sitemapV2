@@ -19,6 +19,7 @@ body{
 .searchList-input-group{
     margin-top: 3rem;
     margin-bottom: 2rem;
+    padding-left: 0px;
 }
 .searchList-searchbox{
     padding-top: 3rem;
