@@ -35,3 +35,10 @@
 }
 
 /* 全局底部导航 */
+/* 全局颜色 */
+.white-bgcolor{
+    background-color: white;
+}
+.am-grid-color{
+    background-color: #f8f8f8;
+}
