@@ -37,27 +37,27 @@ body{
     margin-right: 3px;
 }
 /* 面板自定义样式 */
-.am-panel{
+.am-panel-noborder{
     border: none;
     /* background-color: #f8f8f8; */
     box-shadow:none;
     min-width: 800px
 }
-.am-panel-default > .am-panel-hd {
+.am-panel-noborder> .am-panel-hd{
     font-size: 15px;
     color: #444;
     background-color: #f8f8f8;
     border-bottom: none;
+    height: 50px;
 }
+
 
 .am-panel-bd{
     background-color: #f2f2f2;
     padding: 0.25rem;
 }
 
-.am-panel-hd span{
-    color: green;
-}
+
 .am-panel-hd-inner{
     background-color: #f8f8f8;
 }
@@ -147,4 +147,26 @@ dt + dd {
 .selected-items i:hover{
  color: red;
  padding-left: 5px;
+}
+.matched-company{
+    padding: 10px;
+    font-size: 14px;
+    border-bottom: 1px solid #e6e6e6;
+}
+.matched-company a{
+    color: #858585;
+}
+.matched-company:last-child{
+    border-bottom: none;  
+}
+.matched-company .title{
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.matched-company .description{
+    margin-bottom: 5px;
+}
+.matched-company .description .name{
+    font-weight: bold;
 }

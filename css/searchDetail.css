@@ -32,3 +32,26 @@ table{
     padding-bottom: 1rem;
     padding-top: 1.5rem;
 }
+.news-update-time{
+    width: 100%;
+    font-size: 14px;
+}
+.news-update-time span{
+    margin-left: 5px;
+    color: #737373;
+    
+}
+.news-update-time a{
+    cursor: pointer;
+    color: #737373;
+    margin-left: 5px;
+    font-size: 14px;
+}
+.news-update-time a:hover{
+    cursor: pointer;
+    color: #4796ff;
+}
+.news-update-time a:focus{
+    cursor: pointer;
+    color: #4796ff;
+}
