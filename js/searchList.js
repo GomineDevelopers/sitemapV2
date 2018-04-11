@@ -23,36 +23,36 @@ $(function () {
             $(".selected-box").append(formatted_strings).children().addClass("selected-items");
             $(".selected-box").children().children(':last-child').addClass("am-icon-close");
             $(this).parent().parent(".am-cf").css("display", "none");
-            $(".clear-all").css("display","block");
-            var target_css=$(this);
-            var target_row= target_css.parent().parent(".am-cf")
+            $(".clear-all").css("display", "block");
+            var target_css = $(this);
+            var target_row = target_css.parent().parent(".am-cf")
             console.log(target_css.html());
             click_items = $('.selected-items');
             click_items.each(function (i) {
                 $(this).click(function () {
-                    var inbox_item=$(this);
+                    var inbox_item = $(this);
                     var selected_item_text = inbox_item.text();
                     console.log(selected_item_text);
-                    if(target_css.text()==selected_item_text){
+                    if (target_css.text() == selected_item_text) {
                         target_row.css("display", "block");
-                        
+
                     }
                     inbox_item.remove();
-                    
-                   if($(".selected-items").length==0){
-                       console.log($(".selected-items").length);
-                    $(".clear-all").css("display","none");  
-                   }
-               
+
+                    if ($(".selected-items").length == 0) {
+                        console.log($(".selected-items").length);
+                        $(".clear-all").css("display", "none");
+                    }
+
                 });
-                
+
             });
-            $(".clear-all").click(function(){
+            $(".clear-all").click(function () {
                 $(".selected-box span.selected-items").remove();
                 target_row.css("display", "block");
-                $(this).css("display","none");
-             });
-         
+                $(this).css("display", "none");
+            });
+
         });
 
 
