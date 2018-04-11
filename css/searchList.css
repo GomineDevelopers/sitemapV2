@@ -116,6 +116,17 @@ dt + dd {
     text-align: right;
     float: right;
 }
+.selected-box{
+    width: 92%;
+    float: left;
+}
+.filter dl dd.clear-all {
+    cursor: pointer;
+   padding-left: 0px;
+    text-align: right;
+    float: right;
+    width: 87px;
+}
 /* .filter dl dd a.on {
     font-weight: 700;
     color: #477fd2;
