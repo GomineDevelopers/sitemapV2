@@ -124,15 +124,15 @@
     <!-- 导航结束 -->
     <div class="am-g am-grid-color">
         <div class="am-u-sm-8 am-u-sm-centered">
-           <div class="news-content-warp" style="height:800px">
+           <div class="news-content-warp" style="height:800px" id="main">
                 <div class="am-u-sm-12">
-                    <h1 class="am-text-left">美团遭律师实名举报 支付涉嫌“无照经营”</h1>
+                    <h1 class="am-text-left" v-text="title"></h1>
                 </div>
                 <div class="am-u-sm-12">
                     <h5 class="am-text-left">
-                        <span>来源：21cn</span>
+                        <span v-text="sourceSort"></span>
                         &emsp;&emsp;
-                        <span>发表时间：2018-03-12</span>
+                        <span v-text="dateSort"></span>
                         <div class="am-fr">分享：
                             <a href="##" class="am-icon-btn am-icon-btn-sm am-danger am-icon-weibo"></a>
                             <a href="##" class="am-icon-btn am-icon-btn-sm am-success am-icon-wechat"></a>
@@ -141,8 +141,7 @@
                     </h5>
                 </div>
                <div class="am-u-sm-12"><hr style="border:1px #efefef dashed"></div>
-                <div class="am-u-sm-12"><p>作为O2O的核心环节，支付自然成为了美团意欲切入的市场，不过，市场留给它的空间似乎并不多。
-                    作为O2O的核心环节，支付自然成为了美团意欲切入的市场，不过，市场留给它的空间似乎并不多。</p></div>
+                <div class="am-u-sm-12" v-html="content"></div>
            </div>
         </div>
     </div>
@@ -193,6 +192,8 @@
     <!-- 底部导航 -->
 
     <script src="../js/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../js/vue/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.js"></script>
     <script src="../js/common.js"></script>
     <script src="../js/newsDetail.js"></script>
