@@ -23,6 +23,7 @@ $(function () {
             $(".selected-box").append(formatted_strings).children().addClass("selected-items");
             $(".selected-box").children().children(':last-child').addClass("am-icon-close");
             $(this).parent().parent(".am-cf").css("display", "none");
+            $(".clear-all").css("display","block");
             var target_css=$(this);
             var target_row= target_css.parent().parent(".am-cf")
             console.log(target_css.html());
@@ -38,11 +39,20 @@ $(function () {
                     }
                     inbox_item.remove();
                     
-
+                   if($(".selected-items").length==0){
+                       console.log($(".selected-items").length);
+                    $(".clear-all").css("display","none");  
+                   }
+               
                 });
-
+                
             });
-
+            $(".clear-all").click(function(){
+                $(".selected-box span.selected-items").remove();
+                target_row.css("display", "block");
+                $(this).css("display","none");
+             });
+         
         });
 
 
