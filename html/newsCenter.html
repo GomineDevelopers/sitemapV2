@@ -123,7 +123,7 @@
 
 <div class="am-g am-grid-color">
     <div class="am-u-sm-8 am-u-sm-centered">
-        <div class="am-u-md-centered">
+        <div class="am-u-md-centered" id="main">
             <!--搜索框-->
             <div class="am-g">
                 <div class="am-u-sm-8">
@@ -143,54 +143,15 @@
                 <!--左边面板-->
                 <div class="am-panel am-panel-default">
                     <div class="am-panel-hd"><span class="am-news-line">|</span>面板标题</div>
-                    <div class="am-panel-bd">
+                    <div class="am-panel-bd" v-for="newsLeftList in newsLeftData">
                         <div class="am-g am-panel-content ">
-                            <div class="am-fl"><img class=" am-img-responsive am-panel-img " src="../images/news01.png"></div>
+                            <div class="am-fl"><img class="am-img-responsive am-panel-img " :src="newsLeftList.img"></div>
                             <div class="am-u-sm-8 am-panel-body">
-                                <div class="am-panel-title">摩拜37亿卖身美团？挪用60亿用户押金！</div>
-                                <div class="am-panel-intro">据媒体报道，针对美团将收购无桩单车运营商摩拜的消息，知情人士表示，这一交易并未落定。消息人士称，目前，对收购摩拜表示兴趣并给</div>
+                                <div class="am-panel-title" v-text="newsLeftList.title"></div>
+                                <div class="am-panel-intro" v-text="newsLeftList.description"></div>
                                 <div class="am-panel-source">
                                     <span>来源：蓝鲸财经</span>
-                                    <span class="am-fr">2018-03-11</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="am-panel-bd">
-                        <div class="am-g am-panel-content ">
-                            <img class="am-fl am-panel-img " src="../images/news02.png">
-                            <div class="am-u-sm-8 am-panel-body">
-                                <div class="am-panel-title">IPO观察|开年已有60家撤回IPO</div>
-                                <div class="am-panel-intro">从2018年开年至3月22日，已有60家企业终止IPO申请，其中仅3月份就有32起撤回。此前有券商人士对记者表示，近期陆续有</div>
-                                <div class="am-panel-source">
-                                    <span>来源：第一财经APP</span>
-                                    <span class="am-fr">2018-03-11</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="am-panel-bd">
-                        <div class="am-g am-panel-content ">
-                            <img class="am-fl am-panel-img " src="../images/news03.png">
-                            <div class="am-u-sm-8 am-panel-body">
-                                <div class="am-panel-title">张一鸣：心怀猛虎，我是商战里的刺客！</div>
-                                <div class="am-panel-intro">从最先做资讯平台与各大门户形成对手；微头条提出千人百万粉计划与微博站在了对立面；悟空问 答高调占领了一波大V；与押注内容战略的</div>
-                                <div class="am-panel-source">
-                                    <span>来源：投资界</span>
-                                    <span class="am-fr">2018-03-11</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="am-panel-bd">
-                        <div class="am-g am-panel-content " style="border-bottom: none;">
-                            <img class="am-fl am-panel-img " src="../images/news04.png">
-                            <div class="am-u-sm-8 am-panel-body">
-                                <div class="am-panel-title">张一鸣：心怀猛虎，我是商战里的刺客！</div>
-                                <div class="am-panel-intro">从最先做资讯平台与各大门户形成对手；微头条提出千人百万粉计划与微博站在了对立面；悟空问 答高调占领了一波大V；与押注内容战略的</div>
-                                <div class="am-panel-source">
-                                    <span>来源：投资界</span>
-                                    <span class="am-fr">2018-03-11</span>
+                                    <span class="am-fr" v-text="newsLeftList.create_time"></span>
                                 </div>
                             </div>
                         </div>
@@ -204,24 +165,15 @@
                     <div class="am-panel-hd"><span class="am-news-line">|</span>热门阅读</div>
                     <div>
                         <ul data-am-widget="gallery" class="am-gallery am-gallery-overlay" data-am-gallery="{ pureview: true }" >
-                            <li>
+                            <li v-for="newsRightList in newsRightData">
                                 <div class="am-gallery-item">
                                     <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
-                                        <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg"  alt="远方 有一个地方 那里种有我们的梦想"/>
-                                        <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
+                                        <img :src="newsRightList.img"  alt="远方 有一个地方 那里种有我们的梦想"/>
+                                        <h3 class="am-gallery-title" v-text="newsRightList.title"></h3>
                                     </a>
                                 </div>
                             </li>
-                            <hr class="am-news-hr">
-                            <li>
-                                <div class="am-gallery-item">
-                                    <a href="http://s.amazeui.org/media/i/demos/bing-2.jpg" class="">
-                                        <img src="http://s.amazeui.org/media/i/demos/bing-2.jpg"  alt="某天 也许会相遇 相遇在这个好地方"/>
-                                        <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
-                                        <div class="am-gallery-desc">2375-09-26</div>
-                                    </a>
-                                </div>
-                            </li>
+                            <!--<hr class="am-news-hr">-->
                         </ul>
                     </div>
                 </div>
@@ -287,6 +239,10 @@
 <!-- 底部导航 -->
 
 <script src="../js/jquery/jquery-3.3.1.min.js"></script>
+<script src="../js/vue/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.js"></script>
+<script src="../js/common.js"></script>
+<script src="../js/newsCenter.js"></script>
 </body>
 </html>
