@@ -3,7 +3,9 @@ var newsCenter = new Vue({
     data:{
         loading: false,
         newsLeftData:[],
-        newsRightData:[]
+        newsRightData:[],
+        all: 20, //总页数
+        cur: 1,//当前页码
     },
     mounted:function () {
         var vm = this;
@@ -34,6 +36,47 @@ var newsCenter = new Vue({
         },
         ready() {
             this.fakeAjax()
+        },
+        btnClick: function(data){//页码点击事件
+            if(data != this.cur){
+                this.cur = data 
+            }
+        },
+        pageClick: function(){
+            console.log('现在在'+this.cur+'页');
+        }
+    },
+    //分页
+    computed: {
+        indexs: function(){
+          var left = 1;
+          var right = this.all;
+          var ar = [];
+          if(this.all>= 5){
+            if(this.cur > 3 && this.cur < this.all-2){
+                    left = this.cur - 2
+                    right = this.cur + 2
+            }else{
+                if(this.cur<=3){
+                    left = 1
+                    right = 5
+                }else{
+                    right = this.all
+                    left = this.all -4
+                }
+            }
+         }
+        while (left <= right){
+            ar.push(left)
+            left ++
+        }
+        return ar
+       }
+         
+    },
+    watch: {
+        cur: function(oldValue , newValue){
+            console.log(arguments);
         }
     }
 })

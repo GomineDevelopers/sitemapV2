@@ -158,6 +158,20 @@
                         </div>
                     </div>
                 </div>
+                <div class="page-bar am-fl ">
+                        <div class="am-fl">
+                            <ul class="am-pagination  am-pagination-size">
+                                    <li v-if="cur>1"><a v-on:click="cur--,pageClick()">上一页</a></li>
+                                    <li v-if="cur==1"><a class="banclick">上一页</a></li>
+                                    <li v-for="index in indexs"  v-bind:class="{ 'active': cur == index}">
+                                        <a v-on:click="btnClick(index)">{{ index }}</a>
+                                    </li>
+                                    <li v-if="cur!=all"><a v-on:click="cur++,pageClick()">下一页</a></li>
+                                    <li v-if="cur == all"><a class="banclick">下一页</a></li>
+                                    <li><a>共<i>{{all}}</i>页</a></li>
+                            </ul>
+                        </div>
+                    </div>
             </div>
 
             <!--右边面板-->
@@ -180,21 +194,9 @@
                 </div>
             </div>
             <!--content-->
-
+            
             <!--分页-->
-            <div class="am-u-sm-8 am-fl ">
-                <div class="am-fl">
-                    <ul class="am-pagination  am-pagination-size">
-                        <li class="am-disabled"><a href="#">&laquo;</a></li>
-                        <li class="am-active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">&raquo;</a></li>
-                    </ul>
-                </div>
-            </div>
+            
             <!--为了最后一个不是分页而设置-->
             <div></div>
         </div>
