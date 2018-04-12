@@ -120,6 +120,7 @@
     </div>
 </header>
 <!-- 导航结束 -->
+<div v-show="loading" class="loading"></div>
 
 <div class="am-g am-grid-color">
     <div class="am-u-sm-8 am-u-sm-centered">
@@ -168,7 +169,7 @@
                             <li v-for="newsRightList in newsRightData">
                                 <div class="am-gallery-item">
                                     <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
-                                        <img :src="newsRightList.img"  alt="远方 有一个地方 那里种有我们的梦想"/>
+                                        <img :src="newsRightList.img"  alt=""/>
                                         <h3 class="am-gallery-title" v-text="newsRightList.title"></h3>
                                     </a>
                                 </div>
