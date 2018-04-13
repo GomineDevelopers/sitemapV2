@@ -130,9 +130,9 @@
                 <div class="am-u-sm-8">
                     <div class="am-u-lg-10">
                         <div class="am-input-group am-news-inputGroup">
-                            <input type="text" class="am-form-field">
+                            <input type="text" class="am-form-field" v-model="keyWord">
                             <span class="am-input-group-btn">
-                                <button class="am-btn am-btn-primary" type="button"><span class="am-icon-search"></span> </button>
+                                <button class="am-btn am-btn-primary" type="button" @click="Search()"><span class="am-icon-search"></span> </button>
                             </span>
                         </div>
                     </div>
@@ -159,21 +159,6 @@
                     </div>
                 </div>
                 <!--分页-->
-                <!--<div class="page-bar am-fl ">
-                    <div class="am-fl">
-                        <ul class="am-pagination  am-pagination-size">
-                                <li v-if="cur>1"><a v-on:click="cur&#45;&#45;,pageClick()">上一页</a></li>
-                                <li v-if="cur==1"><a class="banclick">上一页</a></li>
-                                <li v-for="index in indexs"  v-bind:class="{ 'active': cur == index}">
-                                    <a v-on:click="btnClick(index)">{{ index }}</a>
-                                </li>
-                                <li v-if="cur!=all"><a v-on:click="cur++,pageClick()">下一页</a></li>
-                                <li v-if="cur == all"><a class="banclick">下一页</a></li>
-                                <li><a>共<i>{{all}}</i>页</a></li>
-                        </ul>
-                    </div>
-                </div>-->
-                <!--分页-->
                 <div class="am-u-sm-8 am-fl ">
                     <div class="am-fl">
                         <ul class="am-pagination am-pagination-size">
@@ -182,8 +167,8 @@
                             <li v-for="index in indexs"  :class="{ 'am-active': cur == index}">
                                 <a @click="btnClick(index)" v-text="index"></a>
                             </li>
-                            <li v-if="cur==right" :class={"am-disabled":cur==right}><a>&gt;</a></li>
-                            <li v-if="cur!=right"><a @click="cur++,pageClick()">&gt;</a></li>
+                            <li v-if="cur==allPage" :class={"am-disabled":cur==allPage}><a>&gt;</a></li>
+                            <li v-if="cur!=allPage"><a @click="cur++,pageClick()">&gt;</a></li>
                         </ul>
                     </div>
                 </div>
