@@ -158,29 +158,44 @@
                         </div>
                     </div>
                 </div>
-                <div class="page-bar am-fl ">
-                        <div class="am-fl">
-                            <ul class="am-pagination  am-pagination-size">
-                                    <li v-if="cur>1"><a v-on:click="cur--,pageClick()">上一页</a></li>
-                                    <li v-if="cur==1"><a class="banclick">上一页</a></li>
-                                    <li v-for="index in indexs"  v-bind:class="{ 'active': cur == index}">
-                                        <a v-on:click="btnClick(index)">{{ index }}</a>
-                                    </li>
-                                    <li v-if="cur!=all"><a v-on:click="cur++,pageClick()">下一页</a></li>
-                                    <li v-if="cur == all"><a class="banclick">下一页</a></li>
-                                    <li><a>共<i>{{all}}</i>页</a></li>
-                            </ul>
-                        </div>
+                <!--分页-->
+                <!--<div class="page-bar am-fl ">
+                    <div class="am-fl">
+                        <ul class="am-pagination  am-pagination-size">
+                                <li v-if="cur>1"><a v-on:click="cur&#45;&#45;,pageClick()">上一页</a></li>
+                                <li v-if="cur==1"><a class="banclick">上一页</a></li>
+                                <li v-for="index in indexs"  v-bind:class="{ 'active': cur == index}">
+                                    <a v-on:click="btnClick(index)">{{ index }}</a>
+                                </li>
+                                <li v-if="cur!=all"><a v-on:click="cur++,pageClick()">下一页</a></li>
+                                <li v-if="cur == all"><a class="banclick">下一页</a></li>
+                                <li><a>共<i>{{all}}</i>页</a></li>
+                        </ul>
                     </div>
+                </div>-->
+                <!--分页-->
+                <div class="am-u-sm-8 am-fl ">
+                    <div class="am-fl">
+                        <ul class="am-pagination am-pagination-size">
+                            <li v-if="cur==1" :class={"am-disabled":cur==1}><a>&lt;</a></li>
+                            <li v-if="cur>1"><a @click="cur--,pageClick()">&lt;</a></li>
+                            <li v-for="index in indexs"  :class="{ 'am-active': cur == index}">
+                                <a @click="btnClick(index)" v-text="index"></a>
+                            </li>
+                            <li v-if="cur==right" :class={"am-disabled":cur==right}><a>&gt;</a></li>
+                            <li v-if="cur!=right"><a @click="cur++,pageClick()">&gt;</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
             <!--右边面板-->
             <div class="am-u-sm-4">
-                <div class="am-panel am-panel-default">
+                <div class="am-panel am-panel-default am-cf">
                     <div class="am-panel-hd"><span class="am-news-line">|</span>热门阅读</div>
                     <div>
                         <ul data-am-widget="gallery" class="am-gallery am-gallery-overlay" data-am-gallery="{ pureview: true }" >
-                            <li v-for="newsRightList in newsRightData">
+                            <li v-for="(newsRightList,index) in newsRightData" v-if="index < 4">
                                 <div class="am-gallery-item">
                                     <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
                                         <img :src="newsRightList.img"  alt=""/>
@@ -194,8 +209,6 @@
                 </div>
             </div>
             <!--content-->
-            
-            <!--分页-->
             
             <!--为了最后一个不是分页而设置-->
             <div></div>
