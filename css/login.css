@@ -8,7 +8,7 @@
 }
 .am-login-bg{
     background-image: url("../images/loginbg.png");
-    background-size: auto;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
 }
 .am-login-content{
