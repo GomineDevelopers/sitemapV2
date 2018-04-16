@@ -7,7 +7,7 @@ var newsCenter = new Vue({
         newsRightData:[],
         all: '', //总页数
         allPage:'',
-        cur: 1,//当前页码
+        cur: 1//当前页码
     },
     mounted:function () {
         var vm = this;
