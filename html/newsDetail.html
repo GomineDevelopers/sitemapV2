@@ -133,10 +133,20 @@
                         <span v-text="sourceSort"></span>
                         &emsp;&emsp;
                         <span v-text="dateSort"></span>
-                        <div class="am-fr">分享：
-                            <a href="##" class="am-icon-btn am-icon-btn-sm am-danger am-icon-weibo"></a>
+                        <div class="am-fr">
+                            <!--分享：<a href="##" class="am-icon-btn am-icon-btn-sm am-danger am-icon-weibo"></a>
                             <a href="##" class="am-icon-btn am-icon-btn-sm am-success am-icon-wechat"></a>
-                            <a href="##" class="am-icon-btn am-icon-btn-sm am-primary am-icon-qq"></a>
+                            <a href="##" class="am-icon-btn am-icon-btn-sm am-primary am-icon-qq"></a>-->
+                            <!-- JiaThis Button BEGIN -->
+                            <div class="jiathis_style_24x24">
+                                <a class="jiathis_button_tsina"></a>
+                                <a class="jiathis_button_weixin"></a>
+                                <a class="jiathis_button_cqq"></a>
+                                <a class="jiathis_button_qzone"></a>
+                                <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                            </div>
+                            <!-- JiaThis Button END -->
+
                         </div>
                     </h5>
                 </div>
@@ -195,6 +205,7 @@
     <script src="../js/vue/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.js"></script>
+    <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
     <script src="../js/common.js"></script>
     <script src="../js/newsDetail.js"></script>
 </body>
