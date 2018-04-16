@@ -41,7 +41,31 @@ var app = new Vue({
     el:'#app',
     data:{
         jobs:jobs,
-        departments:departments
+        departments:departments,
+        email:'',
+        selected_pro:'',
+        selected_city:'',
+        selected_area:''
+
+    },
+    methods:{
+        onSubmit:function () {
+            var email = this.email;
+            var selected_pro = this.selected_pro;
+            var selected_city = this.selected_city;
+            var selected_area = this.selected_area;
+            console.info(selected_pro,selected_city,selected_area);
+            axios.post('#', {
+                email:'email'
+
+            })
+                .then(function (response) {
+                    alert('成功');
+                })
+                .catch(function (error) {
+                    console.info(error);
+                });
+        }
     }
 })
 

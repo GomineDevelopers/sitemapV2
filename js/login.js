@@ -44,6 +44,7 @@ var app =new Vue({
         },
         //读取cookie
         getCookie:function () {
+            console.info(document.cookie);
             if (document.cookie.length>0) {
                 var arr=document.cookie.split('; ');//这里显示的格式需要切割一下自己可输出看下
                 for(var i=0;i<arr.length;i++){
@@ -57,6 +58,10 @@ var app =new Vue({
                 }
             }
         }
+        //清除cookie
+        /*clearCookie:function () {
+            this.setCookie("","",-1);//修改2值都为空，天数为负1天就好了
+        }*/
 
     }
 })
