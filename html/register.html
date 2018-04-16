@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cn">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,7 +22,7 @@
 <div class="am-u-sm-12">
     <div class="am-container">
         <div class="am-register-content" id="app">
-            <form class="am-form am-form-horizontal" id="form-with-tooltip">
+            <form class="am-form am-form-horizontal" id="form-with-tooltip" @submit.prevent="onSubmit">
                 <fieldset>
                 <div class="am-register-title"><span>创建账户</span></div>
                 <div class="am-form-group am-vertical-align">
@@ -30,7 +30,7 @@
                         电子邮箱地址<span class="am-register-required">*</span>
                     </label>
                     <div class="am-u-sm-5">
-                        <input type="email" id="doc-ipt-1" required>
+                        <input type="email" id="doc-ipt-1" required v-model="email">
                     </div>
                     <div class="am-u-sm-5 am-register-middle1"><span class="am-register-span">您的电子邮箱地址即为您的用户名</span></div>
                 </div>
@@ -53,13 +53,16 @@
                 </div>
                 <div class="am-form-group am-register-space-5">
                     <label class="am-u-sm-2 am-form-label am-register-text">国家/地区<span class="am-register-required">*</span></label>
-                    <div class="am-u-sm-5">
-                        <select data-am-selected = "{btnWidth: '100%', btnSize: 'sm', btnStyle: 'primary'}">
+                    <div class="am-u-sm-5" data-toggle="distpicker">
+                        <!--<select data-am-selected = "{btnWidth: '100%', btnSize: 'sm', btnStyle: 'primary'}">
                             <option value="a">Apple</option>
                             <option value="b">Banana</option>
                             <option value="o">Orange</option>
                             <option value="m">Mango</option>
-                        </select>
+                        </select>-->
+                        <select v-model="selected_pro"></select>
+                        <select v-model="selected_city"></select>
+                        <select v-model="selected_area"></select>
                     </div>
                 </div>
                 <div class="am-form-group">
@@ -126,8 +129,10 @@
 
 <script src="../js/jquery/jquery-3.3.1.min.js"></script>
 <!-- 开发版本 -->
-<script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.js"></script>
 <script src="../js/vue/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.js"></script>
+<script src="../js/jquery/distpicker.js"></script>
 <script src="../js/register.js"></script>
 </body>
 </html>
