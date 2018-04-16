@@ -22,18 +22,18 @@
             <div class="am-container">
                 <div class="am-u-sm-5 am-u-sm-centered">
                     <div class="am-login-content" id="app">
-                        <form class="am-form">
+                        <form class="am-form" @submit.prevent="login">
                             <fieldset>
                                 <div class="am-login-title"><span>登陆</span></div>
 
                                 <div class="am-input-group am-g-space1">
                                     <span class="am-input-group-label"><i class="am-icon-user am-icon-fw am-icon-sm"></i></span>
-                                    <input type="text" class="am-form-field" placeholder="请输入用户名" ref="userName">
+                                    <input type="text" class="am-form-field" placeholder="请输入用户名" v-model="userName">
                                 </div>
 
                                 <div class="am-input-group am-g-space3">
                                     <span class="am-input-group-label"><i class="am-icon-lock am-icon-fw am-icon-sm"></i></span>
-                                    <input type="text" class="am-form-field" placeholder="请输入密码" ref="password">
+                                    <input type="text" class="am-form-field" placeholder="请输入密码" v-model="password">
                                 </div>
                                 <div class="am-u-sm-6">
                                     <label class="am-checkbox text-left">
@@ -44,7 +44,7 @@
                                     <span>忘记密码？</span>
                                 </div>
                                 <div class="am-u-sm-12 am-g-space2">
-                                    <button class="am-btn am-btn-primary am-btn-block " @click="login()" >登陆</button>
+                                    <button class="am-btn am-btn-primary am-btn-block" type="submit">登陆</button>
                                 </div>
                             </fieldset>
                         </form>
