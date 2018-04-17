@@ -66,8 +66,8 @@
                             <option value="o">Orange</option>
                             <option value="m">Mango</option>
                         </select>-->
-                       <div class="am-u-sm-4"> <select v-model="selected_pro"></select></div>
-                       <div class="am-u-sm-4"> <select v-model="selected_city"></select></div>
+                       <div class="am-u-sm-4"> <select v-model="selected_pro" required></select></div>
+                       <div class="am-u-sm-4"> <select v-model="selected_city" required></select></div>
                        <div class="am-u-sm-4"><select v-model="selected_area"></select></div>
                     </div>
                 </div>
@@ -106,7 +106,7 @@
                     <label for="doc-ipt-8" class="am-u-sm-2 am-form-label am-register-text">公司名称<span class="am-register-required">*</span></label>
                     <div class="am-u-sm-10 no-padding-left">
                     <div class="am-u-sm-6">
-                        <input type="text" id="doc-ipt-8" required data-foolish-msg="请填写公司名称">
+                        <input type="text" id="doc-ipt-8"	required:true pattern="^[\u4e00-\u9fa5]{0,}$"  required data-foolish-msg="请填写公司名称">
                     </div>
                 </div>
                 </div>
