@@ -109,3 +109,6 @@
     border-color: transparent transparent red;
     border-style: none inset solid;
 }
+.no-padding-left{
+    padding-left: 0px;
+}
