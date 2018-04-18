@@ -14,7 +14,7 @@ var newsDetail = new Vue({
         },
         dateSort: function () {
             if (this.create_time)
-                return '发布时间：' + this.create_time;
+                return '发布时间：' + formatDate(this.create_time);
         }
     },
     mounted: function () {
@@ -26,7 +26,7 @@ var newsDetail = new Vue({
             .then(function (response) {
                 self.title = response.data.data.title;
                 self.source = response.data.data.source;
-                self.create_time = response.data.data.addate;
+                self.create_time = response.data.data.create_time;
                 self.content = response.data.data.content;
             })
             .catch(function (error) {
