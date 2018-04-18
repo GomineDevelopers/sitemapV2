@@ -110,15 +110,22 @@
           </li>
         </ul>
         <div class="am-topbar-right">
-
-          <ul class="am-nav am-nav-pills am-topbar-nav">
+          <!--未登录-->
+          <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogin">
             <li>
-              <a href="#">登陆</a>
+              <a href="./login.html">登陆</a>
             </li>
-        
-            
             <li>
-              <a href="#">注册</a>
+              <a href="./html/register.html">注册</a>
+            </li>
+          </ul>
+          <!--已登录-->
+          <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogout" >
+            <li>
+              <a href="#" id="vipName"></a>
+            </li>
+            <li>
+              <a id="logout">退出</a>
             </li>
           </ul>
         </div>
@@ -128,18 +135,17 @@
   <!-- 导航结束 -->
 
   <!-- 内容物开始 -->
-  <div class="am-g  am-container-fluid index-content-bg">
+  <div class="am-g  am-container-fluid index-content-bg" id="main">
     <div class="am-u-sm-8 am-u-sm-centered">
       <div class="am-u-sm-centered am-text-center">
-     <p class="am-center"> <img src="images/MakingInsightmorepowerful..png" alt=""></p>
-      <p class="am-center"> <img src="images/Connectwithyouraudiencethroughstoriespeoplelove..png" alt=""></p>
+        <p class="am-center"> <img src="images/MakingInsightmorepowerful..png" alt=""></p>
+        <p class="am-center"> <img src="images/Connectwithyouraudiencethroughstoriespeoplelove..png" alt=""></p>
     </div>
       <div class="am-input-group am-input-group-lg am-u-sm-9 am-u-sm-centered">
-         
-              <input type="text" class="am-form-field" placeholder="请输入企业名称">
-              <span class="am-input-group-btn">
-                <button class="am-btn am-btn-primary" type="button">search</button>
-              </span>
+          <input type="text" class="am-form-field" placeholder="请输入企业名称" v-model="key_pre">
+          <span class="am-input-group-btn">
+            <button class="am-btn am-btn-primary" type="button" @click="search()">search</button>
+          </span>
       </div>
       <hr class="content-devider">
       <div class="index-see-more am-fr ">
@@ -229,8 +235,12 @@
     </div>
   </div>
   <!-- 开发版本 -->
-  <script src="js/jquery/jquery-3.3.1.min.js"></script>
+  <script src="./js/jquery/jquery-3.3.1.min.js"></script>
+  <script src="./js/vue/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.js"></script>
+  <script src="./js/common.js"></script>
+  <script src="./js/index.js"></script>
   <!-- 线上压缩版本 -->
   <!-- <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script> -->
 </body>

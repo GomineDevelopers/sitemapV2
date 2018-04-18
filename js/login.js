@@ -3,65 +3,65 @@ var app =new Vue({
     el:'#app',
     data:{
         userName:'',
-        password:''
+        password:'',
+        checkedLogin:''
     },
     /*页面加载的时候获取*/
-    mounted(){
+    mounted: function (){
         this.getCookie()
     },
     methods:{
         login:function () {
             var userName = this.userName;
             var password = this.password;
-            axios.post('http://192.168.0.191/api/apptoken/get', {
-                ac: 'userName',
-                se: 'password'
+            axios.post('http://192.168.0.5/api/login/login', {
+                    email: userName,
+                    password: password
             })
                 .then(function (response) {
-                    if(response.data.code == '400'){
-                        window.location.href = 'index.html'
+                    if(response.data.status == '1'){
+                        setLocalStorage('token', response.data.data.token);
+                        setLocalStorage('userName', response.data.data.email);
+                        window.location.href = './index.html'
                     }else{
-                        alert(response.data.msg);
+                        alert(response.data.message);
                     }
 
                 })
                 .catch(function (error) {
-                    alert("请求错误！");
+                    console.info(error);
                 });
             //判断复选框是否被勾选 勾选则调用配置cookie方法
-            if(this.checked=true){
-                //传入账号名，密码，和保存天数3个参数
+            if(this.checkedLogin == true){
                 this.setCookie(userName,password,7);
             }
         },
         //设置cookie
-        setCookie(c_name,c_pwd,exdays) {
+        setCookie:function(c_name,c_pwd,exdays) {
             var exdate=new Date();//获取时间
             exdate.setTime(exdate.getTime() + 24*60*60*1000*exdays);//保存的天数
-            //字符串拼接cookie
             window.document.cookie="userName"+ "=" +c_name+";path=/;expires="+exdate.toGMTString();
             window.document.cookie="userPwd"+"="+c_pwd+";path=/;expires="+exdate.toGMTString();
         },
         //读取cookie
         getCookie:function () {
-            console.info(document.cookie);
             if (document.cookie.length>0) {
-                var arr=document.cookie.split('; ');//这里显示的格式需要切割一下自己可输出看下
+                var arr=document.cookie.split('; ');
                 for(var i=0;i<arr.length;i++){
-                    var arr2=arr[i].split('=');//再次切割
-                    //判断查找相对应的值
+                    var arr2=arr[i].split('=');
                     if(arr2[0]=='userName'){
-                        this.userName=arr2[1];//保存到保存数据的地方
+                        this.userName=arr2[1];
                     }else if(arr2[0]=='userPwd'){
                         this.password=arr2[1];
                     }
                 }
             }
-        }
+        },
         //清除cookie
-        /*clearCookie:function () {
+        clearCookie:function () {
             this.setCookie("","",-1);//修改2值都为空，天数为负1天就好了
-        }*/
+            window.location.reload();//刷新当前页面.
+        }
 
     }
 })

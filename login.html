@@ -37,11 +37,11 @@
                                 </div>
                                 <div class="am-u-sm-6">
                                     <label class="am-checkbox text-left">
-                                        <input type="checkbox" value="" data-am-ucheck>记住账号密码
+                                        <input type="checkbox" value="1" data-am-ucheck  v-model="checkedLogin">记住账号密码
                                     </label>
                                 </div>
                                 <div class="am-u-sm-6 text-right">
-                                    <span>忘记密码？</span>
+                                    <span @click="clearCookie()">忘记密码？</span>
                                 </div>
                                 <div class="am-u-sm-12 am-g-space2">
                                     <button class="am-btn am-btn-primary am-btn-block" type="submit">登陆</button>
@@ -60,6 +60,7 @@
 <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.js"></script>
 <script src="./js/vue/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="./js/common.js"></script>
 <script src="./js/login.js"></script>
 </body>
 </html>
