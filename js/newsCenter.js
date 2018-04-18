@@ -5,10 +5,9 @@ var newsCenter = new Vue({
         keyWord:'请输入关键字',
         newsLeftData:[],
         newsRightData:[],
-        all: '', //总页数
-        allPage:'',
-        cur: 1,//当前页码
-        currentId:[],
+        all: '',
+        allPage:'',//总页数
+        cur: 1//当前页码
     },
     mounted:function () {
         var vm = this;
@@ -60,11 +59,8 @@ var newsCenter = new Vue({
                     vm.newsLeftData = response.data.data;
                 })
         },
-        enteringDetail:function(data){
-            var vm=this;
-            this.currentId=data;
-            window.location.href ="newsDetail.html?newsid="+this.currentId;
-             
+        enteringDetail:function(id){
+            window.location.href ="newsDetail.html?newsid="+id;
         }
     },
     //分页
