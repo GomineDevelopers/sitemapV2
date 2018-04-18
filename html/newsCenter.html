@@ -145,11 +145,11 @@
                 <div class="am-panel am-panel-default">
                     <div class="am-panel-hd"><span class="am-news-line">|</span>面板标题</div>
                     <div class="am-panel-bd" v-for="newsLeftList in newsLeftData">
-                        <div class="am-g am-panel-content ">
+                        <div class="am-g am-panel-content " @click="enteringDetail(newsLeftList.id)" >
                             <div class="am-fl"><img class="am-img-responsive am-panel-img " :src="newsLeftList.img"></div>
                             <div class="am-u-sm-8 am-panel-body">
                                 <div class="am-panel-title" v-text="newsLeftList.title"></div>
-                                <div class="am-panel-intro" v-text="newsLeftList.description"></div>
+                                <div class="am-panel-intro" v-html="newsLeftList.content"></div>
                                 <div class="am-panel-source">
                                     <span>来源：蓝鲸财经</span>
                                     <span class="am-fr" v-text="newsLeftList.create_time"></span>

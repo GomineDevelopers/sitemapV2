@@ -7,18 +7,19 @@ var newsCenter = new Vue({
         newsRightData:[],
         all: '', //总页数
         allPage:'',
-        cur: 1//当前页码
+        cur: 1,//当前页码
+        currentId:[],
     },
     mounted:function () {
         var vm = this;
         axios.all([getLeft(), getRight()])
             .then(axios.spread(function (leftC, rightC) {// 两个请求现在都执行完成
-                vm.newsLeftData = leftC.data.data.list.data;
-                vm.all = leftC.data.data.list.total;
+                vm.newsLeftData = leftC.data.data.data;
+                vm.all = leftC.data.data.total;
                 vm.newsLeftData.forEach(function (element, index, array) {// element: 指向当前元素的值 index: 指向当前索引 array: 指向Array对象本身
-                    element.create_time = formatDate(element.create_time);
+                    element.create_time = element.addate;    
                 });
-                vm.newsRightData = rightC.data.data.list.data;
+                vm.newsRightData = rightC.data.data.data;
             }));
     },
     methods:{
@@ -47,7 +48,7 @@ var newsCenter = new Vue({
                 this.cur = data;
                 getLeft(this.cur)
                     .then(function (response) {
-                        vm.newsLeftData = response.data.data.list.data;
+                        vm.newsLeftData = response.data.data;
                     })
 
             }
@@ -56,8 +57,14 @@ var newsCenter = new Vue({
             var vm =this;
             getLeft(this.cur)
                 .then(function (response) {
-                    vm.newsLeftData = response.data.data.list.data;
+                    vm.newsLeftData = response.data.data;
                 })
+        },
+        enteringDetail:function(data){
+            var vm=this;
+            this.currentId=data;
+            window.location.href ="newsDetail.html?newsid="+this.currentId;
+             
         }
     },
     //分页
@@ -103,7 +110,7 @@ function getLeft(curpage) {
     var par = curpage == undefined?page = '1':page = curpage;
     var l = axios({
         method: 'get',
-        url: 'http://192.168.0.191/home/content/newlists',
+        url: 'http://192.168.0.5/api/content/newlist',
         params: {
             category : 2,
             limit:5,
@@ -114,5 +121,5 @@ function getLeft(curpage) {
 }
 
 function getRight() {
-    return axios.get('http://192.168.0.191/home/content/newlists?category=27');
+    return axios.get('http://192.168.0.5/api/content/newlist');
 }
