@@ -42,16 +42,6 @@
     padding-right: .6rem;
     font-weight: 900;
 }
-.am-pagination-size li a{
-    padding: 4px 10px;
-    color: #034f86;
-}
-.am-pagination > .am-active > a,
-.am-pagination > .am-active > a:hover,
-.am-pagination > .am-active > a:focus {
-    background-color: #034f86;
-    border-color: #034f86;
-}
 
 /*加载符号*/
 .centerMe {

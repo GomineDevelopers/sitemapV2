@@ -42,3 +42,15 @@
 .am-grid-color{
     background-color: #f8f8f8;
 }
+
+/*分页*/
+.am-pagination-size li a{
+    padding: 4px 10px;
+    color: #034f86;
+}
+.am-pagination > .am-active > a,
+.am-pagination > .am-active > a:hover,
+.am-pagination > .am-active > a:focus {
+    background-color: #034f86;
+    border-color: #034f86;
+}

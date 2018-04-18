@@ -1,4 +1,5 @@
- function formatDate (date, showDetail) {
+
+function formatDate (date, showDetail) {
     var isShow = showDetail || false;
     var d = new Date(parseInt(date) * 1000)
     var year = d.getFullYear();
@@ -12,6 +13,70 @@
     else
         return year + "-" + month + "-" + date1;
 }
+
+function getQueryVariable (variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split("&");
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == variable) {
+            return pair[1];
+        }
+    }
+    return (false);
+}
+
+function setLocalStorage(key, val) {
+     var exp = new Date().getTime() + 2 * 24 * 60 * 60 * 100;  //令牌过期时间
+     var obj = {
+         val: val,
+         exp: exp
+     };
+     localStorage.setItem(key, JSON.stringify(obj));
+ }
+
+function getLocalStorage(key) {
+     var info = localStorage.getItem(key);
+     if (info) {
+         info = JSON.parse(info);
+         if (info.exp > new Date().getTime()) {
+             return info.val;
+         }
+         else {
+             this.deleteLocalStorage('token');
+             this.deleteLocalStorage('userName');
+         }
+     }
+     return '';
+ }
+
+ function deleteLocalStorage(key) {
+     return localStorage.removeItem(key);
+ }
+
+ function logout() {
+     deleteLocalStorage('token');
+     deleteLocalStorage('userName');
+     window.location.reload();
+ }
+
+ $(function () {
+     if (getLocalStorage('token') && getLocalStorage('userName')) {
+         $("#isLogin").remove();
+         $("#vipName").text(getLocalStorage('userName'));
+         $("#isLogout").show();
+     }
+     else {
+         $("#isLogout").remove();
+         $("#isLogin").show();
+     }
+
+     if ($("#logout")) {
+         $("#logout").click(function () {
+             logout();
+         });
+     }
+ });
 
 
 
