@@ -114,7 +114,7 @@ function getLeft(curpage) {
         method: 'get',
         url: 'http://192.168.0.5/api/content/newlist',
         params: {
-            category : 2,
+          
             limit:5,
             page: par
         }

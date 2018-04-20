@@ -120,7 +120,7 @@
     </div>
 </header>
 <!-- 导航结束 -->
-<div v-show="loading" class="loading"></div>
+<!-- <div v-show="loading" class="loading"></div> -->
 
 <div class="am-g am-grid-color">
     <div class="am-u-sm-8 am-u-sm-centered">
@@ -179,10 +179,10 @@
                 <div class="am-panel am-panel-default am-cf">
                     <div class="am-panel-hd"><span class="am-news-line">|</span>热门阅读</div>
                     <div>
-                        <ul data-am-widget="gallery" class="am-gallery am-gallery-overlay" data-am-gallery="{ pureview: true }" >
+                        <ul data-am-widget="gallery" class="am-gallery am-gallery-overlay" data-am-gallery="{ pureview: false }" >
                             <li v-for="(newsRightList,index) in newsRightData" v-if="index < 4">
-                                <div class="am-gallery-item">
-                                    <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
+                                <div class="am-gallery-item "  @click="enteringDetail(newsRightList.id)">
+                                    <a >
                                         <img :src="newsRightList.img"  alt=""/>
                                         <h3 class="am-gallery-title" v-text="newsRightList.title"></h3>
                                     </a>

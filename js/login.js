@@ -8,7 +8,8 @@ var app =new Vue({
     },
     /*页面加载的时候获取*/
     mounted: function (){
-        this.getCookie()
+        this.getCookie();
+        console.info(this.getCookie())
     },
     methods:{
         login:function () {
