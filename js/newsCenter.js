@@ -16,26 +16,26 @@ var newsCenter = new Vue({
                 vm.newsLeftData = leftC.data.data.data;
                 vm.all = leftC.data.data.total;
                 vm.newsLeftData.forEach(function (element, index, array) {// element: 指向当前元素的值 index: 指向当前索引 array: 指向Array对象本身
-                    element.create_time = element.addate;    
+                    element.create_time = formatDate(element.create_time);    
                 });
                 vm.newsRightData = rightC.data.data.data;
             }));
     },
     methods:{
         /*加载图标start*/
-        toggleLoading(show) {
-            show = true;
-            this.loading = show
-        },
-        fakeAjax() {
-            this.toggleLoading(true);
-            setTimeout(function () {
-                this.toggleLoading(false)
-            }, 1000);
-        },
-        ready() {
-            this.fakeAjax()
-        },
+        // toggleLoading(show) {
+        //     show = true;
+        //     this.loading = show
+        // },
+        // fakeAjax() {
+        //     this.toggleLoading(true);
+        //     setTimeout(function () {
+        //         this.toggleLoading(false)
+        //     }, 1000);
+        // },
+        // ready() {
+        //     this.fakeAjax()
+        // },
         /*搜索*/
         Search:function(){
             /*写入方法*/
@@ -47,7 +47,10 @@ var newsCenter = new Vue({
                 this.cur = data;
                 getLeft(this.cur)
                     .then(function (response) {
-                        vm.newsLeftData = response.data.data;
+                        vm.newsLeftData = response.data.data.data;
+                        vm.newsLeftData.forEach(function (element, index, array) {// element: 指向当前元素的值 index: 指向当前索引 array: 指向Array对象本身
+                            element.create_time = formatDate(element.create_time);    
+                        });
                     })
 
             }
@@ -56,7 +59,10 @@ var newsCenter = new Vue({
             var vm =this;
             getLeft(this.cur)
                 .then(function (response) {
-                    vm.newsLeftData = response.data.data;
+                    vm.newsLeftData = response.data.data.data;
+                    vm.newsLeftData.forEach(function (element, index, array) {// element: 指向当前元素的值 index: 指向当前索引 array: 指向Array对象本身
+                        element.create_time = formatDate(element.create_time);    
+                    });
                 })
         },
         enteringDetail:function(id){
@@ -117,5 +123,5 @@ function getLeft(curpage) {
 }
 
 function getRight() {
-    return axios.get('http://192.168.0.5/api/content/newlist');
+    return axios.get('http://192.168.0.5/api/content/popularlist');
 }
