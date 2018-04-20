@@ -17,6 +17,7 @@ var newsCenter = new Vue({
                 vm.all = leftC.data.data.total;
                 vm.newsLeftData.forEach(function (element, index, array) {// element: 指向当前元素的值 index: 指向当前索引 array: 指向Array对象本身
                     element.create_time = formatDate(element.create_time);    
+                    element.source = "来源："+element.source; 
                 });
                 vm.newsRightData = rightC.data.data.data;
             }));
@@ -49,7 +50,8 @@ var newsCenter = new Vue({
                     .then(function (response) {
                         vm.newsLeftData = response.data.data.data;
                         vm.newsLeftData.forEach(function (element, index, array) {// element: 指向当前元素的值 index: 指向当前索引 array: 指向Array对象本身
-                            element.create_time = formatDate(element.create_time);    
+                            element.create_time = formatDate(element.create_time);
+                            element.source = "来源："+element.source;   
                         });
                     })
 
