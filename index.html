@@ -135,54 +135,35 @@
   <!-- 导航结束 -->
 
   <!-- 内容物开始 -->
-  <div class="am-g  am-container-fluid index-content-bg" id="main">
-    <div class="am-u-sm-8 am-u-sm-centered">
+  <div class="am-g  am-container-fluid index-content-bg">
+    <div class="am-u-sm-8 am-u-sm-centered" id="main">
       <div class="am-u-sm-centered am-text-center">
         <p class="am-center"> <img src="images/MakingInsightmorepowerful..png" alt=""></p>
         <p class="am-center"> <img src="images/Connectwithyouraudiencethroughstoriespeoplelove..png" alt=""></p>
-    </div>
+      </div>
       <div class="am-input-group am-input-group-lg am-u-sm-9 am-u-sm-centered">
-          <input type="text" class="am-form-field" placeholder="请输入企业名称" v-model="key_pre">
+          <input type="text" class="am-form-field" v-model="key_pre">
           <span class="am-input-group-btn">
             <button class="am-btn am-btn-primary" type="button" @click="search()">search</button>
           </span>
       </div>
       <hr class="content-devider">
       <div class="index-see-more am-fr ">
-          <a href="http://">READ MORE <i class="am-icon-angle-double-right am-icon-fw"></i> </a>
-        </div>
-      <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2
-          am-avg-md-3  am-gallery-overlay" data-am-gallery="{ pureview: true }">
-        <li>
-          <div class="am-gallery-item">
-            <a href="http://s.amazeui.org/media/i/demos/bing-1.jpg" class="">
-              <img src="http://s.amazeui.org/media/i/demos/bing-1.jpg" alt="远方 有一个地方 那里种有我们的梦想" />
-              <h3 class="am-gallery-title">远方 有一个地方 那里种有我们的梦想</h3>
-              <div class="am-gallery-desc">2375-09-26</div>
+          <a href="html/newsCenter.html">READ MORE <i class="am-icon-angle-double-right am-icon-fw"></i> </a>
+      </div>
+      <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-3  am-gallery-overlay" data-am-gallery="{ pureview: false }" >
+
+        <li v-for="(pop,index) in newspop" v-if="index<3">
+          <div class="am-gallery-item" @click="enteringDetail(pop.id)">
+            <a>
+              <img :src="pop.img" alt="未加载" />
+              <h3 class="am-gallery-title" v-text="pop.title"></h3>
             </a>
           </div>
         </li>
-        <li>
-          <div class="am-gallery-item">
-            <a href="http://s.amazeui.org/media/i/demos/bing-2.jpg" class="">
-              <img src="http://s.amazeui.org/media/i/demos/bing-2.jpg" alt="某天 也许会相遇 相遇在这个好地方" />
-              <h3 class="am-gallery-title">某天 也许会相遇 相遇在这个好地方</h3>
-              <div class="am-gallery-desc">2375-09-26</div>
-            </a>
-          </div>
-        </li>
-        <li>
-          <div class="am-gallery-item">
-            <a href="http://s.amazeui.org/media/i/demos/bing-3.jpg" class="">
-              <img src="http://s.amazeui.org/media/i/demos/bing-3.jpg" alt="不要太担心 只因为我相信" />
-              <h3 class="am-gallery-title">不要太担心 只因为我相信</h3>
-              <div class="am-gallery-desc">2375-09-26</div>
-            </a>
-          </div>
-        </li>
-        
+
       </ul>
-      
+
     </div>
   </div>
   <!-- 内容物结束 -->
@@ -241,8 +222,6 @@
   <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.js"></script>
   <script src="./js/common.js"></script>
   <script src="./js/index.js"></script>
-  <!-- 线上压缩版本 -->
-  <!-- <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script> -->
 </body>
 
 </html>

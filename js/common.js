@@ -1,4 +1,4 @@
-
+/*时间戳*/
 function formatDate (date, showDetail) {
     var isShow = showDetail || false;
     var d = new Date(parseInt(date) * 1000)
@@ -13,7 +13,7 @@ function formatDate (date, showDetail) {
     else
         return year + "-" + month + "-" + date1;
 }
-
+/*获取url后的参数*/
 function getQueryVariable (variable) {
     var query = window.location.search.substring(1);
     var vars = query.split("&");

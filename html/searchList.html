@@ -159,67 +159,54 @@
                               <div class="box">
                                 <dl class="am-cf title-h">
                                   <dt class="">已选条件：</dt>
-                                  <dd class="selected-box"></dd>
+                                  <dd class="selected-box">
+                                      <span v-for="selectedItem in selectedItems" class="selected-items" @click="delSelected(selectedItem.tag,$event)"><span v-text="selectedItem.selectedName"></span><i class="am-icon-close"></i></span>
+                                  </dd>
                                   <dd class="clear-all" style="display:none;"><a class="am-icon-trash">清除已选 </a></dd>
                               </dl>
-                              <dl class="am-cf">
+                              <dl class="am-cf" v-show="isShow.isShow_dlRan">
                                   <dt>搜索范围：</dt>
                                   <dd>
-                                      <a class="sx_child" v-for="rangItem in rang" v-text="rangItem.text"></a>
+                                      <a class="sx_child" v-for="rangItem in rang" v-text="rangItem.text" @click="getSelected('Ran',$event)"></a>
                                   </dd>
                               </dl>
-                              <dl class="am-cf">
+                              <dl class="am-cf" v-show="isShow.isShow_dlRegC">
                                   <dt>注册资本：</dt>
                                   <dd>
-                                      <a class="sx_child">0-100万&nbsp;</a>
-                                      <a class="sx_child">100万-200万&nbsp;</a>
-                                      <a href="#"  class="sx_child">200万-500万&nbsp;</a>
-                                      <a href="#"  class="sx_child">500万-1000万&nbsp;</a>
-                                      <a href="#"  class="sx_child">1000万以上&nbsp;</a>
+                                      <a class="sx_child" v-for="registeredCapital in registeredCapitals" v-text="registeredCapital.text" @click="getSelected('RegC',$event)"></a>
                                   </dd>
                               </dl>
-                              <dl class="am-cf">
+                              <dl class="am-cf" v-show="isShow.isShow_dlSta">
                                   <dt>员工人数：</dt>
                                   <dd>
-                                      <a class="sx_child">0-500人</a>
-                                      <a class="sx_child">500-1000人</a>
-                                      <a class="sx_child">1000-5000人</a>
-                                      <a class="sx_child">5000-10000</a>
-                                      <a class="sx_child">10000人以上</a>
+                                      <a class="sx_child" v-for="staff in staffs" v-text="staff.text" @click="getSelected('Sta',$event)"></a>
                                   </dd>
                               </dl>
-                              <dl class="am-cf">
+                              <dl class="am-cf" v-show="isShow.isShow_dlTurn">
                                   <dt>营业额：</dt>
                                   <dd>
-                                      <a class="sx_child">0-100万 </a>
-                                      <a class="sx_child">100万-200万 </a>
-                                      <a class="sx_child">200万-500万 </a>
-                                      <a class="sx_child">500万-1000万 </a>
-                                      <a class="sx_child">1000万以上 </a>
+                                      <a class="sx_child" v-for="turnover in turnovers" v-text="turnover.text" @click="getSelected('Turn',$event)"></a>
                                   </dd>
                               </dl>
-                              <dl class="am-cf">
+                              <dl class="am-cf" v-show="isShow.isShow_dlInd">
                                   <dt>行业：</dt>
-                                  <dd class="content-body ">
-                                      <a class="sx_child" v-for="industryItem in industry" v-text="industryItem.text"></a>
+                                  <dd class="content-body" :class={'show-content-body':isShow.isShow_ind}>
+                                      <a class="sx_child" v-for="industryItem in industry" v-text="industryItem.text" @click="getSelected('Ind',$event)"></a>
                                   </dd>
-                                  <dd class="show-more" ><a  class="am-icon-angle-down ">更多 </a></dd>
+                                  <dd class="show-more" @click="More('ind',$event)"><a class="am-icon-angle-down">更多</a></dd>
                               </dl>
-                              <dl class="am-cf">
+                              <dl class="am-cf" v-show="isShow.isShow_dlTime">
                                   <dt>成立时间</dt>
                                   <dd>
-                                      <a name="date" class="sx_child">1-5年</a>
-                                      <a name="date" class="sx_child">5-10年</a>
-                                      <a name="date" class="sx_child">10-15年</a>
-                                      <a name="date" class="sx_child">15年以上</a>
+                                      <a name="date" class="sx_child" v-for="foundedTime in foundedTimes" v-text="foundedTime.text" @click="getSelected('Time',$event)"></a>
                                   </dd>
                               </dl>
-                              <dl class="am-cf">
+                              <dl class="am-cf" id="7" v-show="isShow.isShow_dlReg">
                                 <dt >注册地区：</dt>
-                                <dd class="content-body">
-                                    <a class="sx_child" v-for="areaItem in area" v-text="areaItem.text"></a>
+                                <dd class="content-body" :class={'show-content-body':isShow.isShow_reg}>
+                                    <a class="sx_child" v-for="areaItem in area" v-text="areaItem.text" @click="getSelected('Reg',$event)"></a>
                                 </dd>
-                                <dd class="show-more"><a  class="am-icon-angle-down">更多 </a></dd>
+                                <dd class="show-more" @click="More('reg',$event)"><a class="am-icon-angle-down">更多</a></dd>
                               </dl>
                               </div>
                           </div>
@@ -237,7 +224,7 @@
                 <span> 找到<span class="am-text-danger" v-text="all"></span>符合条件的企业
                   <button class="am-btn  am-btn-primary am-fr">导出数据</button>
                   <span class=" am-fr">
-                      <select v-model="selected" @change="Search">
+                      <select class="am-btn am-btn-secondary" v-model="selected" @change="Search">
                           <option value="asc">排序A-Z</option>
                           <option value="desc">排序Z-A</option>
                       </select>
@@ -246,17 +233,11 @@
               </div>
             <div class="am-panel-bd">
                 <div class="matched-company" v-for="con in contentList">
-                  <div class="title"><span v-text="con.title"></span><span class="am-fr"><a :href="detailUrl">查看</a></span></div>
-                  <div class="description"> <span>法定代表人：<span class="name">谢永林</span> </span> <span>注册资本：<span>18500万</span></span> <span>成立时间：<span>1987-12-1</span> </span> </div>
-                  <div class="description"> <span>电话：<span>0755-3208-6508</span> </span> <span>邮箱：<span>zxcv@qq.com</span></span>  </div>
-                  <div class="description"> <span>地址：<span>辽宁省大连市甘井子区华北路991号403室</span> </span> </div>
+                  <div class="title"><span v-text="con.Account_Name"></span><span class="am-fr"><a :href="detailUrl">查看</a></span></div>
+                  <div class="description"> <span>法定代表人：<span class="name" v-text="con.Legal_Person"></span> </span> <span>注册资本：<span v-text="con.Registered_Capital"></span></span> <span>成立时间：<span v-text="con.Start_Year"></span> </span> </div>
+                  <div class="description"> <span>电话：<span v-text="con.Company_Phone"></span> </span> <span>邮箱：<span v-text="con.Email_Domain"></span></span>  </div>
+                  <div class="description"> <span>地址：<span v-text="con.Street"></span> </span> </div>
                 </div>
-                <!--<div class="matched-company" v-for="con in contentList">
-                    <div class="title"> <span >大连亿家衣服装有限公司</span> <span class="am-fr"><a href="">查看</a></span> </div>
-                    <div class="description"> <span>法定代表人：<span class="name">谢永林</span> </span> <span>注册资本：<span>18500万</span></span> <span>成立时间：<span>1987-12-1</span> </span> </div>
-                    <div class="description"> <span>电话：<span>0755-3208-6508</span> </span> <span>邮箱：<span>zxcv@qq.com</span></span>  </div>
-                    <div class="description"> <span>地址：<span>辽宁省大连市甘井子区华北路991号403室</span> </span> </div>
-                </div>-->
             </div>
          </div>
         </div>
@@ -328,8 +309,9 @@
   <script src="../js/vue/vue.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.js"></script>
+  <script src="../js/common.js"></script>
   <script src="../js/searchList.js"></script>
-  
+
   <!-- 线上压缩版本 -->
   <!-- <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script> -->
 </body>
