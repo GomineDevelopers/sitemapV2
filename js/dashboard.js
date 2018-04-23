@@ -8,13 +8,20 @@ var chartResolution = new Vue({
         dataTitleY: [],
         dataBudget: [],
     },
+
     mounted: function () {
         var vm = this;
-        axios.get('#')
+        vm.drawBarChart();
+        
+
+
+    },
+    methods:{
+        drawBarChart() {
+            // 基于准备好的dom，初始化echarts实例
+            axios.get('#')
             .then(function (response) {
-                vm.dataTitleX = response;
-                vm.dataTitleX = response;
-                vm.dataTitleY = response;
+                
             })
             .catch(function (error) {
                 console.log(error);
@@ -96,8 +103,8 @@ var chartResolution = new Vue({
             ]
         };
         pieChart.setOption(pieOption);
-
-
-    },
+          }
+      
+    }
 
 })

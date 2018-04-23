@@ -1,7 +1,7 @@
 var app = new Vue({
     el:'#main',
     data:{
-        key_pre:'请输入企业名称',
+        key_pre:'',
         newspop:[]
     },
     mounted:function(){
