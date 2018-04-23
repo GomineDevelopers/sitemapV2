@@ -2,7 +2,7 @@ var newsCenter = new Vue({
     el:'#main',
     data:{
         loading: false,
-        keyWord:'请输入关键字',
+        keyWord:'',
         newsLeftData:[],
         newsRightData:[],
         all: '',
