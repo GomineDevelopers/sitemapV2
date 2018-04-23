@@ -233,7 +233,7 @@
               </div>
             <div class="am-panel-bd">
                 <div class="matched-company" v-for="con in contentList">
-                  <div class="title"><span v-text="con.Account_Name"></span><span class="am-fr"><a :href="detailUrl">查看</a></span></div>
+                  <div class="title" @click="goDetail(con.Seq_No)"><span v-text="con.Account_Name"></span><span class="am-fr"><a >查看</a></span></div>
                   <div class="description"> <span>法定代表人：<span class="name" v-text="con.Legal_Person"></span> </span> <span>注册资本：<span v-text="con.Registered_Capital"></span></span> <span>成立时间：<span v-text="con.Start_Year"></span> </span> </div>
                   <div class="description"> <span>电话：<span v-text="con.Company_Phone"></span> </span> <span>邮箱：<span v-text="con.Email_Domain"></span></span>  </div>
                   <div class="description"> <span>地址：<span v-text="con.Street"></span> </span> </div>

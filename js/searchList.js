@@ -70,7 +70,7 @@ var app = new Vue({
         industry:industry,
         foundedTimes:foundedTimes,
         area:area,
-        detailUrl:'searchDetail.html',
+        detailUrl:'',
         selected:'',
         contentList:[],//搜索结果
         key:'',
@@ -224,7 +224,10 @@ var app = new Vue({
                 .then(function (response) {
                     vm.contentList = response.data.data.data;
                 })
-        }
+        },
+        goDetail:function(id){
+            window.location.href ="searchDetail.html?Seq_No="+id;
+        },
     },
 
     computed: {
