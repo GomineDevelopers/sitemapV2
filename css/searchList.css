@@ -137,6 +137,12 @@ dt + dd {
     display: inline-block;
     font-size: 14px;
     color: #6c6c6c
+    
+}
+.filter dl dd a:hover {
+   cursor: pointer;
+    color: #408ff8;
+    
 }
 /* 筛选  */
 /* 筛选结果样式 */
@@ -178,4 +184,9 @@ dt + dd {
 }
 .matched-company .description .name{
     font-weight: bold;
+}
+.am-icon-remove:before, .am-icon-close:before, .am-icon-times:before {
+    content: "\f00d";
+    float: right;
+    padding: 4.5px 0 0 3px;
 }
