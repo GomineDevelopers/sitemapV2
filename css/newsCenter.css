@@ -3,9 +3,16 @@
     margin-bottom: 2rem;
 }
 .am-panel-content{
+     padding-top: 1rem;
+     padding-bottom: 1rem;
+     border-bottom: 1px solid rgba(0, 0, 0, .125);
+     cursor: pointer;
+     padding-left: 15px;
+ }
+.am-panel-content-border{
     padding-top: 1rem;
     padding-bottom: 1rem;
-    border-bottom: 1px solid rgba(0, 0, 0, .125);
+    border-bottom: none;
     cursor: pointer;
     padding-left: 15px;
 }

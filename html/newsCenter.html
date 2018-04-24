@@ -144,14 +144,14 @@
                 <!--左边面板-->
                 <div class="am-panel am-panel-default">
                     <div class="am-panel-hd"><span class="am-news-line">|</span>面板标题</div>
-                    <div class="am-panel-bd" v-for="newsLeftList in newsLeftData">
-                        <div class="am-g am-panel-content " @click="enteringDetail(newsLeftList.id)" >
+                    <div class="am-panel-bd" v-for="(newsLeftList,index) in newsLeftData">
+                        <div class="am-g" @click="enteringDetail(newsLeftList.id)" :class ="[index == newsLeftData.length-1? 'am-panel-content-border':'am-panel-content']">
                             <div class="am-fl"><img class="am-img-responsive am-panel-img " :src="newsLeftList.img"></div>
                             <div class="am-u-sm-8 am-panel-body">
                                 <div class="am-panel-title" ><p v-text="newsLeftList.title"></p></div>
                                 <div class="am-panel-intro" ><p v-text="newsLeftList.description"></p></div>
                                 <div class="am-panel-source">
-                                    <span v-text="newsLeftList.source">来源：蓝鲸财经</span>
+                                    <span v-text="newsLeftList.source"></span>
                                     <span class="am-fr" v-text="newsLeftList.create_time"></span>
                                 </div>
                             </div>
@@ -241,7 +241,6 @@
 
 <script src="../js/jquery/jquery-3.3.1.min.js"></script>
 <script src="../js/vue/vue.js"></script>
-<script src="../js/vue/vue-echarts"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.js"></script>
 <script src="../js/common.js"></script>
