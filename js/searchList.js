@@ -226,6 +226,18 @@ var app = new Vue({
         goDetail:function(id){
             window.location.href ="searchDetail.html?Seq_No="+id;
         },
+        // 清除所有选项
+        // clearAll:function(){
+        //     vm=this;
+        //     vm.selectedItems=[];
+        //     vm.isShow.isShow_dlRan = true;
+        //     vm.isShow.isShow_dlRegC = true;
+        //     vm.isShow.isShow_dlSta = true;
+        //     vm.isShow.isShow_dlTurn = true;
+        //     vm.isShow.isShow_dlInd = true;
+        //     vm.isShow.isShow_dlTime = true;
+        //     vm.isShow.isShow_dlReg = true;
+        // }
     },
 
     computed: {

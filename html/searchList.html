@@ -164,7 +164,7 @@
                                           <i class="am-icon-close" v-text="selectedItem.selectedName"></i>
                                       </span>
                                   </dd>
-                                  <!--<dd class="clear-all" style="display:none;"><a class="am-icon-trash">清除已选</a></dd>-->
+                                  <!-- <dd class="clear-all" v-show="selectedItems.length>0" @click="clearAll"><a class="am-icon-trash">清除已选</a></dd> -->
                               </dl>
                               <dl class="am-cf" v-show="isShow.isShow_dlRan">
                                   <dt>搜索范围：</dt>
