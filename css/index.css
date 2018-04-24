@@ -18,3 +18,8 @@
     color: #ffffff;
 
 }
+/* 图片等高 */
+.am-gallery-overlay .am-gallery-item img {
+    width: 100%;
+    height: 250px;
+}
