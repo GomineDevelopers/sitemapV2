@@ -187,8 +187,6 @@ var app = new Vue({
                 .then(function (response) {
                     vm.contentList = response.data.data.data;
                 })
-
-
         },
         delSelected:function (tmp,e) {
             var vm = this;
@@ -236,7 +234,7 @@ var app = new Vue({
             var left = 1;
             var vm = this;
             /*总页数*/
-            vm.allPage = this.all % 5 == 0 ? this.all / 5: Math.ceil(this.all / 5);
+            vm.allPage = this.all % 10 == 0 ? this.all / 10: Math.ceil(this.all / 10);
             var right = vm.allPage;
             var ar = [];
             if (vm.allPage >= 5) {
@@ -259,7 +257,6 @@ var app = new Vue({
             }
             return ar
         }
-
     }
 })
 

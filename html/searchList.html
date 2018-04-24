@@ -151,7 +151,7 @@
     <div class="am-g">
       <div class="am-u-sm-8  am-u-sm-centered">
           <div class="am-panel am-panel-default am-panel-noborder" id="accordion">
-              <div class="am-panel-hd" data-am-collapse="{parent: '#accordion', target: '#do-not-say-1'}"> <span  ><i class="am-icon-angle-down am-icon-sm"></i> </span> 条件筛选</div>
+              <div class="am-panel-hd" data-am-collapse="{parent: '#accordion', target: '#do-not-say-1'}"><span><i class="am-icon-angle-down am-icon-sm"></i> </span> 条件筛选</div>
               <div class="am-panel-bd  am-in" id="do-not-say-1">
                   <div class="am-panel am-panel-default am-panel-noborder ">
                         <div class="filter">
@@ -160,9 +160,11 @@
                                 <dl class="am-cf title-h">
                                   <dt class="">已选条件：</dt>
                                   <dd class="selected-box">
-                                      <span v-for="selectedItem in selectedItems" class="selected-items" @click="delSelected(selectedItem.tag,$event)"><span v-text="selectedItem.selectedName"></span><i class="am-icon-close"></i></span>
+                                      <span v-for="selectedItem in selectedItems" class="selected-items" @click="delSelected(selectedItem.tag,$event)">
+                                          <i class="am-icon-close" v-text="selectedItem.selectedName"></i>
+                                      </span>
                                   </dd>
-                                  <dd class="clear-all" style="display:none;"><a class="am-icon-trash">清除已选 </a></dd>
+                                  <!--<dd class="clear-all" style="display:none;"><a class="am-icon-trash">清除已选</a></dd>-->
                               </dl>
                               <dl class="am-cf" v-show="isShow.isShow_dlRan">
                                   <dt>搜索范围：</dt>
