@@ -138,7 +138,7 @@
                   <option value="img">图表</option>
               </select>
           </span>
-          <input type="text" class="am-form-field" placeholder="示例：500强企业" v-model="key">
+          <input type="text" class="am-form-field" placeholder="示例：500强企业" v-model="key"  @keydown.enter="Search">
           <span class="am-input-group-btn">
             <button class="am-btn am-btn-secondary" type="button" @click="Search">Search</button>
           </span>
