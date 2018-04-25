@@ -190,3 +190,18 @@ dt + dd {
     float: right;
     padding: 4.5px 0 0 3px;
 }
+/* 奇偶页样式 */
+.listActive:hover{
+    background-color: #f0f6fc;
+    cursor: pointer;
+
+}
+/* .listActive span:hover{
+    color:#408ff8; 
+    
+
+} */
+/* 列表内span样式 */
+.m-l {
+    margin-left: 15px;
+}
