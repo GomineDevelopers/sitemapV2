@@ -71,9 +71,9 @@ var app = new Vue({
         foundedTimes:foundedTimes,
         area:area,
         detailUrl:'',
-        selected:'',
+        /*selected:'',*///字母排序
         contentList:[],//搜索结果
-        key:'',
+        key:'',//本页的关键字
         all:'', //总条数
         allPage:'',
         cur: 1//当前页码
@@ -81,7 +81,7 @@ var app = new Vue({
     mounted:function(){
         searchSelect();//选择图表就跳转页面
         var vm = this;
-        vm.key = decodeURI(getQueryVariable('key_pre'));
+        vm.key = vm.key != "" ? vm.key : decodeURI(getQueryVariable('key_pre'));
         axios.post('http://192.168.0.5/api/content/search', {
             limit:10,
             accounname:vm.key,
@@ -101,8 +101,8 @@ var app = new Vue({
     methods:{
         Search:function () {
             var vm = this;
-            var key = vm.key;
-            var selected = vm.selected;
+            vm.key = vm.key != "" ? vm.key : decodeURI(getQueryVariable('key_pre'));
+            /*var selected = vm.selected;*/
             axios.post('http://192.168.0.5/api/content/search', {
                 limit:10,
                 accounname:vm.key,
@@ -122,7 +122,7 @@ var app = new Vue({
         /*分页*/
         btnClick: function(data){//页码点击事件
             var vm = this ;
-            vm.key = decodeURI(getQueryVariable('key_pre'));
+            vm.key = vm.key != "" ? vm.key : decodeURI(getQueryVariable('key_pre'));
             if(data != this.cur){
                 this.cur = data;
                 getDataPage(this.cur,vm.key,vm.selectedItems)
@@ -133,7 +133,7 @@ var app = new Vue({
         },
         pageClick: function(){
             var vm =this;
-            vm.key = decodeURI(getQueryVariable('key_pre'));
+            vm.key = vm.key != "" ? vm.key : decodeURI(getQueryVariable('key_pre'));
             getDataPage(this.cur,vm.key,vm.selectedItems)
                 .then(function (response) {
                     vm.contentList = response.data.data.data;
@@ -158,8 +158,10 @@ var app = new Vue({
         },
         getSelected:function (tmp,e) {
             var vm = this;
-            vm.key = decodeURI(getQueryVariable('key_pre'));
-            vm.selectedItems.push({'selectedName':e.target.innerText,'tag':tmp});
+            vm.cur = 1;//页码从1开始
+            vm.key = vm.key != "" ? vm.key : decodeURI(getQueryVariable('key_pre'));
+            vm.selectedItems.push({'selectedName':e.target.innerText,'tag':tmp});//选中的数组
+            /*控制选中隐藏*/
             switch (tmp){
                 case 'Ran':
                     vm.isShow.isShow_dlRan = false;
@@ -186,10 +188,13 @@ var app = new Vue({
             getDataPage(this.cur,vm.key,vm.selectedItems)
                 .then(function (response) {
                     vm.contentList = response.data.data.data;
+                    vm.all = response.data.data.total;
+
                 })
         },
         delSelected:function (tmp,e) {
             var vm = this;
+            vm.cur = 1;//页码从1开始
             vm.selectedItems.forEach(function (element,index,array) {
                 if( element.selectedName == e.target.innerText){
                     array.splice(index,1);
@@ -218,9 +223,10 @@ var app = new Vue({
                     vm.isShow.isShow_dlReg = true;
                     break;
             }
-            getDataPage(this.cur,vm.key,vm.selectedItems)
+            getDataPage(1,vm.key,vm.selectedItems)
                 .then(function (response) {
                     vm.contentList = response.data.data.data;
+                    vm.all = response.data.data.total;
                 })
         },
         goDetail:function(id){
