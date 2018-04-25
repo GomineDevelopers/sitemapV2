@@ -33,12 +33,12 @@ fieldset{margin: 0px}
     background-color: rgba(245,249,254,0.95);
     border-bottom: 1px solid #ccc;
 }
-.am-form input[type="text"]{
+.am-form input[type="text"],.am-form input[type="password"]{
     border: none;
     border-bottom: 1px solid #ccc;
     background-color: rgba(245,249,254,0.95);
 }
-.am-form input[type="text"]:focus{
+.am-form input[type="text"]:focus,.am-form input[type="password"]:focus{
     background-color: rgba(245,249,254,0.95);
     border-color: #ccc;
     -webkit-box-shadow: none;

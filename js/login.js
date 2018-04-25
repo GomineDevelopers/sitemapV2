@@ -9,22 +9,27 @@ var app =new Vue({
     /*页面加载的时候获取*/
     mounted: function (){
         this.getCookie();
-        console.info(this.getCookie())
     },
     methods:{
         login:function () {
             var userName = this.userName;
             var password = this.password;
+            var vm = this;
             axios.post('http://192.168.0.5/api/login/login', {
                     email: userName,
                     password: password
             })
                 .then(function (response) {
                     if(response.data.status == '1'){
+                        //判断复选框是否被勾选 勾选则调用配置cookie方法
+                        if(vm.checkedLogin == true){
+                            vm.setCookie(userName,password,7);
+                        }
                         setLocalStorage('token', response.data.data.token);
                         setLocalStorage('userName', response.data.data.email);
-                        window.location.href = './index.html'
-                    }else{
+                        window.location.href = './index.html';
+
+                    }else if(response.data.status == '0'){
                         alert(response.data.message);
                     }
 
@@ -32,10 +37,6 @@ var app =new Vue({
                 .catch(function (error) {
                     console.info(error);
                 });
-            //判断复选框是否被勾选 勾选则调用配置cookie方法
-            if(this.checkedLogin == true){
-                this.setCookie(userName,password,7);
-            }
         },
         //设置cookie
         setCookie:function(c_name,c_pwd,exdays) {
@@ -47,6 +48,7 @@ var app =new Vue({
         //读取cookie
         getCookie:function () {
             if (document.cookie.length>0) {
+                this.checkedLogin = true;
                 var arr=document.cookie.split('; ');
                 for(var i=0;i<arr.length;i++){
                     var arr2=arr[i].split('=');
