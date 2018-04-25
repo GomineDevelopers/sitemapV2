@@ -28,16 +28,16 @@ var DEFAULTS = {
   placeholder: true,
 
   // Select value. Options: 'name' and 'code'
-  valueType: 'name',
+  valueType: 'code',
 
   // Defines the initial value of province.
-  province: '省',
+  province: '请选择省',
 
   // Defines the initial value of city.
-  city: '市',
+  city: '请选择市',
 
   // Defines the initial value of district.
-  district: '区'
+  district: '请选择区'
 };
 
 var DISTRICTS = {

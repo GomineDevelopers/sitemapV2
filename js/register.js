@@ -42,6 +42,7 @@ var app = new Vue({
     data:{
         jobs:jobs,
         departments:departments,
+        depart:'',
         email:'',
         selected_pro:'',
         selected_city:'',
@@ -50,22 +51,33 @@ var app = new Vue({
     },
     methods:{
         onSubmit:function () {
+            /*取值*/
             var email = this.email;
             var selected_pro = this.selected_pro;
             var selected_city = this.selected_city;
             var selected_area = this.selected_area;
-            console.info(selected_pro,selected_city,selected_area);
-            axios.post('#', {
-                email:'email'
+            /*验证*/
+            var len = $('.am-form input').length;
+            var arr = [];//存放未通过的验证
+            for(var i = 0;i<len; i++){
+                if($('.am-form input')[i].validity.valid == false){
+                    arr.push(i);
+                }
+            }
 
-            })
-                .then(function (response) {
-                    alert('成功');
+                /*axios.post('#', {
+                    email:'email'
+
                 })
-                .catch(function (error) {
-                    console.info(error);
-                });
-        }
+                    .then(function (response) {
+                        console.info(response);
+                    })
+                    .catch(function (error) {
+                        console.info(error);
+                    });*/
+            }
+
+
     }
 })
 

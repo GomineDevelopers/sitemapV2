@@ -22,7 +22,7 @@
 <div class="am-u-sm-12">
     <div class="am-container">
         <div class="am-register-content" id="app">
-            <form class="am-form am-form-horizontal" id="form-with-tooltip" @submit.prevent="onSubmit">
+            <form class="am-form am-form-horizontal" id="form-with-tooltip" @submit.prevent="onSubmit()">
                 <fieldset>
                 <div class="am-register-title"><span>创建账户</span></div>
                 <div class="am-form-group am-vertical-align">
@@ -31,7 +31,7 @@
                     </label>
                     <div class="am-u-sm-10 no-padding-left">
                     <div class="am-u-sm-6">
-                        <input type="email" id="doc-ipt-1" required v-model="email">
+                        <input type="email" id="doc-ipt-1" v-model="email" required>
                     </div>
                     <div class="am-u-sm-6 am-register-middle1"><span class="am-register-span">您的电子邮箱地址即为您的用户名</span></div>
                 </div>
@@ -58,16 +58,10 @@
                 </div>
                 </div>
                 <div class="am-form-group am-register-space-5">
-                    <label class="am-u-sm-2 am-form-label am-register-text">国家/地区<span class="am-register-required">*</span></label>
+                    <label class="am-u-sm-2 am-form-label am-register-text">国家/地区</label>
                     <div class="am-u-sm-10 am-form am-form-horizontal no-padding-left" data-toggle="distpicker">
-                        <!--<select data-am-selected = "{btnWidth: '100%', btnSize: 'sm', btnStyle: 'primary'}">
-                            <option value="a">Apple</option>
-                            <option value="b">Banana</option>
-                            <option value="o">Orange</option>
-                            <option value="m">Mango</option>
-                        </select>-->
-                       <div class="am-u-sm-4"> <select v-model="selected_pro" required></select></div>
-                       <div class="am-u-sm-4"> <select v-model="selected_city" required></select></div>
+                       <div class="am-u-sm-4"><select v-model="selected_pro"></select></div>
+                       <div class="am-u-sm-4"><select v-model="selected_city"></select></div>
                        <div class="am-u-sm-4"><select v-model="selected_area"></select></div>
                     </div>
                 </div>
@@ -82,7 +76,7 @@
                     </div>
                 </div>
                 </div>
-                <div class="am-form-group">
+                <!--<div class="am-form-group">
                     <label class="am-u-sm-2 am-form-label am-register-text ">英文名字<span class="am-register-required">*</span></label>
                     <div class="am-u-sm-10 no-padding-left">
                     <div class="am-u-sm-6">
@@ -91,8 +85,8 @@
                     <div class="am-u-sm-6">
                         <input type="text" placeholder="英文名字" pattern="^[A-Za-z]+$" required data-foolish-msg="必须是英文字母">
                     </div>
-                </div>
-                </div>
+                    </div>
+                </div>-->
                 <div class="am-form-group">
                     <label for="doc-ipt-7" class="am-u-sm-2 am-form-label am-register-text">联系电话<span class="am-register-required">*</span></label>
                     <div class="am-u-sm-10 no-padding-left">
@@ -106,30 +100,26 @@
                     <label for="doc-ipt-8" class="am-u-sm-2 am-form-label am-register-text">公司名称<span class="am-register-required">*</span></label>
                     <div class="am-u-sm-10 no-padding-left">
                     <div class="am-u-sm-6">
-                        <input type="text" id="doc-ipt-8"	required:true pattern="^[\u4e00-\u9fa5]{0,}$"  required data-foolish-msg="请填写公司名称">
+                        <input type="text" id="doc-ipt-8" required data-foolish-msg="请填写公司名称">
                     </div>
                 </div>
                 </div>
                 <div class="am-form-group">
-                    <label class="am-u-sm-2 am-form-label am-register-text">部门<span class="am-register-required">*</span></label>
+                    <label class="am-u-sm-2 am-form-label am-register-text">部门</label>
                     <div class="am-u-sm-10 no-padding-left">
                     <div class="am-u-sm-6">
                         <select data-am-selected = "{btnWidth: '100%', btnSize: 'sm',btnStyle: 'primary'}">
-                            <option v-for="department in departments"  :value="department.value">
-                                {{department.text}}
-                            </option>
+                            <option v-for="department in departments"  :value="department.value" v-text="department.text"></option>
                         </select>
                     </div>
                     </div>
                 </div>
                 <div class="am-form-group">
-                    <label class="am-u-sm-2 am-form-label am-register-text">职位<span class="am-register-required">*</span></label>
+                    <label class="am-u-sm-2 am-form-label am-register-text">职位</label>
                     <div class="am-u-sm-10 no-padding-left">
                     <div class="am-u-sm-6">
                         <select data-am-selected = "{btnWidth: '100%', btnSize: 'sm',btnStyle: 'primary'}">
-                            <option v-for="job in jobs" :value="job.value">
-                                {{ job.text }}
-                            </option>
+                            <option v-for="job in jobs" :value="job.value" v-text="job.text"></option>
                         </select>
                     </div>
                 </div>
