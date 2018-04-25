@@ -142,9 +142,9 @@
         <p class="am-center"> <img src="images/Connectwithyouraudiencethroughstoriespeoplelove..png" alt=""></p>
       </div>
       <div class="am-input-group am-input-group-lg am-u-sm-9 am-u-sm-centered">
-          <input type="text" class="am-form-field" v-model="key_pre" @keydown.enter="search()" placeholder="请输入企业名称">
+            <input type="text" class="am-form-field" v-model="key_pre" @keydown.enter="search()" placeholder="请输入企业名称">
           <span class="am-input-group-btn">
-            <button class="am-btn am-btn-primary" type="button" @click="search()" >search</button>
+            <button class="am-btn am-btn-primary" type="button" @click="search()" >搜索</button>
           </span>
       </div>
       <hr class="content-devider">
@@ -156,7 +156,7 @@
         <li v-for="(pop,index) in newspop" v-if="index<3">
           <div class="am-gallery-item" @click="enteringDetail(pop.id)">
             <a>
-              <img :src="pop.img" alt="未加载" />
+              <img :src="pop.img" alt="" />
               <h3 class="am-gallery-title" v-text="pop.title"></h3>
             </a>
           </div>

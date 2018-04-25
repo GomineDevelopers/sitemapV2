@@ -234,7 +234,7 @@
                 </span>
               </div>
             <div class="am-panel-bd">
-                <div class="matched-company" v-for="con in contentList"  @click="goDetail(con.Seq_No)" :class="{'listActive':index%2 != 1}">
+                <div class="matched-company listActive" v-for="con in contentList"  @click="goDetail(con.Seq_No)">
                   <div class="title"><span v-text="con.Account_Name"></span><span class="am-fr"><a >查看</a></span></div>
                   <div class="description"> <span>法定代表人:<span class="name m-l" v-text="con.Legal_Person"></span> </span> <span class="m-l">注册资本：<span v-text="con.Registered_Capital"></span></span> <span>成立时间：<span v-text="con.Start_Year"></span> </span> </div>
                   <div class="description"> <span>电话:<span class="m-l" v-text="con.Company_Phone"></span> </span> <span class="m-l">邮箱：<span v-text="con.Email_Domain"></span></span>  </div>
