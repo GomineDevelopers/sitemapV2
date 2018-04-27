@@ -30,8 +30,10 @@ var chartResolution = new Vue({
         // 图表插入
         var lineChart = echarts.init(document.getElementById('lineBasic'), 'macarons');
         var barChart = echarts.init(document.getElementById('barBasic'), 'macarons');
-        var pieChart = echarts.init(document.getElementById('pieBasic'), 'macarons');
-
+        var pieChartOne = echarts.init(document.getElementById('pieBasicOne'), 'macarons');
+        var pieChartTwo = echarts.init(document.getElementById('pieBasicTwo'), 'macarons');
+        var pieChartThree = echarts.init(document.getElementById('pieBasicThree'), 'macarons');
+        var pieChartFour = echarts.init(document.getElementById('pieBasicFour'), 'macarons');
         var lineOption = {
             xAxis: {
                 type: 'category',
@@ -102,7 +104,10 @@ var chartResolution = new Vue({
                 }
             ]
         };
-        pieChart.setOption(pieOption);
+        pieChartOne.setOption(pieOption);
+        pieChartTwo.setOption(pieOption);
+        pieChartThree.setOption(pieOption);
+        pieChartFour.setOption(pieOption);
           }
       
     }
