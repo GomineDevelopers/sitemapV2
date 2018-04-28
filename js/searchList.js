@@ -81,7 +81,7 @@ var app = new Vue({
     mounted:function(){
         searchSelect();//选择图表就跳转页面
         var vm = this;
-        vm.key = vm.key != "" ? vm.key : decodeURI(getQueryVariable('key_pre'));
+        vm.key = vm.key != "" ? $.trim(vm.key) : $.trim(decodeURI(getQueryVariable('key_pre')));
         axios.post('http://192.168.0.5/api/content/search', {
             limit:10,
             accounname:vm.key,
@@ -101,7 +101,8 @@ var app = new Vue({
     methods:{
         Search:function () {
             var vm = this;
-            vm.key = vm.key != "" ? vm.key : decodeURI(getQueryVariable('key_pre'));
+            vm.cur = 1;//页码从1开始
+            vm.key = vm.key != "" ? $.trim(vm.key) : $.trim(decodeURI(getQueryVariable('key_pre')));
             /*var selected = vm.selected;*/
             axios.post('http://192.168.0.5/api/content/search', {
                 limit:10,
@@ -122,7 +123,7 @@ var app = new Vue({
         /*分页*/
         btnClick: function(data){//页码点击事件
             var vm = this ;
-            vm.key = vm.key != "" ? vm.key : decodeURI(getQueryVariable('key_pre'));
+            vm.key = vm.key != "" ? $.trim(vm.key) : $.trim(decodeURI(getQueryVariable('key_pre')));
             if(data != this.cur){
                 this.cur = data;
                 getDataPage(this.cur,vm.key,vm.selectedItems)
@@ -133,7 +134,7 @@ var app = new Vue({
         },
         pageClick: function(){
             var vm =this;
-            vm.key = vm.key != "" ? vm.key : decodeURI(getQueryVariable('key_pre'));
+            vm.key = vm.key != "" ? $.trim(vm.key) : $.trim(decodeURI(getQueryVariable('key_pre')));
             getDataPage(this.cur,vm.key,vm.selectedItems)
                 .then(function (response) {
                     vm.contentList = response.data.data.data;
@@ -159,7 +160,7 @@ var app = new Vue({
         getSelected:function (tmp,e) {
             var vm = this;
             vm.cur = 1;//页码从1开始
-            vm.key = vm.key != "" ? vm.key : decodeURI(getQueryVariable('key_pre'));
+            vm.key = vm.key != "" ? $.trim(vm.key) : $.trim(decodeURI(getQueryVariable('key_pre')));
             vm.selectedItems.push({'selectedName':e.target.innerText,'tag':tmp});//选中的数组
             /*控制选中隐藏*/
             switch (tmp){

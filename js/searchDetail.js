@@ -53,7 +53,7 @@ var searchDetail = new Vue({
     mounted: function () {
         var companyId = getQueryVariable('Seq_No');
         var self = this;
-        var temp = '无数据';
+        var temp = '';
         axios.get('http://192.168.0.5/api/content/detail/Seq_No/', {
             params: {
                 Seq_No: companyId
@@ -66,7 +66,7 @@ var searchDetail = new Vue({
                 self.intro.GANO = response.data.data.GANO == null?temp:response.data.data.GANO;
                 self.intro.Official_Website = response.data.data.Official_Website == null?temp:response.data.data.Official_Website;
                 self.intro.Street=response.data.data.Street == null?temp:response.data.data.Street;
-                self.intro.update_time=response.data.data.update_time == null?temp:response.data.data.update_time;
+                self.intro.update_time=response.data.data.update_time == null?'未知':response.data.data.update_time;
                 // 基本信息展示
                 self.basicInfo.Account_Name_En=response.data.data.Account_Name_En == null?temp:response.data.data.Account_Name_En;
                 self.basicInfo.Account_Name_Abbr=response.data.data.Account_Name_Abbr == null?temp:response.data.data.Account_Name_Abbr;
