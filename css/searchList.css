@@ -205,3 +205,9 @@ dt + dd {
 .m-l {
     margin-left: 15px;
 }
+
+/*跳转的页码*/
+.am-pagination-size li input{
+    width: 50px;
+    height: 30px;
+}

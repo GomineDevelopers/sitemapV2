@@ -76,7 +76,8 @@ var app = new Vue({
         key:'',//本页的关键字
         all:'', //总条数
         allPage:'',
-        cur: 1//当前页码
+        cur: 1,//当前页码
+        goPage:1
     },
     mounted:function(){
         searchSelect();//选择图表就跳转页面
@@ -134,6 +135,15 @@ var app = new Vue({
         },
         pageClick: function(){
             var vm =this;
+            vm.key = vm.key != "" ? $.trim(vm.key) : $.trim(decodeURI(getQueryVariable('key_pre')));
+            getDataPage(this.cur,vm.key,vm.selectedItems)
+                .then(function (response) {
+                    vm.contentList = response.data.data.data;
+                })
+        },
+        Go:function(){
+            var vm = this;
+            this.cur = vm.goPage;
             vm.key = vm.key != "" ? $.trim(vm.key) : $.trim(decodeURI(getQueryVariable('key_pre')));
             getDataPage(this.cur,vm.key,vm.selectedItems)
                 .then(function (response) {

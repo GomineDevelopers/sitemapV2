@@ -256,6 +256,10 @@
                     </li>
                     <li v-if="cur==allPage" :class={"am-disabled":cur==allPage}><a>&gt;</a></li>
                     <li v-if="cur!=allPage"><a @click="cur++,pageClick()">&gt;</a></li>
+                    <li>跳到</li>
+                    <li><input type="number" v-model="goPage"></li>
+                    <li>页</li>
+                    <li><button @click="Go()">GO</button></li>
                 </ul>
             </div>
         </div>
