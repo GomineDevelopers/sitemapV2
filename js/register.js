@@ -42,20 +42,37 @@ var app = new Vue({
     data:{
         jobs:jobs,
         departments:departments,
-        depart:'',
+
         email:'',
+        password:'',
         selected_pro:'',
         selected_city:'',
-        selected_area:''
+        selected_area:'',
+        lastName:'',
+        name:'',
+        phone:'',
+        company:'',
+        depart:'',
+        job:''
 
     },
     methods:{
         onSubmit:function () {
+            alert(0);
+            var vm = this;
             /*取值*/
-            var email = this.email;
-            var selected_pro = this.selected_pro;
-            var selected_city = this.selected_city;
-            var selected_area = this.selected_area;
+            vm.email = this.email;
+            vm.password = this.password;
+            vm.selected_pro = this.selected_pro;
+            vm.selected_city = this.selected_city;
+            vm.selected_area = this.selected_area;
+            vm.lastName = this.lastName;
+            vm.name = this.name;
+            vm.phone = this.phone;
+            vm.company = this.company;
+            vm.depart = $("#department option:selected")[0].value;
+            vm.job = $("#job option:selected")[0].value;
+
             /*验证*/
             var len = $('.am-form input').length;
             var arr = [];//存放未通过的验证
@@ -65,22 +82,46 @@ var app = new Vue({
                 }
             }
 
-                /*axios.post('#', {
-                    email:'email'
-
+            if(arr.length == 0){
+                axios.post('http://192.168.0.5/api/login/reg', {
+                    email:vm.email,
+                    password:vm.password,
+                    State_Code:vm.selected_pro,
+                    City_Code:vm.selected_city,
+                    County_Code:vm.selected_area,
+                    lastname:vm.lastName,
+                    names:vm.name,
+                    phone:vm.phone,
+                    Account_Name:vm.company,
+                    department:vm.depart,
+                    position:vm.job
                 })
                     .then(function (response) {
-                        console.info(response);
+                        alert("注册成功！");
                     })
                     .catch(function (error) {
-                        console.info(error);
-                    });*/
+                        alert("请求后台出错！");
+                    });
+                }else{
+                    alert("请正确填写内容！");
             }
-
+        }
 
     }
 })
 
+/*
+function Selects() {
+    $('#department').on('change', function() {
+        var depar = $(this).find('option').eq(this.selectedIndex).val();
+    });
+    $('#job').on('change', function() {
+        var job = $(this).find('option').eq(this.selectedIndex).val();
+        /!*var options=$("#job option:selected");
+        console.info(options[0].value);*!/
+    });
+}
+*/
 
 
 $(function() {
