@@ -143,12 +143,20 @@ var app = new Vue({
         },
         Go:function(){
             var vm = this;
-            this.cur = vm.goPage;
+            this.cur = Number(vm.goPage);
             vm.key = vm.key != "" ? $.trim(vm.key) : $.trim(decodeURI(getQueryVariable('key_pre')));
-            getDataPage(this.cur,vm.key,vm.selectedItems)
-                .then(function (response) {
-                    vm.contentList = response.data.data.data;
-                })
+            //总页数
+            vm.allPage = this.all % 10 == 0 ? this.all / 10: Math.ceil(this.all / 10);
+            if(this.cur <= vm.allPage){
+                getDataPage(this.cur,vm.key,vm.selectedItems)
+                    .then(function (response) {
+                        vm.contentList = response.data.data.data;
+                    })
+            }else{
+                alert("输入的页数超过总页数！");
+            }
+
+
         },
         /*点击更多显示与隐藏*/
         More:function (temp,e) {
