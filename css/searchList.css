@@ -210,4 +210,27 @@ dt + dd {
 .am-pagination-size li input{
     width: 50px;
     height: 30px;
+    position: relative;
+    display: block;
+    text-decoration: none;
+    line-height: 1.2;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+.am-pagination-size li button{
+    width: 50px;
+    height: 30px;
+    padding: 4px 10px;
+    position: relative;
+    display: block;
+    text-decoration: none;
+    line-height: 1.2;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    margin-bottom: 5px;
+    margin-right: 5px;
 }
