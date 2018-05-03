@@ -58,7 +58,6 @@ var app = new Vue({
     },
     methods:{
         onSubmit:function () {
-            alert(0);
             var vm = this;
             /*取值*/
             vm.email = this.email;
@@ -143,7 +142,7 @@ $(function() {
                 left: offset.left + 10,
                 top: offset.top + $(this).outerHeight() + 10
             });
-        } else {
+        } else if(e.type === 'focusout') {
             $tooltip.hide();
         }
     });
