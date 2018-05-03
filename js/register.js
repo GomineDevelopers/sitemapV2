@@ -53,7 +53,9 @@ var app = new Vue({
         phone:'',
         company:'',
         depart:'',
-        job:''
+        job:'',
+
+        tipCon:''
 
     },
     methods:{
@@ -71,6 +73,8 @@ var app = new Vue({
             vm.company = this.company;
             vm.depart = $("#department option:selected")[0].value;
             vm.job = $("#job option:selected")[0].value;
+
+            var $modal = $('#my-alert');
 
             /*验证*/
             var len = $('.am-form input').length;
@@ -96,31 +100,25 @@ var app = new Vue({
                     position:vm.job
                 })
                     .then(function (response) {
-                        alert("注册成功！");
+                        vm.tipCon = '注册成功，请登录！';
+                        $modal.modal({
+                            onCancel: function() {
+                                window.location.href = '../login.html';
+                            }
+                        });
                     })
                     .catch(function (error) {
-                        alert("请求后台出错！");
+                        vm.tipCon = '请求后台出错！';
+                        $modal.modal();
                     });
                 }else{
-                    alert("请正确填写内容！");
+                    vm.tipCon = '请正确填写完信息！';
+                    $modal.modal();
             }
         }
 
     }
 })
-
-/*
-function Selects() {
-    $('#department').on('change', function() {
-        var depar = $(this).find('option').eq(this.selectedIndex).val();
-    });
-    $('#job').on('change', function() {
-        var job = $(this).find('option').eq(this.selectedIndex).val();
-        /!*var options=$("#job option:selected");
-        console.info(options[0].value);*!/
-    });
-}
-*/
 
 
 $(function() {
@@ -142,6 +140,15 @@ $(function() {
                 left: offset.left + 10,
                 top: offset.top + $(this).outerHeight() + 10
             });
+        } else if(e.type === 'focusout') {
+            $tooltip.hide();
+        }else{
+            $tooltip.hide();
+        }
+    });
+    $form.on('focusin focusout', '.am-form-success input', function(e) {
+        if (e.type === 'focusin') {
+            $tooltip.hide();
         } else if(e.type === 'focusout') {
             $tooltip.hide();
         }
