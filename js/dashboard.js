@@ -6,9 +6,8 @@ var chartResolution = new Vue({
     data: {
         dataTitleX: [],
         dataTitleY: [],
-        dataBudget: [],
+        dataBudget: []
     },
-
     mounted: function () {
         var vm = this;
         vm.drawPieChart();
