@@ -124,6 +124,12 @@
     <div class="am-g">
         <div class="am-u-sm-8  am-u-sm-centered ">
             <div class="am-input-group dash-input-group am-u-sm-6">
+                <span class="am-input-group-btn">
+                  <select data-am-selected>
+                      <option value="keyWord" selected>关键字</option>
+                      <option value="tag">标签</option>
+                  </select>
+                </span>
                 <input type="text" class="am-form-field" placeholder="示例：500强企业">
                 <span class="am-input-group-btn">
                     <button class="am-btn am-btn-secondary" type="button" @click="Search()">搜索</button>
