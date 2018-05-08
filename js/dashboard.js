@@ -120,7 +120,8 @@ var chartResolution = new Vue({
                         labelLine: {
                             normal: {
                                 show: true,
-                                length:0
+                                length:0,
+                                length2:0
                             }
                         },
                         itemStyle: {
@@ -164,6 +165,10 @@ var chartResolution = new Vue({
                                 axisPointer : {            // 坐标轴指示器，坐标轴触发有效
                                     type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
                                 }
+                            },
+                            grid:{
+                                x:50,
+                                x2:0
                             },
                             xAxis: {
                                 type: 'category',
@@ -222,9 +227,12 @@ var chartResolution = new Vue({
                     type: 'shadow'
                 }
             },
-            /*grid:{
-                x:80
-            },*/
+            grid: { // 控制图的大小，调整下面这些值就可以，
+                x:50,
+                y:50,
+                x2: 0,
+                y2: 50// y2可以控制 X轴跟Zoom控件之间的间隔，避免以为倾斜后造成 label重叠到zoom上
+            },
             xAxis: {
                 type: 'value'
             },
@@ -232,6 +240,7 @@ var chartResolution = new Vue({
                 type: 'category',
                 data: ['巴西','印尼','美国美国','印度','中国','皮革，毛皮，羽毛及其制品和制鞋业'],
                 axisLabel:{
+                    margin:2,
                     formatter:function(value){
                         var ret = "";//拼接加\n返回的类目项
                         var maxLength = 4;//每项显示文字个数
