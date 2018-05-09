@@ -18,6 +18,7 @@ var opts = {
 
 /*省级多点标注 start*/
 function addMarker() {
+    var markerArr = [];
     $.ajax({
        url:'../js/NE.json',
         type:'GET',
@@ -27,11 +28,44 @@ function addMarker() {
                 /*标注添加到地图中*/
                 var point = new BMap.Point(data.province[i].lng,data.province[i].lat);
                 var marker = new BMap.Marker(point);
-                map.addOverlay(marker);
+
                 /*窗口内容*/
                 var content = data.province[i].name;
-                
+
                 addClickHandler(content,marker);
+
+                /*标注添加hover的监听事件*/
+                marker.addEventListener("mouseover",function (e) {
+                    /*点上的文本*/
+                    var label = new BMap.Label("",{
+                        offset:new BMap.Size(15,-20)
+                    });
+                    label.setStyle({
+                        width: "60px",
+                        color: '#fff',
+                        background: '#ff8355',
+                        border: '1px solid "#ff8355"',
+                        borderRadius: "5px",
+                        textAlign: "center",
+                        height: "26px",
+                        lineHeight: "26px"
+                    });
+                    for(var j = 0;j<data.province.length;j++){
+                        var labelContent = "";
+                        if( this.point.lat == data.province[j].lat){
+                            labelContent = data.province[j].count;
+                            label.setContent(labelContent);
+                        }
+                    }
+                    this.setLabel(label);
+                });
+                marker.addEventListener("mouseout",function(e){
+                    var label = this.getLabel();
+                    label.setContent("");//设置标签内容为空
+                    label.setStyle({border:"none",width:"0px",padding:"0px"});//设置标签边框宽度为0
+                });
+
+                map.addOverlay(marker);
             }
         },
         error:function (data,status) {
