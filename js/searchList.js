@@ -80,7 +80,7 @@ var app = new Vue({
         goPage:1
     },
     mounted:function(){
-        searchSelect();//选择图表就跳转页面
+        /*searchSelect();*///选择图表就跳转页面
         var vm = this;
         vm.key = vm.key != "" ? $.trim(vm.key) : $.trim(decodeURI(getQueryVariable('key_pre')));
         axios.post('http://192.168.0.5/api/content/search', {
@@ -298,14 +298,14 @@ var app = new Vue({
 })
 
 
-function searchSelect() {
+/*function searchSelect() {
     $('#search_select').on('change', function() {
         var searchSel = $(this).find('option').eq(this.selectedIndex).val();
         if(searchSel == 'img'){
             window.location.href = 'dashboard.html';
         }
     });
-}
+}*/
 function getDataPage(curpage,key,selectedData) {
     var range = "";
     var capital = "";
