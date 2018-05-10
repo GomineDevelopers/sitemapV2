@@ -26,6 +26,7 @@ function getQueryVariable (variable) {
     return (false);
 }
 
+
 function setLocalStorage(key, val) {
      var exp = new Date().getTime() + 2 * 24 * 60 * 60 * 100;  //令牌过期时间
      var obj = {
@@ -59,6 +60,11 @@ function getLocalStorage(key) {
      deleteLocalStorage('userName');
      window.location.reload();
  }
+
+ /*导航点击事件*/
+function getTagData(organizor,info){
+    window.location.href = './html/searchList.html?info='+info+"&organizor="+organizor;
+}
 
  $(function () {
      if (getLocalStorage('token') && getLocalStorage('userName')) {
