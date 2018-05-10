@@ -38,6 +38,11 @@ var app = new Vue({
             });
     },
     methods: {
+        goChart:function(){
+            var vm = this;
+            var temp = "type="+vm.type+"&info="+vm.info+"&organizor="+vm.organizor;
+            window.location.href = './dashboard.html?'+temp;
+        },
         /*分页*/
         btnClick: function (data) {//页码点击事件
             var vm = this;
