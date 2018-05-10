@@ -14,7 +14,7 @@ var newsCenter = new Vue({
 
         axios.all([getLeft(), getRight()])
             .then(axios.spread(function (leftC, rightC) {// 两个请求现在都执行完成
-                /*vm.loading = false;*/
+                vm.loading = false;
                 vm.newsLeftData = leftC.data.data.data;
                 vm.all = leftC.data.data.total;
                 vm.newsLeftData.forEach(function (element, index, array) {// element: 指向当前元素的值 index: 指向当前索引 array: 指向Array对象本身
@@ -32,10 +32,12 @@ var newsCenter = new Vue({
         /*分页*/
         btnClick: function(data){//页码点击事件
             var vm = this ;
+            vm.loading = true;
             if(data != this.cur){
                 this.cur = data;
                 getLeft(this.cur)
                     .then(function (response) {
+                        vm.loading = false;
                         vm.newsLeftData = response.data.data.data;
                         vm.newsLeftData.forEach(function (element, index, array) {// element: 指向当前元素的值 index: 指向当前索引 array: 指向Array对象本身
                             element.create_time = formatDate(element.create_time);
@@ -47,8 +49,10 @@ var newsCenter = new Vue({
         },
         pageClick: function(){
             var vm =this;
+            vm.loading = true;
             getLeft(this.cur)
                 .then(function (response) {
+                    vm.loading = false;
                     vm.newsLeftData = response.data.data.data;
                     vm.newsLeftData.forEach(function (element, index, array) {// element: 指向当前元素的值 index: 指向当前索引 array: 指向Array对象本身
                         element.create_time = formatDate(element.create_time);    
