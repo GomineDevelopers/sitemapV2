@@ -2,10 +2,11 @@
 var app = new Vue({
     el: '#main',
     data: {
-        selectedItems: [],//已选中的条件
         /*selected:'',*///字母排序
+        info:'',
+        organizor:'',
+        type:'',
         contentList: [],//搜索结果
-        key: '',//本页的关键字
         all: '', //总条数
         allPage: '',
         cur: 1,//当前页码
@@ -13,16 +14,15 @@ var app = new Vue({
        
     },
     mounted: function () {
-        /*searchSelect();*///选择图表就跳转页面
         var vm = this;
-        vm.key = vm.key != "" ? $.trim(vm.key) : $.trim(decodeURI(getQueryVariable('key_pre')));
-        axios.post('http://192.168.0.5/api/content/search', {
-            limit: 10,
-            accounname: vm.key,
-            range: "",
-            capital: "",
-            time: "",
-            address: ""
+        vm.info = $.trim(decodeURI(getQueryVariable('info')));
+        vm.organizor = $.trim(decodeURI(getQueryVariable('organizor')));
+        vm.type = $.trim(decodeURI(getQueryVariable('type')));
+        axios.post('http://192.168.0.5/api/content/ranking', {
+            limit: 1,
+            type:vm.type,
+            info: vm.info,
+            organizor: vm.organizor
         })
             .then(function (response) {
                 vm.contentList = response.data.data.data;
@@ -33,14 +33,12 @@ var app = new Vue({
             });
     },
     methods: {
-
         /*分页*/
         btnClick: function (data) {//页码点击事件
             var vm = this;
-            vm.key = vm.key != "" ? $.trim(vm.key) : $.trim(decodeURI(getQueryVariable('key_pre')));
             if (data != this.cur) {
                 this.cur = data;
-                getDataPage(this.cur, vm.key, vm.selectedItems)
+                getDataPage(this.cur,vm.type, vm.info, vm.organizor)
                     .then(function (response) {
                         vm.contentList = response.data.data.data;
                     })
@@ -48,8 +46,7 @@ var app = new Vue({
         },
         pageClick: function () {
             var vm = this;
-            vm.key = vm.key != "" ? $.trim(vm.key) : $.trim(decodeURI(getQueryVariable('key_pre')));
-            getDataPage(this.cur, vm.key, vm.selectedItems)
+            getDataPage(this.cur,vm.type, vm.info, vm.organizor)
                 .then(function (response) {
                     vm.contentList = response.data.data.data;
                 })
@@ -57,11 +54,10 @@ var app = new Vue({
         Go: function () {
             var vm = this;
             this.cur = Number(vm.goPage);
-            vm.key = vm.key != "" ? $.trim(vm.key) : $.trim(decodeURI(getQueryVariable('key_pre')));
             //总页数
-            vm.allPage = this.all % 10 == 0 ? this.all / 10 : Math.ceil(this.all / 10);
+            vm.allPage = this.all % 1 == 0 ? this.all / 1 : Math.ceil(this.all / 1);
             if (this.cur <= vm.allPage) {
-                getDataPage(this.cur, vm.key, vm.selectedItems)
+                getDataPage(this.cur,vm.type, vm.info, vm.organizor)
                     .then(function (response) {
                         vm.contentList = response.data.data.data;
                     })
@@ -94,7 +90,7 @@ var app = new Vue({
             var left = 1;
             var vm = this;
             /*总页数*/
-            vm.allPage = this.all % 10 == 0 ? this.all / 10 : Math.ceil(this.all / 10);
+            vm.allPage = this.all % 1 == 0 ? this.all / 1 : Math.ceil(this.all / 1);
             var right = vm.allPage;
             var ar = [];
             if (vm.allPage >= 5) {
@@ -129,48 +125,17 @@ var app = new Vue({
         }
     });
 }*/
-function getDataPage(curpage, key, selectedData) {
-    var range = "";
-    var capital = "";
-    var time = "";
-    var address = "";
-    selectedData.forEach(function (element, index, array) {
-        switch (element.tag) {
-            case 'Ran':
-                range = element.selectedName;
-                break;
-            case 'RegC':
-                capital = element.selectedName;
-                break;
-            /*case 'Sta':
-                var range = element.selectedName;
-                break;
-            case 'Turn':
-                var range = element.selectedName;
-                break;
-            case 'Ind':
-                var range = element.selectedName;
-                break;*/
-            case 'Time':
-                time = element.selectedName;
-                break;
-            case 'Reg':
-                address = element.selectedName;
-                break;
-        }
-    });
+function getDataPage(curpage,type, info,organizor ) {
     var par = curpage == undefined ? page = '1' : page = curpage;
     var l = axios({
         method: 'post',
-        url: 'http://192.168.0.5/api/content/search',
+        url: 'http://192.168.0.5/api/content/ranking',
         data: {
-            accounname: key,
-            limit: 10,
+            limit: 1,
             page: par,
-            range: range,
-            capital: capital,
-            time: time,
-            address: address
+            type:type,
+            info: info,
+            organizor: organizor
         }
     });
     return l;

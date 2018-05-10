@@ -62,8 +62,8 @@ function getLocalStorage(key) {
  }
 
  /*导航点击事件*/
-function getTagData(organizor,info){
-    window.location.href = './html/searchList.html?info='+info+"&organizor="+organizor;
+function getTagData(organizor,info,type){
+    window.location.href = './html/labelSearch.html?type='+type+"&info="+info+"&organizor="+organizor;
 }
 
  $(function () {
