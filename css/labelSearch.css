@@ -100,13 +100,7 @@ body {
 .matched-company .description .name {
   font-weight: bold;
 }
-.am-icon-remove:before,
-.am-icon-close:before,
-.am-icon-times:before {
-  content: "\f00d";
-  float: right;
-  padding: 4.5px 0 0 3px;
-}
+
 /* 奇偶页样式 */
 .listActive:hover {
   background-color: #f0f6fc;
@@ -181,9 +175,10 @@ body {
   border: 1px solid transparent;
   border-radius: 4px;
 }
-.btn-login{
+.btn-chart{
     background-color: #1691ff;
 }
 .btn-export {
   background-color: #2a3a54;
+  margin-left: 5px;
 }
