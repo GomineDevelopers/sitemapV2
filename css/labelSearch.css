@@ -1,0 +1,158 @@
+body {
+  background-color: #f8f8f8;
+}
+.am-selected {
+  width: auto;
+}
+.searchList-input-group button:last-child {
+  color: white;
+  background-color: #408ff8;
+}
+.searchList-input-group button:last-child:hover {
+  color: white;
+  background-color: #103b72;
+}
+.searchList-input-group {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+  padding-left: 0px;
+}
+.searchList-searchbox {
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+}
+.searchList-select-angle {
+  background-color: #51ad54;
+  color: white;
+  width: 25px;
+  height: 25px;
+}
+.am-selected-btn {
+  height: 38px;
+}
+.am-selected-status {
+  margin-right: 3px;
+}
+/* 面板自定义样式 */
+.am-panel-noborder {
+  border: none;
+  /* background-color: #f8f8f8; */
+  box-shadow: none;
+  min-width: 800px;
+}
+.am-panel-noborder > .am-panel-hd {
+  font-size: 15px;
+  color: #444;
+  background-color: #f8f8f8;
+  border-bottom: none;
+  height: 50px;
+}
+
+.am-panel-bd {
+  background-color: #f2f2f2;
+  padding: 0.25rem;
+}
+
+.am-panel-hd-inner {
+  background-color: #f8f8f8;
+}
+/* 面板自定义样式 */
+/* 筛选结果样式 */
+.selected-items {
+  border: 1px solid #408ff8;
+  padding: 2px;
+  margin-left: 5px;
+}
+.selected-items:hover {
+  border: 1px solid red;
+  cursor: pointer;
+}
+.selected-items i {
+  padding-left: 5px;
+  padding-right: 2px;
+}
+.selected-items i:hover {
+  color: red;
+  padding-left: 5px;
+}
+.matched-company {
+  padding: 10px;
+  font-size: 14px;
+  border-bottom: 1px solid #e6e6e6;
+}
+.matched-company a {
+  color: #858585;
+}
+.matched-company:last-child {
+  border-bottom: none;
+}
+.matched-company .title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.matched-company .description {
+  margin-bottom: 5px;
+}
+.matched-company .description .name {
+  font-weight: bold;
+}
+.am-icon-remove:before,
+.am-icon-close:before,
+.am-icon-times:before {
+  content: "\f00d";
+  float: right;
+  padding: 4.5px 0 0 3px;
+}
+/* 奇偶页样式 */
+.listActive:hover {
+  background-color: #f0f6fc;
+  cursor: pointer;
+}
+/* .listActive span:hover{
+    color:#408ff8; 
+    
+
+} */
+/* 列表内span样式 */
+.m-l {
+  margin-left: 15px;
+}
+
+/*跳转的页码*/
+.am-pagination-size li input {
+  width: 50px;
+  height: 30px;
+  position: relative;
+  display: block;
+  text-decoration: none;
+  line-height: 1.2;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+.am-pagination-size li button {
+  width: 40px;
+  height: 30px;
+
+  position: relative;
+  display: block;
+  text-decoration: none;
+  line-height: 1.2;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  margin-bottom: 5px;
+  margin-right: 5px;
+}
+.am-pagination-size li button:hover {
+  color: #034f86;
+  background-color: #eeeeee;
+}
+.am-pagination-size li button:focus {
+  color: white;
+  background-color: #034f86;
+  border-color: #034f86;
+}
