@@ -1,7 +1,7 @@
 var newsCenter = new Vue({
     el:'#main',
     data:{
-        loading: false,
+        loading: true,//默认不加载图标
         keyWord:'',
         newsLeftData:[],
         newsRightData:[],
@@ -11,8 +11,10 @@ var newsCenter = new Vue({
     },
     mounted:function () {
         var vm = this;
+
         axios.all([getLeft(), getRight()])
             .then(axios.spread(function (leftC, rightC) {// 两个请求现在都执行完成
+                /*vm.loading = false;*/
                 vm.newsLeftData = leftC.data.data.data;
                 vm.all = leftC.data.data.total;
                 vm.newsLeftData.forEach(function (element, index, array) {// element: 指向当前元素的值 index: 指向当前索引 array: 指向Array对象本身
@@ -23,20 +25,6 @@ var newsCenter = new Vue({
             }));
     },
     methods:{
-        /*加载图标start*/
-        // toggleLoading(show) {
-        //     show = true;
-        //     this.loading = show
-        // },
-        // fakeAjax() {
-        //     this.toggleLoading(true);
-        //     setTimeout(function () {
-        //         this.toggleLoading(false)
-        //     }, 1000);
-        // },
-        // ready() {
-        //     this.fakeAjax()
-        // },
         /*搜索*/
         Search:function(){
             /*写入方法*/
@@ -116,7 +104,6 @@ function getLeft(curpage) {
         method: 'get',
         url: 'http://192.168.0.5/api/content/newlist',
         params: {
-          
             limit:5,
             page: par
         }
