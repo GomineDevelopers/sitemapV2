@@ -6,3 +6,6 @@
 .am-selected {
     width: auto;
 }
+.dash-wrapper{
+    min-width: 984px;
+}

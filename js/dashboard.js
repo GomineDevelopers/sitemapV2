@@ -78,7 +78,7 @@ var chartResolution = new Vue({
                             emphasis: {
                                 show: true,
                                 textStyle: {
-                                    fontSize: '20'
+                                    fontSize: '14'
                                 }
                             }
                         },
@@ -92,7 +92,7 @@ var chartResolution = new Vue({
                     }
                 ]
             };
-            vm.pieChartOne.setOption(pieOptionOne);
+          
 
             var pieOptionTwo = {
                 title:{
@@ -117,11 +117,16 @@ var chartResolution = new Vue({
                             {value:234, name:'5000-10000人'},
                             {value:135, name:'10000人以上'}
                         ],
-                        labelLine: {
+                        label: {
                             normal: {
                                 show: true,
-                                length:0,
-                                length2:0
+                                position: 'inside'
+                            },
+                            emphasis: {
+                                show: true,
+                                textStyle: {
+                                    fontSize: '14'
+                                }
                             }
                         },
                         itemStyle: {
@@ -134,6 +139,7 @@ var chartResolution = new Vue({
                     }
                 ]
             };
+            vm.pieChartOne.setOption(pieOptionOne);
             vm.pieChartTwo.setOption(pieOptionTwo);
             vm.pieChartThree.setOption(pieOptionOne);
             vm.pieChartFour.setOption(pieOptionTwo);

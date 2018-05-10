@@ -23,3 +23,7 @@
     width: 100%;
     height: 250px;
 }
+.am-dropdown-content:hover{
+    cursor: pointer;
+    
+}
