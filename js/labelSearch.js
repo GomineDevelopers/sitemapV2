@@ -11,13 +11,16 @@ var app = new Vue({
         all: '', //总条数
         allPage: '',
         cur: 1,//当前页码
-        goPage: 1
+        goPage: 1,
+        breadItem:''
        
     },
     mounted: function () {
         var vm = this;
         vm.info = $.trim(decodeURI(getQueryVariable('info')));
         vm.organizor = $.trim(decodeURI(getQueryVariable('organizor')));
+        vm.breadItem=vm.organizor+vm.info;
+        console.log(vm.breadItem)
         vm.type = $.trim(decodeURI(getQueryVariable('type')));
         axios.post('http://192.168.0.5/api/content/ranking', {
             limit: 10,

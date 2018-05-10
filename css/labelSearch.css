@@ -182,3 +182,18 @@ body {
   background-color: #2a3a54;
   margin-left: 5px;
 }
+/* 面包屑 */
+.am-breadcrumb {
+  padding: .7em .5em 0 0;
+  margin-bottom: 0.5rem !important ;
+ 
+ 
+  /* margin-top: 2rem; */
+}
+.am-panel-hd span{
+  height: 50px;
+  line-height: 35px;
+}
+.am-panel-hd {
+  padding: 0.6rem 1.25rem 0.6rem 0;
+}
