@@ -122,8 +122,11 @@
 <!-- 导航结束 -->
 
 <div class="am-g am-grid-color">
+  
     <div class="am-u-sm-8 am-u-sm-centered">
-        <div class="am-u-md-centered" id="main">
+        <div class="am-u-md-centered am-cf" id="main">
+            <!--左边面板-->
+          
             <!--搜索框-->
             <div class="am-g">
                 <div class="am-u-sm-8">
@@ -140,7 +143,7 @@
             <!--搜索框-->
             <!--content-->
             <div class="am-u-sm-8">
-                <!--左边面板-->
+                <div v-show="loading" class="loading"></div>
                 <div class="am-panel am-panel-default">
                     <div class="am-panel-hd"><span class="am-news-line">|</span>面板标题</div>
                     <div class="am-panel-bd" v-for="(newsLeftList,index) in newsLeftData">
@@ -196,7 +199,7 @@
             
             <!--为了最后一个不是分页而设置-->
             <div></div>
-            <div v-show="loading" class="loading"></div>
+            
         </div>
     </div>
 </div>
