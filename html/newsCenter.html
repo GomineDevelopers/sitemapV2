@@ -143,7 +143,6 @@
             <!--搜索框-->
             <!--content-->
             <div class="am-u-sm-8">
-                <div v-show="loading" class="loading"></div>
                 <div class="am-panel am-panel-default">
                     <div class="am-panel-hd"><span class="am-news-line">|</span>面板标题</div>
                     <div class="am-panel-bd" v-for="(newsLeftList,index) in newsLeftData">
@@ -160,6 +159,7 @@
                         </div>
                     </div>
                 </div>
+                <div v-show="loading" class="loading"></div>
                 <!--分页-->
                 <div class="am-u-sm-8 am-fl ">
                     <div class="am-fl">

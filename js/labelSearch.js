@@ -3,6 +3,7 @@ var app = new Vue({
     el: '#main',
     data: {
         /*selected:'',*///字母排序
+        loading:true,
         info:'',
         organizor:'',
         type:'',
@@ -19,12 +20,13 @@ var app = new Vue({
         vm.organizor = $.trim(decodeURI(getQueryVariable('organizor')));
         vm.type = $.trim(decodeURI(getQueryVariable('type')));
         axios.post('http://192.168.0.5/api/content/ranking', {
-            limit: 1,
+            limit: 10,
             type:vm.type,
             info: vm.info,
             organizor: vm.organizor
         })
             .then(function (response) {
+                vm.loading = false;
                 vm.contentList = response.data.data.data;
                 vm.all = response.data.data.total;
             })
@@ -36,29 +38,35 @@ var app = new Vue({
         /*分页*/
         btnClick: function (data) {//页码点击事件
             var vm = this;
+            vm.loading = true;
             if (data != this.cur) {
                 this.cur = data;
                 getDataPage(this.cur,vm.type, vm.info, vm.organizor)
                     .then(function (response) {
+                        vm.loading = false;
                         vm.contentList = response.data.data.data;
                     })
             }
         },
         pageClick: function () {
             var vm = this;
+            vm.loading = true;
             getDataPage(this.cur,vm.type, vm.info, vm.organizor)
                 .then(function (response) {
+                    vm.loading = false;
                     vm.contentList = response.data.data.data;
                 })
         },
         Go: function () {
             var vm = this;
+            vm.loading = true;
             this.cur = Number(vm.goPage);
             //总页数
-            vm.allPage = this.all % 1 == 0 ? this.all / 1 : Math.ceil(this.all / 1);
+            vm.allPage = this.all % 10 == 0 ? this.all / 10 : Math.ceil(this.all / 10);
             if (this.cur <= vm.allPage) {
                 getDataPage(this.cur,vm.type, vm.info, vm.organizor)
                     .then(function (response) {
+                        vm.loading = false;
                         vm.contentList = response.data.data.data;
                     })
             } else {
@@ -90,7 +98,7 @@ var app = new Vue({
             var left = 1;
             var vm = this;
             /*总页数*/
-            vm.allPage = this.all % 1 == 0 ? this.all / 1 : Math.ceil(this.all / 1);
+            vm.allPage = this.all % 10 == 0 ? this.all / 10 : Math.ceil(this.all / 10);
             var right = vm.allPage;
             var ar = [];
             if (vm.allPage >= 5) {
@@ -131,7 +139,7 @@ function getDataPage(curpage,type, info,organizor ) {
         method: 'post',
         url: 'http://192.168.0.5/api/content/ranking',
         data: {
-            limit: 1,
+            limit: 10,
             page: par,
             type:type,
             info: info,
