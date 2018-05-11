@@ -27,7 +27,12 @@ var app =new Vue({
                         }
                         setLocalStorage('token', response.data.data.token);
                         setLocalStorage('userName', response.data.data.email);
-                        window.location.href = './index.html';
+                        if(window.history.length != 1){
+                            window.history.back();
+                        }else{
+                            window.location.href = "./index.html";
+                        }
+
 
                     }else if(response.data.status == '0'){
                         alert(response.data.message);
