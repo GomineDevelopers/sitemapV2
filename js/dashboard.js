@@ -172,6 +172,33 @@ var chartResolution = new Vue({
                                     type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
                                 }
                             },
+                            toolbox: {  
+                                show : true,
+                                top:'3%',
+                                itemSize:26,    
+                                feature : {  
+                                    dataView : {show: true, readOnly: false},  
+                                    magicType : {show: true, type: ['line', 'bar']},  
+                                    restore : {show: true},  
+                                    
+                                myTool : {  
+                                        show : true,  
+                                        itemSize:'30px',
+                                        title : 'GIS展示',  
+                                        icon : 'image://../images/map.png',  
+                                        onclick : function (){  
+                                            window.location.href = 'map.html';  
+                                        },
+                                        iconStyle:{
+                                            normal:{
+                                              color:'white',//设置颜色
+                                              itemSize:'30' ,
+                                            }
+                                        }  
+                                     },  
+                               saveAsImage : {show: true}  
+                                }  
+                            }, 
                             grid:{
                                 x:50,
                                 x2:0
