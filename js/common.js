@@ -62,7 +62,10 @@ function getLocalStorage(key) {
  }
 
  /*导航点击事件*/
-function getTagData(organizor,info,type){
+function getTagData(organizor,info,type){//首页
+    window.location.href = './html/labelSearch.html?type='+type+"&info="+info+"&organizor="+organizor;
+}
+function getTagData(organizor,info,type){//非首页
     window.location.href = './html/labelSearch.html?type='+type+"&info="+info+"&organizor="+organizor;
 }
 

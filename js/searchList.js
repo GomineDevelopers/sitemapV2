@@ -70,7 +70,7 @@ var app = new Vue({
         industry:industry,
         foundedTimes:foundedTimes,
         area:area,
-        detailUrl:'',
+        /*detailUrl:'',*/
         /*selected:'',*///字母排序
         contentList:[],//搜索结果
         key:'',//本页的关键字
@@ -96,7 +96,7 @@ var app = new Vue({
                 vm.all = response.data.data.total;
             })
             .catch(function (error) {
-                console.log(error);
+                alert(error);
             });
     },
     methods:{
