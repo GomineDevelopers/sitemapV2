@@ -1,9 +1,6 @@
 body {
   background-color: #f8f8f8;
 }
-.am-g-minH{
-  min-height: 670px;
-}
 .am-selected {
   width: auto;
 }
