@@ -65,8 +65,8 @@ function getLocalStorage(key) {
 function getTagData(organizor,info,type){//首页
     window.location.href = './html/labelSearch.html?type='+type+"&info="+info+"&organizor="+organizor;
 }
-function getTagData(organizor,info,type){//非首页
-    window.location.href = './html/labelSearch.html?type='+type+"&info="+info+"&organizor="+organizor;
+function innerPageGetTagData(organizor,info,type){//非首页
+    window.location.href = 'labelSearch.html?type='+type+"&info="+info+"&organizor="+organizor;
 }
 
  $(function () {

@@ -30,85 +30,74 @@
       <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
         <ul class="am-nav am-nav-pills am-topbar-nav">
           <li class="am-dropdown" data-am-dropdown>
-            <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+            <a class="am-dropdown-toggle" data-am-dropdown-toggle>
               500强
               <span class="am-icon-caret-down"></span>
             </a>
             <ul class="am-dropdown-content">
-              <li class="am-dropdown-header">标题</li>
               <li>
-                <a href="#">1. 去月球</a>
-              </li>
-              <li class="am-active">
-                <a href="#">2. 去火星</a>
+                <a onclick="innerPageGetTagData('福布斯','TOP500','1')">福布斯TOP500</a>
               </li>
               <li>
-                <a href="#">3. 还是回地球</a>
+                <a onclick="innerPageGetTagData('财富','TOP500','1')">财富TOP500</a>
               </li>
-              <li class="am-disabled">
-                <a href="#">4. 下地狱</a>
-              </li>
-              <li class="am-divider"></li>
               <li>
-                <a href="#">5. 桥头一回首</a>
+                <a onclick="innerPageGetTagData('工信部','中企500','1')">工信部中企500</a>
               </li>
             </ul>
           </li>
 
           <li class="am-dropdown" data-am-dropdown>
-            <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+            <a class="am-dropdown-toggle" data-am-dropdown-toggle>
               排行榜
               <span class="am-icon-caret-down"></span>
             </a>
             <ul class="am-dropdown-content">
-              <li class="am-dropdown-header">标题</li>
               <li>
-                <a href="#">1. 去月球</a>
-              </li>
-              <li class="am-active">
-                <a href="#">2. 去火星</a>
-              </li>
-              <li>
-                <a href="#">3. 还是回地球</a>
-              </li>
-              <li class="am-disabled">
-                <a href="#">4. 下地狱</a>
-              </li>
-              <li class="am-divider"></li>
-              <li>
-                <a href="#">5. 桥头一回首</a>
+                <a onclick="innerPageGetTagData('住建部','房企100强','1')">房企100强</a>
               </li>
             </ul>
           </li>
           <li class="am-dropdown" data-am-dropdown>
-            <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
-              上市公司
+            <a class="am-dropdown-toggle" data-am-dropdown-toggle>
+              交易所
               <span class="am-icon-caret-down"></span>
             </a>
             <ul class="am-dropdown-content">
-              <li class="am-dropdown-header">标题</li>
               <li>
-                <a href="#">1. 去月球</a>
-              </li>
-              <li class="am-active">
-                <a href="#">2. 去火星</a>
+                <a onclick="innerPageGetTagData('','上海证券交易所','2')">上海证券交易所</a>
               </li>
               <li>
-                <a href="#">3. 还是回地球</a>
+                <a onclick="innerPageGetTagData('','深圳证券交易所','2')">深圳证券交易所</a>
               </li>
-              <li class="am-disabled">
-                <a href="#">4. 下地狱</a>
-              </li>
-              <li class="am-divider"></li>
               <li>
-                <a href="#">5. 桥头一回首</a>
+                <a onclick="innerPageGetTagData('','香港证券交易所','2')">香港证券交易所</a>
               </li>
             </ul>
           </li>
-          <li>
+          <li >
             <a href="#">新三板</a>
           </li>
         </ul>
+        <div class="am-topbar-right">
+          <!--未登录-->
+          <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogin">
+            <li>
+              <a href="./login.html">登陆</a>
+            </li>
+            <li>
+              <a href="./html/register.html">注册</a>
+            </li>
+          </ul>
+          <!--已登录-->
+          <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogout" >
+            <li>
+              <a href="#" id="vipName"></a>
+            </li>
+            <li>
+              <a id="logout">退出</a>
+            </li>
+          </ul>
         <div class="am-topbar-right">
 
           <ul class="am-nav am-nav-pills am-topbar-nav">
