@@ -16,6 +16,7 @@
 
 <body>
   <!-- 头部导航 -->
+  <div id="main">
   <header class="am-topbar am-topbar-fixed-top">
     <div class="am-u-sm-8  am-u-sm-centered">
       <h1 class="am-topbar-brand">
@@ -29,6 +30,9 @@
 
       <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
         <ul class="am-nav am-nav-pills am-topbar-nav">
+            <li>
+                <a href="../index.html">首页</a>
+            </li>
             <li class="am-dropdown" data-am-dropdown>
               <a class="am-dropdown-toggle" data-am-dropdown-toggle>
                 500强
@@ -36,13 +40,13 @@
               </a>
               <ul class="am-dropdown-content">
                 <li>
-                  <a onclick="innerPageGetTagData('福布斯','TOP500','1')">福布斯TOP500</a>
+                  <a onclick="innerPageGetTagData('福布斯','TOP500','1','500强')">福布斯TOP500</a>
                 </li>
                 <li>
-                  <a onclick="innerPageGetTagData('财富','TOP500','1')">财富TOP500</a>
+                  <a onclick="innerPageGetTagData('财富','TOP500','1','500强')">财富TOP500</a>
                 </li>
                 <li>
-                  <a onclick="innerPageGetTagData('工信部','中企500','1')">工信部中企500</a>
+                  <a onclick="innerPageGetTagData('工信部','中企500','1','500强')">工信部中企500</a>
                 </li>
               </ul>
             </li>
@@ -54,7 +58,7 @@
               </a>
               <ul class="am-dropdown-content">
                 <li>
-                  <a onclick="innerPageGetTagData('住建部','房企100强','1')">房企100强</a>
+                  <a onclick="innerPageGetTagData('住建部','房企100强','1','排行榜')">房企100强</a>
                 </li>
               </ul>
             </li>
@@ -65,18 +69,21 @@
               </a>
               <ul class="am-dropdown-content">
                 <li>
-                  <a onclick="innerPageGetTagData('','上海证券交易所','2')">上海证券交易所</a>
+                  <a onclick="innerPageGetTagData('','上海证券交易所','2','交易所')">上海证券交易所</a>
                 </li>
                 <li>
-                  <a onclick="innerPageGetTagData('','深圳证券交易所','2')">深圳证券交易所</a>
+                  <a onclick="innerPageGetTagData('','深圳证券交易所','2','交易所')">深圳证券交易所</a>
                 </li>
                 <li>
-                  <a onclick="innerPageGetTagData('','香港证券交易所','2')">香港证券交易所</a>
+                  <a onclick="innerPageGetTagData('','香港证券交易所','2','交易所')">香港证券交易所</a>
                 </li>
               </ul>
             </li>
             <li >
               <a href="#">新三板</a>
+            </li>
+            <li>
+                <a href="./newsCenter.html">新闻中心</a>
             </li>
           </ul>
         <div class="am-topbar-right">
@@ -96,13 +103,18 @@
   <!-- 头部导航 -->
 
   <!-- 内容区域 -->
-<div id="main">
+<!--<div >-->
 
     <div class="am-g am-g-minH">
         <div class="am-u-sm-8 am-u-sm-centered">
             <ol class="am-breadcrumb">
                 <li>
                     <a href="#">首页</a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span v-text="breadItemUp"></span>
+                    </a>
                 </li>
                 <li class="am-active">
                     <span v-text="breadItem"></span>
@@ -158,7 +170,8 @@
     </div>
 
   <!--内容区域  -->
-</div>
+<!--</div>-->
+  </div>
     <!-- 底部导航 -->
 <div class="layout-footer">
         <div class="container ">

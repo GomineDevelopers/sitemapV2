@@ -24,58 +24,62 @@
 
         <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
             <ul class="am-nav am-nav-pills am-topbar-nav">
-                <li class="am-dropdown" data-am-dropdown>
-                  <a class="am-dropdown-toggle" data-am-dropdown-toggle>
-                    500强
-                    <span class="am-icon-caret-down"></span>
-                  </a>
-                  <ul class="am-dropdown-content">
-                    <li>
-                      <a onclick="innerPageGetTagData('福布斯','TOP500','1')">福布斯TOP500</a>
-                    </li>
-                    <li>
-                      <a onclick="innerPageGetTagData('财富','TOP500','1')">财富TOP500</a>
-                    </li>
-                    <li>
-                      <a onclick="innerPageGetTagData('工信部','中企500','1')">工信部中企500</a>
-                    </li>
-                  </ul>
-                </li>
-      
-                <li class="am-dropdown" data-am-dropdown>
-                  <a class="am-dropdown-toggle" data-am-dropdown-toggle>
-                    排行榜
-                    <span class="am-icon-caret-down"></span>
-                  </a>
-                  <ul class="am-dropdown-content">
-                    <li>
-                      <a onclick="innerPageGetTagData('住建部','房企100强','1')">房企100强</a>
-                    </li>
-                  </ul>
+                <li>
+                    <a href="../index.html">首页</a>
                 </li>
                 <li class="am-dropdown" data-am-dropdown>
-                  <a class="am-dropdown-toggle" data-am-dropdown-toggle>
-                    交易所
-                    <span class="am-icon-caret-down"></span>
-                  </a>
-                  <ul class="am-dropdown-content">
-                    <li>
-                      <a onclick="innerPageGetTagData('','上海证券交易所','2')">上海证券交易所</a>
-                    </li>
-                    <li>
-                      <a onclick="innerPageGetTagData('','深圳证券交易所','2')">深圳证券交易所</a>
-                    </li>
-                    <li>
-                      <a onclick="innerPageGetTagData('','香港证券交易所','2')">香港证券交易所</a>
-                    </li>
-                  </ul>
+                    <a class="am-dropdown-toggle" data-am-dropdown-toggle>
+                        500强
+                        <span class="am-icon-caret-down"></span>
+                    </a>
+                    <ul class="am-dropdown-content">
+                        <li>
+                            <a onclick="innerPageGetTagData('福布斯','TOP500','1','500强')">福布斯TOP500</a>
+                        </li>
+                        <li>
+                            <a onclick="innerPageGetTagData('财富','TOP500','1','500强')">财富TOP500</a>
+                        </li>
+                        <li>
+                            <a onclick="innerPageGetTagData('工信部','中企500','1','500强')">工信部中企500</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="am-dropdown" data-am-dropdown>
+                    <a class="am-dropdown-toggle" data-am-dropdown-toggle>
+                        排行榜
+                        <span class="am-icon-caret-down"></span>
+                    </a>
+                    <ul class="am-dropdown-content">
+                        <li>
+                            <a onclick="innerPageGetTagData('住建部','房企100强','1','排行榜')">房企100强</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="am-dropdown" data-am-dropdown>
+                    <a class="am-dropdown-toggle" data-am-dropdown-toggle>
+                        交易所
+                        <span class="am-icon-caret-down"></span>
+                    </a>
+                    <ul class="am-dropdown-content">
+                        <li>
+                            <a onclick="innerPageGetTagData('','上海证券交易所','2','交易所')">上海证券交易所</a>
+                        </li>
+                        <li>
+                            <a onclick="innerPageGetTagData('','深圳证券交易所','2','交易所')">深圳证券交易所</a>
+                        </li>
+                        <li>
+                            <a onclick="innerPageGetTagData('','香港证券交易所','2','交易所')">香港证券交易所</a>
+                        </li>
+                    </ul>
                 </li>
                 <li >
-                  <a href="#">新三板</a>
+                    <a href="#">新三板</a>
                 </li>
-              </ul>
+                <li>
+                    <a href="./newsCenter.html">新闻中心</a>
+                </li>
+            </ul>
             <div class="am-topbar-right">
-
                 <ul class="am-nav am-nav-pills am-topbar-nav">
                     <li>
                         <a href="#">登陆</a>
@@ -191,6 +195,7 @@
 <script src="../js/vue/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.js"></script>
+<script src="../js/common.js"></script>
 <script src="../js/ECharts/echarts.js"></script>
 <script src="../js/ECharts/macarons.js"></script>
 <script src="../js/dashboard.js"></script>

@@ -12,16 +12,16 @@ var app = new Vue({
         allPage: '',
         cur: 1,//当前页码
         goPage: 1,
-        breadItem:''
-       
+        breadItem:'',
+        breadItemUp:''
     },
     mounted: function () {
         var vm = this;
-        vm.info = $.trim(decodeURI(getQueryVariable('info')));
-        vm.organizor = $.trim(decodeURI(getQueryVariable('organizor')));
+        vm.info = JSON.parse(localStorage.getItem("b")).info;
+        vm.organizor = JSON.parse(localStorage.getItem("b")).organizor;
+        vm.type = JSON.parse(localStorage.getItem("b")).type;
+        vm.breadItemUp = JSON.parse(localStorage.getItem("b")).navName;
         vm.breadItem=vm.organizor+vm.info;
-        console.log(vm.breadItem)
-        vm.type = $.trim(decodeURI(getQueryVariable('type')));
         axios.post('http://192.168.0.5/api/content/ranking', {
             limit: 10,
             type:vm.type,
@@ -156,3 +156,4 @@ function getDataPage(curpage,type, info,organizor ) {
     });
     return l;
 }
+

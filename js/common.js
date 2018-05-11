@@ -62,11 +62,15 @@ function getLocalStorage(key) {
  }
 
  /*导航点击事件*/
-function getTagData(organizor,info,type){//首页
-    window.location.href = './html/labelSearch.html?type='+type+"&info="+info+"&organizor="+organizor;
+function getTagData(organizor,info,type,navName){//首页
+    var storage = {"type":type,"info":info,"organizor":organizor,"navName":navName};
+    localStorage.setItem("b",JSON.stringify(storage));
+    window.location.href = './html/labelSearch.html';
 }
-function innerPageGetTagData(organizor,info,type){//非首页
-    window.location.href = 'labelSearch.html?type='+type+"&info="+info+"&organizor="+organizor;
+function innerPageGetTagData(organizor,info,type,navName){//非首页
+    var storage = {"type":type,"info":info,"organizor":organizor,"navName":navName};
+    localStorage.setItem("b",JSON.stringify(storage));
+    window.location.href = './labelSearch.html';
 }
 
  $(function () {
