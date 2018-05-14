@@ -20,7 +20,15 @@ var chartResolution = new Vue({
         /*数据-注册行业*/
         legendData:[],
         seriesData:[],
-        selected:{}
+        selected:{},
+        // 饼图
+        pieSet: {
+            firstCollection: [],
+            secondCollection: [],
+            thirdCollection: [],
+            fourthCollection: []
+        }
+
 
     },
     mounted: function () {
@@ -50,103 +58,226 @@ var chartResolution = new Vue({
             vm.pieChartTwo = echarts.init(document.getElementById('pieBasicTwo'), 'macarons');
             vm.pieChartThree = echarts.init(document.getElementById('pieBasicThree'), 'macarons');
             vm.pieChartFour = echarts.init(document.getElementById('pieBasicFour'), 'macarons');
-
-            var pieOptionOne = {
-                title: {
-                    text: '注册资本',
-                    textStyle: {
-                        color: '#000'
-                    },
-                    top: '5%'
-                },
-                tooltip: {
-                    trigger: 'item',
-                    formatter: "{a} <br/>{b}: {c} ({d}%)"
-                },
-                /*legend: {
-                    orient: 'horizontal',
-                    itemHeight:10,
-                    itemWidth:10,
-                    data:['0-100万','100-200万','200万-500万','500万-1000万','1000万以上']
-                },*/
-                series: [
-                    {
-                        name: '访问来源',
-                        type: 'pie',
-                        radius: ['40%', '60%'],
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'inside'
+            vm.info = JSON.parse(localStorage.getItem("b")).info;
+            vm.organizor = JSON.parse(localStorage.getItem("b")).organizor;
+            vm.type = JSON.parse(localStorage.getItem("b")).type;
+            //注册资本 第一个饼图
+            axios.post('http://192.168.0.5/api/content/statistics_personnel/', {
+                type: vm.type,
+                info: vm.info,
+                organizor: vm.organizor
+            })
+                .then(function (response) {
+                    console.info(response.data.data)
+                    vm.pieSet.firstCollection = response.data.data;
+                    // setOption代码区域
+                    var pieOptionOne = {
+                        title: {
+                            text: '注册资本',
+                            textStyle: {
+                                color: '#000'
                             },
-                            emphasis: {
-                                show: true,
-                                textStyle: {
-                                    fontSize: '14'
-                                }
-                            }
+                            top: '5%'
                         },
-                        data: [
-                            { value: 335, name: '0-100万' },
-                            { value: 310, name: '100-200万' },
-                            { value: 234, name: '200万-500万' },
-                            { value: 135, name: '500万-1000万' },
-                            { value: 1548, name: '1000万以上' }
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        },
+
+                        series: [
+                            {
+                                name: '注册资本',
+                                type: 'pie',
+                                radius: ['40%', '60%'],
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'inside'
+                                    },
+                                    emphasis: {
+                                        show: true,
+                                        textStyle: {
+                                            fontSize: '14'
+                                        }
+                                    }
+                                },
+                                data: vm.pieSet.OneCollection
+                            }
                         ]
-                    }
-                ]
-            };
+                    };
+                    // setOption代码区域
+                    vm.pieChartOne.setOption(pieOptionOne);
 
+                })
 
-            var pieOptionTwo = {
-                title: {
-                    text: '成立时间',
-                    textStyle: {
-                        color: '#000'
-                    },
-                    top: '5%'
-                },
-                tooltip: {
-                    trigger: 'item',
-                    formatter: "{a} <br/>{b} : {c} ({d}%)"
-                },
-                series: [
-                    {
-                        name: '访问来源',
-                        type: 'pie',
-                        radius: '60%',
-                        data: [
-                            { value: 335, name: '0-500人' },
-                            { value: 310, name: '1000-5000人' },
-                            { value: 234, name: '5000-10000人' },
-                            { value: 135, name: '10000人以上' }
-                        ],
-                        label: {
-                            normal: {
-                                show: true,
-                                position: 'inside'
+                .catch(function (error) {
+                    alert(error);
+                });
+            // 注册资本 第一个饼图
+
+            // 成立时间 第二个饼图
+            axios.post('http://192.168.0.5/api/content/statistics_year/', {
+                type: vm.type,
+                info: vm.info,
+                organizor: vm.organizor
+            })
+                .then(function (response) {
+                    console.info(response.data.data)
+                    vm.pieSet.secondCollection = response.data.data;
+                    // setOption代码区域
+                    var pieOptionTwo = {
+                        title: {
+                            text: '成立时间',
+                            textStyle: {
+                                color: '#000'
                             },
-                            emphasis: {
-                                show: true,
-                                textStyle: {
-                                    fontSize: '14'
-                                }
-                            }
+                            top: '5%'
                         },
-                        itemStyle: {
-                            emphasis: {
-                                shadowBlur: 10,
-                                shadowOffsetX: 0,
-                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        },
+
+                        series: [
+                            {
+                                name: '成立时间',
+                                type: 'pie',
+                                radius:'60%',
+                                
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'inside'
+                                    },
+                                    emphasis: {
+                                        show: true,
+                                        textStyle: {
+                                            fontSize: '14'
+                                        }
+                                    }
+                                },
+                                data: vm.pieSet.secondCollection
                             }
-                        }
-                    }
-                ]
-            };
-            vm.pieChartOne.setOption(pieOptionOne);
-            vm.pieChartTwo.setOption(pieOptionTwo);
-            vm.pieChartThree.setOption(pieOptionOne);
-            vm.pieChartFour.setOption(pieOptionTwo);
+                        ]
+                    };
+                    // setOption代码区域
+                    vm.pieChartTwo.setOption(pieOptionTwo);
+
+                })
+
+                .catch(function (error) {
+                    alert(error);
+                });
+            // 成立时间 第二个饼图
+
+            // pc数量 第三个饼图
+            axios.post('http://192.168.0.5/api/content/statistics_pc/', {
+                type: vm.type,
+                info: vm.info,
+                organizor: vm.organizor
+            })
+                .then(function (response) {
+                    console.info(response.data.data)
+                    vm.pieSet.thirdCollection = response.data.data;
+                    // setOption代码区域
+                    var pieOptionThird = {
+                        title: {
+                            text: 'pc台数',
+                            textStyle: {
+                                color: '#000'
+                            },
+                            top: '5%'
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        },
+
+                        series: [
+                            {
+                                name: 'pc数量',
+                                type: 'pie',
+                                radius: ['40%', '60%'],
+                                center: ['50%', '60%'],
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'inside'
+                                    },
+                                    emphasis: {
+                                        show: true,
+                                        textStyle: {
+                                            fontSize: '14'
+                                        }
+                                    }
+                                },
+                                data: vm.pieSet.thirdCollection
+                            }
+                        ]
+                    };
+                    // setOption代码区域
+                    vm.pieChartThree.setOption(pieOptionThird);
+
+                })
+
+                .catch(function (error) {
+                    alert(error);
+                });
+            // pc 数量 第三个饼图
+
+            // 员工人数第四个饼图
+            axios.post('http://192.168.0.5/api/content/statistics_personnel/', {
+                type: vm.type,
+                info: vm.info,
+                organizor: vm.organizor
+            })
+                .then(function (response) {
+                    console.info(response.data.data)
+                    vm.pieSet.fourthCollection = response.data.data;
+                    // setOption代码区域
+                    var pieOptionFourth= {
+                        title: {
+                            text: '员工人数',
+                            textStyle: {
+                                color: '#000'
+                            },
+                            top: '5%'
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: "{a} <br/>{b}: {c} ({d}%)"
+                        },
+
+                        series: [
+                            {
+                                name: '员工人数',
+                                type: 'pie',
+                                radius: '60%',
+                                center: ['50%', '60%'],
+                                label: {
+                                    normal: {
+                                        show: true,
+                                        position: 'inside'
+                                    },
+                                    emphasis: {
+                                        show: true,
+                                        textStyle: {
+                                            fontSize: '14'
+                                        }
+                                    }
+                                },
+                                data: vm.pieSet.fourthCollection
+                            }
+                        ]
+                    };
+                    // setOption代码区域
+                    vm.pieChartFour.setOption(pieOptionFourth);
+                })
+                .catch(function (error) {
+                    alert(error);
+                });
+            // 员工人数 第四个饼图
+           
         },
 
         drawBarChart: function () {
