@@ -3,7 +3,11 @@ var app = new Vue({
     el: '#main',
     data: {
         /*selected:'',*///字母排序
-        loading:true,
+        isShow:{
+            loading:true,
+            pagination:false,
+            count:false
+        },
         info:'',
         organizor:'',
         type:'',
@@ -29,7 +33,9 @@ var app = new Vue({
             organizor: vm.organizor
         })
             .then(function (response) {
-                vm.loading = false;
+                vm.isShow.loading = false;
+                vm.isShow.pagination = true;
+                vm.isShow.count = true;
                 vm.contentList = response.data.data.data;
                 vm.all = response.data.data.total;
             })
@@ -46,35 +52,35 @@ var app = new Vue({
         /*分页*/
         btnClick: function (data) {//页码点击事件
             var vm = this;
-            vm.loading = true;
+            vm.isShow.loading = true;
             if (data != this.cur) {
                 this.cur = data;
                 getDataPage(this.cur,vm.type, vm.info, vm.organizor)
                     .then(function (response) {
-                        vm.loading = false;
+                        vm.isShow.loading = false;
                         vm.contentList = response.data.data.data;
                     })
             }
         },
         pageClick: function () {
             var vm = this;
-            vm.loading = true;
+            vm.isShow.loading = true;
             getDataPage(this.cur,vm.type, vm.info, vm.organizor)
                 .then(function (response) {
-                    vm.loading = false;
+                    vm.isShow.loading = false;
                     vm.contentList = response.data.data.data;
                 })
         },
         Go: function () {
             var vm = this;
-            vm.loading = true;
+            vm.isShow.loading = true;
             this.cur = Number(vm.goPage);
             //总页数
             vm.allPage = this.all % 10 == 0 ? this.all / 10 : Math.ceil(this.all / 10);
             if (this.cur <= vm.allPage) {
                 getDataPage(this.cur,vm.type, vm.info, vm.organizor)
                     .then(function (response) {
-                        vm.loading = false;
+                        vm.isShow.loading = false;
                         vm.contentList = response.data.data.data;
                     })
             } else {
