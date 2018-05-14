@@ -237,18 +237,13 @@ var chartResolution = new Vue({
                                 data: vm.registerArea
                             },
                             yAxis: {
-                                type: 'value',
-                                min: 0,
-                                max: 50
+                                type: 'value'
                             },
                             series: [{
                                 data: vm.registerNum,
-                                
                                 type: 'bar'
                             }]
-                        
                         };
-                        
                         vm.barChartB.setOption(barOptionB);
                     });
                 })
