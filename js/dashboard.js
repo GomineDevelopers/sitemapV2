@@ -243,7 +243,9 @@ var chartResolution = new Vue({
                                 data: vm.registerNum,
                                 type: 'bar'
                             }]
+                        
                         };
+                        
                         vm.barChartB.setOption(barOptionB);
                     });
                 })
