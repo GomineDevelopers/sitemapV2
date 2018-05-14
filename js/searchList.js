@@ -60,7 +60,8 @@ var app = new Vue({
             isShow_dlTurn:true,
             isShow_dlInd:true,
             isShow_dlTime:true,
-            isShow_dlReg:true
+            isShow_dlReg:true,
+            loading:true
         },
         selectedItems:[],//已选中的条件
         rang:rang,
