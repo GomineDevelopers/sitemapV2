@@ -93,6 +93,7 @@ var app = new Vue({
             address:""
         })
             .then(function (response) {
+                vm.isShow.loading = false;
                 vm.contentList = response.data.data.data;
                 vm.all = response.data.data.total;
             })
@@ -115,6 +116,7 @@ var app = new Vue({
                 address:""
             })
                 .then(function (response) {
+                    vm.isShow.loading = false;
                     vm.contentList = response.data.data.data;
                     vm.all = response.data.data.total;
                 })
@@ -130,6 +132,7 @@ var app = new Vue({
                 this.cur = data;
                 getDataPage(this.cur,vm.key,vm.selectedItems)
                     .then(function (response) {
+                        vm.isShow.loading = false;
                         vm.contentList = response.data.data.data;
                     })
             }
@@ -139,6 +142,7 @@ var app = new Vue({
             vm.key = vm.key != "" ? $.trim(vm.key) : $.trim(decodeURI(getQueryVariable('key_pre')));
             getDataPage(this.cur,vm.key,vm.selectedItems)
                 .then(function (response) {
+                    vm.isShow.loading = false;
                     vm.contentList = response.data.data.data;
                 })
         },
@@ -151,6 +155,7 @@ var app = new Vue({
             if(this.cur <= vm.allPage){
                 getDataPage(this.cur,vm.key,vm.selectedItems)
                     .then(function (response) {
+                        vm.isShow.loading = false;
                         vm.contentList = response.data.data.data;
                     })
             }else{
@@ -207,6 +212,7 @@ var app = new Vue({
             }
             getDataPage(this.cur,vm.key,vm.selectedItems)
                 .then(function (response) {
+                    vm.isShow.loading = false;
                     vm.contentList = response.data.data.data;
                     vm.all = response.data.data.total;
 
@@ -245,6 +251,7 @@ var app = new Vue({
             }
             getDataPage(1,vm.key,vm.selectedItems)
                 .then(function (response) {
+                    vm.isShow.loading = false;
                     vm.contentList = response.data.data.data;
                     vm.all = response.data.data.total;
                 })
