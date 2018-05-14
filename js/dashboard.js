@@ -153,11 +153,18 @@ var chartResolution = new Vue({
         vm.barChartB = echarts.init(document.getElementById('barBasicB'), 'macarons');
 
             /*下面柱状图*/
-            axios.post('http://192.168.0.5/api/content/city.html', {})
+            vm.info = JSON.parse(localStorage.getItem("b")).info;
+            vm.organizor = JSON.parse(localStorage.getItem("b")).organizor;
+            vm.type = JSON.parse(localStorage.getItem("b")).type;
+            axios.post('http://192.168.0.5/api/content/dashboardcitys/', {
+                type:vm.type,
+                info:vm.info,
+                organizor:vm.organizor
+            })
                 .then(function (response) {
                     response.data.data.forEach(function (element, index, array){
-                        vm.registerArea.push(element.dataTitle);
-                        vm.registerNum.push(element.dataBugets);
+                        vm.registerArea.push(element.Name);
+                        vm.registerNum.push(element.Num);
                         var barOptionB = {
                             title:{
                                 text:'注册地区',
@@ -241,7 +248,7 @@ var chartResolution = new Vue({
                     });
                 })
                 .catch(function (error) {
-                    console.log(error);
+                    alert(error);
                 });
 
 
