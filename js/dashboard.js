@@ -5,18 +5,21 @@ var chartResolution = new Vue({
     el: '#dashboardCharts',
     data: {
         /*样式*/
-        pie:{
-          width:'100%',
-          height:'300px'
+        pie: {
+            width: '100%',
+            height: '300px'
         },
-        bar:{
-            width:'100%',
-            heightR:'600px',
-            heightB:'500px'
+        bar: {
+            width: '100%',
+            heightR: '600px',
+            heightB: '500px'
         },
         /*数据-注册地区*/
-        registerArea:[],
-        registerNum:[]
+        registerArea: [],
+        registerNum: [],
+        /*数据-注册行业*/
+        industryType:[],
+        industryNum:[]
 
     },
     mounted: function () {
@@ -24,7 +27,7 @@ var chartResolution = new Vue({
         vm.drawPieChart();
         vm.drawBarChart();
 
-        setTimeout(function (){
+        setTimeout(function () {
             window.onresize = function () {
                 return function () {
                     vm.pie.width = $("#pieBasicOne").width();
@@ -36,24 +39,24 @@ var chartResolution = new Vue({
                     vm.barChartB.resize();
                     vm.barChartR.resize();
                 }();
-          }
-        },400);
+            }
+        }, 400);
     },
-    methods:{
-        drawPieChart:function(){
-            var vm =this;
+    methods: {
+        drawPieChart: function () {
+            var vm = this;
             vm.pieChartOne = echarts.init(document.getElementById('pieBasicOne'), 'macarons');
             vm.pieChartTwo = echarts.init(document.getElementById('pieBasicTwo'), 'macarons');
             vm.pieChartThree = echarts.init(document.getElementById('pieBasicThree'), 'macarons');
             vm.pieChartFour = echarts.init(document.getElementById('pieBasicFour'), 'macarons');
 
             var pieOptionOne = {
-                title:{
-                    text:'注册资本',
-                    textStyle:{
-                        color:'#000'
+                title: {
+                    text: '注册资本',
+                    textStyle: {
+                        color: '#000'
                     },
-                    top:'5%'
+                    top: '5%'
                 },
                 tooltip: {
                     trigger: 'item',
@@ -67,8 +70,8 @@ var chartResolution = new Vue({
                 },*/
                 series: [
                     {
-                        name:'访问来源',
-                        type:'pie',
+                        name: '访问来源',
+                        type: 'pie',
                         radius: ['40%', '60%'],
                         label: {
                             normal: {
@@ -82,40 +85,40 @@ var chartResolution = new Vue({
                                 }
                             }
                         },
-                        data:[
-                            {value:335, name:'0-100万'},
-                            {value:310, name:'100-200万'},
-                            {value:234, name:'200万-500万'},
-                            {value:135, name:'500万-1000万'},
-                            {value:1548, name:'1000万以上'}
+                        data: [
+                            { value: 335, name: '0-100万' },
+                            { value: 310, name: '100-200万' },
+                            { value: 234, name: '200万-500万' },
+                            { value: 135, name: '500万-1000万' },
+                            { value: 1548, name: '1000万以上' }
                         ]
                     }
                 ]
             };
-          
+
 
             var pieOptionTwo = {
-                title:{
-                    text:'成立时间',
-                    textStyle:{
-                        color:'#000'
+                title: {
+                    text: '成立时间',
+                    textStyle: {
+                        color: '#000'
                     },
-                    top:'5%'
+                    top: '5%'
                 },
-                tooltip : {
+                tooltip: {
                     trigger: 'item',
                     formatter: "{a} <br/>{b} : {c} ({d}%)"
                 },
-                series : [
+                series: [
                     {
                         name: '访问来源',
                         type: 'pie',
-                        radius : '60%',
-                        data:[
-                            {value:335, name:'0-500人'},
-                            {value:310, name:'1000-5000人'},
-                            {value:234, name:'5000-10000人'},
-                            {value:135, name:'10000人以上'}
+                        radius: '60%',
+                        data: [
+                            { value: 335, name: '0-500人' },
+                            { value: 310, name: '1000-5000人' },
+                            { value: 234, name: '5000-10000人' },
+                            { value: 135, name: '10000人以上' }
                         ],
                         label: {
                             normal: {
@@ -145,80 +148,80 @@ var chartResolution = new Vue({
             vm.pieChartFour.setOption(pieOptionTwo);
         },
 
-        drawBarChart:function () {
+        drawBarChart: function () {
             var vm = this;
 
-        // 图表插入
-        vm.barChartR = echarts.init(document.getElementById('barBasicR'), 'macarons');
-        vm.barChartB = echarts.init(document.getElementById('barBasicB'), 'macarons');
+            // 图表插入
+            vm.barChartR = echarts.init(document.getElementById('barBasicR'), 'macarons');
+            vm.barChartB = echarts.init(document.getElementById('barBasicB'), 'macarons');
 
             /*下面柱状图*/
             vm.info = JSON.parse(localStorage.getItem("b")).info;
             vm.organizor = JSON.parse(localStorage.getItem("b")).organizor;
             vm.type = JSON.parse(localStorage.getItem("b")).type;
             axios.post('http://192.168.0.5/api/content/dashboardcitys/', {
-                type:vm.type,
-                info:vm.info,
-                organizor:vm.organizor
+                type: vm.type,
+                info: vm.info,
+                organizor: vm.organizor
             })
                 .then(function (response) {
-                    response.data.data.forEach(function (element, index, array){
+                    response.data.data.forEach(function (element, index, array) {
                         vm.registerArea.push(element.Name);
                         vm.registerNum.push(element.Num);
                         var barOptionB = {
-                            title:{
-                                text:'注册地区',
-                                textStyle:{
-                                    color:'#000'
+                            title: {
+                                text: '注册地区',
+                                textStyle: {
+                                    color: '#000'
                                 }
                             },
-                            tooltip : {
+                            tooltip: {
                                 trigger: 'axis',
-                                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+                                axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                                    type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
                                 }
                             },
-                            toolbox: {  
-                                show : true,
-                                top:'3%',
-                                itemSize:18,
-                                feature : {  
-                                    dataView : {show: true, readOnly: false},  
-                                    magicType : {show: true, type: ['line', 'bar']},  
-                                    restore : {show: true},  
-                                    
-                                myTool : {  
-                                        show : true,  
-                                        itemSize:'18px',
-                                        title : 'GIS展示',  
-                                        icon : 'image://../images/map.png',  
-                                        onclick : function (){  
-                                            window.location.href = 'map.html';  
+                            toolbox: {
+                                show: true,
+                                top: '3%',
+                                itemSize: 18,
+                                feature: {
+                                    dataView: { show: true, readOnly: false },
+                                    magicType: { show: true, type: ['line', 'bar'] },
+                                    restore: { show: true },
+
+                                    myTool: {
+                                        show: true,
+                                        itemSize: '18px',
+                                        title: 'GIS展示',
+                                        icon: 'image://../images/map.png',
+                                        onclick: function () {
+                                            window.location.href = 'map.html';
                                         },
-                                        iconStyle:{
-                                            normal:{
-                                              color:'white',//设置颜色
-                                              itemSize:'30' ,
+                                        iconStyle: {
+                                            normal: {
+                                                color: 'white',//设置颜色
+                                                itemSize: '30',
                                             }
-                                        }  
-                                     },  
-                               saveAsImage : {show: true}  
-                                }  
-                            }, 
-                            grid:{
-                                x:50,
-                                x2:0
+                                        }
+                                    },
+                                    saveAsImage: { show: true }
+                                }
+                            },
+                            grid: {
+                                x: 50,
+                                x2: 0
                             },
                             xAxis: {
                                 type: 'category',
-                                axisLabel:{
-                                    interval:0,
-                                    formatter:function(value){
+                                axisLabel: {
+                                    interval: 0,
+                                    formatter: function (value) {
                                         var ret = "";
                                         var maxLength = 2;
                                         var valLength = value.length;
                                         var rowN = Math.ceil(valLength / maxLength);
-                                        if (rowN > 1){
+                                        if (rowN > 1) {
                                             for (var i = 0; i < rowN; i++) {
                                                 var temp = "";
                                                 var start = i * maxLength;
@@ -237,15 +240,15 @@ var chartResolution = new Vue({
                             },
                             yAxis: {
                                 type: 'value',
-                                name:'数量（个）'
+                                name: '数量（个）'
                             },
                             series: [{
                                 data: vm.registerNum,
                                 type: 'bar'
                             }]
-                        
+
                         };
-                        
+
                         vm.barChartB.setOption(barOptionB);
                     });
                 })
@@ -254,66 +257,88 @@ var chartResolution = new Vue({
                 });
 
 
-        /*右边柱状图*/
-        var BarOptionR = {
-            title:{
-                text:'行业',
-                textStyle:{
-                    color:'#000'
-                },
-                top:'3%'
-            },
-            tooltip: {
-                trigger: 'axis',
-                axisPointer: {
-                    type: 'shadow'
-                }
-            },
-            grid: { // 控制图的大小，调整下面这些值就可以，
-                x:50,
-                y:50,
-                x2: 0,
-                y2: 50// y2可以控制 X轴跟Zoom控件之间的间隔，避免以为倾斜后造成 label重叠到zoom上
-            },
-            xAxis: {
-                type: 'value'
-            },
-            yAxis: {
-                type: 'category',
-                data: ['巴西','印尼','美国美国','印度','中国','皮革，毛皮，羽毛及其制品和制鞋业'],
-                axisLabel:{
-                    margin:2,
-                    formatter:function(value){
-                        var ret = "";//拼接加\n返回的类目项
-                        var maxLength = 4;//每项显示文字个数
-                        var valLength = value.length;//X轴类目项的文字个数
-                        var rowN = Math.ceil(valLength / maxLength); //类目项需要换行的行数
-                        //如果类目项的文字大于5,
-                        if (rowN > 1){
-                            for (var i = 0; i < rowN; i++) {
-                                var temp = "";//每次截取的字符串
-                                var start = i * maxLength;//开始截取的位置
-                                var end = start + maxLength;//结束截取的位置
-                                //这里也可以加一个是否是最后一行的判断，但是不加也没有影响，那就不加吧
-                                temp = value.substring(start, end) + "\n";
-                                ret += temp; //凭借最终的字符串
-                            }
-                            return ret;
-                        }
-                        else {
-                            return value;
-                        }
-                    }
-                }
-            },
-            series: [
-                {
-                    type: 'bar',
-                    data: [18203, 23489, 29034, 104970, 131744, 630230]
-                }
-            ]
-        };
-        vm.barChartR.setOption(BarOptionR);
+            /*右边柱状图*/
+            axios.post('http://192.168.0.5/api/content/industry/', {
+                type: vm.type,
+                info: vm.info,
+                organizor: vm.organizor
+            })
+            
+                .then(function (response) {
+                    response.data.data.forEach(function (element, index, array) {
+                        vm.industryType.push(element.Name);
+                        vm.industryNum.push(element.Num);
+                       
+                        var BarOptionR = {
+                            title: {
+                                text: '行业',
+                                textStyle: {
+                                    color: '#000'
+                                },
+                                top: '3%'
+                            },
+                            tooltip: {
+                                trigger: 'axis',
+                                axisPointer: {
+                                    type: 'shadow'
+                                }
+                            },
+                            grid: { // 控制图的大小，调整下面这些值就可以，
+                                x: 50,
+                                y: 50,
+                                x2: 0,
+                                y2: 50// y2可以控制 X轴跟Zoom控件之间的间隔，避免以为倾斜后造成 label重叠到zoom上
+                            },
+                            xAxis: {
+                                type: 'value'
+                            },
+                            yAxis: {
+                                type: 'category',
+                                data:vm.industryType ,
+                                axisLabel: {
+                                    margin: 2,
+                                    interval: 0,
+                                    formatter: function (value) {
+                                        var ret = "";//拼接加\n返回的类目项
+                                        var maxLength = 4;//每项显示文字个数
+                                        var valLength = value.length;//X轴类目项的文字个数
+                                        var rowN = Math.ceil(valLength / maxLength); //类目项需要换行的行数
+                                        //如果类目项的文字大于5,
+                                        if (rowN > 1) {
+                                            for (var i = 0; i < rowN; i++) {
+                                                var temp = "";//每次截取的字符串
+                                                var start = i * maxLength;//开始截取的位置
+                                                var end = start + maxLength;//结束截取的位置
+                                                //这里也可以加一个是否是最后一行的判断，但是不加也没有影响，那就不加吧
+                                                temp = value.substring(start, end) + "\n";
+                                                ret += temp; //凭借最终的字符串
+                                            }
+                                            return ret;
+                                        }
+                                        else {
+                                            return value;
+                                        }
+                                    }
+                                }
+                            },
+                            series: [
+                                {
+                                    type: 'bar',
+                                    data:vm.industryNum
+                                }
+                            ]
+                        };
+
+                        vm.barChartR.setOption(BarOptionR);
+                    });
+                })
+
+                .catch(function (error) {
+                    alert(error);
+                });
+
+
+
         }
     }
 })
