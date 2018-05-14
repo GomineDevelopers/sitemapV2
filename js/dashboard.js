@@ -27,14 +27,20 @@ var chartResolution = new Vue({
             secondCollection: [],
             thirdCollection: [],
             fourthCollection: []
-        }
-
-
+        },
+        breadItemUp:'',
+        breadItem:''
     },
     mounted: function () {
         var vm = this;
+        vm.info = JSON.parse(localStorage.getItem("b")).info;
+        vm.organizor = JSON.parse(localStorage.getItem("b")).organizor;
+        vm.type = JSON.parse(localStorage.getItem("b")).type;
         vm.drawPieChart();
         vm.drawBarChart();
+
+        vm.breadItemUp = JSON.parse(localStorage.getItem("b")).navName;
+        vm.breadItem=vm.organizor+vm.info;
 
         setTimeout(function () {
             window.onresize = function () {
@@ -58,17 +64,14 @@ var chartResolution = new Vue({
             vm.pieChartTwo = echarts.init(document.getElementById('pieBasicTwo'), 'macarons');
             vm.pieChartThree = echarts.init(document.getElementById('pieBasicThree'), 'macarons');
             vm.pieChartFour = echarts.init(document.getElementById('pieBasicFour'), 'macarons');
-            vm.info = JSON.parse(localStorage.getItem("b")).info;
-            vm.organizor = JSON.parse(localStorage.getItem("b")).organizor;
-            vm.type = JSON.parse(localStorage.getItem("b")).type;
+
             //注册资本 第一个饼图
-            axios.post('http://192.168.0.5/api/content/statistics_personnel/', {
+            axios.post('http://192.168.0.5/api/content/statistics_capital/', {
                 type: vm.type,
                 info: vm.info,
                 organizor: vm.organizor
             })
                 .then(function (response) {
-                    console.info(response.data.data)
                     vm.pieSet.firstCollection = response.data.data;
                     // setOption代码区域
                     var pieOptionOne = {
@@ -76,8 +79,7 @@ var chartResolution = new Vue({
                             text: '注册资本',
                             textStyle: {
                                 color: '#000'
-                            },
-                            top: '5%'
+                            }
                         },
                         tooltip: {
                             trigger: 'item',
@@ -88,7 +90,7 @@ var chartResolution = new Vue({
                             {
                                 name: '注册资本',
                                 type: 'pie',
-                                radius: ['40%', '60%'],
+                                radius: ['50%', '80%'],
                                 label: {
                                     normal: {
                                         show: true,
@@ -101,15 +103,13 @@ var chartResolution = new Vue({
                                         }
                                     }
                                 },
-                                data: vm.pieSet.OneCollection
+                                data: vm.pieSet.firstCollection
                             }
                         ]
                     };
                     // setOption代码区域
                     vm.pieChartOne.setOption(pieOptionOne);
-
                 })
-
                 .catch(function (error) {
                     alert(error);
                 });
@@ -122,7 +122,6 @@ var chartResolution = new Vue({
                 organizor: vm.organizor
             })
                 .then(function (response) {
-                    console.info(response.data.data)
                     vm.pieSet.secondCollection = response.data.data;
                     // setOption代码区域
                     var pieOptionTwo = {
@@ -130,8 +129,7 @@ var chartResolution = new Vue({
                             text: '成立时间',
                             textStyle: {
                                 color: '#000'
-                            },
-                            top: '5%'
+                            }
                         },
                         tooltip: {
                             trigger: 'item',
@@ -142,20 +140,7 @@ var chartResolution = new Vue({
                             {
                                 name: '成立时间',
                                 type: 'pie',
-                                radius:'60%',
-                                
-                                label: {
-                                    normal: {
-                                        show: true,
-                                        position: 'inside'
-                                    },
-                                    emphasis: {
-                                        show: true,
-                                        textStyle: {
-                                            fontSize: '14'
-                                        }
-                                    }
-                                },
+                                radius:'80%',
                                 data: vm.pieSet.secondCollection
                             }
                         ]
@@ -177,38 +162,30 @@ var chartResolution = new Vue({
                 organizor: vm.organizor
             })
                 .then(function (response) {
-                    console.info(response.data.data)
                     vm.pieSet.thirdCollection = response.data.data;
-                    // setOption代码区域
                     var pieOptionThird = {
                         title: {
                             text: 'pc台数',
                             textStyle: {
                                 color: '#000'
-                            },
-                            top: '5%'
+                            }
                         },
                         tooltip: {
                             trigger: 'item',
                             formatter: "{a} <br/>{b}: {c} ({d}%)"
                         },
-
                         series: [
                             {
                                 name: 'pc数量',
                                 type: 'pie',
-                                radius: ['40%', '60%'],
-                                center: ['50%', '60%'],
+                                radius: ['50%', '80%'],
                                 label: {
                                     normal: {
                                         show: true,
                                         position: 'inside'
                                     },
                                     emphasis: {
-                                        show: true,
-                                        textStyle: {
-                                            fontSize: '14'
-                                        }
+                                        show: true
                                     }
                                 },
                                 data: vm.pieSet.thirdCollection
@@ -232,38 +209,27 @@ var chartResolution = new Vue({
                 organizor: vm.organizor
             })
                 .then(function (response) {
-                    console.info(response.data.data)
                     vm.pieSet.fourthCollection = response.data.data;
-                    // setOption代码区域
                     var pieOptionFourth= {
                         title: {
                             text: '员工人数',
                             textStyle: {
                                 color: '#000'
-                            },
-                            top: '5%'
+                            }
                         },
                         tooltip: {
                             trigger: 'item',
                             formatter: "{a} <br/>{b}: {c} ({d}%)"
                         },
-
                         series: [
                             {
                                 name: '员工人数',
                                 type: 'pie',
-                                radius: '60%',
-                                center: ['50%', '60%'],
+                                radius: '80%',
                                 label: {
                                     normal: {
                                         show: true,
                                         position: 'inside'
-                                    },
-                                    emphasis: {
-                                        show: true,
-                                        textStyle: {
-                                            fontSize: '14'
-                                        }
                                     }
                                 },
                                 data: vm.pieSet.fourthCollection
@@ -286,10 +252,6 @@ var chartResolution = new Vue({
             // 图表插入
             vm.pieChartB = echarts.init(document.getElementById('pieBasicB'), 'macarons');
             vm.barChartB = echarts.init(document.getElementById('barBasicB'), 'macarons');
-
-            vm.info = JSON.parse(localStorage.getItem("b")).info;
-            vm.organizor = JSON.parse(localStorage.getItem("b")).organizor;
-            vm.type = JSON.parse(localStorage.getItem("b")).type;
 
             /*下面柱状图*/
             axios.post('http://192.168.0.5/api/content/dashboardcitys/', {
