@@ -137,7 +137,7 @@
         </div>
         <div class="am-u-sm-9 am-u-sm-centered dash-wrapper">
             <div class="am-g">
-                <div class="am-u-sm-7">
+                <div class="am-u-sm-12">
                     <div class="am-u-sm-6">
                         <div id="pieBasicOne" :style="{width:pie.width,height: pie.height}"></div>
                     </div>
@@ -151,11 +151,22 @@
                         <div id="pieBasicFour" :style="{width: pie.width,height: pie.height}"></div>
                     </div>
                 </div>
-                <div class="am-u-sm-5">
-                    <div id="barBasicR" :style="{width: bar.width,height: bar.heightR}"></div>
-                </div>
                 <div class="am-u-g">
-                    <div id="barBasicB" :style="{width: bar.width,height: bar.heightB}"></div>
+                    <div class="am-tabs" data-am-tabs>
+                        <ul class="am-tabs-nav am-nav am-nav-tabs">
+                            <li class="am-active"><a href="#tab1">注册地区</a></li>
+                            <li><a href="#tab2">行业</a></li>
+                        </ul>
+
+                        <div class="am-tabs-bd">
+                            <div class="am-tab-panel am-fade am-in am-active" id="tab1">
+                                <div id="barBasicB" :style="{width: bar.width,height: bar.heightB}"></div>
+                            </div>
+                            <div class="am-tab-panel am-fade" id="tab2">
+                                <div id="pieBasicB" :style="{width: bar.width,height: bar.heightB}"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

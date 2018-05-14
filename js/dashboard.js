@@ -18,8 +18,9 @@ var chartResolution = new Vue({
         registerArea: [],
         registerNum: [],
         /*数据-注册行业*/
-        industryType:[],
-        industryNum:[]
+        legendData:[],
+        seriesData:[],
+        selected:{}
 
     },
     mounted: function () {
@@ -37,7 +38,7 @@ var chartResolution = new Vue({
                     vm.pieChartFour.resize();
                     vm.bar.width = $("#barBasicR").width();
                     vm.barChartB.resize();
-                    vm.barChartR.resize();
+                    vm.pieChartB.resize();
                 }();
             }
         }, 400);
@@ -152,13 +153,14 @@ var chartResolution = new Vue({
             var vm = this;
 
             // 图表插入
-            vm.barChartR = echarts.init(document.getElementById('barBasicR'), 'macarons');
+            vm.pieChartB = echarts.init(document.getElementById('pieBasicB'), 'macarons');
             vm.barChartB = echarts.init(document.getElementById('barBasicB'), 'macarons');
 
-            /*下面柱状图*/
             vm.info = JSON.parse(localStorage.getItem("b")).info;
             vm.organizor = JSON.parse(localStorage.getItem("b")).organizor;
             vm.type = JSON.parse(localStorage.getItem("b")).type;
+
+            /*下面柱状图*/
             axios.post('http://192.168.0.5/api/content/dashboardcitys/', {
                 type: vm.type,
                 info: vm.info,
@@ -168,9 +170,10 @@ var chartResolution = new Vue({
                     response.data.data.forEach(function (element, index, array) {
                         vm.registerArea.push(element.Name);
                         vm.registerNum.push(element.Num);
+                    });
                         var barOptionB = {
                             title: {
-                                text: '注册地区',
+                                text: '',
                                 textStyle: {
                                     color: '#000'
                                 }
@@ -250,95 +253,68 @@ var chartResolution = new Vue({
                         };
 
                         vm.barChartB.setOption(barOptionB);
-                    });
                 })
                 .catch(function (error) {
                     alert(error);
                 });
 
-
-            /*右边柱状图*/
+            /*下面的饼状图*/
             axios.post('http://192.168.0.5/api/content/industry/', {
                 type: vm.type,
                 info: vm.info,
                 organizor: vm.organizor
             })
-            
                 .then(function (response) {
+                    vm.seriesData = response.data.data;
                     response.data.data.forEach(function (element, index, array) {
-                        vm.industryType.push(element.Name);
-                        vm.industryNum.push(element.Num);
-                       
-                        var BarOptionR = {
-                            title: {
-                                text: '行业',
-                                textStyle: {
-                                    color: '#000'
-                                },
-                                top: '3%'
-                            },
-                            tooltip: {
-                                trigger: 'axis',
-                                axisPointer: {
-                                    type: 'shadow'
-                                }
-                            },
-                            grid: { // 控制图的大小，调整下面这些值就可以，
-                                x: 50,
-                                y: 50,
-                                x2: 0,
-                                y2: 50// y2可以控制 X轴跟Zoom控件之间的间隔，避免以为倾斜后造成 label重叠到zoom上
-                            },
-                            xAxis: {
-                                type: 'value'
-                            },
-                            yAxis: {
-                                type: 'category',
-                                data:vm.industryType ,
-                                axisLabel: {
-                                    margin: 2,
-                                    interval: 0,
-                                    formatter: function (value) {
-                                        var ret = "";//拼接加\n返回的类目项
-                                        var maxLength = 4;//每项显示文字个数
-                                        var valLength = value.length;//X轴类目项的文字个数
-                                        var rowN = Math.ceil(valLength / maxLength); //类目项需要换行的行数
-                                        //如果类目项的文字大于5,
-                                        if (rowN > 1) {
-                                            for (var i = 0; i < rowN; i++) {
-                                                var temp = "";//每次截取的字符串
-                                                var start = i * maxLength;//开始截取的位置
-                                                var end = start + maxLength;//结束截取的位置
-                                                //这里也可以加一个是否是最后一行的判断，但是不加也没有影响，那就不加吧
-                                                temp = value.substring(start, end) + "\n";
-                                                ret += temp; //凭借最终的字符串
-                                            }
-                                            return ret;
-                                        }
-                                        else {
-                                            return value;
-                                        }
+                        vm.legendData.push(element.name);
+                        /*vm.selected[element.name] = element.value != 0;*/
+                        vm.selected[element.name] = index < 6;
+                    });
+
+                    var pieOptionB={
+                        title : {
+                            text: '',
+                            subtext: '',
+                            x:'center'
+                        },
+                        tooltip : {
+                            trigger: 'item',
+                            formatter: "{a} <br/>{b} : {c} ({d}%)"
+                        },
+                        legend: {
+                            type: 'scroll',
+                            orient: 'vertical',
+                            right: 10,
+                            top: 20,
+                            bottom: 20,
+                            data: vm.legendData,
+                            selected: vm.selected
+                        },
+                        series : [
+                            {
+                                name: '行业',
+                                type: 'pie',
+                                radius : '55%',
+                                center: ['40%', '50%'],
+                                data: vm.seriesData,
+                                itemStyle: {
+                                    emphasis: {
+                                        shadowBlur: 10,
+                                        shadowOffsetX: 0,
+                                        shadowColor: 'rgba(0, 0, 0, 0.5)'
                                     }
                                 }
-                            },
-                            series: [
-                                {
-                                    type: 'bar',
-                                    data:vm.industryNum
-                                }
-                            ]
-                        };
-
-                        vm.barChartR.setOption(BarOptionR);
-                    });
+                            }
+                        ]
+                    };
+                    vm.pieChartB.setOption(pieOptionB);
                 })
-
                 .catch(function (error) {
                     alert(error);
                 });
-
-
-
         }
+
+
     }
 })
