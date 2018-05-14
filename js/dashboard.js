@@ -170,8 +170,7 @@ var chartResolution = new Vue({
                                 text:'注册地区',
                                 textStyle:{
                                     color:'#000'
-                                },
-                                top:'3%'
+                                }
                             },
                             tooltip : {
                                 trigger: 'axis',
@@ -182,7 +181,7 @@ var chartResolution = new Vue({
                             toolbox: {  
                                 show : true,
                                 top:'3%',
-                                itemSize:26,    
+                                itemSize:18,
                                 feature : {  
                                     dataView : {show: true, readOnly: false},  
                                     magicType : {show: true, type: ['line', 'bar']},  
@@ -190,7 +189,7 @@ var chartResolution = new Vue({
                                     
                                 myTool : {  
                                         show : true,  
-                                        itemSize:'30px',
+                                        itemSize:'18px',
                                         title : 'GIS展示',  
                                         icon : 'image://../images/map.png',  
                                         onclick : function (){  
@@ -237,7 +236,8 @@ var chartResolution = new Vue({
                                 data: vm.registerArea
                             },
                             yAxis: {
-                                type: 'value'
+                                type: 'value',
+                                name:'数量（个）'
                             },
                             series: [{
                                 data: vm.registerNum,
