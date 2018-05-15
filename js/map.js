@@ -4,6 +4,8 @@ var point = new BMap.Point(116.404, 39.915);  // 创建中心点坐标
 map.centerAndZoom(point, 5);                 // 初始化地图，设置中心点坐标和地图级别
 map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
 
+var myGeo = new BMap.Geocoder(); // 创建地址解析器实例
+
 /*添加控件*/
 map.addControl(new BMap.ScaleControl()); //比例尺
 
@@ -16,24 +18,31 @@ var opts = {
     title: ""
 }
 
+
 /*省级多点标注 start*/
 function addMarker() {
     var markerArr = [];
+    /*缓存中的内容*/
+    var info = JSON.parse(localStorage.getItem("b")).info;
+    var organizor = JSON.parse(localStorage.getItem("b")).organizor;
+    var type = JSON.parse(localStorage.getItem("b")).type;
+
     $.ajax({
-        url: '../js/NE.json',
+        url: 'http://192.168.0.5/api/content/gisstate/',
         type: 'GET',
         dataType: 'json',
+        data:{
+            info:info,
+            type:type,
+            organizor:organizor
+        },
         success: function (data, status) {
-            for (var i = 0; i < data.province.length; i++) {
+            for (var i = 0; i < data.data.length; i++) {
                 /*标注添加到地图中*/
-                var point = new BMap.Point(data.province[i].lng, data.province[i].lat);
+                var content = data.data[i].county;
+                var point = new BMap.Point(data.data[i].lng,data.data[i].lat);
                 var marker = new BMap.Marker(point);
-
-                /*窗口内容*/
-                var content = data.province[i].name;
-
-                addClickHandler(content,marker);
-
+                addClickHandler(marker,data.data[i].type);
                 /*标注添加hover的监听事件*/
                 marker.addEventListener("mouseover",function (e) {
                     /*点上的文本*/
@@ -50,22 +59,15 @@ function addMarker() {
                         height: "26px",
                         lineHeight: "26px"
                     });
-                    for(var j = 0;j<data.province.length;j++){
-                        var labelContent = "";
-                        if( this.point.lat == data.province[j].lat){
-                            labelContent = data.province[j].count;
-                            label.setContent(labelContent);
+                    for(var j = 0;j<data.data.length;j++){
+                        if(this.point.lat == data.data[j].lat){
+                            label.setContent(data.data[j].county);
                         }
                     }
                     this.setLabel(label);
                 });
-                marker.addEventListener("mouseout",function(e){
-                    var label = this.getLabel();
-                    label.setContent("");//设置标签内容为空
-                    label.setStyle({border:"none",width:"0px",padding:"0px"});//设置标签边框宽度为0
-                });
-
-                map.addOverlay(marker);
+                    mouseOutEvent(marker);
+                    map.addOverlay(marker);
             }
         },
         error: function (data, status) {
@@ -76,27 +78,89 @@ function addMarker() {
 /*省级多点标注 end*/
 
 /*点击之后进入到下一级 start*/
-function addClickHandler(content, marker) {
+function addClickHandler(marker,sign) {
+    var info = JSON.parse(localStorage.getItem("b")).info;
+    var organizor = JSON.parse(localStorage.getItem("b")).organizor;
+    var type = JSON.parse(localStorage.getItem("b")).type;
+
     marker.addEventListener("click", function (e) {
-        /*openInfo(content,e);*/
         var newPoint = new BMap.Point(e.target.getPosition().lng, e.target.getPosition().lat);
-        map.centerAndZoom(newPoint, 8);
-        $.ajax({
-            url: '../js/NE.json',
-            type: 'GET',
-            dataType: 'json',
-            success: function (data, status) {
-                remove_Overlay();
-                for (var i = 0; i < data.city.length; i++) {
-                    var point = new BMap.Point(data.city[i].lng, data.city[i].lat);
-                    var marker = new BMap.Marker(point);
-                    map.addOverlay(marker);
-                }
+        myGeo.getLocation(newPoint, function(result){
+            var newName = "";
+            switch(sign){
+                case '1':
+                    map.centerAndZoom(result.point, 8);
+                    newName = result.addressComponents.province;
+                    break;
+                case '2':
+                    map.centerAndZoom(result.point, 9);
+                    newName = result.addressComponents.city;
+                    break;
+                case '3':
+                    map.centerAndZoom(result.point, 9);
+                    newName = result.addressComponents.district;
+                    break;
             }
+            $.ajax({
+                url: 'http://192.168.0.5/api/content/giscitys/',
+                type: 'GET',
+                dataType: 'json',
+                data:{
+                    info:info,
+                    type:type,
+                    organizor:organizor,
+                    name:newName
+                },
+                success: function (data, status) {
+                    remove_Overlay();
+                    for (var i = 0; i < data.data.length; i++) {
+                        var point = new BMap.Point(data.data[i].lng,data.data[i].lat);
+                        var marker = new BMap.Marker(point);
+                        addClickHandler(marker,data.data[i].type);
+                        mouseHoverEvent(marker,data.data[i]);
+                        mouseOutEvent(marker);
+                        map.addOverlay(marker);
+                    }
+                }
+            });
         });
     });
 }
 /*点击之后进入到下一级 end*/
+
+/*鼠标放到marker上显示数量*/
+function mouseHoverEvent(marker,data) {
+    marker.addEventListener("mouseover",function (e) {
+        /*点上的文本*/
+        var label = new BMap.Label("",{
+            offset:new BMap.Size(15,-20)
+        });
+        label.setStyle({
+            width: "60px",
+            color: '#fff',
+            background: '#ff8355',
+            border: '1px solid "#ff8355"',
+            borderRadius: "5px",
+            textAlign: "center",
+            height: "26px",
+            lineHeight: "26px"
+        });
+
+        if(this.point.lat == data.lat){
+            label.setContent(data.county);
+        }
+        this.setLabel(label);
+    });
+}
+
+/*鼠标移出marker*/
+function mouseOutEvent(marker){
+    marker.addEventListener("mouseout",function(e){
+        var label = this.getLabel();
+        label.setContent("");//设置标签内容为空
+        label.setStyle({border:"none",width:"0px",padding:"0px"});//设置标签边框宽度为0
+    });
+}
 
 /*清除覆盖物 start*/
 function remove_Overlay() {
