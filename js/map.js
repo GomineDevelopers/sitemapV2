@@ -52,12 +52,12 @@ function addMarker() {
                     label.setStyle({
                         width: "60px",
                         color: '#fff',
-                        background: '#ff8355',
+                        background: '#67C23A',
                         border: '1px solid "#ff8355"',
                         borderRadius: "5px",
                         textAlign: "center",
-                        height: "26px",
-                        lineHeight: "26px"
+                        height: "30px",
+                        lineHeight: "30px"
                     });
                     for(var j = 0;j<data.data.length;j++){
                         if(this.point.lat == data.data[j].lat){
@@ -138,7 +138,7 @@ function mouseHoverEvent(marker,data) {
         label.setStyle({
             width: "60px",
             color: '#fff',
-            background: '#ff8355',
+            background: '#67C23A',
             border: '1px solid "#ff8355"',
             borderRadius: "5px",
             textAlign: "center",
