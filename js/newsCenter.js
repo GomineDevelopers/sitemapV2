@@ -72,7 +72,8 @@ var newsCenter = new Vue({
                 })
         },
         enteringDetail:function(id){
-            window.location.href ="newsDetail.html?newsid="+id;
+            // window.location.href ="newsDetail.html?newsid="+id;
+            window.open ("newsDetail.html?newsid="+id,'_blank');
         }
     },
     //分页
