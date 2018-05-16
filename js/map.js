@@ -9,19 +9,22 @@ var myGeo = new BMap.Geocoder(); // 创建地址解析器实例
 /*添加控件*/
 map.addControl(new BMap.ScaleControl()); //比例尺
 
-addMarker();
-
-/*添加信息窗口*/
-var opts = {
-    width: 250,
-    height: 100,
-    title: ""
-}
-
-
+$(function() {
+    addMarker();
+    $(":radio").click(function () {
+        var selected = $("input[name='radio10']:checked").val();
+        if(selected == 'sg'){
+            remove_Overlay();
+            addMarkerSg();
+        }else if (selected == 'sd') {
+            remove_Overlay();
+            addMarker();
+        }
+    });
+});
+/*------------------------------------------------------------------------------------散点图相关 start*/
 /*省级多点标注 start*/
 function addMarker() {
-    var markerArr = [];
     /*缓存中的内容*/
     var info = JSON.parse(localStorage.getItem("b")).info;
     var organizor = JSON.parse(localStorage.getItem("b")).organizor;
@@ -43,31 +46,9 @@ function addMarker() {
                 var point = new BMap.Point(data.data[i].lng,data.data[i].lat);
                 var marker = new BMap.Marker(point);
                 addClickHandler(marker,data.data[i].type);
-                /*标注添加hover的监听事件*/
-                marker.addEventListener("mouseover",function (e) {
-                    /*点上的文本*/
-                    var label = new BMap.Label("",{
-                        offset:new BMap.Size(15,-20)
-                    });
-                    label.setStyle({
-                        width: "60px",
-                        color: '#fff',
-                        background: '#67C23A',
-                        border: '1px solid "#ff8355"',
-                        borderRadius: "5px",
-                        textAlign: "center",
-                        height: "30px",
-                        lineHeight: "30px"
-                    });
-                    for(var j = 0;j<data.data.length;j++){
-                        if(this.point.lat == data.data[j].lat){
-                            label.setContent(data.data[j].county);
-                        }
-                    }
-                    this.setLabel(label);
-                });
-                    mouseOutEvent(marker);
-                    map.addOverlay(marker);
+                mouseHoverEvent(marker,data.data[i]);
+                mouseOutEvent(marker);
+                map.addOverlay(marker);
             }
         },
         error: function (data, status) {
@@ -136,7 +117,6 @@ function mouseHoverEvent(marker,data) {
             offset:new BMap.Size(15,-20)
         });
         label.setStyle({
-            width: "60px",
             color: '#fff',
             background: '#67C23A',
             border: '1px solid "#ff8355"',
@@ -147,7 +127,8 @@ function mouseHoverEvent(marker,data) {
         });
 
         if(this.point.lat == data.lat){
-            label.setContent(data.county);
+            var con = data.name + "："+data.county;
+            label.setContent(con);
         }
         this.setLabel(label);
     });
@@ -162,11 +143,75 @@ function mouseOutEvent(marker){
     });
 }
 
-/*清除覆盖物 start*/
+/*------------------------------------------------------------------------------------散点图相关 end*/
+
+/*------------------------------------------------------------------------------------栅格相关 start*/
+function addMarkerSg() {
+    var info = JSON.parse(localStorage.getItem("b")).info;
+    var organizor = JSON.parse(localStorage.getItem("b")).organizor;
+    var type = JSON.parse(localStorage.getItem("b")).type;
+
+    $.ajax({
+        url: 'http://192.168.0.5/api/content/gisstate/',
+        type: 'GET',
+        dataType: 'json',
+        data: {
+            info: info,
+            type: type,
+            organizor: organizor
+        },
+        success:function (data, status) {
+            for(var i =0;i<data.data.length;i++){
+                getBoundary(data.data[i]);
+            }
+        }
+    });
+}
+
+function getBoundary(data) {
+    var bdary = new BMap.Boundary();
+    bdary.get(data.name, function(rs){
+        var count = rs.boundaries.length;
+        for (var i = 0; i < count; i++) {
+            var col = "";
+            if(data.county == 0){
+                col = "grey";
+            }else if(data.county > 0 && data.county < 5){
+                col = "green";
+            }else if(data.county >=5 && data.county < 10){
+                col = "blue";
+            }else if(data.county >= 10 && data.county < 50){
+                col = "orange";
+            }else {
+                col = "red";
+            }
+            var ply = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 1, strokeColor: col}); //建立多边形覆盖物
+            map.addOverlay(ply);  //添加覆盖物
+            addLable(data);
+        }
+    });
+}
+
+function addLable(data) {
+    var point = new BMap.Point(data.lng,data.lat);
+    var ops = {
+        position : point,   // 指定文本标注所在的地理位置
+        offset:new BMap.Size(-5,-15)
+    };
+    /*var con = data.name+"："+data.county;*/
+    var label = new BMap.Label(data.county,ops);
+    label.setStyle({});
+    map.addOverlay(label);
+}
+
+/*------------------------------------------------------------------------------------栅格相关 end*/
+
+
+/*------------------------------------------------------------------------------------公用*/
+/*清除覆盖物*/
 function remove_Overlay() {
     map.clearOverlays();
 }
-/*清除覆盖物 end*/
 
 /*鼠标滚轮start*/
 var scrollFunc = function (e) {
@@ -175,7 +220,12 @@ var scrollFunc = function (e) {
     t1.value = map.getZoom();
     if (t1.value == 5 || t1.value == 6 || t1.value == 7) {
         remove_Overlay();
-        addMarker();
+        var selected = $("input[name='radio10']:checked").val();
+        if(selected == 'sd'){
+            addMarker();
+        }else if(selected == 'sg'){
+            addMarkerSg();
+        }
     }
 }
 if (document.addEventListener) {//注册事件
@@ -183,13 +233,3 @@ if (document.addEventListener) {//注册事件
 }
 window.onmousewheel = document.onmousewheel = scrollFunc; //IE/Opera/Chrome
 /*鼠标滚轮end*/
-
-function openInfo(content, e) {
-    var point = new BMap.Point(e.target.getPosition().lng, e.target.getPosition().lat);
-    var infoWindow = new BMap.InfoWindow(content, opts);//创建信息窗口对象
-    map.openInfoWindow(infoWindow, point);//开启窗口
-}
-
-
-
-
