@@ -185,7 +185,7 @@ function getBoundary(data) {
             }else {
                 col = "red";
             }
-            var ply = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 1, strokeColor: col}); //建立多边形覆盖物
+            var ply = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 1, strokeColor: col,fillColor:col}); //建立多边形覆盖物
             map.addOverlay(ply);  //添加覆盖物
             addLable(data);
         }
