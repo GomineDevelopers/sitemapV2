@@ -27,7 +27,19 @@ var newsCenter = new Vue({
     methods:{
         /*搜索*/
         Search:function(){
-            /*写入方法*/
+            var vm = this;
+            vm.loading = true;
+            vm.keyWord = $.trim(vm.keyWord);
+            getLeft(vm.cur,vm.keyWord)
+                .then(function (response) {
+                    vm.loading = false;
+                    vm.newsLeftData = response.data.data.data;
+                    vm.newsLeftData.forEach(function (element, index, array) {// element: 指向当前元素的值 index: 指向当前索引 array: 指向Array对象本身
+                        element.create_time = formatDate(element.create_time);
+                        element.source = "来源："+element.source;
+                    });
+                    vm.all = response.data.data.total;
+                });
         },
         /*分页*/
         btnClick: function(data){//页码点击事件
@@ -35,7 +47,7 @@ var newsCenter = new Vue({
             vm.loading = true;
             if(data != this.cur){
                 this.cur = data;
-                getLeft(this.cur)
+                getLeft(this.cur,vm.keyWord)
                     .then(function (response) {
                         vm.loading = false;
                         vm.newsLeftData = response.data.data.data;
@@ -50,7 +62,7 @@ var newsCenter = new Vue({
         pageClick: function(){
             var vm =this;
             vm.loading = true;
-            getLeft(this.cur)
+            getLeft(this.cur,vm.keyWord)
                 .then(function (response) {
                     vm.loading = false;
                     vm.newsLeftData = response.data.data.data;
@@ -93,28 +105,23 @@ var newsCenter = new Vue({
             return ar
         }
          
-    },
-    watch: {
-        cur: function(oldValue , newValue){
-            /*console.log(arguments);*/
-        }
     }
 })
 
 
-function getLeft(curpage) {
+function getLeft(curpage,key) {
     var par = curpage == undefined?page = '1':page = curpage;
     var l = axios({
-        method: 'get',
+        method: 'post',
         url: 'http://192.168.0.5/api/content/newlist',
-        params: {
+        data: {
             limit:5,
-            page: par
+            page: par,
+            title:key
         }
     });
     return l;
 }
-
 function getRight() {
     return axios.get('http://192.168.0.5/api/content/popularlist');
 }
