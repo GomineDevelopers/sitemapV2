@@ -175,17 +175,29 @@ function getBoundary(data) {
         for (var i = 0; i < count; i++) {
             var col = "";
             if(data.county == 0){
-                col = "grey";
-            }else if(data.county > 0 && data.county < 5){
-                col = "green";
-            }else if(data.county >=5 && data.county < 10){
-                col = "blue";
-            }else if(data.county >= 10 && data.county < 50){
-                col = "orange";
-            }else {
-                col = "red";
+                col = "#d6e4ff";
+            }else if(data.county > 0 && data.county < 10){
+                col = "#36cfc9";
+            }else if(data.county >=10 && data.county < 20){
+                col = "#bae637";
+            }else if(data.county >= 20 && data.county < 50){
+                col = "#ffec3d";
+            }else if(data.county >= 50 && data.county < 100){
+                col = "#faad14";
             }
-            var ply = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 1, strokeColor: col,fillColor:col}); //建立多边形覆盖物
+            else if(data.county >= 100 && data.county < 150){
+                col = "#ffa940";
+            }
+            else if(data.county >= 150 && data.county < 200){
+                col = "#ff7a45";
+            }
+            else if(data.county >= 200 && data.county < 300){
+                col = "#ad2102";
+            }
+            else {
+                col = "#ff6400";
+            }
+            var ply = new BMap.Polygon(rs.boundaries[i], {strokeWeight: 1, strokeColor: col,fillColor:col,fillColorOpacity:"0.5"}); //建立多边形覆盖物
             map.addOverlay(ply);  //添加覆盖物
             addLable(data);
         }
