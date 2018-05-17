@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <!-- 开发版本 -->
-  <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.css">
+  <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
   <!-- 线上压缩版本 -->
   <!-- <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css"> -->
   <link rel="stylesheet" href="css/index.css">
@@ -119,7 +119,7 @@
       <div class="am-input-group am-input-group-lg am-u-sm-9 am-u-sm-centered">
             <input type="text" class="am-form-field" v-model="key_pre" @keydown.enter="search()" placeholder="请输入企业名称">
           <span class="am-input-group-btn">
-            <button class="am-btn am-btn-primary" type="button" @click="search()" >搜索</button>
+            <button class="am-btn am-btn-primary" type="button" @click="search()">搜索</button>
           </span>
       </div>
       <hr class="content-devider">
@@ -190,11 +190,11 @@
       </div>
     </div>
   </div>
-  <!-- 开发版本 -->
+
   <script src="./js/jquery/jquery-3.3.1.min.js"></script>
   <script src="./js/vue/vue.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.js"></script>
+  <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script>
   <script src="./js/common.js"></script>
   <script src="./js/index.js"></script>
 </body>
