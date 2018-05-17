@@ -2,6 +2,10 @@ var searchDetail = new Vue({
     el: '#searchDetail',
     data: {
         companyId:'',
+        isShow:{
+            loading:true,
+            isShowDiv:false
+        },
        intro:{
         Account_Name:'',
         Company_Phone:'',
@@ -60,13 +64,14 @@ var searchDetail = new Vue({
             }
           })
             .then(function (response) {
+                self.isShow.isShowDiv = true;
                 // 头部简介
                 self.intro.Account_Name = response.data.data.Account_Name == null?temp:response.data.data.Account_Name;
                 self.intro.Company_Phone = response.data.data.Company_Phone == null?temp:response.data.data.Company_Phone;
                 self.intro.GANO = response.data.data.GANO == null?temp:response.data.data.GANO;
                 self.intro.Official_Website = response.data.data.Official_Website == null?temp:response.data.data.Official_Website;
                 self.intro.Street=response.data.data.Street == null?temp:response.data.data.Street;
-                self.intro.update_time=response.data.data.update_time == null?'未知':response.data.data.update_time;
+                self.intro.update_time = response.data.data.update_time == null?'未知': formatDate(response.data.data.update_time);
                 // 基本信息展示
                 self.basicInfo.Account_Name_En=response.data.data.Account_Name_En == null?temp:response.data.data.Account_Name_En;
                 self.basicInfo.Account_Name_Abbr=response.data.data.Account_Name_Abbr == null?temp:response.data.data.Account_Name_Abbr;
@@ -102,6 +107,8 @@ var searchDetail = new Vue({
                 self.companySize.Server_Number =response.data.data.Server_Number == null?temp:response.data.data.Server_Number;
                 self.companySize.Storage_Range =response.data.data.Storage_Range == null?temp:response.data.data.Storage_Range ;
                 self.companySize.Storage_Number =response.data.data.Storage_Number == null?temp:response.data.data.Storage_Number;
+
+                self.isShow.loading = false;
             })
             .catch(function (error) {
                 console.log(error);

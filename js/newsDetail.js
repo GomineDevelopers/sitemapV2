@@ -6,7 +6,7 @@ var newsDetail = new Vue({
         source: '',
         create_time: '',
         content: '',
-        newsId:'',
+        newsId:''
     },
     computed: {
         sourceSort: function () {

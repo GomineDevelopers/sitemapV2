@@ -92,8 +92,8 @@
         </div>
     </header>
     <!-- 导航结束 -->
-    <div class="am-g am-grid-color" id="searchDetail">
-        <div class="am-u-sm-8 am-u-sm-centered">
+    <div class="am-g am-grid-color" id="searchDetail" v-show="isShow.isShowDiv">
+        <div class="am-u-sm-8 am-u-sm-centered am-g-minH">
             <div class=" am-u-md-centered">
                 <table class="am-table am-table-compact am-sd-tab1">
                     <tr>
@@ -251,7 +251,9 @@
                 </table>
             </div>
         </div>
+        <div v-show="isShow.loading" class="loading"></div>
     </div>
+
     <!-- 页脚 -->
     <!-- 底部导航 -->
     <div class="layout-footer">

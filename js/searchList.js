@@ -38,7 +38,8 @@ var foundedTimes=[
     {text:'1-5年'},
     {text:'5-10年'},
     {text:'10-15年'},
-    {text:'15年以上'}
+    {text:'10-15年'},
+    {text:'20年以上'}
 
 ];
 var area = [
@@ -71,7 +72,6 @@ var app = new Vue({
         industry:industry,
         foundedTimes:foundedTimes,
         area:area,
-        /*detailUrl:'',*/
         /*selected:'',*///字母排序
         contentList:[],//搜索结果
         key:'',//本页的关键字
@@ -105,7 +105,6 @@ var app = new Vue({
             var vm = this;
             vm.cur = 1;//页码从1开始
             vm.key = vm.key != "" ? $.trim(vm.key) : $.trim(decodeURI(getQueryVariable('key_pre')));
-            /*var selected = vm.selected;*/
             axios.post('http://192.168.0.5/api/content/search', {
                 limit:10,
                 accounname:vm.key,
