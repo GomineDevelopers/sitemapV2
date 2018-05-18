@@ -109,7 +109,7 @@ function addClickHandler(marker,sign) {
 }
 /*点击之后进入到下一级 end*/
 
-/*鼠标放到marker上显示数量*/
+/*数量标签*/
 function mouseHoverEvent(marker,data) {
     marker.addEventListener("mouseover",function (e) {
         /*点上的文本*/
@@ -213,7 +213,55 @@ function addLable(data) {
     /*var con = data.name+"："+data.county;*/
     var label = new BMap.Label(data.county,ops);
     label.setStyle({});
+    addClickHandlerSg(label,data.type);
     map.addOverlay(label);
+}
+/*点击label进入下一级*/
+function addClickHandlerSg(label,sign) {
+    /*缓存中的内容*/
+    var info = JSON.parse(localStorage.getItem("b")).info;
+    var organizor = JSON.parse(localStorage.getItem("b")).organizor;
+    var type = JSON.parse(localStorage.getItem("b")).type;
+
+    label.addEventListener('click',function (e) {
+        var newPoint = new BMap.Point(e.target.getPosition().lng, e.target.getPosition().lat);
+        myGeo.getLocation(newPoint, function(result){
+            var newName = "";
+            switch(sign){
+                case '1':
+                    map.centerAndZoom(result.point, 6);
+                    newName = result.addressComponents.province;
+                    break;
+                case '2':
+                    map.centerAndZoom(result.point, 9);
+                    newName = result.addressComponents.city;
+                    break;
+                case '3':
+                    map.centerAndZoom(result.point, 9);
+                    newName = result.addressComponents.district;
+                    break;
+            }
+            $.ajax({
+                url: 'http://192.168.0.5/api/content/giscitys/',
+                type: 'GET',
+                dataType: 'json',
+                data:{
+                    info:info,
+                    type:type,
+                    organizor:organizor,
+                    name:newName
+                },
+                success: function (data, status) {
+                    remove_Overlay();
+                    for (var i = 0; i < data.data.length; i++) {
+                        getBoundary(data.data[i]);
+                        addClickHandler(label,data.data[i].type);
+                    }
+                }
+            });
+        });
+    });
+
 }
 
 /*------------------------------------------------------------------------------------栅格相关 end*/
