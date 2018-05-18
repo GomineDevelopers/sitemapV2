@@ -278,7 +278,7 @@ var scrollFunc = function (e) {
     e = e || window.event;
     var t1 = document.getElementById("container");
     t1.value = map.getZoom();
-    if (t1.value == 5 || t1.value == 6 || t1.value == 7) {
+    if (t1.value == 5) {
         remove_Overlay();
         var selected = $("input[name='radio10']:checked").val();
         if(selected == 'sd'){
