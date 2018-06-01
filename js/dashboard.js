@@ -91,22 +91,68 @@ var chartResolution = new Vue({
         searchSelect: function() {
             var vm = this;
             axios
-                .post(globalUrl + "content/at_will", {
-                    type: vm.type,
-                    info: vm.info,
-                    organizor: vm.organizor,
-                    registeredCapitals: vm.selectedOptionOne,
-                    foundedTimes: vm.selectedOptionTwo,
-                    pcNumber: vm.selectedOptionThree,
-                    staffs: vm.selectedOptionfour
+                .get(globalUrl + "content/at_will", {
+                    params: {
+                        type: vm.type,
+                        info: vm.info,
+                        organizor: vm.organizor,
+                        // registeredCapitals: vm.selectedOptionOne,
+                        // // foundedTimes: vm.selectedOptionTwo,
+                        pcNumber: vm.selectedOptionThree,
+                        staffs: vm.selectedOptionfour
+                    }
                 })
                 .then(function(response) {
-                    vm.pieSet.firstCollection = response.data.data;
-                    console.log(vm.pieSet.firstCollection);
+                    vm.pieSet.thirdCollection = response.data.data;
+                    vm.refreshPiechart();
                 })
                 .catch(function(error) {
                     console.log(error);
                 });
+        },
+        refreshPiechart: function(data) {
+            var vm = this;
+            console.log(vm.pieSet.thirdCollection);
+
+            vm.pieChartThree.dispose();
+            vm.pieChartThree = echarts.init(
+                document.getElementById("pieBasicThree"),
+                "macarons"
+            );
+
+            // console.log(vm.pieSet.firstCollection);
+            // vm.pieSet.thirdCollection = response.data.data;
+            // var pieOptionThird = {
+            //     title: {
+            //         text: "pc台数",
+            //         textStyle: {
+            //             color: "#000"
+            //         }
+            //     },
+            //     tooltip: {
+            //         trigger: "item",
+            //         formatter: "{a} <br/>{b}: {c} ({d}%)"
+            //     },
+            //     series: [
+            //         {
+            //             name: "pc数量",
+            //             type: "pie",
+            //             radius: ["50%", "80%"],
+            //             label: {
+            //                 normal: {
+            //                     show: true,
+            //                     position: "inside"
+            //                 },
+            //                 emphasis: {
+            //                     show: true
+            //                 }
+            //             },
+            //             data: vm.pieSet.thirdCollection
+            //         }
+            //     ]
+            // };
+            // // setOption代码区域
+            // vm.pieChartThree.setOption(pieOptionThird);
         },
         drawPieChart: function() {
             var vm = this;
