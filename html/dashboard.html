@@ -164,27 +164,26 @@
                 <div class="am-u-sm-8 am-u-sm-centered dashboard-select-area">
                     <select v-model="selectedOptionOne" class="dashboard-select">
                         <option disabled>请选择注册资本</option>
-                        <option v-for="firstOptionItem in picklist.firstOption" :key="firstOptionItem.index" :value="firstOptionItem.value" v-text="firstOptionItem.text">A</option>
-
+                        <option v-for="firstOptionItem in picklist.firstOption" :key="firstOptionItem.index" :value="firstOptionItem.value" v-text="firstOptionItem.text"></option>
                     </select>
                     <select v-model="selectedOptionTwo" class="dashboard-select">
                         <option disabled>请选择成立时间</option>
-                        <option v-for="secondOptionItem in picklist.secondOption" :key="secondOptionItem.index" v-text="secondOptionItem.text">A</option>
+                        <option v-for="secondOptionItem in picklist.secondOption" :key="secondOptionItem.index" :value="secondOptionItem.value" v-text="secondOptionItem.text"></option>
                     </select>
                     <select v-model="selectedOptionThree" class="dashboard-select">
                         <option disabled>请选择pc数量</option>
-                        <option v-for="thirdOptionItem in picklist.thirdOption" :key="thirdOptionItem.index" v-text="thirdOptionItem.text">A</option>
+                        <option v-for="thirdOptionItem in picklist.thirdOption" :key="thirdOptionItem.index" :value="thirdOptionItem.value" v-text="thirdOptionItem.text"></option>
                     </select>
-                    <select class="dashboard-select">
+                    <select v-model="selectedOptionFour" class="dashboard-select">
                         <option disabled>请选择公司人数</option>
-                        <option v-for="fourthOptionItem in picklist.fourthOption" :key="fourthOptionItem.index" v-text="fourthOptionItem.text">A</option>
+                        <option v-for="fourthOptionItem in picklist.fourthOption" :key="fourthOptionItem.index" :value="fourthOptionItem.value" v-text="fourthOptionItem.text"></option>
                     </select>
-                    <button class="btn am-btn am-btn-primary btn-submmit" @click='searchSelect'>确认</button>
+                    <button class="btn am-btn am-btn-primary btn-submmit" @click='refreshPiechart'>确认</button>
                 </div>
             </div>
             <div class="am-u-sm-9 am-u-sm-centered dash-wrapper">
                 <div class="am-g">
-                    <div class="am-u-sm-12">
+                    <div class="am-u-sm-12" v-show="isShow">
                         <div class="am-u-sm-6">
                             <div id="pieBasicOne" :style="{width:pie.width,height: pie.height}"></div>
                         </div>
@@ -197,6 +196,9 @@
                         <div class="am-u-sm-6">
                             <div id="pieBasicFour" :style="{width: pie.width,height: pie.height}"></div>
                         </div>
+                    </div>
+                    <div class="am-u-sm-12 no-data" v-show="!isShow">
+                        <img src="../images/nodata.png" alt="" srcset="">
                     </div>
                     <div class="am-u-g">
                         <div class="am-tabs" data-am-tabs>
@@ -270,11 +272,13 @@
     <script src="../js/jquery/jquery-3.3.1.min.js"></script>
     <script src="../js/vue/vue.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.bootcss.com/qs/6.5.1/qs.min.js"></script>
     <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script>
     <script src="../js/common.js"></script>
     <script src="../js/ECharts/echarts.js"></script>
     <script src="../js/ECharts/macarons.js"></script>
     <script src="../js/dashboard.js"></script>
+
 </body>
 
 </html>

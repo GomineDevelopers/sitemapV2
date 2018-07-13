@@ -18,7 +18,7 @@ var app = new Vue({
         breadItem: "",
         breadItemUp: ""
     },
-    mounted: function() {
+    mounted: function () {
         var vm = this;
         vm.info = JSON.parse(localStorage.getItem("b")).info;
         vm.organizor = JSON.parse(localStorage.getItem("b")).organizor;
@@ -32,47 +32,47 @@ var app = new Vue({
                 info: vm.info,
                 organizor: vm.organizor
             })
-            .then(function(response) {
+            .then(function (response) {
                 vm.isShow.loading = false;
                 vm.isShow.pagination = true;
                 vm.isShow.count = true;
                 vm.contentList = response.data.data.data;
                 vm.all = response.data.data.total;
             })
-            .catch(function(error) {
+            .catch(function (error) {
                 console.log(error);
             });
     },
     methods: {
-        goChart: function() {
+        goChart: function () {
             window.location.href = "./dashboard.html";
         },
         /*分页*/
-        btnClick: function(data) {
+        btnClick: function (data) {
             //页码点击事件
             var vm = this;
             vm.isShow.loading = true;
             if (data != this.cur) {
                 this.cur = data;
                 getDataPage(this.cur, vm.type, vm.info, vm.organizor).then(
-                    function(response) {
+                    function (response) {
                         vm.isShow.loading = false;
                         vm.contentList = response.data.data.data;
                     }
                 );
             }
         },
-        pageClick: function() {
+        pageClick: function () {
             var vm = this;
             vm.isShow.loading = true;
-            getDataPage(this.cur, vm.type, vm.info, vm.organizor).then(function(
+            getDataPage(this.cur, vm.type, vm.info, vm.organizor).then(function (
                 response
             ) {
                 vm.isShow.loading = false;
                 vm.contentList = response.data.data.data;
             });
         },
-        Go: function() {
+        Go: function () {
             var vm = this;
             vm.isShow.loading = true;
             this.cur = Number(vm.goPage);
@@ -81,7 +81,7 @@ var app = new Vue({
                 this.all % 10 == 0 ? this.all / 10 : Math.ceil(this.all / 10);
             if (this.cur <= vm.allPage) {
                 getDataPage(this.cur, vm.type, vm.info, vm.organizor).then(
-                    function(response) {
+                    function (response) {
                         vm.isShow.loading = false;
                         vm.contentList = response.data.data.data;
                     }
@@ -90,7 +90,7 @@ var app = new Vue({
                 alert("输入的页数超过总页数！");
             }
         },
-        goDetail: function(id) {
+        goDetail: function (id) {
             window.open("searchDetail.html?Seq_No=" + id, "_blank");
         }
         // 清除所有选项
@@ -109,7 +109,7 @@ var app = new Vue({
 
     computed: {
         //分页
-        indexs: function() {
+        indexs: function () {
             var left = 1;
             var vm = this;
             /*总页数*/
@@ -152,7 +152,7 @@ function getDataPage(curpage, type, info, organizor) {
     var par = curpage == undefined ? (page = "1") : (page = curpage);
     var l = axios({
         method: "post",
-        url: "http://192.168.0.5/api/content/ranking",
+        url: globalUrl + 'content/ranking',
         data: {
             limit: 10,
             page: par,

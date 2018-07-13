@@ -1,28 +1,32 @@
-.dash-input-group{
+.dash-input-group {
     margin-top: 3rem;
     margin-bottom: 2rem;
     padding-left: 0px;
 }
+
 .am-selected {
     width: auto;
 }
-.dash-wrapper{
+
+.dash-wrapper {
     min-width: 984px;
 }
-.dashboard-select-area{
+
+.dashboard-select-area {
     padding-bottom: 2rem;
 }
+
 .btn-submmit {
     background-color: #1691ff;
     color: white;
     border-radius: 4px;
 }
-.btn-submmit:hover{
+
+.btn-submmit:hover {
     color: white;
-    
 }
-select{
-    
+
+select {
     display: inline-block;
     margin-bottom: 0;
     padding: .4em;
@@ -39,10 +43,16 @@ select{
     display: inline-block;
     border-radius: 4px;
 }
-option{
-    padding:4rem;
+
+option {
+    padding: 4rem;
     line-height: 1.2;
 }
- option:hover{
+
+option:hover {
     background-color: black;
+}
+
+.no-data {
+    text-align: center;
 }
