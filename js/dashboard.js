@@ -145,7 +145,7 @@ var chartResolution = new Vue({
         vm.organizor = JSON.parse(localStorage.getItem('b')).organizor
         vm.type = JSON.parse(localStorage.getItem('b')).type
         vm.drawPieChart()
-        vm.drawBarChart()
+        vm.drawBarChartButtom()
         vm.breadItemUp = JSON.parse(localStorage.getItem('b')).navName
         vm.breadItem = vm.organizor + vm.info
 
@@ -223,6 +223,7 @@ var chartResolution = new Vue({
 
         },
         drawPieChart: function () {
+
             var vm = this
             vm.pieChartOne = echarts.init(
                 document.getElementById('pieBasicOne'),
@@ -415,7 +416,7 @@ var chartResolution = new Vue({
             // 员工人数 第四个饼图
         },
 
-        drawBarChart: function () {
+        drawBarChartButtom: function () {
             var vm = this
 
             // 图表插入
