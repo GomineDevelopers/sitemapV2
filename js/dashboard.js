@@ -145,7 +145,6 @@ var chartResolution = new Vue({
         vm.organizor = JSON.parse(localStorage.getItem('b')).organizor
         vm.type = JSON.parse(localStorage.getItem('b')).type
         vm.drawPieChart()
-        vm.drawBarChart()
         vm.breadItemUp = JSON.parse(localStorage.getItem('b')).navName
         vm.breadItem = vm.organizor + vm.info
 
