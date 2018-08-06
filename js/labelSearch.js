@@ -47,6 +47,9 @@ var app = new Vue({
         goChart: function () {
             window.location.href = "./dashboard.html";
         },
+        goGIS:function(){
+            window.location.href = "./map.html";
+        },
         /*分页*/
         btnClick: function (data) {
             //页码点击事件

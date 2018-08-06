@@ -174,11 +174,13 @@ body {
 }
 .btn-chart{
     background-color: #1691ff;
+    margin-left: 5px;
 }
 .btn-export {
   background-color: #2a3a54;
   margin-left: 5px;
 }
+
 /* 面包屑 */
 .am-breadcrumb {
   padding: .7em .5em 0 0;
