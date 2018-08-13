@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+  <link rel="stylesheet" href="../css/common.css">
+  <link rel="stylesheet" href="../css/userCenter.css">
+  <title>个人中心</title>
+</head>
+
+<body>
+  <!-- 头部导航 -->
+  <header class="am-topbar am-topbar-fixed-top">
+    <div class="am-u-sm-8  am-u-sm-centered">
+      <h1 class="am-topbar-brand">
+        <img src="../images/sitemap_logo.png" alt="">
+      </h1>
+
+      <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse'}">
+        <span class="am-sr-only">导航切换</span>
+        <span class="am-icon-bars"></span>
+      </button>
+
+      <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+        <ul class="am-nav am-nav-pills am-topbar-nav">
+          <li>
+            <a href="../index.html">首页</a>
+          </li>
+          <li class="am-dropdown" data-am-dropdown>
+            <a class="am-dropdown-toggle" data-am-dropdown-toggle>
+              500强
+              <span class="am-icon-caret-down"></span>
+            </a>
+            <ul class="am-dropdown-content">
+              <li>
+                <a onclick="innerPageGetTagData('福布斯','TOP500','1','500强')">福布斯TOP500</a>
+              </li>
+              <li>
+                <a onclick="innerPageGetTagData('财富','TOP500','1','500强')">财富TOP500</a>
+              </li>
+              <li>
+                <a onclick="innerPageGetTagData('工信部','中企500','1','500强')">工信部中企500</a>
+              </li>
+            </ul>
+          </li>
+          <li class="am-dropdown" data-am-dropdown>
+            <a class="am-dropdown-toggle" data-am-dropdown-toggle>
+              排行榜
+              <span class="am-icon-caret-down"></span>
+            </a>
+            <ul class="am-dropdown-content">
+              <li>
+                <a onclick="innerPageGetTagData('住建部','房企100强','1','排行榜')">房企100强</a>
+              </li>
+            </ul>
+          </li>
+          <li class="am-dropdown" data-am-dropdown>
+            <a class="am-dropdown-toggle" data-am-dropdown-toggle>
+              交易所
+              <span class="am-icon-caret-down"></span>
+            </a>
+            <ul class="am-dropdown-content">
+              <li>
+                <a onclick="innerPageGetTagData('','上海证券交易所','2','交易所')">上海证券交易所</a>
+              </li>
+              <li>
+                <a onclick="innerPageGetTagData('','深圳证券交易所','2','交易所')">深圳证券交易所</a>
+              </li>
+              <li>
+                <a onclick="innerPageGetTagData('','香港证券交易所','2','交易所')">香港证券交易所</a>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">新三板</a>
+          </li>
+          <li>
+            <a href="./newsCenter.html">新闻中心</a>
+          </li>
+        </ul>
+        <div class="am-topbar-right">
+          <!--未登录-->
+          <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogin">
+            <li>
+              <a href="../login.html">登陆</a>
+            </li>
+            <li>
+              <a href="./register.html">注册</a>
+            </li>
+          </ul>
+          <!--已登录-->
+          <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogout">
+            <li>
+              <a href="#" id="vipName"></a>
+            </li>
+            <li>
+              <a id="logout">退出</a>
+            </li>
+          </ul>
+        </div>
+        <div class="am-topbar-right">
+          <!--未登录-->
+          <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogin">
+            <li>
+              <a href="../login.html">登陆</a>
+            </li>
+            <li>
+              <a href="./register.html">注册</a>
+            </li>
+          </ul>
+          <!--已登录-->
+          <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogout">
+            <li>
+              <a href="#" id="vipName"></a>
+            </li>
+            <li>
+              <a id="logout">退出</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- 头部导航 -->
+  <div class="am-g user-cenrter-wrapper" id="userCenter">
+    <div class="user-cenrter  am-u-sm-8 am-u-sm-centered">
+      <div class="am-g ">
+        <!-- 左侧面板 -->
+        <div class=" left-pannel">
+          <div class="pannel-tab">
+            <ul>
+              <li v-for="(item,index) in tabItems" :class="{active:index == num}" @click="tab(index)">{{item}}</li>
+            </ul>
+          </div>
+        </div>
+        <!-- 右侧面板 -->
+        <div class=" right-pannel">
+          <!-- 历史记录搜索 -->
+          <div class="am-u-md-3 am-u-end history-input" v-show=" this.num==2">
+            <div class="am-input-group ">
+              <input type="text" class="am-form-field">
+              <span class="am-input-group-btn">
+                <button class="am-btn am-btn-default" type="button">搜索</button>
+              </span>
+            </div>
+          </div>
+          <!-- 历史记录搜索 -->
+
+          <div class="tabCon">
+            <!-- 我的账户 -->
+            <div v-show=" this.num==0">
+              <div class="am-panel">
+                <div class="am-panel-hd">
+                  <div class="title">
+                    <span>我的账号</span>
+                  </div>
+
+                </div>
+                <div class="am-panel-bd">
+                  <div class="am-panel am-panel-default content-pannel">
+                    <div class="tabcontent-nav">
+                      <ul>
+                        <li v-for="(item,index) in contentTabs" @click="contentTab(index)">
+                          <span :class="{contentactive:index == contentNum}">{{item}}</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="am-panel-bd">
+                      <!-- 我的下载 -->
+                      <div v-show=" this.contentNum==0">
+                        <table class="am-table  personal-table  am-table-compact am-text-nowrap am-table-centered">
+                          <tr>
+                            <th>充值日期</th>
+                            <th>充值金额（元）</th>
+                            <th>充值方式</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                          </tr>
+                          <tr>
+                            <td>2017-8-5</td>
+                            <td>200.00</td>
+                            <td>支付宝</td>
+                          </tr>
+                          <tr>
+                            <td>2017-8-5</td>
+                            <td>200.00</td>
+                            <td>网银</td>
+                          </tr>
+                        </table>
+                      </div>
+                      <!-- 消费记录 -->
+                      <div v-show=" this.contentNum==1">
+                        <table class="am-table  personal-table  am-table-compact am-text-nowrap am-table-centered">
+                          <tr>
+                            <th>消费日期</th>
+                            <th>消费金额（元）</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                          </tr>
+                          <tr>
+                            <td>2017-8-5</td>
+                            <td>200.00</td>
+
+                          </tr>
+                          <tr>
+                            <td>2017-8-5</td>
+                            <td>200.00</td>
+
+                          </tr>
+                        </table>
+                      </div>
+                      <!-- 账户余额 -->
+                      <div v-show=" this.contentNum==2">
+                        <div class="am-panel">
+                          <table class="am-table  personal-table  am-table-compact am-text-nowrap am-table-centered">
+                            <tr>
+                              <th>账户余额</th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                            </tr>
+                            <tr>
+                              <td>2017-8-5</td>
+                            </tr>
+                            <tr>
+                              <td>2017-8-5</td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                      <!-- 账户充值 -->
+                      <div v-show=" this.contentNum==3">
+                        <div class="am-panel usercenter-charge">
+                          <div class="am-panel-hd">
+                            <div class="am-panel-hd-inner">
+                              请选择充值金额和充值方式
+                            </div>
+                          </div>
+                          <div class="am-panel-bd">
+                            <div class="am-u-md-12 content-padding">
+                              <ul>
+                                <li>
+                                  <button class="am-btn am-btn-default charge-label">请选择充值金额:</button>
+                                </li>
+                                <li class="buttonGroup " v-for=" (item,index) in chargeValues" :key="index">
+                                  <label class="am-radio-inline am-btn am-btn-default " :class="{ activeitem: item.active }">
+                                    <input type="radio" class="am-hide" name="check-box" :value="item.value" v-model="checkedMoney"> {{item.text}}
+                                  </label>
+                                </li>
+                                <li>
+                                  <div class="am-form-group user-input">
+                                    <div class="am-input-group">
+                                      <span class="am-input-group-label">其他金额</span>
+                                      <input type="number" class="am-form-field " name="chargeValue" @focus="handleFocus" v-model="chargeValue">
+                                      <span class="am-input-group-label">元</span>
+                                    </div>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="am-u-md-12 content-padding">
+                              <ul>
+                                <li>
+                                  <button class="am-btn am-btn-default charge-label">请选择充值方式:</button>
+                                </li>
+                                <li>
+                                  <div class="pay-wrapper">
+                                    <label class="am-radio-inline am-btn am-btn-default am-btn-default" :class="{activeitem :checkedpayer =='alipay' }">
+                                      <input type="radio" class="am-hide" name="check-box" value="alipay" v-model="checkedpayer">
+                                      <img src="../images/alipay.png">
+                                    </label>
+
+                                  </div>
+                                </li>
+                                <li>
+                                  <div class="pay-wrapper">
+                                    <label class="am-radio-inline am-btn am-btn-default" :class="{activeitem :checkedpayer == 'wechatPay'}">
+                                      <input type="radio" class="am-hide" name="check-box" value="wechatPay" v-model="checkedpayer">
+                                      <img class="am-vertical-align-middle" src="../images/wechatPay.png">
+
+                                    </label>
+                                  </div>
+                                </li>
+                              </ul>
+                            </div>
+                            <div class="am-u-md-6 am-u-end  content-padding am-text-center">
+                              <button class="am-btn button-conform  am-round am-btn-xl">确认充值</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 我的下载 -->
+            <div v-show=" this.num==1">
+              <div class="am-panel">
+                <div class="am-panel-hd">
+                  <div class="title">
+                    <span>我的下载</span>
+                  </div>
+
+                </div>
+                <div class="am-panel-bd">
+                  <div class="am-panel am-panel-default content-pannel">
+                    <div class="tabcontent-nav">
+                      <ul>
+                        <li>
+                          <span class="contentactive">我的下载</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="am-panel-bd">
+                      <!-- 我的下载 -->
+                      <div v-show=" this.contentNum==0">
+                        <table class="am-table  personal-table  am-table-compact am-text-nowrap am-table-centered">
+                          <tr>
+                            <th>下载日期</th>
+                            <th>下载数量</th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                          </tr>
+                          <tr>
+                            <td>2017-8-5</td>
+                            <td>200.00</td>
+                            <td>
+                              <button class="am-btn am-btn-primary am-btn-sm download-button">下载文档</button>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>2017-8-5</td>
+                            <td>200.00</td>
+                            <td>
+                              <button class="am-btn am-btn-primary am-btn-sm download-button">下载文档</button>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 我的浏览 -->
+            <div v-show=" this.num==2">
+              <div class="am-panel">
+                <div class="am-panel-hd">
+                  <div class="title">
+                    <span>我的浏览</span>
+                  </div>
+                </div>
+                <div class="am-panel-bd">
+                  <div class="am-panel am-panel-default content-pannel">
+                    <div class="tabcontent-nav">
+                      <ul>
+                        <li>
+                          <span class="contentactive">我的浏览</span>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="am-panel-bd">
+                      <!-- 我的浏览 -->
+                      <div v-show=" this.contentNum==0">
+                        <table class="am-table  personal-table  am-table-compact am-text-nowrap am-table-centered">
+                          <tr>
+                            <th>浏览日期</th>
+                            <th>浏览记录</th>
+                            <th></th>
+                            <th></th>
+                          </tr>
+                          <tr>
+                            <td>2017-8-5</td>
+                            <td>200.00</td>
+                          </tr>
+                          <tr>
+                            <td>2017-8-5</td>
+                            <td>200.00</td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 账户设置 -->
+            <div v-show=" this.num==3" class="account-setting">
+              <div class="am-panel">
+                <div class="am-panel-hd">
+                  <div class="title am-u-sm-centered">
+                    <span class="title">账户设置</span>
+                  </div>
+                </div>
+                <div class="am-panel-bd">
+                  <div class="am-container">
+                    <div class="am-u-md-5">
+                      <div class="am-u-md-12">
+                        <div class="am-input-group ">
+                          <span class="am-input-group-label">
+                            邮箱
+                          </span>
+                          <input type="email" class="am-form-field">
+                        </div>
+                      </div>
+                      <div class="am-u-md-12">
+                        <div class="am-input-group">
+                          <span class="am-input-group-label">
+                            姓名
+                          </span>
+                          <input type="text" class="am-form-field">
+                        </div>
+                      </div>
+                      <div class="am-u-md-12">
+                        <div class=" am-input-group am-form am-form-horizontal " data-toggle="distpicker">
+                          <span class="am-input-group-label">
+                            城市
+                          </span>
+                          <div class="dispicker-wrapper">
+                            <select v-model="selected_pro"></select>
+                          </div>
+                          <div class="dispicker-wrapper">
+                            <select v-model="selected_city"></select>
+                          </div>
+                          <div class="dispicker-wrapper">
+                            <select v-model="selected_area"></select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="am-u-md-12">
+                        <div class="am-input-group am-form am-form-horizontal">
+                          <span class="am-input-group-label">
+                            部门
+                          </span>
+                          <select data-am-selected="{btnWidth: '100%'}" id="department">
+                            <option v-for="department in departments" :value="department.value" v-text="department.text"></option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 账户设置右边一半 -->
+                    <div class="am-u-md-6">
+                      <div class="am-u-md-12">
+                        <div class="am-input-group">
+                          <span class="am-input-group-label">
+                            登陆密码
+                          </span>
+                          <input type="password" class="am-form-field">
+                          <span class="am-input-group-btn">
+                            <button class="am-btn am-btn-default" type="button" @click="handleEdit">修改</button>
+                          </span>
+                          <!-- 模态窗口 -->
+                          <div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
+                            <div class="am-modal-dialog">
+                              <div class="am-modal-hd">修改密码</div>
+                              <div class="am-modal-bd">
+                                <div class="am-form-group">
+                                  <input type="password" class="" id="doc-ipt-pwd-1" placeholder="原始密码">
+                                </div>
+                                <div class="am-form-group">
+                                  <input type="password" id="doc-vld-pwd-1" placeholder="新密码" pattern="^\d{6}$" required/>
+                                </div>
+                                <div class="am-form-group">
+                                  <input type="password" id="doc-vld-pwd-2" placeholder="确认新密码" data-equal-to="#doc-vld-pwd-1" required/>
+                                </div>
+                                <div class="am-u-md-12 am-center model-button ">
+                                  <div class="am-u-md-8 am-u-md-offset-2">
+                                    <div class="am-u-md-6 ">
+                                      <button class="am-btn button-conform  am-modal-btn">保存</button>
+                                    </div>
+                                    <div class="am-u-md-6">
+                                      <button class="am-btn am-btn-default am-modal-btn ">取消</button>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- 模态窗口 -->
+                        </div>
+                      </div>
+                      <div class="am-u-md-12">
+                        <div class="am-input-group">
+                          <span class="am-input-group-label">
+                            联系电话
+                          </span>
+                          <input type="text" class="am-form-field" placeholder="Username">
+                        </div>
+                      </div>
+                      <div class="am-u-md-12">
+                        <div class="am-input-group">
+                          <span class="am-input-group-label">
+                            公司名称
+                          </span>
+                          <input type="text" class="am-form-field" placeholder="Username">
+                        </div>
+                      </div>
+                      <div class="am-u-md-12">
+                        <div class="am-input-group am-form am-form-horizontal">
+                          <span class="am-input-group-label">
+                            所属职位
+                          </span>
+                          <select data-am-selected="{btnWidth: '100%'}" id="department">
+                            <option v-for="department in departments" :value="department.value" v-text="department.text"></option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 保存退出 -->
+                    <div class="am-u-md-12 am-center button-conform-group">
+                      <div class="am-u-md-6 am-u-md-offset-3">
+                        <div class="am-u-md-6 ">
+                          <button class="am-btn button-conform am-btn-lg am-round">保存设置</button>
+                        </div>
+                        <div class="am-u-md-6">
+                          <button class="am-btn am-btn-default am-btn-lg am-round">退出登陆</button>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- 保存退出 -->
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 底部导航 -->
+  <div class="layout-footer">
+    <div class="container ">
+      <div class="footer_main">
+        <div class="am-g am-u-sm-8 am-u-sm-centered">
+          <p class="footer-logo">
+            <img src="../images/foot_gomine_logo.png" alt="">
+          </p>
+          <div class="am-u-md-6">
+            <div>
+              <p>Rm.B-702,Bldg.1,Zhubang 2000 Business Center, No。100 Balizhuang Xili, Chaoyang District,Beijing</p>
+              <p>
+                <a href="">
+                  <i class="am-icon-phone"></i> +86-10-87510736</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="">
+                  <i class="am-icon-envelope-o"></i> marketing@gomine.cn</a>
+              </p>
+              <p>Copyright©GOMINE.CN All right Reserved.京ICP备05075516号</p>
+            </div>
+          </div>
+          <div class="am-u-md-6 ">
+            <strong>
+              <p> subscribe for upgrates</p>
+            </strong>
+            <div>
+              <p>
+                <div class="am-input-group am-btn-group-lg">
+                  <input type="text" class="am-form-field" placeholder="enter your email address">
+                  <span class="am-input-group-btn footer_right-input">
+                    <button class="am-btn am-btn-default " type="button">
+                      <span class="am-icon-envelope-o"></span>
+                    </button>
+                  </span>
+                </div>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- 底部导航 -->
+
+  <script src="../js/jquery/jquery-3.3.1.min.js"></script>
+  <script src="../js/vue/vue.js"></script>
+  <script src="https://cdn.bootcss.com/axios/0.18.0/axios.js"></script>
+  <script src="https://cdn.bootcss.com/qs/6.5.1/qs.min.js"></script>
+  <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script>
+  <script src="../js/common.js"></script>
+  <script src="../js/jquery/distpicker.js"></script>
+  <script src="../js/userCenter.js"></script>
+</body>
+
+</html>

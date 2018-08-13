@@ -1,0 +1,324 @@
+address,
+blockquote,
+dl,
+fieldset,
+figure,
+hr,
+ol,
+p,
+pre,
+ul {
+  margin: 0 0 0 0;
+}
+
+.am-table > tbody > tr > td,
+.am-table > tbody > tr > th,
+.am-table > tfoot > tr > td,
+.am-table > tfoot > tr > th,
+.am-table > thead > tr > td,
+.am-table > thead > tr > th {
+  padding: 1rem;
+  line-height: 1.6;
+  vertical-align: middle;
+  border-top: 1px solid #ddd;
+}
+
+.user-cenrter-wrapper {
+  background-color: #f8f8f8;
+  height: 800px;
+  padding: 2rem;
+}
+
+.user-cenrter-wrapper .left-pannel {
+  width: 15%;
+  background-color: white;
+  min-width: 100px;
+  min-height: 500px;
+  float: left;
+  padding: 5px;
+}
+
+.pannel-tab ul {
+  padding-left: 0px;
+}
+
+.pannel-tab li {
+  list-style: none;
+  width: 100%;
+  text-align: center;
+  padding: 1em 0;
+  cursor: pointer;
+}
+
+.tabCon .title {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.tabCon .am-panel {
+  box-shadow: none;
+}
+
+.content-pannel {
+  border: none;
+  box-shadow: none;
+}
+
+.tabcontent-nav {
+  height: 35px;
+  border-bottom: 1px solid #cccccc;
+}
+
+.tabcontent-nav ul {
+  padding-left: 0px;
+  width: 100%;
+}
+
+.tabcontent-nav li {
+  list-style: none;
+  width: 10%;
+  float: left;
+  text-align: left;
+  padding: 0.3em 0;
+  cursor: pointer;
+  min-width: 80px;
+}
+
+.active {
+  background-color: #3e8ff8 !important;
+  color: white;
+}
+
+.contentactive {
+  border-bottom: 2px solid #3e8ff8;
+  padding-bottom: 5px;
+}
+
+.content-pannel .am-panel-bd {
+  padding: 2.25rem 0;
+}
+
+/* 表格样式 */
+
+.am-table > tbody > tr > td,
+.am-table > tbody > tr > th,
+.am-table > tfoot > tr > td,
+.am-table > tfoot > tr > th,
+.am-table > thead > tr > td,
+.am-table > thead > tr > th {
+  border-top: none;
+}
+
+.personal-table > tbody > tr > th {
+  color: #333333;
+  background-color: #dfe9f7;
+  width: 12.5%;
+}
+
+.usercenter-charge .am-panel-hd {
+  background-color: #dfe9f7;
+  color: #333333;
+  font-weight: bold;
+}
+
+/* 表格样式 */
+
+.usercenter-charge ul > li {
+  list-style: none;
+  float: left;
+}
+
+.buttonGroup label {
+  margin-left: 15px;
+}
+
+.charge-label {
+  background-color: white;
+  pointer-events: none;
+  border-color: transparent;
+  cursor: not-allowed;
+  opacity: 1;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.user-input {
+  width: 200px;
+  margin-left: 10%;
+}
+
+.pay-wrapper label {
+  width: 139px;
+  height: 55px;
+  padding: 7%;
+  margin-left: 15px;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 5%;
+}
+
+.content-padding {
+  padding: 3% 0;
+}
+
+.button-conform {
+  background-color: #3e8ff8;
+  color: #ffffff;
+}
+
+.button-conform:focus {
+  background-color: #3e8ff8;
+  color: #ffffff;
+}
+
+.button-conform:hover {
+  background-color: #3e8ff8;
+  color: #ffffff;
+}
+
+.am-input-group-label {
+  height: 38px;
+  padding: 0 0.5em;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 36px;
+  color: #555;
+  text-align: center;
+  background-color: #eee;
+  border: none;
+  border-radius: 0;
+}
+
+.buttonGroup .am-radio-inline {
+  padding-left: 15px;
+  position: relative;
+  -webkit-transition: color 0.25s linear;
+  transition: color 0.25s linear;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.activeitem::before {
+  font-style: normal;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+  content: '\2713';
+  position: absolute;
+  top: -2px;
+  right: 2px;
+  color: #ffffff;
+  z-index: 1;
+  font-size: 12px;
+}
+
+.activeitem::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-top: 20px solid #65b81b;
+  border-left: 24px solid transparent;
+}
+
+.user-cenrter-wrapper .right-pannel {
+  width: 84%;
+  background-color: white;
+  float: right;
+  padding: 5px;
+  min-height: 500px;
+}
+
+.download-button {
+  border-radius: 5px;
+  background-color: #3e8ff8;
+}
+
+.history-input {
+  position: absolute;
+  right: 0;
+  top: 6%;
+}
+
+.history-input button {
+  background-color: #3e8ff8;
+  color: #ffffff;
+}
+
+.account-setting .am-panel-hd {
+  padding-top: 2rem;
+}
+
+.account-setting .title {
+  text-align: center;
+}
+
+.account-setting .am-input-group {
+  margin-top: 2.5rem;
+}
+
+.account-setting .dispicker-wrapper {
+  width: 33%;
+  float: left;
+}
+
+.account-setting .am-input-group-label {
+  height: 38px;
+  padding: 0 0.5em;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 36px;
+  color: #555;
+  text-align: center;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 0;
+}
+
+.account-setting .am-form-field {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.account-setting .am-form-field:focus {
+  background-color: #ffffff !important;
+  border-color: none !important;
+  outline: 0 !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.account-setting .am-input-group-btn button {
+  background-color: #ffffff;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.account-setting .am-selected-btn {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+.account-setting .am-modal-bd {
+  padding: 15px 10px;
+  text-align: center;
+  border-bottom: none;
+  border-radius: 2px 2px 0 0;
+}
+.button-conform-group {
+  padding: 5vh;
+}
+#my-prompt input {
+  padding: 5px;
+  width: 50%;
+}
+.model-button {
+  padding: 15px;
+}
+.model-button .am-modal-btn:first-child:last-child {
+  width: 100%;
+  border-radius: 5px;
+}
