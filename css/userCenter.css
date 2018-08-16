@@ -11,12 +11,12 @@ ul {
   margin: 0 0 0 0;
 }
 
-.am-table > tbody > tr > td,
-.am-table > tbody > tr > th,
-.am-table > tfoot > tr > td,
-.am-table > tfoot > tr > th,
-.am-table > thead > tr > td,
-.am-table > thead > tr > th {
+.am-table>tbody>tr>td,
+.am-table>tbody>tr>th,
+.am-table>tfoot>tr>td,
+.am-table>tfoot>tr>th,
+.am-table>thead>tr>td,
+.am-table>thead>tr>th {
   padding: 1rem;
   line-height: 1.6;
   vertical-align: middle;
@@ -100,16 +100,16 @@ ul {
 
 /* 表格样式 */
 
-.am-table > tbody > tr > td,
-.am-table > tbody > tr > th,
-.am-table > tfoot > tr > td,
-.am-table > tfoot > tr > th,
-.am-table > thead > tr > td,
-.am-table > thead > tr > th {
+.am-table>tbody>tr>td,
+.am-table>tbody>tr>th,
+.am-table>tfoot>tr>td,
+.am-table>tfoot>tr>th,
+.am-table>thead>tr>td,
+.am-table>thead>tr>th {
   border-top: none;
 }
 
-.personal-table > tbody > tr > th {
+.personal-table>tbody>tr>th {
   color: #333333;
   background-color: #dfe9f7;
   width: 12.5%;
@@ -123,7 +123,7 @@ ul {
 
 /* 表格样式 */
 
-.usercenter-charge ul > li {
+.usercenter-charge ul>li {
   list-style: none;
   float: left;
 }
@@ -282,6 +282,20 @@ ul {
   border-right: none;
 }
 
+.account-setting select {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.account-setting select:focus {
+  background-color: #ffffff !important;
+  border-color: none !important;
+  outline: 0 !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
 .account-setting .am-form-field:focus {
   background-color: #ffffff !important;
   border-color: none !important;
@@ -302,22 +316,27 @@ ul {
   border-left: none;
   border-right: none;
 }
+
 .account-setting .am-modal-bd {
   padding: 15px 10px;
   text-align: center;
   border-bottom: none;
   border-radius: 2px 2px 0 0;
 }
+
 .button-conform-group {
   padding: 5vh;
 }
+
 #my-prompt input {
   padding: 5px;
   width: 50%;
 }
+
 .model-button {
   padding: 15px;
 }
+
 .model-button .am-modal-btn:first-child:last-child {
   width: 100%;
   border-radius: 5px;

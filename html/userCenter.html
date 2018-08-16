@@ -414,7 +414,7 @@
                           <span class="am-input-group-label">
                             邮箱
                           </span>
-                          <input type="email" class="am-form-field">
+                          <input type="email" v-model="userSetting.userEmail" class="am-form-field">
                         </div>
                       </div>
                       <div class="am-u-md-12">
@@ -422,7 +422,7 @@
                           <span class="am-input-group-label">
                             姓名
                           </span>
-                          <input type="text" class="am-form-field">
+                          <input type="text" v-model="userSetting.userName" class="am-form-field">
                         </div>
                       </div>
                       <div class="am-u-md-12">
@@ -430,23 +430,26 @@
                           <span class="am-input-group-label">
                             城市
                           </span>
-                          <div class="dispicker-wrapper">
-                            <select v-model="selected_pro"></select>
-                          </div>
-                          <div class="dispicker-wrapper">
-                            <select v-model="selected_city"></select>
-                          </div>
-                          <div class="dispicker-wrapper">
-                            <select v-model="selected_area"></select>
+                          <div id="targetArea" data-value-type="code">
+                            <div class="dispicker-wrapper">
+                              <select v-model="selected_pro"></select>
+                            </div>
+                            <div class="dispicker-wrapper">
+                              <select v-model="selected_city"></select>
+                            </div>
+                            <div class="dispicker-wrapper">
+                              <select v-model="selected_area"></select>
+                            </div>
                           </div>
                         </div>
                       </div>
+
                       <div class="am-u-md-12">
                         <div class="am-input-group am-form am-form-horizontal">
                           <span class="am-input-group-label">
                             部门
                           </span>
-                          <select data-am-selected="{btnWidth: '100%'}" id="department">
+                          <select id="department" v-model="userSetting.department">
                             <option v-for="department in departments" :value="department.value" v-text="department.text"></option>
                           </select>
                         </div>
@@ -455,11 +458,11 @@
                     <!-- 账户设置右边一半 -->
                     <div class="am-u-md-6">
                       <div class="am-u-md-12">
-                        <div class="am-input-group">
+                        <div class="am-input-group" id="form-with-tooltip">
                           <span class="am-input-group-label">
                             登陆密码
                           </span>
-                          <input type="password" class="am-form-field">
+                          <input type="password" v-model="userSetting.userPassword" class="am-form-field">
                           <span class="am-input-group-btn">
                             <button class="am-btn am-btn-default" type="button" @click="handleEdit">修改</button>
                           </span>
@@ -469,7 +472,7 @@
                               <div class="am-modal-hd">修改密码</div>
                               <div class="am-modal-bd">
                                 <div class="am-form-group">
-                                  <input type="password" class="" id="doc-ipt-pwd-1" placeholder="原始密码">
+                                  <input type="password" class="" id="doc-ipt-pwd-0" v-model="userSetting.userPassword" placeholder="原始密码">
                                 </div>
                                 <div class="am-form-group">
                                   <input type="password" id="doc-vld-pwd-1" placeholder="新密码" pattern="^\d{6}$" required/>
@@ -498,7 +501,7 @@
                           <span class="am-input-group-label">
                             联系电话
                           </span>
-                          <input type="text" class="am-form-field" placeholder="Username">
+                          <input type="text" class="am-form-field" v-model="userSetting.userPhone" placeholder="Username">
                         </div>
                       </div>
                       <div class="am-u-md-12">
@@ -506,7 +509,7 @@
                           <span class="am-input-group-label">
                             公司名称
                           </span>
-                          <input type="text" class="am-form-field" placeholder="Username">
+                          <input type="text" class="am-form-field" v-model="userSetting.userCompanyName" placeholder="Username">
                         </div>
                       </div>
                       <div class="am-u-md-12">
@@ -514,8 +517,8 @@
                           <span class="am-input-group-label">
                             所属职位
                           </span>
-                          <select data-am-selected="{btnWidth: '100%'}" id="department">
-                            <option v-for="department in departments" :value="department.value" v-text="department.text"></option>
+                          <select id="department" v-model="userSetting.job">
+                            <option v-for="job in jobs" :value="job.value" v-text="job.text"></option>
                           </select>
                         </div>
                       </div>
@@ -524,7 +527,7 @@
                     <div class="am-u-md-12 am-center button-conform-group">
                       <div class="am-u-md-6 am-u-md-offset-3">
                         <div class="am-u-md-6 ">
-                          <button class="am-btn button-conform am-btn-lg am-round">保存设置</button>
+                          <button class="am-btn button-conform am-btn-lg am-round" @click="saveUserdata()">保存设置</button>
                         </div>
                         <div class="am-u-md-6">
                           <button class="am-btn am-btn-default am-btn-lg am-round">退出登陆</button>
@@ -539,6 +542,15 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+  <!--model-->
+  <div class="am-modal am-modal-alert" tabindex="-1" id="my-alert">
+    <div class="am-modal-dialog">
+      <div class="am-modal-hd" v-text="tipCon"></div>
+      <div class="am-modal-footer">
+        <span class="am-modal-btn" data-am-modal-cancel>确定</span>
       </div>
     </div>
   </div>
