@@ -137,80 +137,96 @@ var departments = [{
   }
 ];
 var userCenter = new Vue({
-  el: '#userCenter',
+  el: "#userCenter",
   data: {
     tabItems: ["我的账户", "我的下载", "我的浏览", "账户设置"],
     tabContents: ["内容一", "内容二", "内容三", "内容四"],
     contentTabs: ["充值记录", "消费记录", "账户余额", "我要充值"],
     chargeValues: [{
-      text: "10",
-      value: '10',
-      active: true
-    }, {
-      text: "30",
-      value: '30',
-      active: false
-    }, {
-      text: "50",
-      value: '50',
-      active: false
-    }, {
-      text: "100",
-      value: '100',
-      active: false
-    }, {
-      text: "200",
-      value: '200',
-      active: false
-    }],
+        text: "10",
+        value: "10",
+        active: true
+      },
+      {
+        text: "30",
+        value: "30",
+        active: false
+      },
+      {
+        text: "50",
+        value: "50",
+        active: false
+      },
+      {
+        text: "100",
+        value: "100",
+        active: false
+      },
+      {
+        text: "200",
+        value: "200",
+        active: false
+      }
+    ],
     num: 0,
     contentNum: 0,
-    chargeValue: '',
-    checkedMoney: '',
-    checkedpayer: '',
-    realValue: '',
+    chargeValue: "",
+    checkedMoney: "",
+    checkedpayer: "",
+    realValue: "",
     userSetting: {
-      userEmail: '',
-      userName: '',
-      department: '',
-      job: '',
-      userPassword: '',
-      userPhone: '',
-      userCompanyName: '',
-      newpsword: ''
-    },
-    selected_pro: '',
-    selected_city: '',
-    selected_area: '',
-    departments: departments,
-    jobs: jobs
+      userEmail: "",
+      userName: "",
+      userLastName: "",
+      department: "",
+      job: "",
+      userPassword: "",
+      userPhone: "",
+      userCompanyName: "",
 
+    },
+    selected_pro: "",
+    selected_city: "",
+    selected_area: "",
+    departments: departments,
+    jobs: jobs,
+    oldPassword: '',
+    newPassword: '',
+    newPasswordCheck: '',
+    tipCon: ''
   },
   watch: {
-    checkedMoney: 'changeData',
-
+    checkedMoney: "changeData",
+    selected_pro: "resetDispicker"
   },
   mounted: function () {
     var vm = this;
 
-
-
   },
   methods: {
+    resetDispicker() {
+      $("#targetArea").distpicker({
+        province: '-请选择省-',
+        city: '-请选择省-',
+        district: '-请选择省-'
+      });
+    },
     getExistedData() {
       let vm = this;
       let temp = {};
-      axios.post(globalUrl + "content/settings", {
-          token: '9c55fe3a1fa542021e99ad9576936b853c7c9aeb',
+      axios
+        .post(globalUrl + "content/settings", {
+          token: "9c55fe3a1fa542021e99ad9576936b853c7c9aeb"
         })
         .then(function (response) {
-          temp = response.data.data[0]
+          temp = response.data.data[0];
           vm.userSetting.userEmail = temp.email;
-          vm.userSetting.userName = temp.lastname + " " + temp.names
-          vm.userSetting.department = temp.department
-          vm.userSetting.userPassword = temp.password
-          vm.userSetting.userPhone = temp.phone
-          vm.userSetting.userCompanyName = temp.Account_Name
+          vm.userSetting.userName = temp.names
+          vm.userSetting.userLastName = temp.lastname;
+          vm.userSetting.department = temp.department;
+          vm.userSetting.userPassword = temp.password;
+          vm.userSetting.userPhone = temp.phone;
+          vm.userSetting.userCompanyName = temp.Account_Name;
           vm.userSetting.job = temp.position;
           vm.setCity(temp.State_Code, temp.City_Code, temp.County_Code);
         })
@@ -219,62 +235,90 @@ var userCenter = new Vue({
         });
     },
     saveUserdata() {
-      let vm = this
-      arr = this.userSetting.userName.split(" ");
-      let lastname = arr[0];
-      let name = arr[1];
+      var vm = this;
       var $modal = $("#my-alert");
-
       /*验证*/
-      var len = $(".am-form input").length;
+      var len = $(".user-input").length;
       var arr = []; //存放未通过的验证
       for (var i = 0; i < len; i++) {
-        if ($(".am-form input")[i].validity.valid == false) {
+        if ($(".user-input")[i].validity.valid == false) {
           arr.push(i);
+
         }
       }
-
       if (arr.length == 0) {
-        axios.post(globalUrl + "content/uppsword", {
-          email: vm.userSetting.userEmail,
-          State_Code: vm.selected_pro,
-          City_Code: vm.selected_city,
-          County_Code: vm.selected_area,
-          lastname: lastname,
-          names: name,
-          phone: vm.userSetting.userPhone,
-          Account_Name: vm.userSetting.userCompanyName,
-          department: vm.userSetting.department,
-          position: vm.userSetting.job
-        }).then(function () {
-          vm.tipCon = "修改个人信息成功！";
-          $modal.modal({
-            onCancel: function () {
-              window.location.href = "../login.html";
-            }
+        axios
+          .post(globalUrl + "content/uppsword", {
+            token: "9c55fe3a1fa542021e99ad9576936b853c7c9aeb",
+            email: vm.userSetting.userEmail,
+            State_Code: vm.selected_pro,
+            City_Code: vm.selected_city,
+            County_Code: vm.selected_area,
+            lastname: vm.userSetting.userLastName,
+            names: vm.userSetting.userName,
+            phone: vm.userSetting.userPhone,
+            Account_Name: vm.userSetting.userCompanyName,
+            department: vm.userSetting.department,
+            position: vm.userSetting.job
+          })
+          .then(function (response) {
+            vm.tipCon = "信息修改成功";
+            $modal.modal();
+          })
+          .catch(function (error) {
+            vm.tipCon = "请求后台出错！";
+            $modal.modal();
           });
-        }).catch(function (error) {
-          vm.tipCon = "请求后台出错！";
-          // $modal.modal();
-        });
+      } else {
+        vm.tipCon = "请检查并正确填写信息~";
+        $modal.modal();
       }
     },
     changePassword() {
-      let VM = this;
-      axios.post(globalUrl + "content/uppsword", {
-        password: vm.userSetting.userPassword,
+      let vm = this;
+      var $modal = $("#my-alert");
+      /*验证*/
+      var len = $(".change-passwd").length;
+      var arr = []; //存放未通过的验证
+      for (var i = 0; i < len; i++) {
+        if ($(".change-passwd")[i].validity.valid == false) {
+          arr.push(i);
 
-      }).then(function () {
-        vm.tipCon = "修改个人信息成功！";
-        $modal.modal({
-          onCancel: function () {
-            window.location.href = "../login.html";
-          }
-        });
-      }).catch(function (error) {
-        vm.tipCon = "请求后台出错！";
-        // $modal.modal();
-      });
+        }
+      }
+      if (arr.length == 0) {
+        axios
+          .post(globalUrl + "content/password", {
+            token: "9c55fe3a1fa542021e99ad9576936b853c7c9aeb",
+            password: vm.oldPassword,
+            newPassword: vm.newPassword,
+            newPasswordCheck: vm.newPasswordCheck
+          })
+          .then(function (response) {
+            console.log(response.data.status)
+            if (response.data.status == 0) {
+              vm.tipCon = "原始密码错误"
+              $modal.modal();
+            } else if (response.data.status == 2) {
+              vm.tipCon = "新密码与原始密码一致，请重新修改"
+              $modal.modal();
+            } else if (response.data.status == 1) {
+              vm.tipCon = "密码修改成功"
+              $modal.modal();
+              $("#my-prompt").modal('close');
+            } else {
+              vm.tipCon = "未知错误，请刷新重试"
+              $modal.modal();
+            }
+
+          })
+          .catch(function (error) {
+
+          });
+      } else {
+        vm.tipCon = "请检查并正确填写信息~";
+        $modal.modal();
+      }
     },
     setCity(pro, city, area) {
       $("#targetArea").distpicker({
@@ -295,14 +339,13 @@ var userCenter = new Vue({
     changeData() {
       let vm = this;
       vm.chargeValues.forEach(function (ele, index, arr) {
-        console.info(vm.checkedMoney)
         if (vm.checkedMoney == ele.text) {
           ele.active = true;
         } else {
           ele.active = false;
         }
         vm.realValue = vm.checkedMoney;
-        vm.chargeValue = '';
+        vm.chargeValue = "";
       });
     },
     handleFocus() {
@@ -310,32 +353,34 @@ var userCenter = new Vue({
       vm.chargeValues.forEach(function (ele, index, arr) {
         ele.active = false;
         vm.realValue = vm.chargeValue;
-      })
+      });
     },
     handleEdit() {
       $('#my-prompt').modal({
         relatedTarget: this,
+        onConfirm: function (options) {
+          this.changePassword
+        },
+        // closeOnConfirm: false,
+        onCancel: function () {
+
+        }
       });
     }
   }
-})
+});
 $(function () {
   var $form = $("#form-with-tooltip");
   var $tooltip = $('<div id="vld-tooltip">提示信息！</div>');
   $tooltip.appendTo(document.body);
-
   $form.validator();
-
   var validator = $form.data("amui.validator");
-
-  $form.on("focusin focusout", ".am-form-error input", function (e) {
+  $form.on("focusin focusout", ".am-field-error", function (e) {
     if (e.type === "focusin") {
+
       var $this = $(this);
       var offset = $this.offset();
-      var msg =
-        $this.data("foolishMsg") ||
-        validator.getValidationMessage($this.data("validity"));
-
+      var msg = $this.data("foolishMsg") || validator.getValidationMessage($this.data("validity"));
       $tooltip
         .text(msg)
         .show()
@@ -349,7 +394,7 @@ $(function () {
       $tooltip.hide();
     }
   });
-  $form.on("focusin focusout", ".am-form-success input", function (e) {
+  $form.on("focusin focusout", ".am-field-valid ", function (e) {
     if (e.type === "focusin") {
       $tooltip.hide();
     } else if (e.type === "focusout") {

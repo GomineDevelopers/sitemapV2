@@ -142,7 +142,7 @@ ul {
   box-shadow: none;
 }
 
-.user-input {
+.user-input-money {
   width: 200px;
   margin-left: 10%;
 }
@@ -276,16 +276,24 @@ ul {
   border-radius: 0;
 }
 
-.account-setting .am-form-field {
-  border-top: none;
-  border-left: none;
-  border-right: none;
+.account-setting .am-input-group:not(:first-child):not(:last-child),
+.am-input-group-btn:not(:first-child):not(:last-child),
+.am-input-group-label:not(:first-child):not(:last-child) {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
 }
 
-.account-setting select {
-  border-top: none;
-  border-left: none;
-  border-right: none;
+.account-setting .am-input-group input {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+}
+
+.account-setting .am-input-group select {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
 }
 
 .account-setting select:focus {
@@ -296,7 +304,7 @@ ul {
   box-shadow: none !important;
 }
 
-.account-setting .am-form-field:focus {
+.account-setting input:focus {
   background-color: #ffffff !important;
   border-color: none !important;
   outline: 0 !important;
@@ -329,8 +337,31 @@ ul {
 }
 
 #my-prompt input {
-  padding: 5px;
-  width: 50%;
+  height: 40px;
+  background-color: #f8f8f8;
+}
+
+#my-prompt .am-modal-dialog {
+  background-color: #ffffff;
+}
+
+#my-prompt .am-modal-hd {
+  font-weight: 600;
+  font-size: 2rem;
+}
+
+#my-prompt .save-button {
+  color: #ffffff;
+  background-color: #3e8ff8;
+  width: 100%;
+  border-radius: 3px;
+}
+
+#my-prompt .cancel-button {
+  border: 1px solid #3e8ff8;
+  width: 100%;
+  border-radius: 3px;
+  background-color: #ffffff;
 }
 
 .model-button {
@@ -341,3 +372,64 @@ ul {
   width: 100%;
   border-radius: 5px;
 }
+
+.nameGroup {
+  width: 50%;
+  float: left;
+}
+
+.am-field-valid,
+.am-form-success .am-form-field {
+  border-color: #5eb95e !important;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.am-field-error,
+.am-form-error .am-form-field {
+  border-color: #dd514c !important;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+#vld-tooltip {
+  position: absolute;
+  z-index: 1111;
+  font-size: 14px;
+  padding: 5px 10px;
+  background: #F37B1D;
+  min-width: 150px;
+  color: #fff;
+  transition: all 0.15s;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .15);
+  display: none;
+}
+
+#vld-tooltip:before {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  width: 0;
+  height: 0;
+  margin-left: -8px;
+  content: "";
+  border-width: 0 8px 8px;
+  border-color: transparent transparent #F37B1D;
+  border-style: none inset solid;
+}
+
+.am-form-group .am-alert {
+  margin: 5px 0 0;
+  padding: .25em .625em;
+  font-size: 1.3rem;
+  z-index: 999;
+  position: absolute;
+}
+
+#my-alert {}
