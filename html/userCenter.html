@@ -141,9 +141,9 @@
           <!-- 历史记录搜索 -->
           <div class="am-u-md-3 am-u-end history-input" v-show=" this.num==2">
             <div class="am-input-group ">
-              <input type="text">
+              <input class="am-form-field" v-model="targetSearchcontent" type="text">
               <span class="am-input-group-btn">
-                <button class="am-btn am-btn-default" type="button">搜索</button>
+                <button class="am-btn am-btn-default" type="button" @click="toSearchData">搜索</button>
               </span>
             </div>
           </div>
@@ -383,15 +383,44 @@
                             <th></th>
                             <th></th>
                           </tr>
-                          <tr>
-                            <td>2017-8-5</td>
-                            <td>200.00</td>
-                          </tr>
-                          <tr>
-                            <td>2017-8-5</td>
-                            <td>200.00</td>
+                          <tr v-for="item in historyData" :key="item.id">
+                            <td v-text="item.create_time"></td>
+                            <td v-text="item.info"></td>
                           </tr>
                         </table>
+                        <!-- 浏览记录分页 -->
+                        <div class="am-u-sm-8 am-u-sm-centered ">
+                          <div class="am-fl">
+                            <ul class="am-pagination am-pagination-size">
+                              <li v-if="cur==1" :class="{ 'am-disabled' :cur==1}">
+                                <a>&lt;</a>
+                              </li>
+                              <li v-if="cur>1">
+                                <a @click="cur--,pageClick()">&lt;</a>
+                              </li>
+                              <li v-for="index in indexs" :class="{ 'am-active': cur == index}">
+                                <a @click="btnClick(index)" v-text="index"></a>
+                              </li>
+                              <li v-if="cur==allPage" :class="{ 'am-disabled' :cur==allPage}">
+                                <a>&gt;</a>
+                              </li>
+                              <li v-if="cur!=allPage">
+                                <a @click="cur++,pageClick()">&gt;</a>
+                              </li>
+                              <li>共</li>
+                              <li v-text="allPage"></li>
+                              <li>页</li>
+                              <li>跳到</li>
+                              <li>
+                                <input type="number" v-model="goPage">
+                              </li>
+                              <li>页</li>
+                              <li>
+                                <button @click="Go()">GO</button>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>

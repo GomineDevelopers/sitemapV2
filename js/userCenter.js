@@ -142,6 +142,27 @@ var userCenter = new Vue({
     tabItems: ["我的账户", "我的下载", "我的浏览", "账户设置"],
     tabContents: ["内容一", "内容二", "内容三", "内容四"],
     contentTabs: ["充值记录", "消费记录", "账户余额", "我要充值"],
+    // 历史纪录和搜索
+    targetSearchcontent: '',
+    historyData: {},
+    cur: 1, //当前页码
+    goPage: 1,
+    all: "", //总条数
+    allPage: "",
+    search: {
+      historyData: {},
+      cur: 1, //当前页码
+      goPage: 1,
+      all: "", //总条数
+      allPage: "",
+      isSearch: false,
+    },
+    isShow: {
+      loading: true,
+      pagination: false,
+      count: false
+    },
+
     chargeValues: [{
         text: "10",
         value: "10",
@@ -200,8 +221,40 @@ var userCenter = new Vue({
     selected_pro: "resetDispicker"
   },
   mounted: function () {
-    var vm = this;
 
+    var token = localStorage;
+    console.log(token)
+  },
+  computed: {
+    //分页
+    indexs: function () {
+      var left = 1;
+      var vm = this;
+      /*总页数*/
+      vm.allPage =
+        this.all % 5 == 0 ? this.all / 5 : Math.ceil(this.all / 5);
+      var right = vm.allPage;
+      var ar = [];
+      if (vm.allPage >= 5) {
+        if (this.cur > 3 && this.cur < vm.allPage - 2) {
+          left = this.cur - 2;
+          right = this.cur + 2;
+        } else {
+          if (this.cur <= 3) {
+            left = 1;
+            right = 5;
+          } else {
+            right = vm.allPage;
+            left = vm.allPage - 4;
+          }
+        }
+      }
+      while (left <= right) {
+        ar.push(left);
+        left++;
+      }
+      return ar;
+    }
   },
   methods: {
     resetDispicker() {
@@ -211,12 +264,83 @@ var userCenter = new Vue({
         district: '-请选择省-'
       });
     },
+    // 获取token
+
+
+    // 搜索内容获取
+    getSearchData() {
+      var vm = this;
+      axios.post(globalUrl + "content/number", {
+        token: "3986236de4c68ebac8051572d3be678dae2b50db",
+
+      }).then(function (response) {
+        console.log(response)
+        vm.historyData = response.data.data.data;
+        vm.all = response.data.data.total
+      })
+    },
+    /*分页*/
+    btnClick: function (data) {
+      //页码点击事件
+      var vm = this;
+      vm.isShow.loading = true;
+      if (data != this.cur) {
+        this.cur = data;
+        getDataPage(this.cur).then(
+          function (response) {
+            vm.isShow.loading = false;
+            vm.historyData = response.data.data.data;
+          }
+        );
+      }
+    },
+    pageClick: function () {
+      var vm = this;
+      vm.isShow.loading = true;
+      getDataPage(this.cur).then(function (response) {
+        vm.isShow.loading = false;
+        vm.historyData = response.data.data.data;
+      });
+    },
+    Go: function () {
+      var vm = this;
+      vm.isShow.loading = true;
+      this.cur = Number(vm.goPage);
+      //总页数
+      vm.allPage =
+        this.all % 5 == 0 ? this.all / 5 : Math.ceil(this.all / 5);
+      if (this.cur <= vm.allPage) {
+        getDataPage(this.cur).then(
+          function (response) {
+            vm.isShow.loading = false;
+            vm.historyData = response.data.data.data;
+          }
+        );
+      } else {
+        alert("输入的页数超过总页数！");
+      }
+    },
+
+    // 数据搜索
+    toSearchData() {
+      var vm = this;
+      axios.post(globalUrl + "content/numsearch", {
+        token: "3986236de4c68ebac8051572d3be678dae2b50db",
+        content: vm.targetSearchcontent
+      }).then(function (response) {
+        vm.historyData = response.data.data.data
+        vm.all = response.data.data.total
+        console.log(response)
+      })
+    },
+
+
     getExistedData() {
       let vm = this;
       let temp = {};
       axios
         .post(globalUrl + "content/settings", {
-          token: "9c55fe3a1fa542021e99ad9576936b853c7c9aeb"
+          token: "3986236de4c68ebac8051572d3be678dae2b50db"
         })
         .then(function (response) {
           temp = response.data.data[0];
@@ -331,6 +455,8 @@ var userCenter = new Vue({
       this.num = index;
       if (this.num == 3) {
         this.getExistedData();
+      } else if (this.num == 2) {
+        this.getSearchData();
       }
     },
     contentTab(index) {
@@ -367,6 +493,7 @@ var userCenter = new Vue({
         }
       });
     }
+    // 历史纪录分页相关
   }
 });
 $(function () {
@@ -402,3 +529,18 @@ $(function () {
     }
   });
 });
+
+function getDataPage(curpage) {
+  var par = curpage == undefined ? (page = "1") : (page = curpage);
+  var l = axios({
+    method: "post",
+    url: globalUrl + 'content/number',
+    data: {
+
+      page: par,
+      token: "3986236de4c68ebac8051572d3be678dae2b50db"
+    }
+  });
+  return l;
+
+}

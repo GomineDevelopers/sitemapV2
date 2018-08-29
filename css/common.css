@@ -1,60 +1,111 @@
 /*页面最小高度*/
-.am-g-minH{
+
+.am-g-minH {
     min-height: 670px;
 }
 
 /* 全局底部导航 */
-.footer_main{
-    color: #c6c6c6;
-    padding-top: 3rem;
-    padding-bottom: 1rem;
-    background-color: black;
-}
-.footer_main{
+
+.footer_main {
     color: #c6c6c6;
     padding-top: 3rem;
     padding-bottom: 1rem;
     background-color: black;
 }
 
-.footer-logo{
+.footer_main {
+    color: #c6c6c6;
+    padding-top: 3rem;
+    padding-bottom: 1rem;
+    background-color: black;
+}
+
+.footer-logo {
     padding-left: 1.5rem;
 }
-.footer_right-input input{
+
+.footer_right-input input {
     background-color: black;
     color: #7d7d7d;
 }
-.footer_right-input button{
+
+.footer_right-input button {
     background-color: #3b4d5c;
-    
 }
-.footer_right-input span{
+
+.footer_right-input span {
     color: #c6c6c6;
-    
 }
 
 /* 全局底部导航 */
+
 /* 全局颜色 */
-.white-bgcolor{
+
+.white-bgcolor {
     background-color: white;
 }
-.am-grid-color{
+
+.am-grid-color {
     background-color: #f8f8f8;
 }
 
 /*分页*/
-.am-pagination-size li a{
+
+.am-pagination-size li a {
     padding: 4px 10px;
     color: #034f86;
 }
-.am-pagination > .am-active > a,
-.am-pagination > .am-active > a:hover,
-.am-pagination > .am-active > a:focus {
+
+.am-pagination>.am-active>a,
+.am-pagination>.am-active>a:hover,
+.am-pagination>.am-active>a:focus {
+    background-color: #034f86;
+    border-color: #034f86;
+}
+
+/*跳转的页码*/
+
+.am-pagination-size li input {
+    width: 50px;
+    height: 30px;
+    position: relative;
+    display: block;
+    text-decoration: none;
+    line-height: 1.2;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+.am-pagination-size li button {
+    width: 40px;
+    height: 30px;
+    position: relative;
+    display: block;
+    text-decoration: none;
+    line-height: 1.2;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+.am-pagination-size li button:hover {
+    color: #034f86;
+    background-color: #eeeeee;
+}
+
+.am-pagination-size li button:focus {
+    color: white;
     background-color: #034f86;
     border-color: #034f86;
 }
 
 /*加载符号*/
+
 .centerMe {
     position: absolute;
     top: 50%;
@@ -79,7 +130,9 @@
     -webkit-transition: background .2s;
     transition: background .2s;
 }
-.loading:after, .loading:before {
+
+.loading:after,
+.loading:before {
     content: '';
     position: absolute;
     display: block;
@@ -96,6 +149,7 @@
     -webkit-transition: background .2s;
     transition: background .2s;
 }
+
 .loading:before {
     left: 15px;
     -webkit-animation: fade3 1s infinite;
@@ -113,21 +167,25 @@
         background: #2980b9;
     }
 }
+
 @-webkit-keyframes fade2 {
     33% {
         background: #2980b9;
     }
 }
+
 @keyframes fade2 {
     33% {
         background: #2980b9;
     }
 }
+
 @-webkit-keyframes fade3 {
     66% {
         background: #2980b9;
     }
 }
+
 @keyframes fade3 {
     66% {
         background: #2980b9;
