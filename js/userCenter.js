@@ -264,8 +264,10 @@ var userCenter = new Vue({
           token: "3986236de4c68ebac8051572d3be678dae2b50db"
         })
         .then(function (response) {
+          vm.isSearch = false;
           vm.historyData = response.data.data.data;
           vm.all = response.data.data.total;
+          vm.cur = 1;
         });
     },
     /*分页*/
@@ -378,7 +380,7 @@ var userCenter = new Vue({
       if (arr.length == 0) {
         axios
           .post(globalUrl + "content/uppsword", {
-            token: "9c55fe3a1fa542021e99ad9576936b853c7c9aeb",
+            token: "3986236de4c68ebac8051572d3be678dae2b50db",
             email: vm.userSetting.userEmail,
             State_Code: vm.selected_pro,
             City_Code: vm.selected_city,
@@ -417,7 +419,7 @@ var userCenter = new Vue({
       if (arr.length == 0) {
         axios
           .post(globalUrl + "content/password", {
-            token: "9c55fe3a1fa542021e99ad9576936b853c7c9aeb",
+            token: "3986236de4c68ebac8051572d3be678dae2b50db",
             password: vm.oldPassword,
             newPassword: vm.newPassword,
             newPasswordCheck: vm.newPasswordCheck
@@ -456,7 +458,6 @@ var userCenter = new Vue({
       if (this.num == 3) {
         this.getExistedData();
       } else if (this.num == 2) {
-        vm.isSearch = false;
         this.getSearchData();
       }
     },
@@ -489,7 +490,9 @@ var userCenter = new Vue({
           this.changePassword;
         },
         // closeOnConfirm: false,
-        onCancel: function () {}
+        onCancel: function () {
+          $("#my-prompt").modal("close");
+        }
       });
     }
     // 历史纪录分页相关
