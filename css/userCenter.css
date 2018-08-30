@@ -98,6 +98,10 @@ ul {
   padding: 2.25rem 0;
 }
 
+.footer-page {
+  background-color: #ffffff;
+}
+
 /* 表格样式 */
 .am-table>tbody>tr>td,
 .am-table>tbody>tr>th,
