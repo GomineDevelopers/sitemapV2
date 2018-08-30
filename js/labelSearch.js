@@ -47,7 +47,7 @@ var app = new Vue({
         goChart: function () {
             window.location.href = "./dashboard.html";
         },
-        goGIS:function(){
+        goGIS: function () {
             window.location.href = "./map.html";
         },
         /*分页*/
@@ -143,14 +143,7 @@ var app = new Vue({
     }
 });
 
-/*function searchSelect() {
-    $('#search_select').on('change', function() {
-        var searchSel = $(this).find('option').eq(this.selectedIndex).val();
-        if(searchSel == 'img'){
-            window.location.href = 'dashboard.html';
-        }
-    });
-}*/
+
 function getDataPage(curpage, type, info, organizor) {
     var par = curpage == undefined ? (page = "1") : (page = curpage);
     var l = axios({

@@ -1,234 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+    <link href="https://cdn.bootcss.com/amazeui/2.7.2/css/amazeui.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/newsCenter.css">
     <title>新闻中心</title>
 </head>
+
 <body>
-<header class="am-topbar am-topbar-fixed-top">
-    <div class="am-u-sm-8  am-u-sm-centered">
-        <h1 class="am-topbar-brand">
-            <img src="../images/sitemap_logo.png" alt="">
-        </h1>
+    <header class="am-topbar am-topbar-fixed-top">
+        <div class="am-u-sm-8  am-u-sm-centered">
+            <h1 class="am-topbar-brand">
+                <img src="../images/sitemap_logo.png" alt="">
+            </h1>
 
-        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse'}">
-            <span class="am-sr-only">导航切换</span>
-            <span class="am-icon-bars"></span>
-        </button>
+            <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+                data-am-collapse="{target: '#doc-topbar-collapse'}">
+                <span class="am-sr-only">导航切换</span>
+                <span class="am-icon-bars"></span>
+            </button>
 
-        <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
-            <ul class="am-nav am-nav-pills am-topbar-nav">
-                <li>
-                    <a href="../index.html">首页</a>
-                </li>
-                <li class="am-dropdown" data-am-dropdown>
-                  <a class="am-dropdown-toggle" data-am-dropdown-toggle>
-                    500强
-                    <span class="am-icon-caret-down"></span>
-                  </a>
-                  <ul class="am-dropdown-content">
+            <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+                <ul class="am-nav am-nav-pills am-topbar-nav">
                     <li>
-                      <a onclick="innerPageGetTagData('福布斯','TOP500','1','500强')">福布斯TOP500</a>
+                        <a href="../index.html">首页</a>
+                    </li>
+                    <li class="am-dropdown" data-am-dropdown>
+                        <a class="am-dropdown-toggle" data-am-dropdown-toggle>
+                            500强
+                            <span class="am-icon-caret-down"></span>
+                        </a>
+                        <ul class="am-dropdown-content">
+                            <li>
+                                <a onclick="innerPageGetTagData('福布斯','TOP500','1','500强')">福布斯TOP500</a>
+                            </li>
+                            <li>
+                                <a onclick="innerPageGetTagData('财富','TOP500','1','500强')">财富TOP500</a>
+                            </li>
+                            <li>
+                                <a onclick="innerPageGetTagData('工信部','中企500','1','500强')">工信部中企500</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="am-dropdown" data-am-dropdown>
+                        <a class="am-dropdown-toggle" data-am-dropdown-toggle>
+                            排行榜
+                            <span class="am-icon-caret-down"></span>
+                        </a>
+                        <ul class="am-dropdown-content">
+                            <li>
+                                <a onclick="innerPageGetTagData('住建部','房企100强','1','排行榜')">房企100强</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="am-dropdown" data-am-dropdown>
+                        <a class="am-dropdown-toggle" data-am-dropdown-toggle>
+                            交易所
+                            <span class="am-icon-caret-down"></span>
+                        </a>
+                        <ul class="am-dropdown-content">
+                            <li>
+                                <a onclick="innerPageGetTagData('','上海证券交易所','2','交易所')">上海证券交易所</a>
+                            </li>
+                            <li>
+                                <a onclick="innerPageGetTagData('','深圳证券交易所','2','交易所')">深圳证券交易所</a>
+                            </li>
+                            <li>
+                                <a onclick="innerPageGetTagData('','香港证券交易所','2','交易所')">香港证券交易所</a>
+                            </li>
+                        </ul>
                     </li>
                     <li>
-                      <a onclick="innerPageGetTagData('财富','TOP500','1','500强')">财富TOP500</a>
+                        <a href="#">新三板</a>
                     </li>
-                    <li>
-                      <a onclick="innerPageGetTagData('工信部','中企500','1','500强')">工信部中企500</a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="am-dropdown" data-am-dropdown>
-                  <a class="am-dropdown-toggle" data-am-dropdown-toggle>
-                    排行榜
-                    <span class="am-icon-caret-down"></span>
-                  </a>
-                  <ul class="am-dropdown-content">
-                    <li>
-                      <a onclick="innerPageGetTagData('住建部','房企100强','1','排行榜')">房企100强</a>
-                    </li>
-                  </ul>
-                </li>
-                <li class="am-dropdown" data-am-dropdown>
-                  <a class="am-dropdown-toggle" data-am-dropdown-toggle>
-                    交易所
-                    <span class="am-icon-caret-down"></span>
-                  </a>
-                  <ul class="am-dropdown-content">
-                    <li>
-                      <a onclick="innerPageGetTagData('','上海证券交易所','2','交易所')">上海证券交易所</a>
-                    </li>
-                    <li>
-                      <a onclick="innerPageGetTagData('','深圳证券交易所','2','交易所')">深圳证券交易所</a>
-                    </li>
-                    <li>
-                      <a onclick="innerPageGetTagData('','香港证券交易所','2','交易所')">香港证券交易所</a>
-                    </li>
-                  </ul>
-                </li>
-                <li >
-                  <a href="#">新三板</a>
-                </li>
-                <li class="am-active">
-                    <a href="./newsCenter.html">新闻中心</a>
-                </li>
-              </ul>
-            <div class="am-topbar-right">
-                <!--未登录-->
-                <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogin">
-                    <li>
-                        <a href="../login.html">登陆</a>
-                    </li>
-                    <li>
-                        <a href="./register.html">注册</a>
+                    <li class="am-active">
+                        <a href="./newsCenter.html">新闻中心</a>
                     </li>
                 </ul>
-                <!--已登录-->
-                <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogout" >
-                    <li>
-                        <a href="#" id="vipName"></a>
-                    </li>
-                    <li>
-                        <a id="logout">退出</a>
-                    </li>
-                </ul>
+                <div class="am-topbar-right">
+                    <!--未登录-->
+                    <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogin">
+                        <li>
+                            <a href="../login.html">登陆</a>
+                        </li>
+                        <li>
+                            <a href="./register.html">注册</a>
+                        </li>
+                    </ul>
+                    <!--已登录-->
+                    <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogout">
+                        <li>
+                            <a href="#" id="vipName"></a>
+                        </li>
+                        <li>
+                            <a id="logout">退出</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-</header>
-<!-- 导航结束 -->
+    </header>
+    <!-- 导航结束 -->
 
-<div class="am-g am-grid-color">
-  
-    <div class="am-u-sm-8 am-u-sm-centered">
-        <div class="am-u-md-centered am-cf" id="main">
-            <!--左边面板-->
-          
-            <!--搜索框-->
-            <div class="am-g">
-                <div class="am-u-sm-8">
-                    <div class="am-u-lg-10">
-                        <div class="am-input-group am-news-inputGroup">
-                            <input type="text" class="am-form-field" v-model="keyWord" placeholder="请输入关键字">
-                            <span class="am-input-group-btn">
-                                <button class="am-btn am-btn-primary" type="button" @click="Search()"><span class="am-icon-search"></span> </button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--搜索框-->
-            <!--content-->
-            <div class="am-u-sm-8">
-                <div class="am-panel am-panel-default">
-                    <div class="am-panel-hd"><span class="am-news-line">|</span>面板标题</div>
-                    <div class="am-panel-bd" v-for="(newsLeftList,index) in newsLeftData">
-                        <div class="am-g" @click="enteringDetail(newsLeftList.id)" :class ="[index == newsLeftData.length-1? 'am-panel-content-border':'am-panel-content']">
-                            <div class="am-fl"><img class="am-img-responsive am-panel-img " :src="newsLeftList.img"></div>
-                            <div class="am-u-sm-8 am-panel-body">
-                                <div class="am-panel-title" ><p v-text="newsLeftList.title"></p></div>
-                                <div class="am-panel-intro" ><p v-text="newsLeftList.description"></p></div>
-                                <div class="am-panel-source">
-                                    <span v-text="newsLeftList.source"></span>
-                                    <span class="am-fr" v-text="newsLeftList.create_time"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div v-show="loading" class="loading"></div>
-                <!--分页-->
-                <div class="am-u-sm-8 am-fl ">
-                    <div class="am-fl">
-                        <ul class="am-pagination am-pagination-size">
-                            <li v-if="cur==1" :class={"am-disabled":cur==1}><a>&lt;</a></li>
-                            <li v-if="cur>1"><a @click="cur--,pageClick()">&lt;</a></li>
-                            <li v-for="index in indexs"  :class="{ 'am-active': cur == index}">
-                                <a @click="btnClick(index)" v-text="index"></a>
-                            </li>
-                            <li v-if="cur==allPage" :class={"am-disabled":cur==allPage}><a>&gt;</a></li>
-                            <li v-if="cur!=allPage"><a @click="cur++,pageClick()">&gt;</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <div class="am-g am-grid-color">
 
-            <!--右边面板-->
-            <div class="am-u-sm-4">
-                <div class="am-panel am-panel-default am-cf">
-                    <div class="am-panel-hd"><span class="am-news-line">|</span>热门阅读</div>
-                    <div>
-                        <ul data-am-widget="gallery" class="am-gallery am-gallery-overlay" data-am-gallery="{ pureview: false }" >
-                            <li v-for="(newsRightList,index) in newsRightData" v-if="index < 4">
-                                <div class="am-gallery-item "  @click="enteringDetail(newsRightList.id)">
-                                    <a >
-                                        <img :src="newsRightList.img"  alt=""/>
-                                        <h3 class="am-gallery-title" v-text="newsRightList.title"></h3>
-                                    </a>
-                                </div>
-                            </li>
-                            <!--<hr class="am-news-hr">-->
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!--content-->
-            
-            <!--为了最后一个不是分页而设置-->
-            <div></div>
-            
-        </div>
-    </div>
-</div>
-<!-- 底部导航 -->
-<div class="layout-footer">
-    <div class="container ">
-        <div class="footer_main">
-            <div class="am-g am-u-sm-8 am-u-sm-centered">
-                <p class="footer-logo">
-                    <img src="../images/foot_gomine_logo.png" alt="">
-                </p>
-                <div class="am-u-md-6">
-                    <div >
-                        <p>Rm.B-702,Bldg.1,Zhubang 2000 Business Center, No。100 Balizhuang Xili, Chaoyang District,Beijing</p>
-                        <p>
-                            <a href=""><i class="am-icon-phone"></i> +86-10-87510736</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a href=""><i class="am-icon-envelope-o"></i> marketing@gomine.cn</a>
-                        </p>
-                        <p>Copyright©GOMINE.CN All right Reserved.京ICP备05075516号</p>
-                    </div>
-                </div>
-                <div class="am-u-md-6 ">
-                    <strong><p> subscribe for upgrates</p></strong>
-                    <div>
-                        <p>
-                            <div class="am-input-group am-btn-group-lg">
-                                <input type="text" class="am-form-field" placeholder="enter your email address">
-                                <span class="am-input-group-btn footer_right-input">
-                                    <button class="am-btn am-btn-default " type="button">
-                                        <span class="am-icon-envelope-o"></span>
+        <div class="am-u-sm-8 am-u-sm-centered">
+            <div class="am-u-md-centered am-cf" id="main">
+                <!--左边面板-->
+
+                <!--搜索框-->
+                <div class="am-g">
+                    <div class="am-u-sm-8">
+                        <div class="am-u-lg-10">
+                            <div class="am-input-group am-news-inputGroup">
+                                <input type="text" class="am-form-field" v-model="keyWord" placeholder="请输入关键字">
+                                <span class="am-input-group-btn">
+                                    <button class="am-btn am-btn-primary" type="button" @click="Search()"><span class="am-icon-search"></span>
                                     </button>
                                 </span>
                             </div>
-                        </p>
+                        </div>
+                    </div>
+                </div>
+                <!--搜索框-->
+                <!--content-->
+                <div class="am-u-sm-8">
+                    <div class="am-panel am-panel-default">
+                        <div class="am-panel-hd"><span class="am-news-line">|</span>面板标题</div>
+                        <div class="am-panel-bd" v-for="(newsLeftList,index) in newsLeftData">
+                            <div class="am-g" @click="enteringDetail(newsLeftList.id)" :class="[index == newsLeftData.length-1? 'am-panel-content-border':'am-panel-content']">
+                                <div class="am-fl"><img class="am-img-responsive am-panel-img " :src="newsLeftList.img"></div>
+                                <div class="am-u-sm-8 am-panel-body">
+                                    <div class="am-panel-title">
+                                        <p v-text="newsLeftList.title"></p>
+                                    </div>
+                                    <div class="am-panel-intro">
+                                        <p v-text="newsLeftList.description"></p>
+                                    </div>
+                                    <div class="am-panel-source">
+                                        <span v-text="newsLeftList.source"></span>
+                                        <span class="am-fr" v-text="newsLeftList.create_time"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div v-show="loading" class="loading"></div>
+                    <!--分页-->
+                    <div class="am-u-sm-8 am-fl ">
+                        <div class="am-fl">
+                            <ul class="am-pagination am-pagination-size">
+                                <li v-if="cur==1" :class={"am-disabled":cur==1}><a>&lt;</a></li>
+                                <li v-if="cur>1"><a @click="cur--,pageClick()">&lt;</a></li>
+                                <li v-for="index in indexs" :class="{ 'am-active': cur == index}">
+                                    <a @click="btnClick(index)" v-text="index"></a>
+                                </li>
+                                <li v-if="cur==allPage" :class={"am-disabled":cur==allPage}><a>&gt;</a></li>
+                                <li v-if="cur!=allPage"><a @click="cur++,pageClick()">&gt;</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!--右边面板-->
+                <div class="am-u-sm-4">
+                    <div class="am-panel am-panel-default am-cf">
+                        <div class="am-panel-hd"><span class="am-news-line">|</span>热门阅读</div>
+                        <div>
+                            <ul data-am-widget="gallery" class="am-gallery am-gallery-overlay" data-am-gallery="{ pureview: false }">
+                                <li v-for="(newsRightList,index) in newsRightData" v-if="index < 4">
+                                    <div class="am-gallery-item " @click="enteringDetail(newsRightList.id)">
+                                        <a>
+                                            <img :src="newsRightList.img" alt="" />
+                                            <h3 class="am-gallery-title" v-text="newsRightList.title"></h3>
+                                        </a>
+                                    </div>
+                                </li>
+                                <!--<hr class="am-news-hr">-->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!--content-->
+
+                <!--为了最后一个不是分页而设置-->
+                <div></div>
+
+            </div>
+        </div>
+    </div>
+    <!-- 底部导航 -->
+    <div class="layout-footer">
+        <div class="container ">
+            <div class="footer_main">
+                <div class="am-g am-u-sm-8 am-u-sm-centered">
+                    <p class="footer-logo">
+                        <img src="../images/foot_gomine_logo.png" alt="">
+                    </p>
+                    <div class="am-u-md-6">
+                        <div>
+                            <p>Rm.B-702,Bldg.1,Zhubang 2000 Business Center, No。100 Balizhuang Xili, Chaoyang
+                                District,Beijing</p>
+                            <p>
+                                <a href=""><i class="am-icon-phone"></i> +86-10-87510736</a>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href=""><i class="am-icon-envelope-o"></i> marketing@gomine.cn</a>
+                            </p>
+                            <p>Copyright©GOMINE.CN All right Reserved.京ICP备05075516号</p>
+                        </div>
+                    </div>
+                    <div class="am-u-md-6 ">
+                        <strong>
+                            <p> subscribe for upgrates</p>
+                        </strong>
+                        <div>
+                            <p>
+                                <div class="am-input-group am-btn-group-lg">
+                                    <input type="text" class="am-form-field" placeholder="enter your email address">
+                                    <span class="am-input-group-btn footer_right-input">
+                                        <button class="am-btn am-btn-default " type="button">
+                                            <span class="am-icon-envelope-o"></span>
+                                        </button>
+                                    </span>
+                                </div>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- 底部导航 -->
+    <!-- 底部导航 -->
 
-<script src="../js/jquery/jquery-3.3.1.min.js"></script>
-<script src="../js/vue/vue.js"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script>
-<script src="../js/common.js"></script>
-<script src="../js/newsCenter.js"></script>
+    <script src="../js/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../js/vue/vue.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
+    <script src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/newsCenter.js"></script>
 </body>
+
 </html>

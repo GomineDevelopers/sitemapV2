@@ -1,4 +1,5 @@
-var jobs = [{
+var jobs = [
+  {
     text: "员工",
     value: "员工"
   },
@@ -39,7 +40,8 @@ var jobs = [{
     value: "其他"
   }
 ];
-var departments = [{
+var departments = [
+  {
     text: "IT 应用开发",
     value: "IT 应用开发"
   },
@@ -143,27 +145,21 @@ var userCenter = new Vue({
     tabContents: ["内容一", "内容二", "内容三", "内容四"],
     contentTabs: ["充值记录", "消费记录", "账户余额", "我要充值"],
     // 历史纪录和搜索
-    targetSearchcontent: '',
+    targetSearchcontent: "",
     historyData: {},
     cur: 1, //当前页码
     goPage: 1,
     all: "", //总条数
     allPage: "",
-    search: {
-      historyData: {},
-      cur: 1, //当前页码
-      goPage: 1,
-      all: "", //总条数
-      allPage: "",
-      isSearch: false,
-    },
+    isSearch: true,
     isShow: {
       loading: true,
       pagination: false,
       count: false
     },
 
-    chargeValues: [{
+    chargeValues: [
+      {
         text: "10",
         value: "10",
         active: true
@@ -203,44 +199,41 @@ var userCenter = new Vue({
       job: "",
       userPassword: "",
       userPhone: "",
-      userCompanyName: "",
-
+      userCompanyName: ""
     },
     selected_pro: "",
     selected_city: "",
     selected_area: "",
     departments: departments,
     jobs: jobs,
-    oldPassword: '',
-    newPassword: '',
-    newPasswordCheck: '',
-    tipCon: ''
+    oldPassword: "",
+    newPassword: "",
+    newPasswordCheck: "",
+    tipCon: ""
   },
   watch: {
     checkedMoney: "changeData",
     selected_pro: "resetDispicker"
   },
-  mounted: function () {
-
+  mounted: function() {
     var token = localStorage;
-    console.log(token)
+    console.log(token);
   },
   computed: {
     //分页
-    indexs: function () {
+    indexs: function() {
       var left = 1;
       var vm = this;
       /*总页数*/
-      vm.allPage =
-        this.all % 5 == 0 ? this.all / 5 : Math.ceil(this.all / 5);
+      vm.allPage = vm.all % 5 == 0 ? vm.all / 5 : Math.ceil(vm.all / 5);
       var right = vm.allPage;
       var ar = [];
       if (vm.allPage >= 5) {
-        if (this.cur > 3 && this.cur < vm.allPage - 2) {
-          left = this.cur - 2;
-          right = this.cur + 2;
+        if (vm.cur > 3 && vm.cur < vm.allPage - 2) {
+          left = vm.cur - 2;
+          right = vm.cur + 2;
         } else {
-          if (this.cur <= 3) {
+          if (vm.cur <= 3) {
             left = 1;
             right = 5;
           } else {
@@ -259,63 +252,79 @@ var userCenter = new Vue({
   methods: {
     resetDispicker() {
       $("#targetArea").distpicker({
-        province: '-请选择省-',
-        city: '-请选择省-',
-        district: '-请选择省-'
+        province: "-请选择省-",
+        city: "-请选择省-",
+        district: "-请选择省-"
       });
     },
     // 获取token
 
-
     // 搜索内容获取
     getSearchData() {
       var vm = this;
-      axios.post(globalUrl + "content/number", {
-        token: "3986236de4c68ebac8051572d3be678dae2b50db",
-
-      }).then(function (response) {
-        console.log(response)
-        vm.historyData = response.data.data.data;
-        vm.all = response.data.data.total
-      })
+      axios
+        .post(globalUrl + "content/number", {
+          token: "3986236de4c68ebac8051572d3be678dae2b50db"
+        })
+        .then(function(response) {
+          console.log(response);
+          vm.historyData = response.data.data.data;
+          vm.all = response.data.data.total;
+        });
     },
     /*分页*/
-    btnClick: function (data) {
+    btnClick: function(data) {
       //页码点击事件
       var vm = this;
       vm.isShow.loading = true;
-      if (data != this.cur) {
-        this.cur = data;
-        getDataPage(this.cur).then(
-          function (response) {
+      if (data != vm.cur) {
+        vm.cur = data;
+        if (vm.isSearch) {
+          getSearchDataPage(vm.cur).then(function(response) {
             vm.isShow.loading = false;
             vm.historyData = response.data.data.data;
-          }
-        );
+          });
+        } else {
+          getDataPage(vm.cur).then(function(response) {
+            vm.isShow.loading = false;
+            vm.historyData = response.data.data.data;
+          });
+        }
       }
     },
-    pageClick: function () {
+    pageClick: function() {
       var vm = this;
       vm.isShow.loading = true;
-      getDataPage(this.cur).then(function (response) {
-        vm.isShow.loading = false;
-        vm.historyData = response.data.data.data;
-      });
+      if (vm.isSearch) {
+        getSearchDataPage(vm.cur).then(function(response) {
+          vm.isShow.loading = false;
+          vm.historyData = response.data.data.data;
+        });
+      } else {
+        getDataPage(vm.cur).then(function(response) {
+          vm.isShow.loading = false;
+          vm.historyData = response.data.data.data;
+        });
+      }
     },
-    Go: function () {
+    Go: function() {
       var vm = this;
       vm.isShow.loading = true;
-      this.cur = Number(vm.goPage);
+      vm.cur = Number(vm.goPage);
       //总页数
-      vm.allPage =
-        this.all % 5 == 0 ? this.all / 5 : Math.ceil(this.all / 5);
-      if (this.cur <= vm.allPage) {
-        getDataPage(this.cur).then(
-          function (response) {
+      vm.allPage = vm.all % 5 == 0 ? vm.all / 5 : Math.ceil(vm.all / 5);
+      if (vm.cur <= vm.allPage) {
+        if (vm.isSearch) {
+          getSearchDataPage(vm.cur).then(function(response) {
             vm.isShow.loading = false;
             vm.historyData = response.data.data.data;
-          }
-        );
+          });
+        } else {
+          getDataPage(vm.cur).then(function(response) {
+            vm.isShow.loading = false;
+            vm.historyData = response.data.data.data;
+          });
+        }
       } else {
         alert("输入的页数超过总页数！");
       }
@@ -324,16 +333,17 @@ var userCenter = new Vue({
     // 数据搜索
     toSearchData() {
       var vm = this;
-      axios.post(globalUrl + "content/numsearch", {
-        token: "3986236de4c68ebac8051572d3be678dae2b50db",
-        content: vm.targetSearchcontent
-      }).then(function (response) {
-        vm.historyData = response.data.data.data
-        vm.all = response.data.data.total
-        console.log(response)
-      })
+      axios
+        .post(globalUrl + "content/numsearch", {
+          token: "3986236de4c68ebac8051572d3be678dae2b50db",
+          content: vm.targetSearchcontent
+        })
+        .then(function(response) {
+          vm.historyData = response.data.data.data;
+          vm.all = response.data.data.total;
+          console.log(response);
+        });
     },
-
 
     getExistedData() {
       let vm = this;
@@ -342,10 +352,10 @@ var userCenter = new Vue({
         .post(globalUrl + "content/settings", {
           token: "3986236de4c68ebac8051572d3be678dae2b50db"
         })
-        .then(function (response) {
+        .then(function(response) {
           temp = response.data.data[0];
           vm.userSetting.userEmail = temp.email;
-          vm.userSetting.userName = temp.names
+          vm.userSetting.userName = temp.names;
           vm.userSetting.userLastName = temp.lastname;
           vm.userSetting.department = temp.department;
           vm.userSetting.userPassword = temp.password;
@@ -354,7 +364,7 @@ var userCenter = new Vue({
           vm.userSetting.job = temp.position;
           vm.setCity(temp.State_Code, temp.City_Code, temp.County_Code);
         })
-        .catch(function (error) {
+        .catch(function(error) {
           console.log(error);
         });
     },
@@ -367,7 +377,6 @@ var userCenter = new Vue({
       for (var i = 0; i < len; i++) {
         if ($(".user-input")[i].validity.valid == false) {
           arr.push(i);
-
         }
       }
       if (arr.length == 0) {
@@ -385,11 +394,11 @@ var userCenter = new Vue({
             department: vm.userSetting.department,
             position: vm.userSetting.job
           })
-          .then(function (response) {
+          .then(function(response) {
             vm.tipCon = "信息修改成功";
             $modal.modal();
           })
-          .catch(function (error) {
+          .catch(function(error) {
             vm.tipCon = "请求后台出错！";
             $modal.modal();
           });
@@ -407,7 +416,6 @@ var userCenter = new Vue({
       for (var i = 0; i < len; i++) {
         if ($(".change-passwd")[i].validity.valid == false) {
           arr.push(i);
-
         }
       }
       if (arr.length == 0) {
@@ -418,27 +426,24 @@ var userCenter = new Vue({
             newPassword: vm.newPassword,
             newPasswordCheck: vm.newPasswordCheck
           })
-          .then(function (response) {
-            console.log(response.data.status)
+          .then(function(response) {
+            console.log(response.data.status);
             if (response.data.status == 0) {
-              vm.tipCon = "原始密码错误"
+              vm.tipCon = "原始密码错误";
               $modal.modal();
             } else if (response.data.status == 2) {
-              vm.tipCon = "新密码与原始密码一致，请重新修改"
+              vm.tipCon = "新密码与原始密码一致，请重新修改";
               $modal.modal();
             } else if (response.data.status == 1) {
-              vm.tipCon = "密码修改成功"
+              vm.tipCon = "密码修改成功";
               $modal.modal();
-              $("#my-prompt").modal('close');
+              $("#my-prompt").modal("close");
             } else {
-              vm.tipCon = "未知错误，请刷新重试"
+              vm.tipCon = "未知错误，请刷新重试";
               $modal.modal();
             }
-
           })
-          .catch(function (error) {
-
-          });
+          .catch(function(error) {});
       } else {
         vm.tipCon = "请检查并正确填写信息~";
         $modal.modal();
@@ -456,6 +461,7 @@ var userCenter = new Vue({
       if (this.num == 3) {
         this.getExistedData();
       } else if (this.num == 2) {
+        this.isSearch = false;
         this.getSearchData();
       }
     },
@@ -464,7 +470,7 @@ var userCenter = new Vue({
     },
     changeData() {
       let vm = this;
-      vm.chargeValues.forEach(function (ele, index, arr) {
+      vm.chargeValues.forEach(function(ele, index, arr) {
         if (vm.checkedMoney == ele.text) {
           ele.active = true;
         } else {
@@ -476,38 +482,37 @@ var userCenter = new Vue({
     },
     handleFocus() {
       var vm = this;
-      vm.chargeValues.forEach(function (ele, index, arr) {
+      vm.chargeValues.forEach(function(ele, index, arr) {
         ele.active = false;
         vm.realValue = vm.chargeValue;
       });
     },
     handleEdit() {
-      $('#my-prompt').modal({
+      $("#my-prompt").modal({
         relatedTarget: this,
-        onConfirm: function (options) {
-          this.changePassword
+        onConfirm: function(options) {
+          this.changePassword;
         },
         // closeOnConfirm: false,
-        onCancel: function () {
-
-        }
+        onCancel: function() {}
       });
     }
     // 历史纪录分页相关
   }
 });
-$(function () {
+$(function() {
   var $form = $("#form-with-tooltip");
   var $tooltip = $('<div id="vld-tooltip">提示信息！</div>');
   $tooltip.appendTo(document.body);
   $form.validator();
   var validator = $form.data("amui.validator");
-  $form.on("focusin focusout", ".am-field-error", function (e) {
+  $form.on("focusin focusout", ".am-field-error", function(e) {
     if (e.type === "focusin") {
-
       var $this = $(this);
       var offset = $this.offset();
-      var msg = $this.data("foolishMsg") || validator.getValidationMessage($this.data("validity"));
+      var msg =
+        $this.data("foolishMsg") ||
+        validator.getValidationMessage($this.data("validity"));
       $tooltip
         .text(msg)
         .show()
@@ -521,7 +526,7 @@ $(function () {
       $tooltip.hide();
     }
   });
-  $form.on("focusin focusout", ".am-field-valid ", function (e) {
+  $form.on("focusin focusout", ".am-field-valid ", function(e) {
     if (e.type === "focusin") {
       $tooltip.hide();
     } else if (e.type === "focusout") {
@@ -534,13 +539,23 @@ function getDataPage(curpage) {
   var par = curpage == undefined ? (page = "1") : (page = curpage);
   var l = axios({
     method: "post",
-    url: globalUrl + 'content/number',
+    url: globalUrl + "content/number",
     data: {
-
       page: par,
       token: "3986236de4c68ebac8051572d3be678dae2b50db"
     }
   });
   return l;
-
+}
+function getSearchDataPage(curpage) {
+  var par = curpage == undefined ? (page = "1") : (page = curpage);
+  var l = axios({
+    method: "post",
+    url: globalUrl + "content/numsearch",
+    data: {
+      page: par,
+      token: "3986236de4c68ebac8051572d3be678dae2b50db"
+    }
+  });
+  return l;
 }

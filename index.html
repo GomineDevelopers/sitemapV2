@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <!-- 开发版本 -->
-  <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+  <link href="https://cdn.bootcss.com/amazeui/2.7.2/css/amazeui.min.css" rel="stylesheet">
   <!-- 线上压缩版本 -->
-  <!-- <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css"> -->
+  <!--<link href="https://cdn.bootcss.com/amazeui/2.7.2/css/amazeui.min.css" rel="stylesheet"> -->
   <link rel="stylesheet" href="css/index.css">
   <link rel="stylesheet" href="css/common.css">
   <title>siteMap</title>
@@ -95,7 +95,7 @@
             </li>
           </ul>
           <!--已登录-->
-          <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogout" >
+          <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogout">
             <li>
               <a href="#" id="vipName"></a>
             </li>
@@ -117,16 +117,16 @@
         <p class="am-center"> <img src="images/Connectwithyouraudiencethroughstoriespeoplelove..png" alt=""></p>
       </div>
       <div class="am-input-group am-input-group-lg am-u-sm-9 am-u-sm-centered">
-            <input type="text" class="am-form-field" v-model="key_pre" @keydown.enter="search()" placeholder="请输入企业名称">
-          <span class="am-input-group-btn">
-            <button class="am-btn am-btn-primary" type="button" @click="search()">搜索</button>
-          </span>
+        <input type="text" class="am-form-field" v-model="key_pre" @keydown.enter="search()" placeholder="请输入企业名称">
+        <span class="am-input-group-btn">
+          <button class="am-btn am-btn-primary" type="button" @click="search()">搜索</button>
+        </span>
       </div>
       <hr class="content-devider">
       <div class="index-see-more am-fr ">
-          <a href="html/newsCenter.html">READ MORE <i class="am-icon-angle-double-right am-icon-fw"></i> </a>
+        <a href="html/newsCenter.html">READ MORE <i class="am-icon-angle-double-right am-icon-fw"></i> </a>
       </div>
-      <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-3  am-gallery-overlay" data-am-gallery="{ pureview: false }" >
+      <ul data-am-widget="gallery" class="am-gallery am-avg-sm-2 am-avg-md-3  am-gallery-overlay" data-am-gallery="{ pureview: false }">
 
         <li v-for="(pop,index) in newspop" v-if="index<3">
           <div class="am-gallery-item" @click="enteringDetail(pop.id)">
@@ -142,48 +142,52 @@
     </div>
   </div>
   <!-- 内容物结束 -->
-<!-- 页脚 -->
-   <!--===========layout-footer================-->
-   <div class="layout-footer">
+  <!-- 页脚 -->
+  <!--===========layout-footer================-->
+  <div class="layout-footer">
     <div class="footer ">
-      <div  class="footer--bg"></div>
+      <div class="footer--bg"></div>
       <div class="footer-inner">
         <div class="container ">
           <div class="footer_main">
             <div class="am-g am-u-sm-8 am-u-sm-centered">
-                <p class="footer_about--text footer-logo"> <img src="./images/foot_gomine_logo.png" alt=""></p>
+              <p class="footer_about--text footer-logo"> <img src="./images/foot_gomine_logo.png" alt=""></p>
               <div class="am-u-md-6">
                 <div class="footer_main--column">
-                   
+
                   <div class="footer_about">
-                      <p class="footer_about--text">
-                          Rm.B-702,Bldg.1,Zhubang 2000 Business Center, No。100 Balizhuang Xili,
-                          Chaoyang District,Beijing
-                      </p>
-                      <p class="footer_about--text">
-                         <a href=""><i class="am-icon-phone"></i> +86-10-87510736</a>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href=""><i class="am-icon-envelope-o"></i> marketing@gomine.cn</a> 
-                      </p>
-                      <p class="footer_about--text">Copyright©GOMINE.CN All right Reserved.京ICP备05075516号</p>
-                    </div>
+                    <p class="footer_about--text">
+                      Rm.B-702,Bldg.1,Zhubang 2000 Business Center, No。100 Balizhuang Xili,
+                      Chaoyang District,Beijing
+                    </p>
+                    <p class="footer_about--text">
+                      <a href=""><i class="am-icon-phone"></i> +86-10-87510736</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <a href=""><i class="am-icon-envelope-o"></i> marketing@gomine.cn</a>
+                    </p>
+                    <p class="footer_about--text">Copyright©GOMINE.CN All right Reserved.京ICP备05075516号</p>
+                  </div>
                 </div>
               </div>
 
               <div class="am-u-md-6 ">
-                  <div class="footer_right--column">
-                   <strong> <p class="footer_about--text"> subscribe for upgrates</p></strong>
-                    <div class="footer_about">
-                        <p class="footer_about--text">
-                            <div class="am-input-group am-btn-group-lg footer_right-input ">
-                                <input type="text" class="am-form-field" placeholder="enter your email address">
-                                <span class="am-input-group-btn">
-                                    <button class="am-btn am-btn-default " type="button"><span class="am-icon-envelope-o"></span> </button>
-                                  </span>
-                              </div>
-                        </p>
-                       
+                <div class="footer_right--column">
+                  <strong>
+                    <p class="footer_about--text"> subscribe for upgrates</p>
+                  </strong>
+                  <div class="footer_about">
+                    <p class="footer_about--text">
+                      <div class="am-input-group am-btn-group-lg footer_right-input ">
+                        <input type="text" class="am-form-field" placeholder="enter your email address">
+                        <span class="am-input-group-btn">
+                          <button class="am-btn am-btn-default " type="button"><span class="am-icon-envelope-o"></span>
+                          </button>
+                        </span>
                       </div>
+                    </p>
+
                   </div>
-              </div> 
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -193,8 +197,8 @@
 
   <script src="./js/jquery/jquery-3.3.1.min.js"></script>
   <script src="./js/vue/vue.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script>
+  <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
+  <script src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
   <script src="./js/common.js"></script>
   <script src="./js/index.js"></script>
 </body>

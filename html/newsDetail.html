@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
+    <link href="https://cdn.bootcss.com/amazeui/2.7.2/css/amazeui.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/common.css">
     <link rel="stylesheet" href="../css/newsDetail.css">
     <title>新闻详情</title>
@@ -18,7 +18,8 @@
                 <img src="../images/sitemap_logo.png" alt="">
             </h1>
 
-            <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse'}">
+            <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+                data-am-collapse="{target: '#doc-topbar-collapse'}">
                 <span class="am-sr-only">导航切换</span>
                 <span class="am-icon-bars"></span>
             </button>
@@ -26,55 +27,55 @@
             <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
                 <ul class="am-nav am-nav-pills am-topbar-nav">
                     <li class="am-dropdown" data-am-dropdown>
-                      <a class="am-dropdown-toggle" data-am-dropdown-toggle>
-                        500强
-                        <span class="am-icon-caret-down"></span>
-                      </a>
-                      <ul class="am-dropdown-content">
-                        <li>
-                          <a onclick="innerPageGetTagData('福布斯','TOP500','1')">福布斯TOP500</a>
-                        </li>
-                        <li>
-                          <a onclick="innerPageGetTagData('财富','TOP500','1')">财富TOP500</a>
-                        </li>
-                        <li>
-                          <a onclick="innerPageGetTagData('工信部','中企500','1')">工信部中企500</a>
-                        </li>
-                      </ul>
+                        <a class="am-dropdown-toggle" data-am-dropdown-toggle>
+                            500强
+                            <span class="am-icon-caret-down"></span>
+                        </a>
+                        <ul class="am-dropdown-content">
+                            <li>
+                                <a onclick="innerPageGetTagData('福布斯','TOP500','1')">福布斯TOP500</a>
+                            </li>
+                            <li>
+                                <a onclick="innerPageGetTagData('财富','TOP500','1')">财富TOP500</a>
+                            </li>
+                            <li>
+                                <a onclick="innerPageGetTagData('工信部','中企500','1')">工信部中企500</a>
+                            </li>
+                        </ul>
                     </li>
-          
+
                     <li class="am-dropdown" data-am-dropdown>
-                      <a class="am-dropdown-toggle" data-am-dropdown-toggle>
-                        排行榜
-                        <span class="am-icon-caret-down"></span>
-                      </a>
-                      <ul class="am-dropdown-content">
-                        <li>
-                          <a onclick="innerPageGetTagData('住建部','房企100强','1')">房企100强</a>
-                        </li>
-                      </ul>
+                        <a class="am-dropdown-toggle" data-am-dropdown-toggle>
+                            排行榜
+                            <span class="am-icon-caret-down"></span>
+                        </a>
+                        <ul class="am-dropdown-content">
+                            <li>
+                                <a onclick="innerPageGetTagData('住建部','房企100强','1')">房企100强</a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="am-dropdown" data-am-dropdown>
-                      <a class="am-dropdown-toggle" data-am-dropdown-toggle>
-                        交易所
-                        <span class="am-icon-caret-down"></span>
-                      </a>
-                      <ul class="am-dropdown-content">
-                        <li>
-                          <a onclick="innerPageGetTagData('','上海证券交易所','2')">上海证券交易所</a>
-                        </li>
-                        <li>
-                          <a onclick="innerPageGetTagData('','深圳证券交易所','2')">深圳证券交易所</a>
-                        </li>
-                        <li>
-                          <a onclick="innerPageGetTagData('','香港证券交易所','2')">香港证券交易所</a>
-                        </li>
-                      </ul>
+                        <a class="am-dropdown-toggle" data-am-dropdown-toggle>
+                            交易所
+                            <span class="am-icon-caret-down"></span>
+                        </a>
+                        <ul class="am-dropdown-content">
+                            <li>
+                                <a onclick="innerPageGetTagData('','上海证券交易所','2')">上海证券交易所</a>
+                            </li>
+                            <li>
+                                <a onclick="innerPageGetTagData('','深圳证券交易所','2')">深圳证券交易所</a>
+                            </li>
+                            <li>
+                                <a onclick="innerPageGetTagData('','香港证券交易所','2')">香港证券交易所</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li >
-                      <a href="#">新三板</a>
+                    <li>
+                        <a href="#">新三板</a>
                     </li>
-                  </ul>
+                </ul>
                 <div class="am-topbar-right">
 
                     <ul class="am-nav am-nav-pills am-topbar-nav">
@@ -94,7 +95,7 @@
     <!-- 导航结束 -->
     <div class="am-g am-grid-color">
         <div class="am-u-sm-8 am-u-sm-centered">
-           <div class="news-content-warp am-cf" style="min-height:800px" id="main">
+            <div class="news-content-warp am-cf" style="min-height:800px" id="main">
                 <div class="am-u-sm-12">
                     <h1 class="am-text-left" v-text="title"></h1>
                 </div>
@@ -113,16 +114,19 @@
                                 <a class="jiathis_button_weixin"></a>
                                 <a class="jiathis_button_cqq"></a>
                                 <a class="jiathis_button_qzone"></a>
-                                <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+                                <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis"
+                                    target="_blank"></a>
                             </div>
                             <!-- JiaThis Button END -->
 
                         </div>
                     </h5>
                 </div>
-               <div class="am-u-sm-12"><hr style="border:1px #efefef dashed"></div>
+                <div class="am-u-sm-12">
+                    <hr style="border:1px #efefef dashed">
+                </div>
                 <div class="am-u-sm-12 am-cf" v-html="content"></div>
-           </div>
+            </div>
         </div>
     </div>
     <!-- 页脚 -->
@@ -135,13 +139,15 @@
                         <img src="../images/foot_gomine_logo.png" alt="">
                     </p>
                     <div class="am-u-md-6">
-                        <div >
+                        <div>
                             <p>
-                                Rm.B-702,Bldg.1,Zhubang 2000 Business Center, No。100 Balizhuang Xili, Chaoyang District,Beijing
+                                Rm.B-702,Bldg.1,Zhubang 2000 Business Center, No。100 Balizhuang Xili, Chaoyang
+                                District,Beijing
                             </p>
                             <p>
                                 <a href="">
-                                    <i class="am-icon-phone"></i> +86-10-87510736</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <i class="am-icon-phone"></i> +86-10-87510736</a>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <a href="">
                                     <i class="am-icon-envelope-o"></i> marketing@gomine.cn</a>
                             </p>
@@ -173,8 +179,8 @@
 
     <script src="../js/jquery/jquery-3.3.1.min.js"></script>
     <script src="../js/vue/vue.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
+    <script src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
     <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js" charset="utf-8"></script>
     <script src="../js/common.js"></script>
     <script src="../js/newsDetail.js"></script>

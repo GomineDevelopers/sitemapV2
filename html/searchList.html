@@ -2,256 +2,271 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <!-- 开发版本 -->
-  <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css">
-  <!-- 线上压缩版本 -->
-  <!-- <link rel="stylesheet" href="http://cdn.amazeui.org/amazeui/2.7.2/css/amazeui.min.css"> -->
-  <link rel="stylesheet" href="../css/common.css">
-  <link rel="stylesheet" href="../css/searchList.css">
-  <title>搜索列表</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 开发版本 -->
+    <link href="https://cdn.bootcss.com/amazeui/2.7.2/css/amazeui.min.css" rel="stylesheet">
+    <!-- 线上压缩版本 -->
+    <!--<link href="https://cdn.bootcss.com/amazeui/2.7.2/css/amazeui.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/searchList.css">
+    <title>搜索列表</title>
 </head>
 
 <body>
-  <!-- 头部导航 -->
-  <header class="am-topbar am-topbar-fixed-top">
-    <div class="am-u-sm-8  am-u-sm-centered">
-      <h1 class="am-topbar-brand">
-        <img src="../images/sitemap_logo.png" alt="">
-      </h1>
+    <!-- 头部导航 -->
+    <header class="am-topbar am-topbar-fixed-top">
+        <div class="am-u-sm-8  am-u-sm-centered">
+            <h1 class="am-topbar-brand">
+                <img src="../images/sitemap_logo.png" alt="">
+            </h1>
 
-      <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse'}">
-        <span class="am-sr-only">导航切换</span>
-        <span class="am-icon-bars"></span>
-      </button>
+            <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+                data-am-collapse="{target: '#doc-topbar-collapse'}">
+                <span class="am-sr-only">导航切换</span>
+                <span class="am-icon-bars"></span>
+            </button>
 
-      <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
-        <ul class="am-nav am-nav-pills am-topbar-nav">
-          <li>
-            <a href="../index.html">首页</a>
-          </li>
-          <li class="am-dropdown" data-am-dropdown>
-            <a class="am-dropdown-toggle" data-am-dropdown-toggle>
-              500强
-              <span class="am-icon-caret-down"></span>
-            </a>
-            <ul class="am-dropdown-content">
-              <li>
-                <a onclick="innerPageGetTagData('福布斯','TOP500','1')">福布斯TOP500</a>
-              </li>
-              <li>
-                <a onclick="innerPageGetTagData('财富','TOP500','1')">财富TOP500</a>
-              </li>
-              <li>
-                <a onclick="innerPageGetTagData('工信部','中企500','1')">工信部中企500</a>
-              </li>
-            </ul>
-          </li>
-          <li class="am-dropdown" data-am-dropdown>
-            <a class="am-dropdown-toggle" data-am-dropdown-toggle>
-              排行榜
-              <span class="am-icon-caret-down"></span>
-            </a>
-            <ul class="am-dropdown-content">
-              <li>
-                <a onclick="innerPageGetTagData('住建部','房企100强','1')">房企100强</a>
-              </li>
-            </ul>
-          </li>
-          <li class="am-dropdown" data-am-dropdown>
-            <a class="am-dropdown-toggle" data-am-dropdown-toggle>
-              交易所
-              <span class="am-icon-caret-down"></span>
-            </a>
-            <ul class="am-dropdown-content">
-              <li>
-                <a onclick="innerPageGetTagData('','上海证券交易所','2')">上海证券交易所</a>
-              </li>
-              <li>
-                <a onclick="innerPageGetTagData('','深圳证券交易所','2')">深圳证券交易所</a>
-              </li>
-              <li>
-                <a onclick="innerPageGetTagData('','香港证券交易所','2')">香港证券交易所</a>
-              </li>
-            </ul>
-          </li>
-          <li >
-            <a href="#">新三板</a>
-          </li>
-        </ul>
-        <div class="am-topbar-right">
-            <!--未登录-->
-            <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogin">
-                <li>
-                    <a href="../login.html">登陆</a>
-                </li>
-                <li>
-                    <a href="./register.html">注册</a>
-                </li>
-            </ul>
-            <!--已登录-->
-            <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogout" >
-                <li>
-                    <a href="#" id="vipName"></a>
-                </li>
-                <li>
-                    <a id="logout">退出</a>
-                </li>
-            </ul>
+            <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+                <ul class="am-nav am-nav-pills am-topbar-nav">
+                    <li>
+                        <a href="../index.html">首页</a>
+                    </li>
+                    <li class="am-dropdown" data-am-dropdown>
+                        <a class="am-dropdown-toggle" data-am-dropdown-toggle>
+                            500强
+                            <span class="am-icon-caret-down"></span>
+                        </a>
+                        <ul class="am-dropdown-content">
+                            <li>
+                                <a onclick="innerPageGetTagData('福布斯','TOP500','1')">福布斯TOP500</a>
+                            </li>
+                            <li>
+                                <a onclick="innerPageGetTagData('财富','TOP500','1')">财富TOP500</a>
+                            </li>
+                            <li>
+                                <a onclick="innerPageGetTagData('工信部','中企500','1')">工信部中企500</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="am-dropdown" data-am-dropdown>
+                        <a class="am-dropdown-toggle" data-am-dropdown-toggle>
+                            排行榜
+                            <span class="am-icon-caret-down"></span>
+                        </a>
+                        <ul class="am-dropdown-content">
+                            <li>
+                                <a onclick="innerPageGetTagData('住建部','房企100强','1')">房企100强</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="am-dropdown" data-am-dropdown>
+                        <a class="am-dropdown-toggle" data-am-dropdown-toggle>
+                            交易所
+                            <span class="am-icon-caret-down"></span>
+                        </a>
+                        <ul class="am-dropdown-content">
+                            <li>
+                                <a onclick="innerPageGetTagData('','上海证券交易所','2')">上海证券交易所</a>
+                            </li>
+                            <li>
+                                <a onclick="innerPageGetTagData('','深圳证券交易所','2')">深圳证券交易所</a>
+                            </li>
+                            <li>
+                                <a onclick="innerPageGetTagData('','香港证券交易所','2')">香港证券交易所</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">新三板</a>
+                    </li>
+                </ul>
+                <div class="am-topbar-right">
+                    <!--未登录-->
+                    <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogin">
+                        <li>
+                            <a href="../login.html">登陆</a>
+                        </li>
+                        <li>
+                            <a href="./register.html">注册</a>
+                        </li>
+                    </ul>
+                    <!--已登录-->
+                    <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogout">
+                        <li>
+                            <a href="#" id="vipName"></a>
+                        </li>
+                        <li>
+                            <a id="logout">退出</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </header>
-  <!-- 头部导航 -->
+    </header>
+    <!-- 头部导航 -->
 
-  <!-- 内容区域 -->
-<div id="main">
-  <div class="am-g">
-    <div class="am-u-sm-8  am-u-sm-centered">
-      
-        <div class="am-input-group searchList-input-group am-u-sm-6">
-          <!--<span class="am-input-group-btn">
+    <!-- 内容区域 -->
+    <div id="main">
+        <div class="am-g">
+            <div class="am-u-sm-8  am-u-sm-centered">
+
+                <div class="am-input-group searchList-input-group am-u-sm-6">
+                    <!--<span class="am-input-group-btn">
               <select data-am-selected id="search_select">
                   <option value="list" selected>列表</option>
                   <option value="img">图表</option>
               </select>
           </span>-->
-          <input type="text" class="am-form-field" placeholder="示例：500强企业" v-model="key"  @keydown.enter="Search">
-          <span class="am-input-group-btn">
-            <button class="am-btn am-btn-secondary" type="button" @click="Search()">搜索</button>
-          </span>
+                    <input type="text" class="am-form-field" placeholder="示例：500强企业" v-model="key" @keydown.enter="Search">
+                    <span class="am-input-group-btn">
+                        <button class="am-btn am-btn-secondary" type="button" @click="Search()">搜索</button>
+                    </span>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <!-- 条件筛选区域 -->
-    <div class="am-g">
-      <div class="am-u-sm-8  am-u-sm-centered">
-          <div class="am-panel am-panel-default am-panel-noborder" id="accordion">
-              <div class="am-panel-hd" data-am-collapse="{parent: '#accordion', target: '#do-not-say-1'}"><span><i class="am-icon-angle-down am-icon-sm"></i> </span> 条件筛选</div>
-              <div class="am-panel-bd  am-in" id="do-not-say-1">
-                  <div class="am-panel am-panel-default am-panel-noborder ">
-                        <div class="filter">
-                          <div class="container">
-                              <div class="box">
-                                <dl class="am-cf title-h">
-                                  <dt class="">已选条件：</dt>
-                                  <dd class="selected-box">
-                                      <span v-for="selectedItem in selectedItems" class="selected-items" @click="delSelected(selectedItem.tag,$event)">
-                                          <i class="am-icon-close" v-text="selectedItem.selectedName"></i>
-                                      </span>
-                                  </dd>
-                                  <!-- <dd class="clear-all" v-show="selectedItems.length>0" @click="clearAll"><a class="am-icon-trash">清除已选</a></dd> -->
-                              </dl>
-                              <dl class="am-cf" v-show="isShow.isShow_dlRan">
-                                  <dt>搜索范围：</dt>
-                                  <dd>
-                                      <a class="sx_child" v-for="rangItem in rang" v-text="rangItem.text" @click="getSelected('Ran',$event)"></a>
-                                  </dd>
-                              </dl>
-                              <dl class="am-cf" v-show="isShow.isShow_dlRegC">
-                                  <dt>注册资本：</dt>
-                                  <dd>
-                                      <a class="sx_child" v-for="registeredCapital in registeredCapitals" v-text="registeredCapital.text" @click="getSelected('RegC',$event)"></a>
-                                  </dd>
-                              </dl>
-                              <dl class="am-cf" v-show="isShow.isShow_dlSta">
-                                  <dt>员工人数：</dt>
-                                  <dd>
-                                      <a class="sx_child" v-for="staff in staffs" v-text="staff.text" @click="getSelected('Sta',$event)"></a>
-                                  </dd>
-                              </dl>
-                              <dl class="am-cf" v-show="isShow.isShow_dlTurn">
-                                  <dt>营业额：</dt>
-                                  <dd>
-                                      <a class="sx_child" v-for="turnover in turnovers" v-text="turnover.text" @click="getSelected('Turn',$event)"></a>
-                                  </dd>
-                              </dl>
-                              <dl class="am-cf" v-show="isShow.isShow_dlInd">
-                                  <dt>行业：</dt>
-                                  <dd class="content-body" :class={'show-content-body':isShow.isShow_ind}>
-                                      <a class="sx_child" v-for="industryItem in industry" v-text="industryItem.text" @click="getSelected('Ind',$event)"></a>
-                                  </dd>
-                                  <dd class="show-more" @click="More('ind',$event)"><a class="am-icon-angle-down">更多</a></dd>
-                              </dl>
-                              <dl class="am-cf" v-show="isShow.isShow_dlTime">
-                                  <dt>成立时间</dt>
-                                  <dd>
-                                      <a name="date" class="sx_child" v-for="foundedTime in foundedTimes" v-text="foundedTime.text" @click="getSelected('Time',$event)"></a>
-                                  </dd>
-                              </dl>
-                              <dl class="am-cf" id="7" v-show="isShow.isShow_dlReg">
-                                <dt >注册地区：</dt>
-                                <dd class="content-body" :class={'show-content-body':isShow.isShow_reg}>
-                                    <a class="sx_child" v-for="areaItem in area" v-text="areaItem.text" @click="getSelected('Reg',$event)"></a>
-                                </dd>
-                                <dd class="show-more" @click="More('reg',$event)"><a class="am-icon-angle-down">更多</a></dd>
-                              </dl>
-                              </div>
-                          </div>
-                      </div>
-                      </div>
+        <!-- 条件筛选区域 -->
+        <div class="am-g">
+            <div class="am-u-sm-8  am-u-sm-centered">
+                <div class="am-panel am-panel-default am-panel-noborder" id="accordion">
+                    <div class="am-panel-hd" data-am-collapse="{parent: '#accordion', target: '#do-not-say-1'}"><span><i
+                                class="am-icon-angle-down am-icon-sm"></i> </span> 条件筛选</div>
+                    <div class="am-panel-bd  am-in" id="do-not-say-1">
+                        <div class="am-panel am-panel-default am-panel-noborder ">
+                            <div class="filter">
+                                <div class="container">
+                                    <div class="box">
+                                        <dl class="am-cf title-h">
+                                            <dt class="">已选条件：</dt>
+                                            <dd class="selected-box">
+                                                <span v-for="selectedItem in selectedItems" class="selected-items"
+                                                    @click="delSelected(selectedItem.tag,$event)">
+                                                    <i class="am-icon-close" v-text="selectedItem.selectedName"></i>
+                                                </span>
+                                            </dd>
+                                            <!-- <dd class="clear-all" v-show="selectedItems.length>0" @click="clearAll"><a class="am-icon-trash">清除已选</a></dd> -->
+                                        </dl>
+                                        <dl class="am-cf" v-show="isShow.isShow_dlRan">
+                                            <dt>搜索范围：</dt>
+                                            <dd>
+                                                <a class="sx_child" v-for="rangItem in rang" v-text="rangItem.text"
+                                                    @click="getSelected('Ran',$event)"></a>
+                                            </dd>
+                                        </dl>
+                                        <dl class="am-cf" v-show="isShow.isShow_dlRegC">
+                                            <dt>注册资本：</dt>
+                                            <dd>
+                                                <a class="sx_child" v-for="registeredCapital in registeredCapitals"
+                                                    v-text="registeredCapital.text" @click="getSelected('RegC',$event)"></a>
+                                            </dd>
+                                        </dl>
+                                        <dl class="am-cf" v-show="isShow.isShow_dlSta">
+                                            <dt>员工人数：</dt>
+                                            <dd>
+                                                <a class="sx_child" v-for="staff in staffs" v-text="staff.text" @click="getSelected('Sta',$event)"></a>
+                                            </dd>
+                                        </dl>
+                                        <dl class="am-cf" v-show="isShow.isShow_dlTurn">
+                                            <dt>营业额：</dt>
+                                            <dd>
+                                                <a class="sx_child" v-for="turnover in turnovers" v-text="turnover.text"
+                                                    @click="getSelected('Turn',$event)"></a>
+                                            </dd>
+                                        </dl>
+                                        <dl class="am-cf" v-show="isShow.isShow_dlInd">
+                                            <dt>行业：</dt>
+                                            <dd class="content-body" :class={'show-content-body':isShow.isShow_ind}>
+                                                <a class="sx_child" v-for="industryItem in industry" v-text="industryItem.text"
+                                                    @click="getSelected('Ind',$event)"></a>
+                                            </dd>
+                                            <dd class="show-more" @click="More('ind',$event)"><a class="am-icon-angle-down">更多</a></dd>
+                                        </dl>
+                                        <dl class="am-cf" v-show="isShow.isShow_dlTime">
+                                            <dt>成立时间</dt>
+                                            <dd>
+                                                <a name="date" class="sx_child" v-for="foundedTime in foundedTimes"
+                                                    v-text="foundedTime.text" @click="getSelected('Time',$event)"></a>
+                                            </dd>
+                                        </dl>
+                                        <dl class="am-cf" id="7" v-show="isShow.isShow_dlReg">
+                                            <dt>注册地区：</dt>
+                                            <dd class="content-body" :class={'show-content-body':isShow.isShow_reg}>
+                                                <a class="sx_child" v-for="areaItem in area" v-text="areaItem.text"
+                                                    @click="getSelected('Reg',$event)"></a>
+                                            </dd>
+                                            <dd class="show-more" @click="More('reg',$event)"><a class="am-icon-angle-down">更多</a></dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-              </div>
-      </div>
+                </div>
+            </div>
 
-     <!-- 展示列表 -->
-      <div class="am-u-sm-8 am-u-sm-centered">
-         <div class="news-content-warp ">
-          <div class="am-panel am-panel-default am-panel-noborder  " >
-            <div class="am-panel-hd white-bgcolor " >
-                <span> 找到<span class="am-text-danger" v-text="all"></span>符合条件的企业
-                  <button class="btn am-btn  am-btn-primary am-fr btn-export"> <i class="am-icon-save"></i> 导出</button>
-                  <button class="btn am-btn am-btn-primary am-fr  btn-chart" @click="goChart"> <i class="am-icon-bar-chart"></i> 图表</button>
-                  <!--<span class=" am-fr">
+            <!-- 展示列表 -->
+            <div class="am-u-sm-8 am-u-sm-centered">
+                <div class="news-content-warp ">
+                    <div class="am-panel am-panel-default am-panel-noborder  ">
+                        <div class="am-panel-hd white-bgcolor ">
+                            <span> 找到<span class="am-text-danger" v-text="all"></span>符合条件的企业
+                                <button class="btn am-btn  am-btn-primary am-fr btn-export"> <i class="am-icon-save"></i>
+                                    导出</button>
+                                <button class="btn am-btn am-btn-primary am-fr  btn-chart" @click="goChart"> <i class="am-icon-bar-chart"></i>
+                                    图表</button>
+                                <!--<span class=" am-fr">
                       <select class="am-btn am-btn-secondary">
                           <option value="asc">排序A-Z</option>
                           <option value="desc">排序Z-A</option>
                       </select>
                   </span>-->
-                </span>
-              </div>
-            <div class="am-panel-bd">
-                <div class="matched-company listActive" v-for="con in contentList"  @click="goDetail(con.Seq_No)">
-                  <div class="title"><span v-text="con.Account_Name"></span><span class="am-fr"><a >查看</a></span></div>
-                  <div class="description"> <span>法定代表人:<span class="name m-l" v-text="con.Legal_Person"></span> </span> <span class="m-l">注册资本：<span v-text="con.Registered_Capital"></span></span> <span>成立时间：<span v-text="con.Start_Year"></span> </span> </div>
-                  <div class="description"> <span>电话:<span class="m-l" v-text="con.Company_Phone"></span> </span> <span class="m-l">邮箱：<span v-text="con.Email_Domain"></span></span>  </div>
-                  <div class="description"> <span>地址:<span class="m-l" v-text="con.Street"></span> </span> </div>
+                            </span>
+                        </div>
+                        <div class="am-panel-bd">
+                            <div class="matched-company listActive" v-for="con in contentList" @click="goDetail(con.Seq_No)">
+                                <div class="title"><span v-text="con.Account_Name"></span><span class="am-fr"><a>查看</a></span></div>
+                                <div class="description"> <span>法定代表人:<span class="name m-l" v-text="con.Legal_Person"></span>
+                                    </span> <span class="m-l">注册资本：<span v-text="con.Registered_Capital"></span></span>
+                                    <span>成立时间：<span v-text="con.Start_Year"></span> </span> </div>
+                                <div class="description"> <span>电话:<span class="m-l" v-text="con.Company_Phone"></span>
+                                    </span> <span class="m-l">邮箱：<span v-text="con.Email_Domain"></span></span> </div>
+                                <div class="description"> <span>地址:<span class="m-l" v-text="con.Street"></span> </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-         </div>
-        </div>
-    </div>
-    <div v-show="isShow.loading" class="loading"></div>
-        <!--分页-->
-      <div class="am-u-sm-8 am-u-sm-centered ">
-            <div class="am-fl">
-                <ul class="am-pagination am-pagination-size">
-                    <li v-if="cur==1" :class={"am-disabled":cur==1}><a>&lt;</a></li>
-                    <li v-if="cur>1"><a @click="cur--,pageClick()">&lt;</a></li>
-                    <li v-for="index in indexs"  :class="{ 'am-active': cur == index}">
-                        <a @click="btnClick(index)" v-text="index"></a>
-                    </li>
-                    <li v-if="cur==allPage" :class={"am-disabled":cur==allPage}><a>&gt;</a></li>
-                    <li v-if="cur!=allPage"><a @click="cur++,pageClick()">&gt;</a></li>
-                    <li>共</li>
-                    <li v-text="allPage"></li>
-                    <li>页</li>
-                    <li>跳到</li>
-                    <li><input type="number" v-model="goPage"></li>
-                    <li>页</li>
-                    <li><button @click="Go()">GO</button></li>
-                </ul>
+            <div v-show="isShow.loading" class="loading"></div>
+            <!--分页-->
+            <div class="am-u-sm-8 am-u-sm-centered ">
+                <div class="am-fl">
+                    <ul class="am-pagination am-pagination-size">
+                        <li v-if="cur==1" :class={"am-disabled":cur==1}><a>&lt;</a></li>
+                        <li v-if="cur>1"><a @click="cur--,pageClick()">&lt;</a></li>
+                        <li v-for="index in indexs" :class="{ 'am-active': cur == index}">
+                            <a @click="btnClick(index)" v-text="index"></a>
+                        </li>
+                        <li v-if="cur==allPage" :class={"am-disabled":cur==allPage}><a>&gt;</a></li>
+                        <li v-if="cur!=allPage"><a @click="cur++,pageClick()">&gt;</a></li>
+                        <li>共</li>
+                        <li v-text="allPage"></li>
+                        <li>页</li>
+                        <li>跳到</li>
+                        <li><input type="number" v-model="goPage"></li>
+                        <li>页</li>
+                        <li><button @click="Go()">GO</button></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
 
-  <!--内容区域  -->
-</div>
+        <!--内容区域  -->
+    </div>
     <!-- 底部导航 -->
-<div class="layout-footer">
+    <div class="layout-footer">
         <div class="container ">
             <div class="footer_main ">
                 <div class="am-g am-u-sm-8 am-u-sm-centered">
@@ -259,13 +274,15 @@
                         <img src="../images/foot_gomine_logo.png" alt="">
                     </p>
                     <div class="am-u-md-6">
-                        <div >
+                        <div>
                             <p>
-                                Rm.B-702,Bldg.1,Zhubang 2000 Business Center, No。100 Balizhuang Xili, Chaoyang District,Beijing
+                                Rm.B-702,Bldg.1,Zhubang 2000 Business Center, No。100 Balizhuang Xili, Chaoyang
+                                District,Beijing
                             </p>
                             <p>
                                 <a href="">
-                                    <i class="am-icon-phone"></i> +86-10-87510736</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <i class="am-icon-phone"></i> +86-10-87510736</a>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <a href="">
                                     <i class="am-icon-envelope-o"></i> marketing@gomine.cn</a>
                             </p>
@@ -294,13 +311,13 @@
         </div>
     </div>
     <!-- 底部导航 -->
-  <!-- 开发版本 -->
-  <script src="../js/jquery/jquery-3.3.1.min.js"></script>
-  <script src="../js/vue/vue.js"></script>
-  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  <script src="http://cdn.amazeui.org/amazeui/2.7.2/js/amazeui.min.js"></script>
-  <script src="../js/common.js"></script>
-  <script src="../js/searchList.js"></script>
+    <!-- 开发版本 -->
+    <script src="../js/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../js/vue/vue.js"></script>
+    <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
+    <script src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/searchList.js"></script>
 
 </body>
 
