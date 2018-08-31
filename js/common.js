@@ -1,5 +1,6 @@
+// 全局URl
+const globalUrl = "http://118.31.78.153/backend/api/";
 /*时间戳*/
-const globalUrl = "http://192.168.0.5/sitemap/api/";
 function formatDate(date, showDetail) {
     var isShow = showDetail || false;
     var d = new Date(parseInt(date) * 1000);
@@ -83,6 +84,7 @@ function getTagData(organizor, info, type, navName) {
     localStorage.setItem("b", JSON.stringify(storage));
     window.location.href = "./html/labelSearch.html";
 }
+
 function innerPageGetTagData(organizor, info, type, navName) {
     //非首页
     var storage = {
@@ -95,7 +97,7 @@ function innerPageGetTagData(organizor, info, type, navName) {
     window.location.href = "./labelSearch.html";
 }
 
-$(function() {
+$(function () {
     if (getLocalStorage("token") && getLocalStorage("userName")) {
         $("#isLogin").remove();
         $("#vipName").text(getLocalStorage("userName"));
@@ -106,7 +108,7 @@ $(function() {
     }
 
     if ($("#logout")) {
-        $("#logout").click(function() {
+        $("#logout").click(function () {
             logout();
         });
     }

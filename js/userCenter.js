@@ -206,15 +206,17 @@ var userCenter = new Vue({
     oldPassword: "",
     newPassword: "",
     newPasswordCheck: "",
-    tipCon: ""
+    tipCon: "",
+    token: ''
   },
   watch: {
     checkedMoney: "changeData",
     selected_pro: "resetDispicker"
   },
   mounted: function () {
-    var token = localStorage;
-    console.log(token);
+
+    this.token = JSON.parse(localStorage.getItem('token')).val
+    console.log(this.token)
   },
   computed: {
     //分页
@@ -261,7 +263,7 @@ var userCenter = new Vue({
       var vm = this;
       axios
         .post(globalUrl + "content/number", {
-          token: "3986236de4c68ebac8051572d3be678dae2b50db"
+          token: vm.token
         })
         .then(function (response) {
           vm.isSearch = false;
@@ -278,12 +280,12 @@ var userCenter = new Vue({
       if (data != vm.cur) {
         vm.cur = data;
         if (vm.isSearch) {
-          getSearchDataPage(vm.cur, vm.targetSearchcontent).then(function (response) {
+          getSearchDataPage(vm.cur, vm.targetSearchcontent, vm.token).then(function (response) {
             vm.isShow.loading = false;
             vm.historyData = response.data.data.data;
           });
         } else {
-          getDataPage(vm.cur).then(function (response) {
+          getDataPage(vm.cur, vm.token).then(function (response) {
             vm.isShow.loading = false;
             vm.historyData = response.data.data.data;
           });
@@ -294,12 +296,12 @@ var userCenter = new Vue({
       var vm = this;
       vm.isShow.loading = true;
       if (vm.isSearch) {
-        getSearchDataPage(vm.cur, vm.targetSearchcontent).then(function (response) {
+        getSearchDataPage(vm.cur, vm.targetSearchcontent, vm.token).then(function (response) {
           vm.isShow.loading = false;
           vm.historyData = response.data.data.data;
         });
       } else {
-        getDataPage(vm.cur).then(function (response) {
+        getDataPage(vm.cur, vm.token).then(function (response) {
           vm.isShow.loading = false;
           vm.historyData = response.data.data.data;
         });
@@ -313,12 +315,12 @@ var userCenter = new Vue({
       vm.allPage = vm.all % 5 == 0 ? vm.all / 5 : Math.ceil(vm.all / 5);
       if (vm.cur <= vm.allPage) {
         if (vm.isSearch) {
-          getSearchDataPage(vm.cur, vm.targetSearchcontent).then(function (response) {
+          getSearchDataPage(vm.cur, vm.targetSearchcontent, vm.token).then(function (response) {
             vm.isShow.loading = false;
             vm.historyData = response.data.data.data;
           });
         } else {
-          getDataPage(vm.cur).then(function (response) {
+          getDataPage(vm.cur, vm.token).then(function (response) {
             vm.isShow.loading = false;
             vm.historyData = response.data.data.data;
           });
@@ -333,7 +335,7 @@ var userCenter = new Vue({
       var vm = this;
       axios
         .post(globalUrl + "content/numsearch", {
-          token: "3986236de4c68ebac8051572d3be678dae2b50db",
+          token: vm.token,
           content: vm.targetSearchcontent
         })
         .then(function (response) {
@@ -348,7 +350,7 @@ var userCenter = new Vue({
       let temp = {};
       axios
         .post(globalUrl + "content/settings", {
-          token: "3986236de4c68ebac8051572d3be678dae2b50db"
+          token: vm.token
         })
         .then(function (response) {
           temp = response.data.data[0];
@@ -380,7 +382,7 @@ var userCenter = new Vue({
       if (arr.length == 0) {
         axios
           .post(globalUrl + "content/uppsword", {
-            token: "3986236de4c68ebac8051572d3be678dae2b50db",
+            token: vm.token,
             email: vm.userSetting.userEmail,
             State_Code: vm.selected_pro,
             City_Code: vm.selected_city,
@@ -419,7 +421,7 @@ var userCenter = new Vue({
       if (arr.length == 0) {
         axios
           .post(globalUrl + "content/password", {
-            token: "3986236de4c68ebac8051572d3be678dae2b50db",
+            token: vm.token,
             password: vm.oldPassword,
             newPassword: vm.newPassword,
             newPasswordCheck: vm.newPasswordCheck
@@ -533,20 +535,20 @@ $(function () {
   });
 });
 
-function getDataPage(curpage) {
+function getDataPage(curpage, token) {
   var par = curpage == undefined ? (page = "1") : (page = curpage);
   var l = axios({
     method: "post",
     url: globalUrl + "content/number",
     data: {
       page: par,
-      token: "3986236de4c68ebac8051572d3be678dae2b50db"
+      token: token
     }
   });
   return l;
 }
 
-function getSearchDataPage(curpage, content) {
+function getSearchDataPage(curpage, content, token) {
   var par = curpage == undefined ? (page = "1") : (page = curpage);
   var l = axios({
     method: "post",
@@ -554,7 +556,7 @@ function getSearchDataPage(curpage, content) {
     data: {
       page: par,
       content: content,
-      token: "3986236de4c68ebac8051572d3be678dae2b50db"
+      token: token
     }
   });
   return l;

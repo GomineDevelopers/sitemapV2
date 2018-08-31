@@ -19,7 +19,8 @@
                 <img src="../images/sitemap_logo.png" alt="">
             </h1>
 
-            <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only" data-am-collapse="{target: '#doc-topbar-collapse'}">
+            <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+                data-am-collapse="{target: '#doc-topbar-collapse'}">
                 <span class="am-sr-only">导航切换</span>
                 <span class="am-icon-bars"></span>
             </button>
@@ -30,79 +31,79 @@
                         <a href="../index.html">首页</a>
                     </li>
                     <li class="am-dropdown" data-am-dropdown>
-                      <a class="am-dropdown-toggle" data-am-dropdown-toggle>
-                        500强
-                        <span class="am-icon-caret-down"></span>
-                      </a>
-                      <ul class="am-dropdown-content">
-                        <li>
-                          <a onclick="innerPageGetTagData('福布斯','TOP500','1','500强')">福布斯TOP500</a>
-                        </li>
-                        <li>
-                          <a onclick="innerPageGetTagData('财富','TOP500','1','500强')">财富TOP500</a>
-                        </li>
-                        <li>
-                          <a onclick="innerPageGetTagData('工信部','中企500','1','500强')">工信部中企500</a>
-                        </li>
-                      </ul>
+                        <a class="am-dropdown-toggle" data-am-dropdown-toggle>
+                            500强
+                            <span class="am-icon-caret-down"></span>
+                        </a>
+                        <ul class="am-dropdown-content">
+                            <li>
+                                <a onclick="innerPageGetTagData('福布斯','TOP500','1','500强')">福布斯TOP500</a>
+                            </li>
+                            <li>
+                                <a onclick="innerPageGetTagData('财富','TOP500','1','500强')">财富TOP500</a>
+                            </li>
+                            <li>
+                                <a onclick="innerPageGetTagData('工信部','中企500','1','500强')">工信部中企500</a>
+                            </li>
+                        </ul>
                     </li>
-          
+
                     <li class="am-dropdown" data-am-dropdown>
-                      <a class="am-dropdown-toggle" data-am-dropdown-toggle>
-                        排行榜
-                        <span class="am-icon-caret-down"></span>
-                      </a>
-                      <ul class="am-dropdown-content">
-                        <li>
-                          <a onclick="innerPageGetTagData('住建部','房企100强','1','排行榜')">房企100强</a>
-                        </li>
-                      </ul>
+                        <a class="am-dropdown-toggle" data-am-dropdown-toggle>
+                            排行榜
+                            <span class="am-icon-caret-down"></span>
+                        </a>
+                        <ul class="am-dropdown-content">
+                            <li>
+                                <a onclick="innerPageGetTagData('住建部','房企100强','1','排行榜')">房企100强</a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="am-dropdown" data-am-dropdown>
-                      <a class="am-dropdown-toggle" data-am-dropdown-toggle>
-                        交易所
-                        <span class="am-icon-caret-down"></span>
-                      </a>
-                      <ul class="am-dropdown-content">
-                        <li>
-                          <a onclick="innerPageGetTagData('','上海证券交易所','2','交易所')">上海证券交易所</a>
-                        </li>
-                        <li>
-                          <a onclick="innerPageGetTagData('','深圳证券交易所','2','交易所')">深圳证券交易所</a>
-                        </li>
-                        <li>
-                          <a onclick="innerPageGetTagData('','香港证券交易所','2','交易所')">香港证券交易所</a>
-                        </li>
-                      </ul>
+                        <a class="am-dropdown-toggle" data-am-dropdown-toggle>
+                            交易所
+                            <span class="am-icon-caret-down"></span>
+                        </a>
+                        <ul class="am-dropdown-content">
+                            <li>
+                                <a onclick="innerPageGetTagData('','上海证券交易所','2','交易所')">上海证券交易所</a>
+                            </li>
+                            <li>
+                                <a onclick="innerPageGetTagData('','深圳证券交易所','2','交易所')">深圳证券交易所</a>
+                            </li>
+                            <li>
+                                <a onclick="innerPageGetTagData('','香港证券交易所','2','交易所')">香港证券交易所</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li >
-                      <a href="#">新三板</a>
+                    <li>
+                        <a href="#">新三板</a>
                     </li>
                     <li>
                         <a href="./newsCenter.html">新闻中心</a>
                     </li>
-                  </ul>
-                  <div class="am-topbar-right">
-                      <!--未登录-->
-                      <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogin">
-                          <li>
-                              <a href="../login.html">登陆</a>
-                          </li>
-                          <li>
-                              <a href="./register.html">注册</a>
-                          </li>
-                      </ul>
-                      <!--已登录-->
-                      <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogout" >
-                          <li>
-                              <a href="#" id="vipName"></a>
-                          </li>
-                          <li>
-                              <a id="logout">退出</a>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
+                </ul>
+                <div class="am-topbar-right">
+                    <!--未登录-->
+                    <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogin">
+                        <li>
+                            <a href="../login.html">登陆</a>
+                        </li>
+                        <li>
+                            <a href="./register.html">注册</a>
+                        </li>
+                    </ul>
+                    <!--已登录-->
+                    <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogout">
+                        <li>
+                            <a href="./userCenter.html" id="vipName"></a>
+                        </li>
+                        <li>
+                            <a id="logout">退出</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </header>
     <!-- 头部导航 -->
@@ -149,10 +150,12 @@
                         </p>
                         <div class="am-u-md-6">
                             <div>
-                                <p>Rm.B-702,Bldg.1,Zhubang 2000 Business Center, No。100 Balizhuang Xili, Chaoyang District,Beijing</p>
+                                <p>Rm.B-702,Bldg.1,Zhubang 2000 Business Center, No。100 Balizhuang Xili, Chaoyang
+                                    District,Beijing</p>
                                 <p>
                                     <a href="">
-                                        <i class="am-icon-phone"></i> +86-10-87510736</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <i class="am-icon-phone"></i> +86-10-87510736</a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <a href="">
                                         <i class="am-icon-envelope-o"></i> marketing@gomine.cn</a>
                                 </p>
@@ -181,10 +184,10 @@
             </div>
         </div>
     </div>
-        <!-- 底部导航 -->
-        
+    <!-- 底部导航 -->
+
     <script src="../js/jquery/jquery-3.3.1.min.js"></script>
-     <script src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
+    <script src="https://cdn.bootcss.com/amazeui/2.7.2/js/amazeui.min.js"></script>
     <script src="../js/common.js"></script>
     <script src="../js/map.js"></script>
 </body>
