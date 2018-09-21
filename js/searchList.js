@@ -590,8 +590,8 @@ var app = new Vue({
             break;
         }
       });
-      window.location.href =
-        "http://118.31.78.153/backend/api/content/daochu/accounname/" +
+      window.location.href = globalUrl +
+        "/content/daochu/accounname/" +
         vm.key +
         "/range/" +
         range +
@@ -617,7 +617,7 @@ var app = new Vue({
       //     .catch(function(error) {
       //       console.log(error);
       //     });
-      console.log(vm.key)
+
     }
     // 清除所有选项
     // clearAll:function(){

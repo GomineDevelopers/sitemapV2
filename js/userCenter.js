@@ -543,7 +543,12 @@ var userCenter = new Vue({
         console.log(vm.all)
         vm.cur = 1;
       });
+    },
+    getEachrecordData(date) {
+      window.location.href = globalUrl + "/content/document" + "/datetime/"
+      date;
     }
+
   }
 });
 $(function () {
