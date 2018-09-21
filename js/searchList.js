@@ -1,5 +1,4 @@
-var rang = [
-  {
+var rang = [{
     text: "企业名称",
     value: "企业名称"
   },
@@ -44,8 +43,7 @@ var rang = [
     value: "商标"
   }
 ];
-var registeredCapitals = [
-  {
+var registeredCapitals = [{
     text: "0-100万",
     value: "0-100万"
   },
@@ -66,8 +64,7 @@ var registeredCapitals = [
     value: "1000万以上"
   }
 ];
-var staffs = [
-  {
+var staffs = [{
     text: "0-500人",
     value: "0-500人"
   },
@@ -84,8 +81,7 @@ var staffs = [
     value: "10000人以上"
   }
 ];
-var turnovers = [
-  {
+var turnovers = [{
     text: "0-100万",
     value: "0-100万"
   },
@@ -106,8 +102,7 @@ var turnovers = [
     value: "1000万以上"
   }
 ];
-var industry = [
-  {
+var industry = [{
     text: "农副食品加工业"
   },
   {
@@ -198,8 +193,7 @@ var industry = [
     text: "金属制品，机械和设备修理业"
   }
 ];
-var foundedTimes = [
-  {
+var foundedTimes = [{
     text: "1-5年"
   },
   {
@@ -215,8 +209,7 @@ var foundedTimes = [
     text: "20年以上"
   }
 ];
-var area = [
-  {
+var area = [{
     text: "北京"
   },
   {
@@ -358,12 +351,12 @@ var app = new Vue({
     goPage: 1,
     exportDataNum: ""
   },
-  mounted: function() {
+  mounted: function () {
     var vm = this;
     vm.key =
-      vm.key != ""
-        ? $.trim(vm.key)
-        : $.trim(decodeURI(getQueryVariable("key_pre")));
+      vm.key != "" ?
+      $.trim(vm.key) :
+      $.trim(decodeURI(getQueryVariable("key_pre")));
     axios
       .post(globalUrl + "content/search", {
         limit: 10,
@@ -373,24 +366,24 @@ var app = new Vue({
         time: "",
         address: ""
       })
-      .then(function(response) {
+      .then(function (response) {
         vm.isShow.loading = false;
         vm.contentList = response.data.data.data;
         vm.all = response.data.data.total;
       })
-      .catch(function(error) {
+      .catch(function (error) {
         alert(error);
       });
     console.log(vm.selectedItems);
   },
   methods: {
-    Search: function() {
+    Search: function () {
       var vm = this;
       vm.cur = 1; //页码从1开始
       vm.key =
-        vm.key != ""
-          ? $.trim(vm.key)
-          : $.trim(decodeURI(getQueryVariable("key_pre")));
+        vm.key != "" ?
+        $.trim(vm.key) :
+        $.trim(decodeURI(getQueryVariable("key_pre")));
       axios
         .post(globalUrl + "content/search", {
           limit: 10,
@@ -400,26 +393,26 @@ var app = new Vue({
           time: "",
           address: ""
         })
-        .then(function(response) {
+        .then(function (response) {
           vm.isShow.loading = false;
           vm.contentList = response.data.data.data;
           vm.all = response.data.data.total;
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
     /*分页*/
-    btnClick: function(data) {
+    btnClick: function (data) {
       //页码点击事件
       var vm = this;
       vm.key =
-        vm.key != ""
-          ? $.trim(vm.key)
-          : $.trim(decodeURI(getQueryVariable("key_pre")));
+        vm.key != "" ?
+        $.trim(vm.key) :
+        $.trim(decodeURI(getQueryVariable("key_pre")));
       if (data != this.cur) {
         this.cur = data;
-        getDataPage(this.cur, vm.key, vm.selectedItems).then(function(
+        getDataPage(this.cur, vm.key, vm.selectedItems).then(function (
           response
         ) {
           vm.isShow.loading = false;
@@ -427,29 +420,29 @@ var app = new Vue({
         });
       }
     },
-    pageClick: function() {
+    pageClick: function () {
       var vm = this;
       vm.key =
-        vm.key != ""
-          ? $.trim(vm.key)
-          : $.trim(decodeURI(getQueryVariable("key_pre")));
-      getDataPage(this.cur, vm.key, vm.selectedItems).then(function(response) {
+        vm.key != "" ?
+        $.trim(vm.key) :
+        $.trim(decodeURI(getQueryVariable("key_pre")));
+      getDataPage(this.cur, vm.key, vm.selectedItems).then(function (response) {
         vm.isShow.loading = false;
         vm.contentList = response.data.data.data;
       });
     },
-    Go: function() {
+    Go: function () {
       var vm = this;
       this.cur = Number(vm.goPage);
       vm.key =
-        vm.key != ""
-          ? $.trim(vm.key)
-          : $.trim(decodeURI(getQueryVariable("key_pre")));
+        vm.key != "" ?
+        $.trim(vm.key) :
+        $.trim(decodeURI(getQueryVariable("key_pre")));
       //总页数
       vm.allPage =
         this.all % 10 == 0 ? this.all / 10 : Math.ceil(this.all / 10);
       if (this.cur <= vm.allPage) {
-        getDataPage(this.cur, vm.key, vm.selectedItems).then(function(
+        getDataPage(this.cur, vm.key, vm.selectedItems).then(function (
           response
         ) {
           vm.isShow.loading = false;
@@ -460,7 +453,7 @@ var app = new Vue({
       }
     },
     /*点击更多显示与隐藏*/
-    More: function(temp, e) {
+    More: function (temp, e) {
       var vm = this;
       if (temp == "reg") {
         if (vm.isShow.isShow_reg == false) {
@@ -476,13 +469,13 @@ var app = new Vue({
         }
       }
     },
-    getSelected: function(tmp, e) {
+    getSelected: function (tmp, e) {
       var vm = this;
       vm.cur = 1; //页码从1开始
       vm.key =
-        vm.key != ""
-          ? $.trim(vm.key)
-          : $.trim(decodeURI(getQueryVariable("key_pre")));
+        vm.key != "" ?
+        $.trim(vm.key) :
+        $.trim(decodeURI(getQueryVariable("key_pre")));
       vm.selectedItems.push({
         selectedName: e.target.innerText,
         tag: tmp
@@ -511,16 +504,16 @@ var app = new Vue({
           vm.isShow.isShow_dlReg = false;
           break;
       }
-      getDataPage(this.cur, vm.key, vm.selectedItems).then(function(response) {
+      getDataPage(this.cur, vm.key, vm.selectedItems).then(function (response) {
         vm.isShow.loading = false;
         vm.contentList = response.data.data.data;
         vm.all = response.data.data.total;
       });
     },
-    delSelected: function(tmp, e) {
+    delSelected: function (tmp, e) {
       var vm = this;
       vm.cur = 1; //页码从1开始
-      vm.selectedItems.forEach(function(element, index, array) {
+      vm.selectedItems.forEach(function (element, index, array) {
         if (element.selectedName == e.target.innerText) {
           array.splice(index, 1);
         }
@@ -548,31 +541,31 @@ var app = new Vue({
           vm.isShow.isShow_dlReg = true;
           break;
       }
-      getDataPage(1, vm.key, vm.selectedItems).then(function(response) {
+      getDataPage(1, vm.key, vm.selectedItems).then(function (response) {
         vm.isShow.loading = false;
         vm.contentList = response.data.data.data;
         vm.all = response.data.data.total;
       });
     },
-    goDetail: function(id) {
+    goDetail: function (id) {
       window.open("searchDetail.html?Seq_No=" + id, "_blank");
     },
-    goChart: function() {
+    goChart: function () {
       window.location.href = "./dashboard.html";
     },
-    exportData: function() {
+    exportData: function () {
       var vm = this;
       vm.cur = 1; //页码从1开始
       vm.key =
-        vm.key != ""
-          ? $.trim(vm.key)
-          : $.trim(decodeURI(getQueryVariable("key_pre")));
+        vm.key != "" ?
+        $.trim(vm.key) :
+        $.trim(decodeURI(getQueryVariable("key_pre")));
       var range = "";
       var capital = "";
       var time = "";
       var address = "";
       var items = vm.selectedItems;
-      items.forEach(function(element, index, array) {
+      items.forEach(function (element, index, array) {
         switch (element.tag) {
           case "Ran":
             range = element.selectedName;
@@ -580,15 +573,15 @@ var app = new Vue({
           case "RegC":
             capital = element.selectedName;
             break;
-          /*case 'Sta':
-                            var range = element.selectedName;
-                            break;
-                        case 'Turn':
-                            var range = element.selectedName;
-                            break;
-                        case 'Ind':
-                            var range = element.selectedName;
-                            break;*/
+            /*case 'Sta':
+                              var range = element.selectedName;
+                              break;
+                          case 'Turn':
+                              var range = element.selectedName;
+                              break;
+                          case 'Ind':
+                              var range = element.selectedName;
+                              break;*/
           case "Time":
             time = element.selectedName;
             break;
@@ -624,6 +617,7 @@ var app = new Vue({
       //     .catch(function(error) {
       //       console.log(error);
       //     });
+      console.log(vm.key)
     }
     // 清除所有选项
     // clearAll:function(){
@@ -641,7 +635,7 @@ var app = new Vue({
 
   computed: {
     //分页
-    indexs: function() {
+    indexs: function () {
       var left = 1;
       var vm = this;
       /*总页数*/
@@ -677,7 +671,7 @@ function getDataPage(curpage, key, selectedData) {
   var capital = "";
   var time = "";
   var address = "";
-  selectedData.forEach(function(element, index, array) {
+  selectedData.forEach(function (element, index, array) {
     switch (element.tag) {
       case "Ran":
         range = element.selectedName;
@@ -685,15 +679,15 @@ function getDataPage(curpage, key, selectedData) {
       case "RegC":
         capital = element.selectedName;
         break;
-      /*case 'Sta':
-                    var range = element.selectedName;
-                    break;
-                case 'Turn':
-                    var range = element.selectedName;
-                    break;
-                case 'Ind':
-                    var range = element.selectedName;
-                    break;*/
+        /*case 'Sta':
+                      var range = element.selectedName;
+                      break;
+                  case 'Turn':
+                      var range = element.selectedName;
+                      break;
+                  case 'Ind':
+                      var range = element.selectedName;
+                      break;*/
       case "Time":
         time = element.selectedName;
         break;
@@ -718,14 +712,14 @@ function getDataPage(curpage, key, selectedData) {
   });
   return l;
 }
-$(function() {
-  $("#doc-prompt-toggle").on("click", function() {
+$(function () {
+  $("#doc-prompt-toggle").on("click", function () {
     $("#my-prompt").modal({
       relatedTarget: this,
-      onConfirm: function(e) {
+      onConfirm: function (e) {
         alert("你输入的是：" + e.data || "");
       },
-      onCancel: function(e) {}
+      onCancel: function (e) {}
     });
   });
 });

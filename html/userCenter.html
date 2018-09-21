@@ -337,21 +337,50 @@
                             <th></th>
                             <th></th>
                           </tr>
-                          <tr>
-                            <td>2017-8-5</td>
-                            <td>200.00</td>
+                          <tr v-for="item in historyRecordData" :key="item.id">
+                            <td v-text="item.daytime"></td>
+                            <td v-text="item.num"></td>
                             <td>
                               <button class="am-btn am-btn-primary am-btn-sm download-button">下载文档</button>
                             </td>
                           </tr>
-                          <tr>
-                            <td>2017-8-5</td>
-                            <td>200.00</td>
-                            <td>
-                              <button class="am-btn am-btn-primary am-btn-sm download-button">下载文档</button>
-                            </td>
-                          </tr>
+
                         </table>
+                      </div>
+                    </div>
+                    <div class="am-panel-footer footer-page">
+                      <!-- 浏览记录分页 -->
+                      <div class="am-u-sm-12 am-u-sm-centered ">
+                        <div class="am-center">
+                          <ul class="am-pagination am-pagination-size">
+                            <li v-if="cur==1" :class="{ 'am-disabled' :cur==1}">
+                              <a>&lt;</a>
+                            </li>
+                            <li v-if="cur>1">
+                              <a @click="cur--,pageClick()">&lt;</a>
+                            </li>
+                            <li v-for="index in indexs" :class="{ 'am-active': cur == index}">
+                              <a @click="btnClick(index,)" v-text="index"></a>
+                            </li>
+                            <li v-if="cur==allPage" :class="{ 'am-disabled' :cur==allPage}">
+                              <a>&gt;</a>
+                            </li>
+                            <li v-if="cur!=allPage">
+                              <a @click="cur++,pageClick()">&gt;</a>
+                            </li>
+                            <li>共</li>
+                            <li v-text="allPage"></li>
+                            <li>页</li>
+                            <li>跳到</li>
+                            <li>
+                              <input type="number" v-model="goPage">
+                            </li>
+                            <li>页</li>
+                            <li>
+                              <button @click="Go()">GO</button>
+                            </li>
+                          </ul>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -402,16 +431,16 @@
                               <a>&lt;</a>
                             </li>
                             <li v-if="cur>1">
-                              <a @click="cur--,pageClick()">&lt;</a>
+                              <a @click="cur--,pageClick('history')">&lt;</a>
                             </li>
                             <li v-for="index in indexs" :class="{ 'am-active': cur == index}">
-                              <a @click="btnClick(index)" v-text="index"></a>
+                              <a @click="btnClick(index,'history')" v-text="index"></a>
                             </li>
                             <li v-if="cur==allPage" :class="{ 'am-disabled' :cur==allPage}">
                               <a>&gt;</a>
                             </li>
                             <li v-if="cur!=allPage">
-                              <a @click="cur++,pageClick()">&gt;</a>
+                              <a @click="cur++,pageClick('history')">&gt;</a>
                             </li>
                             <li>共</li>
                             <li v-text="allPage"></li>
@@ -422,7 +451,7 @@
                             </li>
                             <li>页</li>
                             <li>
-                              <button @click="Go()">GO</button>
+                              <button @click="Go('history')">GO</button>
                             </li>
                           </ul>
                         </div>

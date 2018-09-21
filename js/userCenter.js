@@ -1,5 +1,4 @@
-var jobs = [
-  {
+var jobs = [{
     text: "员工",
     value: "员工"
   },
@@ -40,8 +39,7 @@ var jobs = [
     value: "其他"
   }
 ];
-var departments = [
-  {
+var departments = [{
     text: "IT 应用开发",
     value: "IT 应用开发"
   },
@@ -158,8 +156,7 @@ var userCenter = new Vue({
       count: false
     },
 
-    chargeValues: [
-      {
+    chargeValues: [{
         text: "10",
         value: "10",
         active: true
@@ -210,19 +207,21 @@ var userCenter = new Vue({
     newPassword: "",
     newPasswordCheck: "",
     tipCon: "",
-    token: ""
+    token: "",
+    // 下载记录
+    historyRecordData: {},
+    pageType: ""
   },
   watch: {
     checkedMoney: "changeData",
     selected_pro: "resetDispicker"
   },
-  mounted: function() {
+  mounted: function () {
     this.token = JSON.parse(localStorage.getItem("token")).val;
-    console.log(this.token);
   },
   computed: {
     //分页
-    indexs: function() {
+    indexs: function () {
       var left = 1;
       var vm = this;
       /*总页数*/
@@ -267,70 +266,94 @@ var userCenter = new Vue({
         .post(globalUrl + "content/number", {
           token: vm.token
         })
-        .then(function(response) {
-          vm.isSearch = false;
+        .then(function (response) {
           vm.historyData = response.data.data.data;
           vm.all = response.data.data.total;
           vm.cur = 1;
         });
     },
     /*分页*/
-    btnClick: function(data) {
+    btnClick: function (data) {
       //页码点击事件
       var vm = this;
       vm.isShow.loading = true;
       if (data != vm.cur) {
         vm.cur = data;
-        if (vm.isSearch) {
-          getSearchDataPage(vm.cur, vm.targetSearchcontent, vm.token).then(
-            function(response) {
-              vm.isShow.loading = false;
+        if (vm.pageType == "history") {
+          if (vm.isSearch) {
+            history(vm.cur, vm.token).then(function (response) {
               vm.historyData = response.data.data.data;
-            }
-          );
+            });
+          } else {
+            historySearch(vm.cur, vm.targetSearchcontent, vm.token).then(
+              function (response) {
+                vm.isShow.loading = false;
+                vm.historyData = response.data.data.data;
+              }
+            );
+          }
+        }
+        if (vm.pageType == "download") {
+          getDataPage(vm.cur, vm.token).then(function (response) {
+            vm.isShow.loading = false;
+            vm.historyRecordData = response.data.data.data;
+          });
+        }
+      }
+    },
+    pageClick: function (type) {
+      var vm = this;
+      vm.isShow.loading = true;
+      if (vm.pageType == "history") {
+        if (vm.isSearch) {
+          history(vm.cur, vm.token).then(function (response) {
+            vm.isShow.loading = false;
+            vm.historyData = response.data.data.data;
+          });
         } else {
-          getDataPage(vm.cur, vm.token).then(function(response) {
+          historySearch(vm.cur, vm.targetSearchcontent, vm.token).then(function (
+            response
+          ) {
             vm.isShow.loading = false;
             vm.historyData = response.data.data.data;
           });
         }
       }
-    },
-    pageClick: function() {
-      var vm = this;
-      vm.isShow.loading = true;
-      if (vm.isSearch) {
-        getSearchDataPage(vm.cur, vm.targetSearchcontent, vm.token).then(
-          function(response) {
-            vm.isShow.loading = false;
-            vm.historyData = response.data.data.data;
-          }
-        );
-      } else {
-        getDataPage(vm.cur, vm.token).then(function(response) {
+      if (vm.pageType == "download") {
+        getDataPage(vm.cur, vm.token).then(function (response) {
           vm.isShow.loading = false;
-          vm.historyData = response.data.data.data;
+          vm.historyRecordData = response.data.data.data;
         });
       }
     },
-    Go: function() {
+    Go: function (type) {
       var vm = this;
       vm.isShow.loading = true;
       vm.cur = Number(vm.goPage);
       //总页数
       vm.allPage = vm.all % 5 == 0 ? vm.all / 5 : Math.ceil(vm.all / 5);
       if (vm.cur <= vm.allPage) {
-        if (vm.isSearch) {
-          getSearchDataPage(vm.cur, vm.targetSearchcontent, vm.token).then(
-            function(response) {
+        if (vm.pageType == "history") {
+          if (vm.isSearch) {
+            history(vm.cur, vm.token).then(function (response) {
               vm.isShow.loading = false;
               vm.historyData = response.data.data.data;
-            }
-          );
-        } else {
-          getDataPage(vm.cur, vm.token).then(function(response) {
+            });
+          } else {
+            historySearch(vm.cur, vm.targetSearchcontent, vm.token).then(
+              function (response) {
+                vm.isShow.loading = false;
+                vm.historyData = response.data.data.data;
+              }
+            );
+          }
+        }
+        if (vm.pageType == "download") {
+          getDataPage(vm.cur, vm.token).then(function (response) {
             vm.isShow.loading = false;
-            vm.historyData = response.data.data.data;
+            vm.historyRecordData = response.data.data.data;
+            vm.all = response.data.data.total;
+            vm.cur = 1
           });
         }
       } else {
@@ -341,17 +364,14 @@ var userCenter = new Vue({
     // 数据搜索
     toSearchData() {
       var vm = this;
-      axios
-        .post(globalUrl + "content/numsearch", {
-          token: vm.token,
-          content: vm.targetSearchcontent
-        })
-        .then(function(response) {
-          vm.historyData = response.data.data.data;
-          vm.all = response.data.data.total;
-          vm.isSearch = true;
-          vm.cur = 1;
-        });
+      historySearch(vm.cur, vm.targetSearchcontent, vm.token).then(function (
+        response
+      ) {
+        vm.historyData = response.data.data.data;
+        vm.all = response.data.data.total;
+        vm.isSearch = false;
+        vm.cur = 1;
+      });
     },
 
     getExistedData() {
@@ -361,7 +381,7 @@ var userCenter = new Vue({
         .post(globalUrl + "content/settings", {
           token: vm.token
         })
-        .then(function(response) {
+        .then(function (response) {
           temp = response.data.data[0];
           vm.userSetting.userEmail = temp.email;
           vm.userSetting.userName = temp.names;
@@ -373,7 +393,7 @@ var userCenter = new Vue({
           vm.userSetting.job = temp.position;
           vm.setCity(temp.State_Code, temp.City_Code, temp.County_Code);
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -403,11 +423,11 @@ var userCenter = new Vue({
             department: vm.userSetting.department,
             position: vm.userSetting.job
           })
-          .then(function(response) {
+          .then(function (response) {
             vm.tipCon = "信息修改成功";
             $modal.modal();
           })
-          .catch(function(error) {
+          .catch(function (error) {
             vm.tipCon = "请求后台出错！";
             $modal.modal();
           });
@@ -435,7 +455,7 @@ var userCenter = new Vue({
             newPassword: vm.newPassword,
             newPasswordCheck: vm.newPasswordCheck
           })
-          .then(function(response) {
+          .then(function (response) {
             if (response.data.status == 0) {
               vm.tipCon = "原始密码错误";
               $modal.modal();
@@ -451,7 +471,7 @@ var userCenter = new Vue({
               $modal.modal();
             }
           })
-          .catch(function(error) {});
+          .catch(function (error) {});
       } else {
         vm.tipCon = "请检查并正确填写信息~";
         $modal.modal();
@@ -469,7 +489,13 @@ var userCenter = new Vue({
       if (this.num == 3) {
         this.getExistedData();
       } else if (this.num == 2) {
+        this.all = 0
         this.getSearchData();
+        this.pageType = "history"
+        this.isSearch = true;
+      } else if (this.num == 1) {
+        this.getRecordData();
+        this.pageType = "download"
       }
     },
     contentTab(index) {
@@ -477,7 +503,7 @@ var userCenter = new Vue({
     },
     changeData() {
       let vm = this;
-      vm.chargeValues.forEach(function(ele, index, arr) {
+      vm.chargeValues.forEach(function (ele, index, arr) {
         if (vm.checkedMoney == ele.text) {
           ele.active = true;
         } else {
@@ -489,7 +515,7 @@ var userCenter = new Vue({
     },
     handleFocus() {
       var vm = this;
-      vm.chargeValues.forEach(function(ele, index, arr) {
+      vm.chargeValues.forEach(function (ele, index, arr) {
         ele.active = false;
         vm.realValue = vm.chargeValue;
       });
@@ -497,25 +523,36 @@ var userCenter = new Vue({
     handleEdit() {
       $("#my-prompt").modal({
         relatedTarget: this,
-        onConfirm: function(options) {
+        onConfirm: function (options) {
           this.changePassword;
         },
         // closeOnConfirm: false,
-        onCancel: function() {
+        onCancel: function () {
           $("#my-prompt").modal("close");
         }
       });
+    },
+    // 下载文档
+    getRecordData() {
+      let vm = this;
+      let url = globalUrl + "/content/mydown";
+      getDataPage(vm.cur, vm.token).then(function (response) {
+        vm.isShow.loading = false;
+        vm.historyRecordData = response.data.data.data;
+        vm.all = response.data.data.total;
+        console.log(vm.all)
+        vm.cur = 1;
+      });
     }
-    // 历史纪录分页相关
   }
 });
-$(function() {
+$(function () {
   var $form = $("#form-with-tooltip");
   var $tooltip = $('<div id="vld-tooltip">提示信息！</div>');
   $tooltip.appendTo(document.body);
   $form.validator();
   var validator = $form.data("amui.validator");
-  $form.on("focusin focusout", ".am-field-error", function(e) {
+  $form.on("focusin focusout", ".am-field-error", function (e) {
     if (e.type === "focusin") {
       var $this = $(this);
       var offset = $this.offset();
@@ -535,7 +572,7 @@ $(function() {
       $tooltip.hide();
     }
   });
-  $form.on("focusin focusout", ".am-field-valid ", function(e) {
+  $form.on("focusin focusout", ".am-field-valid ", function (e) {
     if (e.type === "focusin") {
       $tooltip.hide();
     } else if (e.type === "focusout") {
@@ -544,7 +581,7 @@ $(function() {
   });
 });
 
-function getDataPage(curpage, token) {
+function history(curpage, token) {
   var par = curpage == undefined ? (page = "1") : (page = curpage);
   var l = axios({
     method: "post",
@@ -557,14 +594,27 @@ function getDataPage(curpage, token) {
   return l;
 }
 
-function getSearchDataPage(curpage, content, token) {
+function historySearch(curpage, content, token) {
   var par = curpage == undefined ? (page = "1") : (page = curpage);
   var l = axios({
     method: "post",
     url: globalUrl + "content/numsearch",
     data: {
       page: par,
-      content: content,
+      token: token,
+      content: content
+    }
+  });
+  return l;
+}
+
+function getDataPage(curpage, token) {
+  var par = curpage == undefined ? (page = "1") : (page = curpage);
+  var l = axios({
+    method: "post",
+    url: globalUrl + "content/mydown",
+    data: {
+      page: par,
       token: token
     }
   });

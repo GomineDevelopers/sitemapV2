@@ -95,7 +95,7 @@ var app = new Vue({
         },
         goDetail: function (id) {
             window.open("searchDetail.html?Seq_No=" + id, "_blank");
-        }
+        },
         // 清除所有选项
         // clearAll:function(){
         //     vm=this;
@@ -108,6 +108,58 @@ var app = new Vue({
         //     vm.isShow.isShow_dlTime = true;
         //     vm.isShow.isShow_dlReg = true;
         // }
+        // 导出数据
+        exportData: function () {
+            var vm = this;
+            vm.cur = 1; //页码从1开始
+            vm.key =
+                vm.key != "" ?
+                $.trim(vm.key) :
+                $.trim(decodeURI(getQueryVariable("key_pre")));
+            var range = "";
+            var capital = "";
+            var time = "";
+            var address = "";
+            var items = vm.selectedItems;
+            items.forEach(function (element, index, array) {
+                switch (element.tag) {
+                    case "Ran":
+                        range = element.selectedName;
+                        break;
+                    case "RegC":
+                        capital = element.selectedName;
+                        break;
+                        /*case 'Sta':
+                                          var range = element.selectedName;
+                                          break;
+                                      case 'Turn':
+                                          var range = element.selectedName;
+                                          break;
+                                      case 'Ind':
+                                          var range = element.selectedName;
+                                          break;*/
+                    case "Time":
+                        time = element.selectedName;
+                        break;
+                    case "Reg":
+                        address = element.selectedName;
+                        break;
+                }
+            });
+            window.location.href =
+                "http://118.31.78.153/backend/api/content/daochu/accounname/" +
+                vm.key +
+                "/range/" +
+                range +
+                "/input/" +
+                vm.exportDataNum +
+                "/capital/" +
+                capital +
+                "/time/" +
+                time +
+                "/address/" +
+                address;
+        }
     },
 
     computed: {

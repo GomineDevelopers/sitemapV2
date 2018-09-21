@@ -134,7 +134,8 @@
                     <div class="am-panel am-panel-default am-panel-noborder  ">
                         <div class="am-panel-hd white-bgcolor" v-show="isShow.count">
                             <span> 找到<span class="am-text-danger" v-text="all"></span>符合条件的企业
-                                <button class="btn am-btn  am-btn-primary am-fr btn-export"> <i class="am-icon-save"></i>
+                                <button class="btn am-btn  am-btn-primary am-fr btn-export" @click="exportData"> <i
+                                        class="am-icon-save"></i>
                                     导出</button>
                                 <button class="btn am-btn am-btn-primary am-fr  btn-chart" @click="goChart"> <i class="am-icon-bar-chart"></i>
                                     图表</button>
