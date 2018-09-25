@@ -545,8 +545,8 @@ var userCenter = new Vue({
       });
     },
     getEachrecordData(date) {
-      window.location.href = globalUrl + "/content/document" + "/datetime/"
-      date;
+      window.location.href = globalUrl + "content/document" + "/datetime/" + date;
+
     }
 
   }

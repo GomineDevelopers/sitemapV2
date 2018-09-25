@@ -591,7 +591,7 @@ var app = new Vue({
         }
       });
       window.location.href = globalUrl +
-        "/content/daochu/accounname/" +
+        "content/daochu/accounname/" +
         vm.key +
         "/range/" +
         range +
