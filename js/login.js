@@ -27,10 +27,16 @@ var app = new Vue({
                         }
                         setLocalStorage("token", response.data.data.token);
                         setLocalStorage("userName", response.data.data.email);
-                        if (window.history.length != 1) {
-                            window.history.back();
-                        } else {
+                        let prevLink=document.referrer;
+                        if ($.trim(prevLink)=='') {
+                            console.log(prevLink)
                             window.location.href = "./index.html";
+                        } else {
+                            console.log(prevLink)
+                            if(prevLink.indexOf('/register.html')!=-1){
+                                window.location.href = "./index.html";
+                            }
+                            window.location.href = prevLink;
                         }
                     } else if (response.data.status == "0") {
                         alert(response.data.message);
