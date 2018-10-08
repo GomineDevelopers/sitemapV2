@@ -48,16 +48,16 @@ var registeredCapitals = [{
     value: "0-100万"
   },
   {
-    text: "100万-200万",
-    value: "100万-200万"
+    text: "100-200万",
+    value: "100-200万"
   },
   {
-    text: "200万-500万",
-    value: "200万-500万"
+    text: "200-500万",
+    value: "200-500万"
   },
   {
-    text: "500万-1000万",
-    value: "500万-1000万"
+    text: "500-1000万",
+    value: "500-1000万"
   },
   {
     text: "1000万以上",
@@ -67,6 +67,10 @@ var registeredCapitals = [{
 var staffs = [{
     text: "0-500人",
     value: "0-500人"
+  },
+  {
+    text: "500-1000人",
+    value: "500-1000人"
   },
   {
     text: "1000-5000人",
@@ -203,7 +207,7 @@ var foundedTimes = [{
     text: "10-15年"
   },
   {
-    text: "10-15年"
+    text: "15-20年"
   },
   {
     text: "20年以上"
@@ -551,7 +555,17 @@ var app = new Vue({
       window.open("searchDetail.html?Seq_No=" + id, "_blank");
     },
     goChart: function () {
-      window.location.href = "./dashboard.html";
+      var selectVars="";
+      
+       for(item in this.selectedItems)
+       { 
+         selectVars+= item==0 ? "?": "&";
+         selectVars+=  this.selectedItems[item].tag+ "="+ this.selectedItems[item].selectedName;
+       }
+       selectVars=encodeURI(encodeURI(selectVars));
+      
+       window.location.href = selectVars ? "./dashboard.html"+selectVars: "./dashboard.html";
+      
     },
     exportData: function () {
       var vm = this;

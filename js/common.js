@@ -1,7 +1,7 @@
 // 全局URl
-//const globalUrl = "http://118.31.78.153/backend/api/";
+const globalUrl = "http://118.31.78.153/backend/api/";
 // 本地全局URl
-const globalUrl = "http://192.168.0.5/sitemap/api/";
+//const globalUrl = "http://192.168.0.5/sitemap/api/";
 /*时间戳*/
 function formatDate(date, showDetail) {
     var isShow = showDetail || false;

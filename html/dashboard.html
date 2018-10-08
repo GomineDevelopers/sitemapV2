@@ -183,12 +183,12 @@
                         <option v-for="fourthOptionItem in picklist.fourthOption" :key="fourthOptionItem.index" :value="fourthOptionItem.value"
                             v-text="fourthOptionItem.text"></option>
                     </select>
-                    <button class="btn am-btn am-btn-primary btn-submmit" @click='refreshPiechart'>确认</button>
+                    <button class="btn am-btn am-btn-primary btn-submmit" @click='refreshPieChart'>确认</button>
                 </div>
             </div>
             <div class="am-u-sm-9 am-u-sm-centered dash-wrapper">
-                <div class="am-g">
-                    <div class="am-u-sm-12" v-show="isShow">
+                <div class="am-g" >
+                    <div class="am-u-sm-12" v-show="hasResult && !isLoading">
                         <div class="am-u-sm-6">
                             <div id="pieBasicOne" :style="{width:pie.width,height: pie.height}"></div>
                         </div>
@@ -202,7 +202,7 @@
                             <div id="pieBasicFour" :style="{width: pie.width,height: pie.height}"></div>
                         </div>
                     </div>
-                    <div class="am-u-sm-12 no-data" v-show="!isShow">
+                    <div class="am-u-sm-12 no-data" v-show="!hasResult && !isLoading" style="display:none">
                         <img src="../images/nodata.png" alt="" srcset="">
                     </div>
                     <div class="am-u-g">

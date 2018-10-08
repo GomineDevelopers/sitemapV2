@@ -258,6 +258,7 @@ dt + dd {
   border-radius: 4px;
 }
 .btn-chart{
+    margin-right:10px;
     background-color: #1691ff;
 }
 .btn-export {
