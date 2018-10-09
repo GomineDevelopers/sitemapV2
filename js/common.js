@@ -1,7 +1,7 @@
 // 全局URl
-const globalUrl = "http://118.31.78.153/backend/api/";
+//const globalUrl = "http://118.31.78.153/backend/api/";
 // 本地全局URl
-//const globalUrl = "http://192.168.0.5/sitemap/api/";
+const globalUrl = "http://192.168.0.5/sitemap/api/";
 /*时间戳*/
 function formatDate(date, showDetail) {
     var isShow = showDetail || false;
@@ -98,7 +98,18 @@ function innerPageGetTagData(organizor, info, type, navName) {
     localStorage.setItem("b", JSON.stringify(storage));
     window.location.href = "./labelSearch.html";
 }
+//检测是否登陆，未登录跳转登陆页面
+function loginCheck(){
+    let token=getLocalStorage("token")||null
+    let flag=0;
+    if (token==''||token==null){
+        if(flag<1){
+            window.location.href = "../login.html";
+            this.flag++;
+        }
 
+    }
+}
 $(function () {
     if (getLocalStorage("token") && getLocalStorage("userName")) {
         $("#isLogin").remove();
@@ -114,4 +125,4 @@ $(function () {
             logout();
         });
     }
-});
+})

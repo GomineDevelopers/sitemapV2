@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +9,6 @@
     <link rel="stylesheet" href="../css/dashboard.css">
     <title>dashboard</title>
 </head>
-
 <body>
     <!-- 头部导航 -->
     <header class="am-topbar am-topbar-fixed-top">
@@ -102,26 +100,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="am-topbar-right">
-                    <!--未登录-->
-                    <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogin">
-                        <li>
-                            <a href="../login.html">登陆</a>
-                        </li>
-                        <li>
-                            <a href="./register.html">注册</a>
-                        </li>
-                    </ul>
-                    <!--已登录-->
-                    <ul class="am-nav am-nav-pills am-topbar-nav" style="display: none;" id="isLogout">
-                        <li>
-                            <a href="./userCenter.html" id="vipName"></a>
-                        </li>
-                        <li>
-                            <a id="logout">退出</a>
-                        </li>
-                    </ul>
-                </div>
+
             </div>
         </div>
     </header>
@@ -161,29 +140,51 @@
                     </li>
                 </ol>
             </div>
-            <div class="am-u-sm-8 am-u-sm-centered ">
-                <div class="am-u-sm-8 am-u-sm-centered dashboard-select-area">
+            <div class="am-container am-u-sm-centered ">
+                <div class=" am-u-sm-centered dashboard-select-area am-cf">
+                    <div class="label-wrapper am-fl">
+                    <div>注册资本:</div>
+                    <div>
                     <select v-model="selectedOptionOne" class="dashboard-select">
                         <option disabled>请选择注册资本</option>
                         <option v-for="firstOptionItem in picklist.firstOption" :key="firstOptionItem.index" :value="firstOptionItem.value"
                             v-text="firstOptionItem.text"></option>
                     </select>
+                    </div>
+                    </div>
+                    <div class="label-wrapper am-fl">
+                        <div>成立时间:</div>
+                    <div>
                     <select v-model="selectedOptionTwo" class="dashboard-select">
                         <option disabled>请选择成立时间</option>
                         <option v-for="secondOptionItem in picklist.secondOption" :key="secondOptionItem.index" :value="secondOptionItem.value"
                             v-text="secondOptionItem.text"></option>
                     </select>
+                    </div>
+                    </div>
+                    <div class="label-wrapper am-fl">
+                    <div>PC数量:</div>
+                    <div>
                     <select v-model="selectedOptionThree" class="dashboard-select">
                         <option disabled>请选择pc数量</option>
                         <option v-for="thirdOptionItem in picklist.thirdOption" :key="thirdOptionItem.index" :value="thirdOptionItem.value"
                             v-text="thirdOptionItem.text"></option>
                     </select>
-                    <select v-model="selectedOptionFour" class="dashboard-select">
-                        <option disabled>请选择公司人数</option>
-                        <option v-for="fourthOptionItem in picklist.fourthOption" :key="fourthOptionItem.index" :value="fourthOptionItem.value"
-                            v-text="fourthOptionItem.text"></option>
-                    </select>
+                     </div>
+                    </div>
+                    <div class="label-wrapper am-fl">
+                        <div>公司人数:</div>
+                        <div>
+                        <select v-model="selectedOptionFour" class="dashboard-select">
+                            <option disabled>请选择公司人数</option>
+                            <option v-for="fourthOptionItem in picklist.fourthOption" :key="fourthOptionItem.index" :value="fourthOptionItem.value"
+                                v-text="fourthOptionItem.text"></option>
+                        </select>
+                        </div>
+                    </div>
+                    <div class=" am-fl">
                     <button class="btn am-btn am-btn-primary btn-submmit" @click='refreshPieChart'>确认</button>
+                    </div>
                 </div>
             </div>
             <div class="am-u-sm-9 am-u-sm-centered dash-wrapper">
@@ -229,6 +230,7 @@
                 </div>
             </div>
         </div>
+        <div v-show='isLoading' class="loading"></div>
     </div>
 
     <!-- 底部导航 -->

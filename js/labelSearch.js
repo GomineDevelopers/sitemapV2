@@ -18,6 +18,10 @@ var app = new Vue({
         breadItem: "",
         breadItemUp: ""
     },
+    created:function(){
+        //登陆检测
+        loginCheck();
+    },
     mounted: function () {
         var vm = this;
         vm.info = JSON.parse(localStorage.getItem("b")).info;

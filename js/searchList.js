@@ -355,6 +355,10 @@ var app = new Vue({
     goPage: 1,
     exportDataNum: ""
   },
+    created:function(){
+        //登陆检测
+        loginCheck();
+    },
   mounted: function () {
     var vm = this;
     vm.key =

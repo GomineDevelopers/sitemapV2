@@ -95,7 +95,7 @@ var chartResolution = new Vue({
     data: {
         /*样式*/
         pie: {
-            width: '100%',
+            width: '100% !important',
             height: '300px'
         },
         bar: {
@@ -131,16 +131,20 @@ var chartResolution = new Vue({
             fourthOption: staffs
         },
         hasResult: true,
-        isLoading: true,
+        isLoading:true
+    },
+    created:function(){
+        //登陆检测
+        loginCheck();
     },
     mounted: function () {
-        var vm = this
+
+        let vm = this
         vm.info = JSON.parse(localStorage.getItem('b')).info
         vm.organizor = JSON.parse(localStorage.getItem('b')).organizor
         vm.type = JSON.parse(localStorage.getItem('b')).type
         vm.breadItemUp = JSON.parse(localStorage.getItem('b')).navName
         vm.breadItem = vm.organizor + vm.info
-
         //以后要加PC台数
         if (vm.getUrlItem("RegC")) {
             vm.selectedOptionOne = decodeURI(decodeURI(vm.getUrlItem("RegC")));
@@ -169,7 +173,6 @@ var chartResolution = new Vue({
                 vm.pieChartFour.resize()
                 vm.bar.width = $('#barBasicR').width()
                 vm.barChartB.resize()
-                vm.pieChartB.resize()
             });
         },
         getUrlItem: function (name) {
@@ -179,7 +182,8 @@ var chartResolution = new Vue({
             return null;
         },
         searchSelect: function () {
-            var vm = this
+            var vm = this;
+            vm.isLoading=true;
             let postData = {};
             (postData.registeredCapitals = vm.selectedOptionOne),
                 (postData.foundedTimes = vm.selectedOptionTwo),
@@ -198,19 +202,17 @@ var chartResolution = new Vue({
                             pieOptionTwo.series[0].data = response.data.data[2];
                             pieOptionThree.series[0].data = response.data.data[3];
                             pieOptionFour.series[0].data = response.data.data[4];
-
                             // setOption代码区域
                             vm.pieChartOne.setOption(pieOptionOne)
                             vm.pieChartTwo.setOption(pieOptionTwo)
                             vm.pieChartThree.setOption(pieOptionThree)
                             vm.pieChartFour.setOption(pieOptionFour)
                             vm.hasResult = true
-
                         } else {
                             vm.hasResult = false
+                            vm.isLoading=true;
                         }
-                        vm.isLoading = false;
-                        vm.resizePieChart();
+                        vm.isLoading=false;
 
                     })
                     .catch(function (error) {
@@ -219,13 +221,12 @@ var chartResolution = new Vue({
         },
         refreshPieChart: function () {
             var vm = this;
-            vm.isLoading = true;
-            vm.searchSelect()
+            vm.searchSelect();
+
 
         },
         initPieChart: function () {
             var vm = this
-            vm.isLoading = true;
             vm.pieChartOne = echarts.init(
                 document.getElementById('pieBasicOne'),
                 'macarons'
@@ -341,8 +342,6 @@ var chartResolution = new Vue({
         },
         drawPieChart: function () {
             let vm = this;
-            //注册资本 第一个饼图
-
             // 注册资本 第一个饼图
             var promise1 = new Promise(function (resolve, reject) {
                     axios
@@ -384,7 +383,6 @@ var chartResolution = new Vue({
                     })
 
             });
-
             // pc数量 第三个饼图
             var promise3 = new Promise(function (resolve, reject) {
                 axios
@@ -404,7 +402,6 @@ var chartResolution = new Vue({
                         alert(error)
                     })
             });
-
             // 员工人数第四个饼图
             var promise4 = new Promise(function (resolve, reject) {
                 axios
@@ -424,16 +421,14 @@ var chartResolution = new Vue({
                         alert(error)
                     })
             });
-
             //所有异步完成后,不再loading
             Promise.all([promise1, promise2, promise3, promise4]).then(function (values) {
-                vm.isLoading = false;
+                vm.isLoading=false;
                 vm.resizePieChart();
             });
         },
         drawBarChartButtom: function () {
-            var vm = this
-
+            var vm = this;
             // 图表插入
             vm.pieChartB = echarts.init(
                 document.getElementById('pieBasicB'),

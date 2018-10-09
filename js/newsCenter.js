@@ -9,6 +9,10 @@ var newsCenter = new Vue({
         allPage: "", //总页数
         cur: 1 //当前页码
     },
+    created:function(){
+        //登陆检测
+        loginCheck();
+    },
     mounted: function() {
         var vm = this;
 

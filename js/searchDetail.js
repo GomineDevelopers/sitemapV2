@@ -54,6 +54,10 @@ var searchDetail = new Vue({
         }
     },
     computed: {},
+    created:function(){
+        //登陆检测
+        loginCheck();
+    },
     mounted: function() {
         var companyId = getQueryVariable("Seq_No");
         var self = this;

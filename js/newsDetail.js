@@ -7,6 +7,7 @@ var newsDetail = new Vue({
         content: "",
         newsId: ""
     },
+
     computed: {
         sourceSort: function() {
             return "来源：" + this.source;
@@ -15,6 +16,10 @@ var newsDetail = new Vue({
             if (this.create_time)
                 return "发布时间：" + formatDate(this.create_time);
         }
+    },
+    created:function(){
+        //登陆检测
+        loginCheck();
     },
     mounted: function() {
         var newsId = getQueryVariable("newsid");
