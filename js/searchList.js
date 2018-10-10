@@ -385,6 +385,10 @@ var app = new Vue({
     console.log(vm.selectedItems);
   },
   methods: {
+    //跳转gis页面
+      goGIS: function () {
+          window.location.href = "./map.html";
+      },
     Search: function () {
       var vm = this;
       vm.cur = 1; //页码从1开始
@@ -560,16 +564,16 @@ var app = new Vue({
     },
     goChart: function () {
       var selectVars="";
-      
+
        for(item in this.selectedItems)
-       { 
+       {
          selectVars+= item==0 ? "?": "&";
          selectVars+=  this.selectedItems[item].tag+ "="+ this.selectedItems[item].selectedName;
        }
        selectVars=encodeURI(encodeURI(selectVars));
-      
+
        window.location.href = selectVars ? "./dashboard.html"+selectVars: "./dashboard.html";
-      
+
     },
     exportData: function () {
       var vm = this;

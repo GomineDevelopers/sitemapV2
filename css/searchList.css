@@ -190,8 +190,8 @@ dt + dd {
   cursor: pointer;
 }
 /* .listActive span:hover{
-    color:#408ff8; 
-    
+    color:#408ff8;
+
 
 } */
 /* 列表内span样式 */
@@ -259,6 +259,7 @@ dt + dd {
 }
 .btn-chart{
     margin-right:10px;
+    margin-left: 10px;
     background-color: #1691ff;
 }
 .btn-export {
