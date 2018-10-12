@@ -353,7 +353,13 @@ var app = new Vue({
     allPage: "",
     cur: 1, //当前页码
     goPage: 1,
-    exportDataNum: ""
+    exportDataNum: "",
+    gisKey:{
+     range : "",
+     capital: "",
+     time:"",
+     address : ""
+      }
   },
     created:function(){
         //登陆检测
@@ -385,276 +391,296 @@ var app = new Vue({
     console.log(vm.selectedItems);
   },
   methods: {
-    //跳转gis页面
+      //跳转gis页面
       goGIS: function () {
+          let vm=this;
+          vm.key = vm.key != "" ? $.trim(vm.key) : $.trim(decodeURI(getQueryVariable("key_pre")));
+          var range = "";
+          var capital = "";
+          var time = "";
+          var address = "";
+          var items = vm.selectedItems;
+          items.forEach(function (element, index, array) {
+              switch (element.tag) {
+                  case "Ran":
+                      vm.gisKey.range = element.selectedName;
+                      break;
+                  case "RegC":
+                      vm.gisKey.capital = element.selectedName;
+                      break;
+                  /*case 'Sta':
+                                    var range = element.selectedName;
+                                    break;
+                                case 'Turn':
+                                    var range = element.selectedName;
+                                    break;
+                                case 'Ind':
+                                    var range = element.selectedName;
+                                    break;*/
+                  case "Time":
+                      vm.gisKey.time = element.selectedName;
+                      break;
+                  case "Reg":
+                      vm.gisKey.address = element.selectedName;
+                      break;
+              }
+          });
+          var storage = {
+
+              key:vm.key,
+              range: vm.gisKey.range,
+              capital: vm.gisKey.capital,
+              time: vm.gisKey.time,
+              address: vm.gisKey.address,
+
+          };
+          var type={
+              type:1
+          }
+          localStorage.setItem("searchLitToMap", JSON.stringify(storage));
+          localStorage.setItem("type", JSON.stringify(type));
           window.location.href = "./map.html";
       },
-    Search: function () {
-      var vm = this;
-      vm.cur = 1; //页码从1开始
-      vm.key =
-        vm.key != "" ?
-        $.trim(vm.key) :
-        $.trim(decodeURI(getQueryVariable("key_pre")));
-      axios
-        .post(globalUrl + "content/search", {
-          limit: 10,
-          accounname: vm.key,
-          range: "",
-          capital: "",
-          time: "",
-          address: ""
-        })
-        .then(function (response) {
-          vm.isShow.loading = false;
-          vm.contentList = response.data.data.data;
-          vm.all = response.data.data.total;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-    /*分页*/
-    btnClick: function (data) {
-      //页码点击事件
-      var vm = this;
-      vm.key =
-        vm.key != "" ?
-        $.trim(vm.key) :
-        $.trim(decodeURI(getQueryVariable("key_pre")));
-      if (data != this.cur) {
-        this.cur = data;
-        getDataPage(this.cur, vm.key, vm.selectedItems).then(function (
-          response
-        ) {
-          vm.isShow.loading = false;
-          vm.contentList = response.data.data.data;
-        });
-      }
-    },
-    pageClick: function () {
-      var vm = this;
-      vm.key =
-        vm.key != "" ?
-        $.trim(vm.key) :
-        $.trim(decodeURI(getQueryVariable("key_pre")));
-      getDataPage(this.cur, vm.key, vm.selectedItems).then(function (response) {
-        vm.isShow.loading = false;
-        vm.contentList = response.data.data.data;
-      });
-    },
-    Go: function () {
-      var vm = this;
-      this.cur = Number(vm.goPage);
-      vm.key =
-        vm.key != "" ?
-        $.trim(vm.key) :
-        $.trim(decodeURI(getQueryVariable("key_pre")));
-      //总页数
-      vm.allPage =
-        this.all % 10 == 0 ? this.all / 10 : Math.ceil(this.all / 10);
-      if (this.cur <= vm.allPage) {
-        getDataPage(this.cur, vm.key, vm.selectedItems).then(function (
-          response
-        ) {
-          vm.isShow.loading = false;
-          vm.contentList = response.data.data.data;
-        });
-      } else {
-        alert("输入的页数超过总页数！");
-      }
-    },
-    /*点击更多显示与隐藏*/
-    More: function (temp, e) {
-      var vm = this;
-      if (temp == "reg") {
-        if (vm.isShow.isShow_reg == false) {
-          vm.isShow.isShow_reg = true;
-        } else if (vm.isShow.isShow_reg == true) {
-          vm.isShow.isShow_reg = false;
-        }
-      } else if (temp == "ind") {
-        if (vm.isShow.isShow_ind == false) {
-          vm.isShow.isShow_ind = true;
-        } else if (vm.isShow.isShow_ind == true) {
-          vm.isShow.isShow_ind = false;
-        }
-      }
-    },
-    getSelected: function (tmp, e) {
-      var vm = this;
-      vm.cur = 1; //页码从1开始
-      vm.key =
-        vm.key != "" ?
-        $.trim(vm.key) :
-        $.trim(decodeURI(getQueryVariable("key_pre")));
-      vm.selectedItems.push({
-        selectedName: e.target.innerText,
-        tag: tmp
-      }); //选中的数组
-      /*控制选中隐藏*/
-      switch (tmp) {
-        case "Ran":
-          vm.isShow.isShow_dlRan = false;
-          break;
-        case "RegC":
-          vm.isShow.isShow_dlRegC = false;
-          break;
-        case "Sta":
-          vm.isShow.isShow_dlSta = false;
-          break;
-        case "Turn":
-          vm.isShow.isShow_dlTurn = false;
-          break;
-        case "Ind":
-          vm.isShow.isShow_dlInd = false;
-          break;
-        case "Time":
-          vm.isShow.isShow_dlTime = false;
-          break;
-        case "Reg":
-          vm.isShow.isShow_dlReg = false;
-          break;
-      }
-      getDataPage(this.cur, vm.key, vm.selectedItems).then(function (response) {
-        vm.isShow.loading = false;
-        vm.contentList = response.data.data.data;
-        vm.all = response.data.data.total;
-      });
-    },
-    delSelected: function (tmp, e) {
-      var vm = this;
-      vm.cur = 1; //页码从1开始
-      vm.selectedItems.forEach(function (element, index, array) {
-        if (element.selectedName == e.target.innerText) {
-          array.splice(index, 1);
-        }
-      });
-      switch (tmp) {
-        case "Ran":
-          vm.isShow.isShow_dlRan = true;
-          break;
-        case "RegC":
-          vm.isShow.isShow_dlRegC = true;
-          break;
-        case "Sta":
-          vm.isShow.isShow_dlSta = true;
-          break;
-        case "Turn":
-          vm.isShow.isShow_dlTurn = true;
-          break;
-        case "Ind":
-          vm.isShow.isShow_dlInd = true;
-          break;
-        case "Time":
-          vm.isShow.isShow_dlTime = true;
-          break;
-        case "Reg":
-          vm.isShow.isShow_dlReg = true;
-          break;
-      }
-      getDataPage(1, vm.key, vm.selectedItems).then(function (response) {
-        vm.isShow.loading = false;
-        vm.contentList = response.data.data.data;
-        vm.all = response.data.data.total;
-      });
-    },
-    goDetail: function (id) {
-      window.open("searchDetail.html?Seq_No=" + id, "_blank");
-    },
-    goChart: function () {
-      var selectVars="";
+      Search: function () {
+          var vm = this;
+          vm.cur = 1; //页码从1开始
+          vm.key =
+              vm.key != "" ?
+                  $.trim(vm.key) :
+                  $.trim(decodeURI(getQueryVariable("key_pre")));
+          axios
+              .post(globalUrl + "content/search", {
+                  limit: 10,
+                  accounname: vm.key,
+                  range: "",
+                  capital: "",
+                  time: "",
+                  address: ""
+              })
+              .then(function (response) {
+                  vm.isShow.loading = false;
+                  vm.contentList = response.data.data.data;
+                  vm.all = response.data.data.total;
+              })
+              .catch(function (error) {
+                  console.log(error);
+              });
+      },
+      /*分页*/
+      btnClick: function (data) {
+          //页码点击事件
+          var vm = this;
+          vm.key =
+              vm.key != "" ?
+                  $.trim(vm.key) :
+                  $.trim(decodeURI(getQueryVariable("key_pre")));
+          if (data != this.cur) {
+              this.cur = data;
+              getDataPage(this.cur, vm.key, vm.selectedItems).then(function (
+                  response
+              ) {
+                  vm.isShow.loading = false;
+                  vm.contentList = response.data.data.data;
+              });
+          }
+      },
+      pageClick: function () {
+          var vm = this;
+          vm.key =
+              vm.key != "" ?
+                  $.trim(vm.key) :
+                  $.trim(decodeURI(getQueryVariable("key_pre")));
+          getDataPage(this.cur, vm.key, vm.selectedItems).then(function (response) {
+              vm.isShow.loading = false;
+              vm.contentList = response.data.data.data;
+          });
+      },
+      Go: function () {
+          var vm = this;
+          this.cur = Number(vm.goPage);
+          vm.key =
+              vm.key != "" ?
+                  $.trim(vm.key) :
+                  $.trim(decodeURI(getQueryVariable("key_pre")));
+          //总页数
+          vm.allPage =
+              this.all % 10 == 0 ? this.all / 10 : Math.ceil(this.all / 10);
+          if (this.cur <= vm.allPage) {
+              getDataPage(this.cur, vm.key, vm.selectedItems).then(function (
+                  response
+              ) {
+                  vm.isShow.loading = false;
+                  vm.contentList = response.data.data.data;
+              });
+          } else {
+              alert("输入的页数超过总页数！");
+          }
+      },
+      /*点击更多显示与隐藏*/
+      More: function (temp, e) {
+          var vm = this;
+          if (temp == "reg") {
+              if (vm.isShow.isShow_reg == false) {
+                  vm.isShow.isShow_reg = true;
+              } else if (vm.isShow.isShow_reg == true) {
+                  vm.isShow.isShow_reg = false;
+              }
+          } else if (temp == "ind") {
+              if (vm.isShow.isShow_ind == false) {
+                  vm.isShow.isShow_ind = true;
+              } else if (vm.isShow.isShow_ind == true) {
+                  vm.isShow.isShow_ind = false;
+              }
+          }
+      },
+      getSelected: function (tmp, e) {
+          var vm = this;
+          vm.cur = 1; //页码从1开始
+          vm.key =
+              vm.key != "" ?
+                  $.trim(vm.key) :
+                  $.trim(decodeURI(getQueryVariable("key_pre")));
+          vm.selectedItems.push({
+              selectedName: e.target.innerText,
+              tag: tmp
+          }); //选中的数组
+          /*控制选中隐藏*/
+          switch (tmp) {
+              case "Ran":
+                  vm.isShow.isShow_dlRan = false;
+                  break;
+              case "RegC":
+                  vm.isShow.isShow_dlRegC = false;
+                  break;
+              case "Sta":
+                  vm.isShow.isShow_dlSta = false;
+                  break;
+              case "Turn":
+                  vm.isShow.isShow_dlTurn = false;
+                  break;
+              case "Ind":
+                  vm.isShow.isShow_dlInd = false;
+                  break;
+              case "Time":
+                  vm.isShow.isShow_dlTime = false;
+                  break;
+              case "Reg":
+                  vm.isShow.isShow_dlReg = false;
+                  break;
+          }
+          getDataPage(this.cur, vm.key, vm.selectedItems).then(function (response) {
+              vm.isShow.loading = false;
+              vm.contentList = response.data.data.data;
+              vm.all = response.data.data.total;
+          });
+      },
+      delSelected: function (tmp, e) {
+          var vm = this;
+          vm.cur = 1; //页码从1开始
+          vm.selectedItems.forEach(function (element, index, array) {
+              if (element.selectedName == e.target.innerText) {
+                  array.splice(index, 1);
+              }
+          });
+          switch (tmp) {
+              case "Ran":
+                  vm.isShow.isShow_dlRan = true;
+                  break;
+              case "RegC":
+                  vm.isShow.isShow_dlRegC = true;
+                  break;
+              case "Sta":
+                  vm.isShow.isShow_dlSta = true;
+                  break;
+              case "Turn":
+                  vm.isShow.isShow_dlTurn = true;
+                  break;
+              case "Ind":
+                  vm.isShow.isShow_dlInd = true;
+                  break;
+              case "Time":
+                  vm.isShow.isShow_dlTime = true;
+                  break;
+              case "Reg":
+                  vm.isShow.isShow_dlReg = true;
+                  break;
+          }
+          getDataPage(1, vm.key, vm.selectedItems).then(function (response) {
+              vm.isShow.loading = false;
+              vm.contentList = response.data.data.data;
+              vm.all = response.data.data.total;
+          });
+      },
+      goDetail: function (id) {
+          window.open("searchDetail.html?Seq_No=" + id, "_blank");
+      },
+      goChart: function () {
+          var selectVars = "";
 
-       for(item in this.selectedItems)
-       {
-         selectVars+= item==0 ? "?": "&";
-         selectVars+=  this.selectedItems[item].tag+ "="+ this.selectedItems[item].selectedName;
-       }
-       selectVars=encodeURI(encodeURI(selectVars));
+          for (item in this.selectedItems) {
+              selectVars += item == 0 ? "?" : "&";
+              selectVars += this.selectedItems[item].tag + "=" + this.selectedItems[item].selectedName;
+          }
+          selectVars = encodeURI(encodeURI(selectVars));
 
-       window.location.href = selectVars ? "./dashboard.html"+selectVars: "./dashboard.html";
+          window.location.href = selectVars ? "./dashboard.html" + selectVars : "./dashboard.html";
 
-    },
-    exportData: function () {
-      var vm = this;
-      vm.cur = 1; //页码从1开始
-      vm.key =
-        vm.key != "" ?
-        $.trim(vm.key) :
-        $.trim(decodeURI(getQueryVariable("key_pre")));
-      var range = "";
-      var capital = "";
-      var time = "";
-      var address = "";
-      var items = vm.selectedItems;
-      items.forEach(function (element, index, array) {
-        switch (element.tag) {
-          case "Ran":
-            range = element.selectedName;
-            break;
-          case "RegC":
-            capital = element.selectedName;
-            break;
-            /*case 'Sta':
-                              var range = element.selectedName;
-                              break;
-                          case 'Turn':
-                              var range = element.selectedName;
-                              break;
-                          case 'Ind':
-                              var range = element.selectedName;
-                              break;*/
-          case "Time":
-            time = element.selectedName;
-            break;
-          case "Reg":
-            address = element.selectedName;
-            break;
-        }
-      });
-      window.location.href = globalUrl +
-        "content/daochu/accounname/" +
-        vm.key +
-        "/range/" +
-        range +
-        "/input/" +
-        vm.exportDataNum +
-        "/capital/" +
-        capital +
-        "/time/" +
-        time +
-        "/address/" +
-        address;
+      },
+      exportData: function () {
+          var vm = this;
+          vm.cur = 1; //页码从1开始
+          vm.key =
+              vm.key != "" ?
+                  $.trim(vm.key) :
+                  $.trim(decodeURI(getQueryVariable("key_pre")));
+          var range = "";
+          var capital = "";
+          var time = "";
+          var address = "";
+          var items = vm.selectedItems;
+          items.forEach(function (element, index, array) {
+              switch (element.tag) {
+                  case "Ran":
+                      range = element.selectedName;
+                      break;
+                  case "RegC":
+                      capital = element.selectedName;
+                      break;
+                  /*case 'Sta':
+                                    var range = element.selectedName;
+                                    break;
+                                case 'Turn':
+                                    var range = element.selectedName;
+                                    break;
+                                case 'Ind':
+                                    var range = element.selectedName;
+                                    break;*/
+                  case "Time":
+                      time = element.selectedName;
+                      break;
+                  case "Reg":
+                      address = element.selectedName;
+                      break;
+              }
+          });
+          window.location.href = globalUrl + "content/daochu/accounname/" +
+              vm.key +
+              "/range/" +
+              range +
+              "/input/" +
+              vm.exportDataNum +
+              "/capital/" +
+              capital +
+              "/time/" +
+              time +
+              "/address/" +
+              address;
 
-      //   axios
-      //     .post(globalUrl + "content/daochu", {
-      //       accounname: vm.key,
-      //       range: range,
-      //       capital: capital,
-      //       time: time,
-      //       address: address,
-      //       input: vm.exportDataNum
-      //     })
-      //     .then(function(response) {})
-      //     .catch(function(error) {
-      //       console.log(error);
-      //     });
+      },
+      goGist(){
 
-    }
-    // 清除所有选项
-    // clearAll:function(){
-    //     vm=this;
-    //     vm.selectedItems=[];
-    //     vm.isShow.isShow_dlRan = true;
-    //     vm.isShow.isShow_dlRegC = true;
-    //     vm.isShow.isShow_dlSta = true;
-    //     vm.isShow.isShow_dlTurn = true;
-    //     vm.isShow.isShow_dlInd = true;
-    //     vm.isShow.isShow_dlTime = true;
-    //     vm.isShow.isShow_dlReg = true;
-    // }
+      }
   },
-
   computed: {
     //分页
     indexs: function () {

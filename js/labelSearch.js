@@ -52,6 +52,10 @@ var app = new Vue({
             window.location.href = "./dashboard.html";
         },
         goGIS: function () {
+            var storage={
+                type:0
+            }
+            localStorage.setItem("type", JSON.stringify(storage));
             window.location.href = "./map.html";
         },
         /*分页*/

@@ -95,7 +95,7 @@ var chartResolution = new Vue({
     data: {
         /*样式*/
         pie: {
-            width: '100% !important',
+            width: '400px',
             height: '300px'
         },
         bar: {
@@ -288,6 +288,12 @@ var chartResolution = new Vue({
                     name: '成立时间',
                     type: 'pie',
                     radius: '80%',
+                    label: {
+                        normal: {
+                            show: true,
+                            position: 'inside'
+                        }
+                    }
                 }]
             };
             pieOptionThree = {

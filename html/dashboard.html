@@ -191,19 +191,19 @@
                 <div class="am-g" >
                     <div class="am-u-sm-12" v-show="hasResult && !isLoading">
                         <div class="am-u-sm-6">
-                            <div id="pieBasicOne" :style="{width:pie.width,height: pie.height}"></div>
+                            <div id="pieBasicOne" style="width: 100%" :style="{width:pie.width,height: pie.height}"></div>
                         </div>
                         <div class="am-u-sm-6">
-                            <div id="pieBasicTwo" :style="{width: pie.width,height: pie.height}"></div>
+                            <div id="pieBasicTwo" style="width: 100%" :style="{width: pie.width,height: pie.height}"></div>
                         </div>
                         <div class="am-u-sm-6">
-                            <div id="pieBasicThree" :style="{width:pie.width,height: pie.height}"></div>
+                            <div id="pieBasicThree" style="width: 100%" :style="{width:pie.width,height: pie.height}"></div>
                         </div>
                         <div class="am-u-sm-6">
-                            <div id="pieBasicFour" :style="{width: pie.width,height: pie.height}"></div>
+                            <div id="pieBasicFour" style="width: 100%" :style="{width: pie.width,height: pie.height}"></div>
                         </div>
                     </div>
-                    <div class="am-u-sm-12 no-data" v-show="!hasResult && !isLoading" style="display:none">
+                    <div class="am-u-sm-12 no-data"  v-show="!hasResult && !isLoading" style="display:none">
                         <img src="../images/nodata.png" alt="" srcset="">
                     </div>
                     <div class="am-u-g">
