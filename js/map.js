@@ -4,8 +4,8 @@ $((function () {
 }))
 var map =new Vue({
     el:"#mapRoot",
-    data:{
-        countData:[]
+    data :{
+        countData: []
     },
     mounted:function () {
      this.getMapdata();
@@ -25,27 +25,28 @@ var map =new Vue({
         },
         getMapdata(){
             let vm=this
-            axios({
-                method: "post",
-                url: globalUrl + 'content/gis_screen',
+            var arryData=[]
+            axios(globalUrl + 'content/gis_screen', {
+                method: 'post',
 
-            }).then(function (res) {
-                if(res.data.status==1){
-                    vm.countData=res.data.data.result
+            }).then(function (response) {
+                vm.countData=response.data.data.result
+                vm.setMap(vm.countData)
+                })
+                .catch(function (error) {
+                    console.log(error)
+                })
 
-                }
-            });
-            console.log(vm.countData)
-            this.setMap()
 
         },
-        setMap(){
-            var vm=this;
-            console.log(vm.countData)
+        setMap(temp){
+            let vm=this;
             var dom = document.getElementById("container");
             var myChart = echarts.init(dom);
             option = null;
-            var data=vm.countData;
+            var data=[]
+            data=temp;
+            console.log(data)
             var geoCoordMap = {
                 '海门':[121.15,31.89],
             '澳门特别行政区':[113.55751910182,22.204117988443],

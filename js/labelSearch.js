@@ -102,7 +102,7 @@ var app = new Vue({
             }
         },
         goDetail: function (id) {
-            window.open("searchDetail.html?Seq_No=" + id, "_blank");
+            window.open("newSearchDetail.html?Seq_No=" + id, "_blank");
         },
         // 清除所有选项
         // clearAll:function(){

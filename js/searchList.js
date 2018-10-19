@@ -612,7 +612,7 @@ var app = new Vue({
           });
       },
       goDetail: function (id) {
-          window.open("searchDetail.html?Seq_No=" + id, "_blank");
+          window.open("newSearchDetail.html?Seq_No=" + id, "_blank");
       },
       goChart: function () {
           var selectVars = "";
