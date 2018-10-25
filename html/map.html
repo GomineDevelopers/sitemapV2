@@ -137,16 +137,17 @@
     <div class="am-u-sm-10  am-u-sm-centered">
         <div class="am-form-group" style="margin-top: 1.5rem;">
             <label class="am-radio-inline">
-                <input type="radio" name="radio10" value="sd" data-am-ucheck checked> 散点图
+                <input type="radio" name="radio10" value="sd" @click="changePointChart()" data-am-ucheck checked> 散点图
             </label>
             <label class="am-radio-inline">
-                <input type="radio" name="radio10" value="sg" data-am-ucheck> 栅格图
+                <input type="radio" name="radio10" value="sg" @click="changeMap()" data-am-ucheck> 栅格图
             </label>
         </div>
     </div>
     <div class="am-g">
         <!-- 地图放置区域 -->
-        <div class="am-u-sm-9 am-u-sm-centered" id="container" style="height: 800px;"></div>
+        <div class="am-u-sm-9 am-u-sm-centered" v-show="!isGrid" id="container" style="height: 800px;"></div>
+        <div class="am-u-sm-9 am-u-sm-centered" v-show="isGrid" id="containerGrid" style="height:800px;"></div>
         <!-- 地图放置区域 -->
     </div>
 
@@ -202,6 +203,7 @@
     <script src="../js/vue/vue.js"></script>
     <script src="../js/common.js"></script>
     <script src="../js/map.js"></script>
+    <script src="../js/map/mapStyle.js"></script>
 </body>
 
 </html>

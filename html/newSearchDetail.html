@@ -116,7 +116,7 @@
                     <h4 class="am-panel-title">管理层</h4>
                     <div class="button-group">
                         <button type="button" class="am-btn" @click="showCharts(0)">列表</button>
-                        <button type="button"class="am-btn" @click="showCharts(1)">图表</button>
+                        <button type="button" class="am-btn" @click="showCharts(1)">图表</button>
                     </div>
                     <div data-am-collapse="{ target: '#do-not-say-322'}" class="panel-arrow">
                         <i class="am-icon-angle-down "></i>
@@ -132,41 +132,44 @@
         <div class="am-u-sm-10 am-u-sm-centered am-g-minH" v-show="isShow.showChart==0">
             <div class="page-header">
                 <h3 class="page-title">
-                企业详情
-            </h3></div>
+                    企业详情
+                </h3>
+            </div>
             <div class=" am-u-md-centered">
-            <div class="am-u-lg-4 am-u-md-6">
+                <div class="am-u-lg-4 am-u-md-6">
 
                     <div class="am-panel am-panel-default">
-                        <div class="am-panel-hd "  >
+                        <div class="am-panel-hd ">
                             <h4 class="am-panel-title">
-                               基本信息
+                                基本信息
 
                             </h4>
-                            <div class="panel-arrow" data-am-collapse="{target: '#do-not-say-1'}"><i class="am-icon-angle-down "></i></div>
+                            <div class="panel-arrow" data-am-collapse="{target: '#do-not-say-1'}">
+                                <i :class="{ 'am-icon-angle-down' : angleOne, 'am-icon-angle-up': !angleOne}" @click="toggle('angleOne')"></i></div>
                         </div>
                         <div id="do-not-say-1" class="am-panel-collapse am-collapse am-in">
                             <div class="am-panel-bd am-cf">
                                 <div class="map-location" id="companyLocation">
 
                                 </div>
-                                <p><span>公司名称：</span ><span class="companyName" v-text="intro.Account_Name"></span></p>
+                                <p><span>公司名称：</span><span class="companyName" v-text="intro.Account_Name"></span></p>
                                 <p class="location">
-                                   <span>地址：</span>
+                                    <span>地址：</span>
                                     <span v-text="intro.Street">
                                     </span>
                                 </p>
                                 <div class="">
                                     <p><span>电话：</span><span v-text="intro.Company_Phone"></span></p>
-                                    <p><span>官网：</span><a class="link-style" v-text="intro.Official_Website" :href="'http://'+intro.Official_Website" target="_blank"></a></p>
+                                    <p><span>官网：</span><a class="link-style" v-text="intro.Official_Website" :href="'http://'+intro.Official_Website"
+                                            target="_blank"></a></p>
                                     <p><span>更新时间：</span><span v-text="intro.update_time"></span></p>
                                     <p><span>GOMINE唯一ID号：</span><span v-text="intro.GANO"></span></p>
                                 </div>
                                 <!--<div class="right-row">-->
-                                    <!--<h5>11</h5>-->
-                                    <!--<h5>22</h5>-->
-                                    <!--<h5>33</h5>-->
-                                    <!--<h5>444</h5>-->
+                                <!--<h5>11</h5>-->
+                                <!--<h5>22</h5>-->
+                                <!--<h5>33</h5>-->
+                                <!--<h5>444</h5>-->
                                 <!--</div>-->
 
                             </div>
@@ -174,13 +177,14 @@
                     </div>
 
                     <div class="am-panel am-panel-default">
-                        <div class="am-panel-hd" >
-                            <h4 class="am-panel-title" >管理层</h4>
+                        <div class="am-panel-hd">
+                            <h4 class="am-panel-title">管理层</h4>
                             <div class="button-group">
                                 <button type="button" class="am-btn list" @click="showCharts(0)">列表</button>
                                 <button type="button" class="am-btn " @click="showCharts(1)">图表</button>
                             </div>
-                            <div class="panel-arrow" data-am-collapse="{ target: '#do-not-say-3'}"><i class="am-icon-angle-down "></i></div>
+                            <div class="panel-arrow" data-am-collapse="{ target: '#do-not-say-3'}">
+                                <i :class="{ 'am-icon-angle-down' : angleTwo, 'am-icon-angle-up': !angleTwo}" @click="toggle('angleTwo')"></i></div>
                         </div>
                         <div id="do-not-say-3" class="am-panel-collapse am-collapse am-in">
                             <div class="am-panel-bd">
@@ -188,10 +192,26 @@
                                     <li class="list-separated-item">
                                         <div class="descripe-wrapper am-cf">
                                             <div class="avatar">
+                                                <span class="avatar-lg"><img :src="picUrl" /> </span>
+                                            </div>
+                                            <div class="descripe">
+                                                <div><a href="javascript:void(0)" class="text-inherit" v-text="name">Dr.
+                                                        Thomas
+                                                        Caulfield</a></div>
+                                                <small class="d-block item-except text-sm text-muted h-1x" v-text="jobTitle">
+                                                    CEO
+                                                </small>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="list-separated-item">
+                                        <div class="descripe-wrapper am-cf">
+                                            <div class="avatar">
                                                 <span class="avatar-lg"><img src="../images/companyheader.jpg"> </span>
                                             </div>
                                             <div class="descripe">
-                                                <div><a href="javascript:void(0)" class="text-inherit">Dr. Thomas Caulfield</a></div>
+                                                <div><a href="javascript:void(0)" class="text-inherit">Dr. Thomas
+                                                        Caulfield</a></div>
                                                 <small class="d-block item-except text-sm text-muted h-1x">
                                                     CEO
                                                 </small>
@@ -204,7 +224,8 @@
                                                 <span class="avatar-lg"><img src="../images/companyheader.jpg"> </span>
                                             </div>
                                             <div class="descripe">
-                                                <div><a href="javascript:void(0)" class="text-inherit">Dr. Thomas Caulfield</a></div>
+                                                <div><a href="javascript:void(0)" class="text-inherit">Dr. Thomas
+                                                        Caulfield</a></div>
                                                 <small class="d-block item-except text-sm text-muted h-1x">
                                                     CEO
                                                 </small>
@@ -217,7 +238,8 @@
                                                 <span class="avatar-lg"><img src="../images/companyheader.jpg"> </span>
                                             </div>
                                             <div class="descripe">
-                                                <div><a href="javascript:void(0)" class="text-inherit">Dr. Thomas Caulfield</a></div>
+                                                <div><a href="javascript:void(0)" class="text-inherit">Dr. Thomas
+                                                        Caulfield</a></div>
                                                 <small class="d-block item-except text-sm text-muted h-1x">
                                                     CEO
                                                 </small>
@@ -230,20 +252,8 @@
                                                 <span class="avatar-lg"><img src="../images/companyheader.jpg"> </span>
                                             </div>
                                             <div class="descripe">
-                                                <div><a href="javascript:void(0)" class="text-inherit">Dr. Thomas Caulfield</a></div>
-                                                <small class="d-block item-except text-sm text-muted h-1x">
-                                                    CEO
-                                                </small>
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-separated-item">
-                                        <div class="descripe-wrapper am-cf">
-                                            <div class="avatar">
-                                                <span class="avatar-lg"><img src="../images/companyheader.jpg"> </span>
-                                            </div>
-                                            <div class="descripe">
-                                                <div><a href="javascript:void(0)" class="text-inherit">Dr. Thomas Caulfield</a></div>
+                                                <div><a href="javascript:void(0)" class="text-inherit">Dr. Thomas
+                                                        Caulfield</a></div>
                                                 <small class="d-block item-except text-sm text-muted h-1x">
                                                     CEO
                                                 </small>
@@ -255,18 +265,21 @@
                         </div>
                     </div>
 
-            </div>
-            <div class="am-u-lg-8 am-u-md-6">
+                </div>
+                <div class="am-u-lg-8 am-u-md-6">
 
                     <div class="am-panel am-panel-default">
-                        <div class="am-panel-hd"  >
+                        <div class="am-panel-hd">
                             <h4 class="am-panel-title">
-                                工商注册信息
+                                企业详细信息
                             </h4>
-                            <div class="panel-arrow" data-am-collapse="{ target: '#do-not-say-11'}"><i class="am-icon-angle-down "></i></div>
+                            <div class="panel-arrow" data-am-collapse="{ target: '#do-not-say-11'}">
+                                <i :class="{ 'am-icon-angle-down' : angleThree, 'am-icon-angle-up': !angleThree}"
+                                    @click="toggle('angleThree')"></i></div>
                         </div>
                         <div id="do-not-say-11" class="am-panel-collapse am-collapse am-in">
                             <div class="am-panel-bd">
+                                <h4>工商注册信息：</h4>
                                 <table class="am-table am-table-bordered am-table-radius am-table-compact  am-table-hover search-detail-table">
 
                                     <tr>
@@ -332,6 +345,7 @@
                                         <td colspan="3" class="ywjs" v-text="basicInfo.Business_Scope"></td>
                                     </tr>
                                 </table>
+                                <h4>企业特征信息：</h4>
                                 <table class="am-table am-table-bordered am-table-radius am-table-compact  am-table-hover search-detail-table">
                                     <tr>
                                         <td class="am-sd-tdbg">员工人数:</td>
@@ -387,14 +401,15 @@
                     </div>
 
                     <div class="am-panel am-panel-default">
-                        <div class="am-panel-hd" >
+                        <div class="am-panel-hd">
                             <h4 class="am-panel-title">新闻</h4>
-                            <div class="panel-arrow" data-am-collapse="{target: '#do-not-say-33'}"><i class="am-icon-angle-down "></i></div>
+                            <div class="panel-arrow" data-am-collapse="{target: '#do-not-say-33'}"><i :class="{ 'am-icon-angle-down' : angleFour, 'am-icon-angle-up': !angleFour}"
+                                    @click="toggle('angleFour')"></i></div>
                         </div>
                         <div id="do-not-say-33" class="am-panel-collapse am-collapse am-in">
                             <div class="am-panel-bd">
                                 <div class="button-group tab-buttons">
-                                    <button type="button" class="am-btn" @click="showItem(1)" >科技新闻</button>
+                                    <button type="button" class="am-btn" @click="showItem(1)">科技新闻</button>
                                     <button type="button" class="am-btn" @click="showItem(2)">一般新闻</button>
                                     <button type="button" class="am-btn" @click="showItem(3)">投资</button>
                                     <button type="button" class="am-btn" @click="showItem(4)">人力资源</button>
@@ -402,62 +417,117 @@
                                 <div class="news-wrapper">
                                     <div class="tec-news" v-show="isShow.tabIndex==1">
                                         <ul class="list-unstyled list-separated">
-                                            <li class="list-separated-item">
-                                                <div class="descripe-wrapper am-cf">
-                                                    <div class="avatar"><span class="avatar-lg">
+                                            <li class="list-separated-item" v-for="(item ,index) of newsData" :key="item.id">
+                                                <div class="descripe-wrapper am-cf" @click="goWebsite(item.ORI_URL)">
+                                                    <!-- <div class="avatar"><span class="avatar-lg">
                                                             <img src="../images/companyheader.jpg"></span>
-                                                    </div>
+                                                    </div> -->
                                                     <div class="descripe">
                                                         <div>
-                                                            <a href="javascript:void(0)" class="text-inherit">Dr. Thomas Caulfield</a>
+                                                            <a href="javascript:void(0)" class="text-inherit" v-html="item.content">
+                                                            </a>
                                                         </div>
-                                                        <small class="d-block item-except text-sm text-muted h-1x">CEO</small>
+                                                        <small class="d-block item-except text-sm text-muted h-1x"
+                                                            v-text="item.replys_ctime"></small>
+                                                    </div>
+                                                    <div class="go-detail">
+                                                        <span class="am-icon-chevron-circle-right"></span>
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="list-separated-item">
-                                                <div class="descripe-wrapper am-cf">
-                                                    <div class="avatar"><span class="avatar-lg">
-                                                            <img src="../images/companyheader.jpg"></span>
-                                                    </div>
-                                                    <div class="descripe">
-                                                        <div>
-                                                            <a href="javascript:void(0)" class="text-inherit">Dr. Thomas Caulfield</a>
-                                                        </div>
-                                                        <small class="d-block item-except text-sm text-muted h-1x">CEO</small>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            </ul>
+                                        </ul>
                                     </div>
-                                    <div class="non-tec-news" v-show="isShow.tabIndex==2">22</div>
-                                    <div class="investment" v-show="isShow.tabIndex==3">33</div>
-                                    <div class="recruitment" v-show="isShow.tabIndex==4">44</div>
+                                    <div class="non-tec-news" v-show="isShow.tabIndex==2">
+                                        <ul class="list-unstyled list-separated">
+                                            <li class="list-separated-item" v-for="(item ,index) of newsData" :key="item.id">
+                                                <div class="descripe-wrapper am-cf" @click="goWebsite(item.ORI_URL)">
+                                                    <!-- <div class="avatar"><span class="avatar-lg">
+                                                                                                    <img src="../images/companyheader.jpg"></span>
+                                                                                            </div> -->
+                                                    <div class="descripe">
+                                                        <div>
+                                                            <a href="javascript:void(0)" class="text-inherit" v-html="item.content">
+                                                            </a>
+                                                        </div>
+                                                        <small class="d-block item-except text-sm text-muted h-1x"
+                                                            v-text="item.replys_ctime"></small>
+                                                    </div>
+                                                    <div class="go-detail">
+                                                        <span class="am-icon-chevron-circle-right"></span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="investment" v-show="isShow.tabIndex==3">
+                                        <ul class="list-unstyled list-separated">
+                                            <li class="list-separated-item" v-for="(item ,index) of newsData" :key="item.id">
+                                                <div class="descripe-wrapper am-cf" @click="goWebsite(item.ORI_URL)">
+                                                    <!-- <div class="avatar"><span class="avatar-lg">
+                                                                                                    <img src="../images/companyheader.jpg"></span>
+                                                                                            </div> -->
+                                                    <div class="descripe">
+                                                        <div>
+                                                            <a href="javascript:void(0)" class="text-inherit" v-html="item.content">
+                                                            </a>
+                                                        </div>
+                                                        <small class="d-block item-except text-sm text-muted h-1x"
+                                                            v-text="item.replys_ctime"></small>
+                                                    </div>
+                                                    <div class="go-detail">
+                                                        <span class="am-icon-chevron-circle-right"></span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="recruitment" v-show="isShow.tabIndex==4">
+                                        <ul class="list-unstyled list-separated">
+                                            <li class="list-separated-item" v-for="(item ,index) of newsData" :key="item.id">
+                                                <div class="descripe-wrapper am-cf" @click="goWebsite(item.ORI_URL)">
+                                                    <!-- <div class="avatar"><span class="avatar-lg">
+                                                                                                    <img src="../images/companyheader.jpg"></span>
+                                                                                            </div> -->
+                                                    <div class="descripe">
+                                                        <div>
+                                                            <a href="javascript:void(0)" class="text-inherit" v-html="item.content">
+                                                            </a>
+                                                        </div>
+                                                        <small class="d-block item-except text-sm text-muted h-1x"
+                                                            v-text="item.replys_ctime"></small>
+                                                    </div>
+                                                    <div class="go-detail">
+                                                        <span class="am-icon-chevron-circle-right"></span>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
 
                                     <div class="am-u-sm-12 am-u-sm-centered" v-show="true">
-                                            <ul class="am-pagination am-pagination-size">
-                                                <li v-if="cur==1" :class={"am-disabled":cur==1}><a>&lt;</a></li>
-                                                <li v-if="cur>1"><a @click="cur--,pageClick()">&lt;</a></li>
-                                                <li v-for="index in indexs" :class="{ 'am-active': cur == index}">
-                                                    <a @click="btnClick(index)" v-text="index"></a>
-                                                </li>
-                                                <li v-if="cur==allPage" :class={"am-disabled":cur==allPage}><a>&gt;</a></li>
-                                                <li v-if="cur!=allPage"><a @click="cur++,pageClick()">&gt;</a></li>
-                                                <li>共</li>
-                                                <li v-text="allPage"></li>
-                                                <li>页</li>
-                                                <li>跳到</li>
-                                                <li><input type="number" v-model="goPage"></li>
-                                                <li>页</li>
-                                                <li><button @click="Go()">GO</button></li>
-                                            </ul>
+                                        <ul class="am-pagination am-pagination-size">
+                                            <li v-if="cur==1" :class={"am-disabled":cur==1}> <a>&lt;</a> </li>
+                                            <li v-if="cur>1"><a @click="cur--,pageClick()">&lt;</a></li>
+                                            <li v-for="index in indexs" :class="{ 'am-active': cur == index}">
+                                                <a @click="btnClick(index)" v-text="index"></a>
+                                            </li>
+                                            <li v-if="cur==allPage" :class={"am-disabled":cur==allPage}><a>&gt;</a></li>
+                                            <li v-if="cur!=allPage"><a @click="cur++,pageClick()">&gt;</a></li>
+                                            <li>共</li>
+                                            <li v-text="allPage"></li>
+                                            <li>页</li>
+                                            <li>跳到</li>
+                                            <li><input type="number" v-model="goPage"></li>
+                                            <li>页</li>
+                                            <li><button @click="Go()">GO</button></li>
+                                        </ul>
                                     </div>
                                 </div>
 
                             </div>
                         </div>
                     </div>
-            </div>
+                </div>
             </div>
         </div>
         <div v-show="isShow.loading" class="loading"></div>

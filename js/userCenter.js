@@ -216,13 +216,13 @@ var userCenter = new Vue({
     checkedMoney: "changeData",
     selected_pro: "resetDispicker"
   },
-  created:function(){
-      //登陆检测
-      loginCheck();
+  created: function () {
+    //登陆检测
+    loginCheck();
   },
   mounted: function () {
-    if(getLocalStorage("token")){
-        this.token = JSON.parse(localStorage.getItem("token")).val;
+    if (getLocalStorage("token")) {
+      this.token = JSON.parse(localStorage.getItem("token")).val;
 
     }
 

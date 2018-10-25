@@ -28,6 +28,20 @@ function formatDate(date, showDetail) {
         );
     else return year + "-" + month + "-" + date1;
 }
+formatDateTwo = function (date, showDetail) {
+    var isShow = showDetail || false;
+    var d = new Date(parseInt(date) * 1000)
+    var year = d.getFullYear();
+    var month = d.getMonth() + 1 > 9 ? d.getMonth() + 1 : "0" + (d.getMonth() + 1);
+    var date1 = d.getDate() > 9 ? d.getDate() : "0" + d.getDate();
+    var hour = d.getHours() > 9 ? d.getHours() : "0" + d.getHours();
+    var minute = d.getMinutes() > 9 ? d.getMinutes() : "0" + d.getMinutes();
+    var second = d.getSeconds() > 9 ? d.getSeconds() : "0" + d.getSeconds();
+    if (isShow)
+        return year + "-" + month + "-" + date1 + " " + hour + ":" + minute + ":" + second;
+    else
+        return year + "-" + month + "-" + date1 + " " + hour + ":" + minute;
+}
 /*获取url后的参数*/
 function getQueryVariable(variable) {
     var query = window.location.search.substring(1);
@@ -99,11 +113,11 @@ function innerPageGetTagData(organizor, info, type, navName) {
     window.location.href = "./labelSearch.html";
 }
 //检测是否登陆，未登录跳转登陆页面
-function loginCheck(){
-    let token=getLocalStorage("token")||null
-    let flag=0;
-    if (token==''||token==null){
-        if(flag<1){
+function loginCheck() {
+    let token = getLocalStorage("token") || null
+    let flag = 0;
+    if (token == '' || token == null) {
+        if (flag < 1) {
             window.location.href = "../login.html";
             this.flag++;
         }
