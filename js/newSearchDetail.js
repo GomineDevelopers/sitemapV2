@@ -114,8 +114,8 @@ var app = new Vue({
     methods: {
         getNewsData() {
             var companyId = getQueryVariable("Seq_No");
-            var self = this;
-            var temp = "";
+            let self = this;
+            let temp = "";
             axios.get(globalUrl + "content/detail/Seq_No/", {
                     params: {
                         Seq_No: companyId,
@@ -176,12 +176,12 @@ var app = new Vue({
                     self.newsData = tempRes.result.data;
                     self.cur = tempRes.result.current_page;
                     self.all = tempRes.result.total
-
+                    self.showLocation();
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
-            this.showLocation();
+
         },
         showItem(index) {
             let vm = this;
@@ -196,11 +196,13 @@ var app = new Vue({
         },
         showLocation() {
             // 百度地图API功能
+            let vm = this;
             var map = new BMap.Map("companyLocation");
-            var point = new BMap.Point(this.intro.longitude, this.intro.latitude);
+            var point = new BMap.Point(vm.intro.longitude, vm.intro.latitude);
+
             var marker = new BMap.Marker(point); // 创建标注
             map.addOverlay(marker); // 将标注添加到地图中
-            map.centerAndZoom(point, 18);
+            map.centerAndZoom(point, 15);
             map.disableScrollWheelZoom(); //开启鼠标滚轮缩放
             map.disableDragging();
             var opts = {
