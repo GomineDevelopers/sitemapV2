@@ -2,116 +2,115 @@ $((function () {
 
 
 }))
-var map =new Vue({
-    el:"#mapRoot",
-    data :{
+var map = new Vue({
+    el: "#mapRoot",
+    data: {
         countData: [],
-        isGrid:false,
+        isGrid: false,
     },
-    mounted:function () {
-        if(JSON.parse(localStorage.getItem("type")).type==0){
+    mounted: function () {
+        if (JSON.parse(localStorage.getItem("type")).type == 0) {
             this.getlabelData();
         }
-        if(JSON.parse(localStorage.getItem("type")).type==1){
+        if (JSON.parse(localStorage.getItem("type")).type == 1) {
             this.getMapdata();
         }
     },
-    methods:{
-        getMapdata(){
-            let vm=this;
-            var storage={}
+    methods: {
+        getMapdata() {
+            let vm = this;
+            var storage = {}
             localStorage.setItem("b", JSON.stringify(storage));
-            var key= JSON.parse(localStorage.getItem("searchLitToMap")).key;
-            var range= JSON.parse(localStorage.getItem("searchLitToMap")).range;
-            var capital= JSON.parse(localStorage.getItem("searchLitToMap")).capital;
-            var time= JSON.parse(localStorage.getItem("searchLitToMap")).time;
-            var address= JSON.parse(localStorage.getItem("searchLitToMap")).address;
+            var key = JSON.parse(localStorage.getItem("searchLitToMap")).key;
+            var range = JSON.parse(localStorage.getItem("searchLitToMap")).range;
+            var capital = JSON.parse(localStorage.getItem("searchLitToMap")).capital;
+            var time = JSON.parse(localStorage.getItem("searchLitToMap")).time;
+            var address = JSON.parse(localStorage.getItem("searchLitToMap")).address;
             axios(globalUrl + 'content/gis_screen', {
                 method: 'post',
-                params:{
-                accounname: key,
-                range: range,
-                capital: capital,
-                time: time,
-                address: address
+                params: {
+                    accounname: key,
+                    range: range,
+                    capital: capital,
+                    time: time,
+                    address: address
                 }
             }).then(function (response) {
-                vm.countData=response.data.data
+                vm.countData = response.data.data
                 vm.setMap(vm.countData)
-                }).catch(function (error) {
-                    console.log(error)
-                })
+            }).catch(function (error) {
+                console.log(error)
+            })
 
 
         },
-        getlabelData(){
-            var storage={}
+        getlabelData() {
+            var storage = {}
             localStorage.setItem("searchLitToMap", JSON.stringify(storage));
             /*缓存中的内容*/
             var info = JSON.parse(localStorage.getItem("b")).info;
             var organizor = JSON.parse(localStorage.getItem("b")).organizor;
             var type = JSON.parse(localStorage.getItem("b")).type;
-            let vm=this
+            let vm = this
             axios(globalUrl + 'content/gisstate/', {
-                method: 'get',
-                dataType: "json",
-                params: {
-                    info: info,
-                    type: type,
-                    organizor: organizor
-                },
+                    method: 'get',
+                    dataType: "json",
+                    params: {
+                        info: info,
+                        type: type,
+                        organizor: organizor
+                    },
 
-            }).then(function (response) {
-                vm.countData=response.data.data
-                vm.setMap(vm.countData)
-            })
+                }).then(function (response) {
+                    vm.countData = response.data.data
+                    vm.setMap(vm.countData)
+                })
                 .catch(function (error) {
                     console.log(error)
                 })
         },
-        setMap(temp){
-            let vm=this;
+        setMap(temp) {
+            let vm = this;
             var dom = document.getElementById("container");
             var myChart = echarts.init(dom);
             option = null;
-            var data=[]
-            data=temp;
+            var data = []
+            data = temp;
             var geoCoordMap = {
-                '海门':[121.15,31.89],
-                '澳门':[113.55751910182,22.204117988443],
-                '香港':[114.18612410257,22.29358599328],
-                '台湾':[121.97387097872,24.086956718805],
-                '新疆':[85.614899338339,42.127000957642],
-                '宁夏':[106.15548126505,37.321323112295],
-                '青海':[96.202543672261,35.499761004275],
-                '甘肃':[38.103267343752,102.45762459934],
-                '陕西':[35.860026261323,109.50378929073],
-                '西藏':[31.367315402715,89.137981684031],
-                '云南':[101.59295163701,24.864212795483],
-                '贵州':[106.7349961033,26.902825927797],
-                '四川':[102.8991597236,30.367480937958],
-                '重庆':[106.53063501341,29.544606108886],
-                '海南':[109.73375548794,19.180500801261],
-                '广西':[108.92427442706,23.552254688119],
-                '广东':[113.39481755876,23.408003729025],
-                '湖南':[111.72066354648,27.695864052356],
-                '湖北':[112.41056219213,31.20931625014],
-                '河南':[113.48680405753,34.157183767956],
-                '山东':[118.52766339288,36.099289929728],
-                '江西':[115.6760823667,27.757258443441],
-                '福建':[117.98494311991,26.050118295661],
-                '安徽':[117.21600520757,31.859252417079],
-                '浙江':[119.95720242066,29.159494120761],
-                '江苏':[119.36848893836,33.013797169954],
-                '上海':[121.48789948569,31.249161710015],
-                '黑龙江':[128.04741371499,47.356591643111],
-                '吉林':[126.26287593078,43.678846185241],
-                '辽宁':[41.621600105958,122.75359155772],
-                '内蒙古':[114.41586754817,43.468238221949],
-                '山西':[112.51549586384,37.866565990509],
-                '河北':[115.66143362422,38.613839749251],
-                '天津':[117.21081309155,39.14392990331],
-                '北京':[116.46,39.92],
+                '澳门': [113.55751910182, 22.204117988443],
+                '香港': [114.18612410257, 22.29358599328],
+                '台湾': [121.97387097872, 24.086956718805],
+                '新疆': [85.614899338339, 42.127000957642],
+                '宁夏': [106.15548126505, 37.321323112295],
+                '青海': [35.499761004275, 96.202543672261],
+                '甘肃': [102.45762459934, 38.103267343752],
+                '陕西': [109.50378929073, 35.860026261323],
+                '西藏': [89.137981684031, 31.367315402715],
+                '云南': [101.59295163701, 24.864212795483],
+                '贵州': [106.7349961033, 26.902825927797],
+                '四川': [102.8991597236, 30.367480937958],
+                '重庆': [106.53063501341, 29.544606108886],
+                '海南': [109.73375548794, 19.180500801261],
+                '广西': [108.92427442706, 23.552254688119],
+                '广东': [113.39481755876, 23.408003729025],
+                '湖南': [111.72066354648, 27.695864052356],
+                '湖北': [112.41056219213, 31.20931625014],
+                '河南': [113.48680405753, 34.157183767956],
+                '山东': [118.52766339288, 36.099289929728],
+                '江西': [115.6760823667, 27.757258443441],
+                '福建': [117.98494311991, 26.050118295661],
+                '安徽': [117.21600520757, 31.859252417079],
+                '浙江': [119.95720242066, 29.159494120761],
+                '江苏': [119.36848893836, 33.013797169954],
+                '上海': [121.48789948569, 31.249161710015],
+                '黑龙江': [128.04741371499, 47.356591643111],
+                '吉林': [126.26287593078, 43.678846185241],
+                '辽宁': [122.75359155772, 41.621600105958],
+                '内蒙古': [114.41586754817, 43.468238221949],
+                '山西': [112.51549586384, 37.866565990509],
+                '河北': [115.66143362422, 38.613839749251],
+                '天津': [117.21081309155, 39.14392990331],
+                '北京': [116.46, 39.92],
             };
 
             var convertData = function (data) {
@@ -139,11 +138,11 @@ var map =new Vue({
                         color: '#fff'
                     }
                 },
-                tooltip : {
+                tooltip: {
                     trigger: 'item',
-                    formatter:function(params){
-                        return params.name+'<br/>'+
-                            params.seriesName+": "+params.value[2]
+                    formatter: function (params) {
+                        return params.name + '<br/>' +
+                            params.seriesName + ": " + params.value[2]
                     }
                 },
                 bmap: {
@@ -155,8 +154,7 @@ var map =new Vue({
                     },
                     roam: true,
                     mapStyle: {
-                        styleJson: [
-                            {
+                        styleJson: [{
                                 "featureType": "water",
                                 "elementType": "all",
                                 "stylers": {
@@ -286,19 +284,18 @@ var map =new Vue({
                             }
                         ]
                     },
-                    data:data
+                    data: data
                 },
-                series : [
-                    {
+                series: [{
                         name: '数量',
                         type: 'scatter',
                         coordinateSystem: 'bmap',
                         data: convertData(data),
                         symbolSize: function (val) {
-                            if(val[2]<10){
-                                return val[2]*2;
-                            }else {
-                                return val[2]/3
+                            if (val[2] < 10) {
+                                return val[2] * 2;
+                            } else {
+                                return val[2] / 3
                             }
                         },
                         label: {
@@ -326,10 +323,10 @@ var map =new Vue({
                             return b.value - a.value;
                         }).slice(0, 6)),
                         symbolSize: function (val) {
-                            if(val[2]<10){
-                                return val[2]*2;
-                            }else {
-                                return val[2]/3
+                            if (val[2] < 10) {
+                                return val[2] * 2;
+                            } else {
+                                return val[2] / 3
                             }
 
                         },
@@ -361,15 +358,15 @@ var map =new Vue({
                 myChart.setOption(option, true);
             }
         },
-        changePointChart(){
-            let vm=this;
-            vm.isGrid=false;
+        changePointChart() {
+            let vm = this;
+            vm.isGrid = false;
         },
-        changeMap(){
-            let vm=this;
-            vm.isGrid=true;
-            var data=[];
-            for( var i=0; i<vm.countData.length;i++){
+        changeMap() {
+            let vm = this;
+            vm.isGrid = true;
+            var data = [];
+            for (var i = 0; i < vm.countData.length; i++) {
                 data.push({
                     name: vm.countData[i].name,
                     value: vm.countData[i].value
@@ -379,13 +376,13 @@ var map =new Vue({
             console.log(data)
             var mainContainer = document.getElementById('containerGrid');
             var resizeMainContainer = function () {
-                mainContainer.style.width = window.innerWidth*0.8+'px';
-                mainContainer.style.height = window.innerHeight*0.8+'px';
+                mainContainer.style.width = window.innerWidth * 0.8 + 'px';
+                mainContainer.style.height = window.innerHeight * 0.8 + 'px';
             };
             resizeMainContainer();
             var dom = document.getElementById("containerGrid");
-            var myChart = echarts.init(dom,e_macarons);
-            $(window).on('resize',function(){//
+            var myChart = echarts.init(dom, e_macarons);
+            $(window).on('resize', function () { //
                 //屏幕大小自适应，重置容器高宽
                 resizeMainContainer();
                 myChart.resize();
@@ -402,14 +399,14 @@ var map =new Vue({
                 legend: {
                     orient: 'vertical',
                     left: 'left',
-                    data:['公司数量']
+                    data: ['公司数量']
                 },
                 visualMap: {
                     min: 0,
                     max: 500,
                     left: 'left',
                     top: 'bottom',
-                    text: ['高','低'],           // 文本，默认为数值文本
+                    text: ['高', '低'], // 文本，默认为数值文本
                     calculable: true
                 },
                 toolbox: {
@@ -418,28 +415,28 @@ var map =new Vue({
                     left: 'right',
                     top: 'center',
                     feature: {
-                        dataView: {readOnly: false},
+                        dataView: {
+                            readOnly: false
+                        },
                         restore: {},
                         saveAsImage: {}
                     }
                 },
-                series: [
-                    {
-                        name: '公司数量',
-                        type: 'map',
-                        mapType: 'china',
-                        roam: false,
-                        label: {
-                            normal: {
-                                show: true
-                            },
-                            emphasis: {
-                                show: true
-                            }
+                series: [{
+                    name: '公司数量',
+                    type: 'map',
+                    mapType: 'china',
+                    roam: false,
+                    label: {
+                        normal: {
+                            show: true
                         },
-                        data:vm.countData
-                    }
-                ]
+                        emphasis: {
+                            show: true
+                        }
+                    },
+                    data: vm.countData
+                }]
             };
             myChart.setOption(option);
         }

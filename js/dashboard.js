@@ -2,9 +2,9 @@
 var pieOptionOne, pieOptionTwo, pieOptionThree, pieOptionFour = "";
 
 var registeredCapitals = [{
-    text: '全部',
-    value: 'all'
-},
+        text: '全部',
+        value: 'all'
+    },
     {
         text: '0-100万',
         value: '0-100万'
@@ -27,9 +27,9 @@ var registeredCapitals = [{
     }
 ]
 var staffs = [{
-    text: '全部',
-    value: 'all'
-},
+        text: '全部',
+        value: 'all'
+    },
     {
         text: "0-500人",
         value: "0-500人"
@@ -52,9 +52,9 @@ var staffs = [{
     }
 ]
 var foundedTimes = [{
-    text: '全部',
-    value: 'all'
-},
+        text: '全部',
+        value: 'all'
+    },
     {
         text: '1-5年',
         value: '1-5年'
@@ -77,9 +77,9 @@ var foundedTimes = [{
     }
 ]
 var pcNumber = [{
-    text: '全部',
-    value: 'all'
-},
+        text: '全部',
+        value: 'all'
+    },
     {
         text: '1-50台',
         value: '1-50台'
@@ -131,14 +131,13 @@ var chartResolution = new Vue({
             fourthOption: staffs
         },
         hasResult: true,
-        isLoading:true
+        isLoading: true
     },
-    created:function(){
+    created: function () {
         //登陆检测
         loginCheck();
     },
     mounted: function () {
-
         let vm = this
         vm.info = JSON.parse(localStorage.getItem('b')).info
         vm.organizor = JSON.parse(localStorage.getItem('b')).organizor
@@ -183,41 +182,41 @@ var chartResolution = new Vue({
         },
         searchSelect: function () {
             var vm = this;
-            vm.isLoading=true;
+            vm.isLoading = true;
             let postData = {};
             (postData.registeredCapitals = vm.selectedOptionOne),
-                (postData.foundedTimes = vm.selectedOptionTwo),
-                (postData.pcNumber = vm.selectedOptionThree),
-                (postData.staffs = vm.selectedOptionFour),
-                (postData.info = vm.info),
-                (postData.organizor = vm.organizor),
-                axios(globalUrl + 'content/at_will', {
+            (postData.foundedTimes = vm.selectedOptionTwo),
+            (postData.pcNumber = vm.selectedOptionThree),
+            (postData.staffs = vm.selectedOptionFour),
+            (postData.info = vm.info),
+            (postData.organizor = vm.organizor),
+            axios(globalUrl + 'content/at_will', {
                     method: 'post',
                     data: Qs.stringify(postData)
                 })
-                    .then(function (response) {
+                .then(function (response) {
 
-                        if (Object.keys(response.data.data).length != 0) {
-                            pieOptionOne.series[0].data = response.data.data[1];
-                            pieOptionTwo.series[0].data = response.data.data[2];
-                            pieOptionThree.series[0].data = response.data.data[3];
-                            pieOptionFour.series[0].data = response.data.data[4];
-                            // setOption代码区域
-                            vm.pieChartOne.setOption(pieOptionOne)
-                            vm.pieChartTwo.setOption(pieOptionTwo)
-                            vm.pieChartThree.setOption(pieOptionThree)
-                            vm.pieChartFour.setOption(pieOptionFour)
-                            vm.hasResult = true
-                        } else {
-                            vm.hasResult = false
-                            vm.isLoading=true;
-                        }
-                        vm.isLoading=false;
+                    if (Object.keys(response.data.data).length != 0) {
+                        pieOptionOne.series[0].data = response.data.data[1];
+                        pieOptionTwo.series[0].data = response.data.data[2];
+                        pieOptionThree.series[0].data = response.data.data[3];
+                        pieOptionFour.series[0].data = response.data.data[4];
+                        // setOption代码区域
+                        vm.pieChartOne.setOption(pieOptionOne)
+                        vm.pieChartTwo.setOption(pieOptionTwo)
+                        vm.pieChartThree.setOption(pieOptionThree)
+                        vm.pieChartFour.setOption(pieOptionFour)
+                        vm.hasResult = true
+                    } else {
+                        vm.hasResult = false
+                        vm.isLoading = true;
+                    }
+                    vm.isLoading = false;
 
-                    })
-                    .catch(function (error) {
-                        console.log(error)
-                    })
+                })
+                .catch(function (error) {
+                    console.log(error)
+                })
         },
         refreshPieChart: function () {
             var vm = this;
@@ -350,25 +349,24 @@ var chartResolution = new Vue({
             let vm = this;
             // 注册资本 第一个饼图
             var promise1 = new Promise(function (resolve, reject) {
-                    axios
-                        .post(globalUrl + 'content/statistics_capital/', {
-                            type: vm.type,
-                            info: vm.info,
-                            organizor: vm.organizor
-                        })
-                        .then(function (response) {
-                            vm.pieSet.firstCollection = response.data.data
-                            // setOption代码区域
-                            pieOptionOne.series[0].data = vm.pieSet.firstCollection;
-                            // setOption代码区域
-                            vm.pieChartOne.setOption(pieOptionOne);
-                            resolve("1 success");
-                        })
-                        .catch(function (error) {
-                            alert(error)
-                        })
-                }
-            );
+                axios
+                    .post(globalUrl + 'content/statistics_capital/', {
+                        type: vm.type,
+                        info: vm.info,
+                        organizor: vm.organizor
+                    })
+                    .then(function (response) {
+                        vm.pieSet.firstCollection = response.data.data
+                        // setOption代码区域
+                        pieOptionOne.series[0].data = vm.pieSet.firstCollection;
+                        // setOption代码区域
+                        vm.pieChartOne.setOption(pieOptionOne);
+                        resolve("1 success");
+                    })
+                    .catch(function (error) {
+                        alert(error)
+                    })
+            });
             // 成立时间 第二个饼图
             var promise2 = new Promise(function (resolve, reject) {
                 axios
@@ -429,7 +427,7 @@ var chartResolution = new Vue({
             });
             //所有异步完成后,不再loading
             Promise.all([promise1, promise2, promise3, promise4]).then(function (values) {
-                vm.isLoading=false;
+                vm.isLoading = false;
                 vm.resizePieChart();
             });
         },
