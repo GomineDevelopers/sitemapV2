@@ -19,8 +19,7 @@ var map = new Vue({
     methods: {
         getMapdata() {
             let vm = this;
-            var storage = {}
-            localStorage.setItem("b", JSON.stringify(storage));
+            localStorage.removeItem("b");
             var key = JSON.parse(localStorage.getItem("searchLitToMap")).key;
             var range = JSON.parse(localStorage.getItem("searchLitToMap")).range;
             var capital = JSON.parse(localStorage.getItem("searchLitToMap")).capital;
@@ -45,8 +44,7 @@ var map = new Vue({
 
         },
         getlabelData() {
-            var storage = {}
-            localStorage.setItem("searchLitToMap", JSON.stringify(storage));
+            localStorage.removeItem("searchLitToMap");
             /*缓存中的内容*/
             var info = JSON.parse(localStorage.getItem("b")).info;
             var organizor = JSON.parse(localStorage.getItem("b")).organizor;

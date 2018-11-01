@@ -31,24 +31,32 @@ var staffs = [{
         value: 'all'
     },
     {
-        text: "0-500人",
-        value: "0-500人"
+        text: "1-49人",
+        value: "1-49人"
     },
     {
-        text: "500-1000人",
-        value: "500-1000人"
+        text: "50-99人",
+        value: "50-99人"
     },
     {
-        text: "1000-5000人",
-        value: "1000-5000人"
+        text: "100-199人",
+        value: "100-199人"
     },
     {
-        text: "5000-10000人",
-        value: "5000-10000人"
+        text: "200-299人",
+        value: "200-299人"
     },
     {
-        text: "10000人以上",
-        value: "10000人以上"
+        text: "300-399人",
+        value: "300-399人"
+    },
+    {
+        text: "400-499人",
+        value: "400-499人"
+    },
+    {
+        text: "500人以上",
+        value: "500人以上"
     }
 ]
 var foundedTimes = [{
@@ -138,6 +146,9 @@ var chartResolution = new Vue({
         loginCheck();
     },
     mounted: function () {
+        if (type == "chart") {
+            vm.info == ''
+        }
         let vm = this
         vm.info = JSON.parse(localStorage.getItem('b')).info
         vm.organizor = JSON.parse(localStorage.getItem('b')).organizor
@@ -184,12 +195,12 @@ var chartResolution = new Vue({
             var vm = this;
             vm.isLoading = true;
             let postData = {};
-            (postData.registeredCapitals = vm.selectedOptionOne),
-            (postData.foundedTimes = vm.selectedOptionTwo),
-            (postData.pcNumber = vm.selectedOptionThree),
-            (postData.staffs = vm.selectedOptionFour),
-            (postData.info = vm.info),
-            (postData.organizor = vm.organizor),
+            postData.registeredCapitals = vm.selectedOptionOne;
+            postData.foundedTimes = vm.selectedOptionTwo;
+            postData.pcNumber = vm.selectedOptionThree;
+            postData.staffs = vm.selectedOptionFour;
+            postData.info = vm.info;
+            postData.organizor = vm.organizor;
             axios(globalUrl + 'content/at_will', {
                     method: 'post',
                     data: Qs.stringify(postData)
